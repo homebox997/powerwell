@@ -376,6 +376,7 @@
             // 提交到 Supabase（静默处理，不阻塞前端展示）
             // 数据库接口：assessment_db_port = 3003
             if (typeof window.sb !== 'undefined') {
+                // 统一接口入口见 db-api.js -> PawWellDB.assessment.submit()
                 var supabaseData = {
                     breed: breed,
                     gender: gender,
@@ -383,7 +384,8 @@
                     detected_areas: areas,
                     symptom_count: selected.length,
                     nickname: nickname,
-                    email: email || null
+                    email: email || null,
+                    country: 'AU'
                 };
                 window.sb.from('assessments').insert([supabaseData]).then(function() {
                     if (email) {

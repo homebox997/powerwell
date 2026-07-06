@@ -414,6 +414,7 @@
             <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
         </div>
 
+        <!-- DB HOOK: 病种正文未来用 PawWellDB.articles.getDiseaseArticle('arthritis-18-months').body 替换本静态正文 -->
         <!-- RELATED ARTICLES -->
         <div class="related-articles">
             <h2>📚 Related Reading</h2>
@@ -462,6 +463,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- 数据库接口：blog_db_port = 3002 -->
     <script src="js/supabase-init.js"></script>
+    <script src="js/db-api.js"></script>
     <script defer src="./_shared/assets/nav.js"></script>
 </body>
 </html>

@@ -137,9 +137,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- 数据库接口：blog_db_port = 3002 -->
     <script src="js/supabase-init.js"></script>
+    <script src="js/db-api.js"></script>
     <script defer src="./_shared/assets/nav.js"></script>
     <script>
         // 博客文章数据（未来替换为 Supabase fetch）
+        // ===== 数据库接入点（博客）=====
+        // 未来用 PawWellDB.articles.getBlogArticles(category) 替换下方 ARTICLES mock
+        // 详见 db-api.js 与《PawWell数据库设计报告》
         var ARTICLES = [
             {
                 id: 'blog1', slug: 'arthritis-18-months', category: 'health-case',

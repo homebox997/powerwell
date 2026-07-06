@@ -133,6 +133,116 @@
           </div>
           <div id="logs" class="log-list"></div>
         </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Employee Invitations</h2>
+            <span class="badge">admin+</span>
+          </div>
+          <div class="editor">
+            <div class="field">
+              <label for="inviteName">Employee name</label>
+              <input id="inviteName" type="text" placeholder="Employee name">
+            </div>
+            <div class="field">
+              <label for="inviteEmail">Employee email</label>
+              <input id="inviteEmail" type="email" placeholder="employee@example.com">
+            </div>
+            <div class="field">
+              <label for="inviteRole">Initial permission</label>
+              <select id="inviteRole">
+                <option value="employee_viewer">View data only</option>
+                <option value="employee_reviewer">Can participate in review</option>
+                <option value="employee_editor">Can edit non-core fields</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="inviteScopes">Permission scope</label>
+              <select id="inviteScopes" multiple>
+                <option value="data.read" selected>Read data</option>
+                <option value="review.participate">Participate in review</option>
+                <option value="content.edit_non_core">Edit non-core fields</option>
+                <option value="data.export">Export data</option>
+              </select>
+            </div>
+            <button id="inviteBtn" class="btn primary" type="button">Create Invitation</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Permission Changes</h2>
+            <span class="badge">approval workflow</span>
+          </div>
+          <div class="editor">
+            <div class="field">
+              <label for="permissionEmail">Employee email</label>
+              <input id="permissionEmail" type="email" placeholder="employee@example.com">
+            </div>
+            <div class="field">
+              <label for="permissionRole">Requested role</label>
+              <select id="permissionRole">
+                <option value="employee_viewer">Employee: View Only</option>
+                <option value="employee_reviewer">Employee: Reviewer</option>
+                <option value="employee_editor">Employee: Non-core Editor</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="permissionReason">Reason</label>
+              <textarea id="permissionReason" placeholder="Why this permission is needed"></textarea>
+            </div>
+            <button id="permissionBtn" class="btn primary" type="button">Submit Permission Request</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Notion Connection</h2>
+            <span class="badge">super admin only</span>
+          </div>
+          <div class="editor">
+            <div class="field">
+              <label for="notionWorkspace">Workspace name</label>
+              <input id="notionWorkspace" type="text" placeholder="PowerWell Notion">
+            </div>
+            <div class="field">
+              <label for="notionDataSource">Data source ID</label>
+              <input id="notionDataSource" type="text" placeholder="Notion data source UUID">
+            </div>
+            <div class="field">
+              <label for="notionSecret">Encrypted Notion API key or server secret reference</label>
+              <input id="notionSecret" type="password" placeholder="Store the real key server-side">
+            </div>
+            <div class="actions">
+              <button id="notionSaveBtn" class="btn primary" type="button">Bind Notion</button>
+              <button id="notionSyncBtn" class="btn" type="button">Run Sync Now</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Notion Review Pool</h2>
+            <div class="actions">
+              <select id="reviewTargetTable">
+                <option value="blog_articles">Blog Articles</option>
+                <option value="disease_articles">Disease Articles</option>
+                <option value="community_posts">Community Posts</option>
+              </select>
+              <button id="reviewRefreshBtn" class="btn" type="button">Refresh</button>
+            </div>
+          </div>
+          <div id="reviewPool" class="log-list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>System Monitor</h2>
+            <span class="badge">permission + Notion workflow</span>
+          </div>
+          <div id="workflowLogs" class="log-list"></div>
+        </section>
       </section>
     </main>
   </div>
@@ -140,5 +250,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="./config.js"></script>
   <script src="./admin.js"></script>
+  <script src="./permission-notion.js"></script>
 </body>
 </html>

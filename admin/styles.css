@@ -338,6 +338,26 @@ td small {
   font-size: 13px;
 }
 
+.review-item {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+}
+
+.review-item > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.review-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .empty {
   padding: 34px 16px;
   text-align: center;
@@ -377,4 +397,3 @@ td small {
     width: 100%;
   }
 }
-

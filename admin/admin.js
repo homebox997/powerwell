@@ -56,6 +56,7 @@
         }
         if (!state.supabaseClient) {
           state.supabaseClient = window.supabase.createClient(config.supabase.url, config.supabase.anonKey);
+          window.PowerWellAdminSupabase = state.supabaseClient;
         }
         return state.supabaseClient.schema(config.supabase.schema);
       },
@@ -224,6 +225,7 @@
     }
     if (!state.supabaseClient) {
       state.supabaseClient = window.supabase.createClient(config.supabase.url, config.supabase.anonKey);
+      window.PowerWellAdminSupabase = state.supabaseClient;
     }
     return state.supabaseClient;
   }

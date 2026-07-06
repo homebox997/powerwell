@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | PawWell — Senior Dog Health Forum & Case Sharing</title>
+    <meta name="description" content="Join the PawWell community to share senior dog health cases, ask questions about arthritis, kidney disease and heart conditions, and connect with fellow Australian dog parents.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://agedpawwell.com/community.html">
+    <!-- 数据库接口：community_db_port = 3004（posts 表、comments 表） -->
+    <!-- 数据库接口：user_db_port = 3005（用户资料表） -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f4f6f9; min-height: 100vh; }
+        /* ====== HEADER ====== */
+        .site-header { background: white; padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-wrap { display: flex; align-items: center; text-decoration: none; }
+        .logo-img { height: 40px; display: block; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
+        .nav a:hover { background: #f5f5f5; }
+        /* ====== LAYOUT ====== */
+        .page-body { padding-top: 4.5rem; max-width: 1200px; margin: 0 auto; padding-left: 18px; padding-right: 18px; display: grid; grid-template-columns: 1fr 320px; gap: 24px; padding-bottom: 3rem; }
+        /* ====== SIDEBAR ====== */
+        .sidebar { position: sticky; top: 5rem; height: fit-content; }
+        .sidebar-card { background: white; border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .sidebar-card h3 { font-size: 0.95rem; margin-bottom: 0.8rem; color: #2c3e50; }
+        .sidebar-card p { font-size: 0.85rem; color: #7a8a9a; line-height: 1.5; margin-bottom: 0.5rem; }
+        .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0; }
+        .stat-row:last-child { border-bottom: none; }
+        .stat-row span { font-size: 0.85rem; color: #7a8a9a; }
+        .stat-row strong { font-size: 0.9rem; color: #2c3e50; }
+        .topic-btn { display: block; width: 100%; text-align: left; padding: 9px 12px; border-radius: 10px; font-size: 0.88rem; color: #2c3e50; text-decoration: none; transition: all 0.2s; margin-bottom: 4px; cursor: pointer; border: none; background: none; font-family: inherit; }
+        .topic-btn:hover { background: #f5f5f5; }
+        .topic-btn.active { background: #fff0eb; color: #ff6b6b; font-weight: 700; }
+        .topic-btn .icon { margin-right: 6px; }
+        .topic-count { float: right; font-size: 0.78rem; color: #aaa; }
+        /* ====== WRITE POST BUTTON ====== */
+        .write-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.3s; box-shadow: 0 4px 14px rgba(255,107,107,0.3); }
+        .write-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,107,0.4); }
+        /* ====== POST FEED ====== */
+        .feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
+        .feed-title { font-size: 1.3rem; font-weight: 700; color: #2c3e50; }
+        .feed-count { font-size: 0.85rem; color: #aaa; }
+        /* ====== POST CARD ====== */
+        .post-card { background: white; border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s; }
+        .post-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-1px); }
+        .post-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.9rem; }
+        .user-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: white; flex-shrink: 0; }
+        .post-meta { flex: 1; }
+        .post-user { font-weight: 700; font-size: 0.9rem; color: #2c3e50; }
+        .post-user .dog-info { font-weight: 400; color: #7a8a9a; font-size: 0.82rem; }
+        .post-time { font-size: 0.78rem; color: #aaa; }
+        .category-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .post-title { font-size: 1.05rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem; line-height: 1.4; cursor: pointer; }
+        .post-title:hover { color: #ff6b6b; }
+        .post-excerpt { font-size: 0.88rem; color: #5a6c7d; line-height: 1.6; margin-bottom: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .post-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.9rem; }
+        .post-tag { padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; background: #f5f5f5; color: #7a8a9a; }
+        .post-actions { display: flex; gap: 1.2rem; padding-top: 0.8rem; border-top: 1px solid #f0f0f0; }
+        .action-btn { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; color: #aaa; cursor: pointer; background: none; border: none; font-family: inherit; transition: color 0.2s; padding: 4px 8px; border-radius: 8px; }
+        .action-btn:hover { color: #ff6b6b; background: #fff5f5; }
+        .action-btn.liked { color: #ff6b6b; }
+        /* ====== LOAD MORE ====== */
+        .load-more { display: block; width: 100%; padding: 14px; background: white; border: 2px solid #e0e0e0; border-radius: 14px; font-size: 0.9rem; font-weight: 600; color: #2c3e50; cursor: pointer; font-family: inherit; transition: all 0.3s; text-align: center; }
+        .load-more:hover { border-color: #ff6b6b; color: #ff6b6b; }
+        /* ====== POST MODAL ====== */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 18px; }
+        .modal-overlay.open { display: flex; }
+        .modal { background: white; border-radius: 20px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 1.8rem; position: relative; }
+        .modal-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border-radius: 50%; background: #f5f5f5; border: none; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .modal h2 { font-size: 1.2rem; margin-bottom: 1.2rem; color: #2c3e50; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.88rem; color: #2c3e50; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 0.95rem; font-family: inherit; resize: vertical; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #ff6b6b; }
+        .form-group textarea { min-height: 140px; }
+        .submit-post { width: 100%; padding: 14px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.3s; }
+        .submit-post:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,107,107,0.4); }
+        /* ====== POST DETAIL ====== */
+        .detail-modal .modal { max-width: 700px; }
+        .detail-header { margin-bottom: 1.2rem; }
+        .detail-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.6rem; line-height: 1.3; }
+        .detail-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .detail-content { font-size: 0.95rem; color: #3d5060; line-height: 1.8; margin-bottom: 1.5rem; white-space: pre-wrap; }
+        .detail-content strong { color: #2c3e50; }
+        .comments-section { border-top: 2px solid #f0f0f0; padding-top: 1.2rem; }
+        .comments-title { font-size: 0.95rem; font-weight: 700; color: #2c3e50; margin-bottom: 1rem; }
+        .comment-item { display: flex; gap: 10px; margin-bottom: 1rem; }
+        .comment-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; color: white; flex-shrink: 0; }
+        .comment-body { flex: 1; background: #f8f9fa; border-radius: 12px; padding: 10px 14px; }
+        .comment-user { font-weight: 700; font-size: 0.85rem; color: #2c3e50; }
+        .comment-time { font-size: 0.75rem; color: #aaa; margin-left: 6px; }
+        .comment-text { font-size: 0.88rem; color: #4a5a6a; line-height: 1.5; margin-top: 3px; }
+        .comment-input-wrap { display: flex; gap: 8px; margin-top: 1rem; }
+        .comment-input { flex: 1; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 0.9rem; font-family: inherit; }
+        .comment-input:focus { outline: none; border-color: #ff6b6b; }
+        .comment-send { padding: 10px 18px; background: #ff6b6b; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; font-family: inherit; white-space: nowrap; }
+        /* ====== DOG BREED STATS ====== */
+        .breed-row { display: flex; align-items: center; gap: 6px; padding: 5px 0; }
+        .breed-icon { font-size: 1rem; flex-shrink: 0; }
+        .breed-name { flex: 1; font-size: 0.83rem; color: #2c3e50; font-weight: 600; }
+        .breed-count { font-size: 0.75rem; color: #aaa; white-space: nowrap; }
+        .breed-bar { height: 3px; background: #f0f0f0; border-radius: 2px; margin: 1px 0 6px; width: var(--pct, 50%); }
+        /* ====== FOOTER ====== */
+        .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
+        .site-footer a { color: #ff8e53; text-decoration: none; }
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 900px) {
+            .page-body { grid-template-columns: 1fr; }
+            .sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+            .sidebar-card:first-child { grid-column: 1 / -1; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .page-body { padding-top: 5rem; }
+            .sidebar { grid-template-columns: 1fr; }
+            .sidebar-card:first-child { grid-column: auto; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "PawWell Community",
+      "url": "https://agedpawwell.com/community.html",
+      "description": "Join the PawWell community to share senior dog health cases, ask questions, and connect with Australian dog parents.",
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" }
+    }
+    </script>
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="./index.html" class="logo-wrap" aria-label="PawWell Home">
+                <img src="./_shared/assets/logo.png" alt="PawWell - Senior Dog Health Community" class="logo-img">
+            </a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+                <a href="./index.html">Home</a>
+                <a href="./assessment.html">AI Health Check</a>
+                <a href="./arthritis.html">Arthritis Guide</a>
+                <a href="./kidney.html">Kidney Disease</a>
+                <a href="./heart.html">Heart Disease</a>
+                <a href="./community.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Community</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== PAGE BODY ========== -->
+    <div class="page-body">
+        <!-- ====== MAIN FEED ====== -->
+        <main role="main">
+            <div class="feed-header">
+                <h1 class="feed-title">Community Discussions</h1>
+                <span class="feed-count" id="postCount">Loading...</span>
+            </div>
+            <div id="postFeed"></div>
+        <div id="seoPostList">
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="health-case" class="post-card post-seo-card" aria-label="Health case post: Milo arthritis 18 months">
+            <meta itemprop="datePublished" content="2026-07-05">
+            <meta itemprop="author" content="MiloMum">
+            <meta itemprop="headline" content="Milo's arthritis journey: 18 months of natural supplements, here's what worked">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#ff6b6b;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">SM</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">MiloMum</span>
+                        <span class="dog-info">Milo (Golden Retriever, 11yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">2 hours ago</div>
+                </div>
+                <span class="category-badge" style="background:#fff0eb;color:#ff6b6b;">📋 Health Case</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Milo's arthritis journey — 18 months of natural supplements, here's what worked</h2>
+            <p class="post-excerpt" itemprop="description">After being diagnosed with moderate arthritis at age 10, Milo has been on a combination of glucosamine, MSM and fish oil for 18 months. Here's what we learned and what actually worked.</p>
+            <div class="post-tags">
+                <span class="post-tag">Arthritis</span><span class="post-tag">Supplements</span><span class="post-tag">Recovery</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>47</span></button>
+                <button class="action-btn" onclick="openDetail('p1')" aria-label="View 12 comments">💬 <span>12</span></button>
+                <span class="action-btn" aria-label="312 views">👁 <span>312</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="health-case" class="post-card post-seo-card" aria-label="Health case post: Bella kidney disease early detection">
+            <meta itemprop="datePublished" content="2026-07-05">
+            <meta itemprop="author" content="BellaLover">
+            <meta itemprop="headline" content="Bella diagnosed with early-stage kidney disease: what the vet told us">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#c0392b;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">LT</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">BellaLover</span>
+                        <span class="dog-info">Bella (Cavalier King Charles, 10yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">5 hours ago</div>
+                </div>
+                <span class="category-badge" style="background:#fff3e0;color:#f57f17;">🔖 Pinned</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Bella diagnosed with early-stage kidney disease — what the vet told us</h2>
+            <p class="post-excerpt" itemprop="description">Blood tests showed elevated creatinine and BUN. Our vet said we caught it very early. Sharing our experience because early detection made all the difference for Bella.</p>
+            <div class="post-tags">
+                <span class="post-tag">Kidney Disease</span><span class="post-tag">Early Detection</span><span class="post-tag">Diet</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>83</span></button>
+                <button class="action-btn" onclick="openDetail('p2')" aria-label="View 21 comments">💬 <span>21</span></button>
+                <span class="action-btn" aria-label="541 views">👁 <span>541</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="question" class="post-card post-seo-card" aria-label="Question post: Duke heart murmur">
+            <meta itemprop="datePublished" content="2026-07-05">
+            <meta itemprop="author" content="DukeDad">
+            <meta itemprop="headline" content="Duke started coughing after exercise: heart murmur or just age?">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#4a9eb8;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">JK</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">DukeDad</span>
+                        <span class="dog-info">Duke (German Shepherd, 9yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">8 hours ago</div>
+                </div>
+                <span class="category-badge" style="background:#e3f2fd;color:#1565c0;">❓ Question</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Duke started coughing after exercise — heart murmur or just age?</h2>
+            <p class="post-excerpt" itemprop="description">My 9-year-old German Shepherd has developed a soft cough that gets worse after our walks. Vet heard a Grade 2 murmur. Should I be worried? Seeking advice from dog parents who've dealt with heart murmurs.</p>
+            <div class="post-tags">
+                <span class="post-tag">Heart Disease</span><span class="post-tag">Heart Murmur</span><span class="post-tag">Question</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>29</span></button>
+                <button class="action-btn" onclick="openDetail('p3')" aria-label="View 34 comments">💬 <span>34</span></button>
+                <span class="action-btn" aria-label="198 views">👁 <span>198</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="tip" class="post-card post-seo-card" aria-label="Tips post: Bunnings ramp Rocky">
+            <meta itemprop="datePublished" content="2026-07-04">
+            <meta itemprop="author" content="RockyDad">
+            <meta itemprop="headline" content="The $30 Bunnings ramp that changed everything for Rocky: no more jumping">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#7c3aed;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">MR</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">RockyDad</span>
+                        <span class="dog-info">Rocky (Labrador, 12yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">1 day ago</div>
+                </div>
+                <span class="category-badge" style="background:#f3e5f5;color:#7c3aed;">💡 Tips</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">The $30 Bunnings ramp that changed everything for Rocky — no more jumping</h2>
+            <p class="post-excerpt" itemprop="description">Rocky is 12 and has bad hips. We spent $30 at Bunnings on a DIY ramp for our couch and car boot. It's been a life changer for him and for us.</p>
+            <div class="post-tags">
+                <span class="post-tag">Arthritis</span><span class="post-tag">Home Tips</span><span class="post-tag">Mobility</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>124</span></button>
+                <button class="action-btn" onclick="openDetail('p4')" aria-label="View 45 comments">💬 <span>45</span></button>
+                <span class="action-btn" aria-label="892 views">👁 <span>892</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="health-case" class="post-card post-seo-card" aria-label="Health case post: Charlie skin kidney">
+            <meta itemprop="datePublished" content="2026-07-03">
+            <meta itemprop="author" content="CharlieMum">
+            <meta itemprop="headline" content="Charlie's skin issues turned out to be kidney-related: a lesson in always trusting your gut">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#27ae60;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">AW</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">CharlieMum</span>
+                        <span class="dog-info">Charlie (Cavoodle, 8yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">2 days ago</div>
+                </div>
+                <span class="category-badge" style="background:#fff0eb;color:#ff6b6b;">📋 Health Case</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Charlie's skin issues turned out to be kidney-related — a lesson in always trusting your gut</h2>
+            <p class="post-excerpt" itemprop="description">Charlie's skin problems turned out to be a symptom of kidney disease. We saw three vets before the right test finally revealed the truth. Trust your gut and demand a full senior blood panel.</p>
+            <div class="post-tags">
+                <span class="post-tag">Kidney Disease</span><span class="post-tag">Early Detection</span><span class="post-tag">Lesson Learned</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>201</span></button>
+                <button class="action-btn" onclick="openDetail('p5')" aria-label="View 58 comments">💬 <span>58</span></button>
+                <span class="action-btn" aria-label="1423 views">👁 <span>1423</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="product" class="post-card post-seo-card" aria-label="Product review: orthopedic dog beds">
+            <meta itemprop="datePublished" content="2026-07-02">
+            <meta itemprop="author" content="CocoCarer">
+            <meta itemprop="headline" content="Honest review: 5 orthopedic dog beds: which one is actually worth it">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#e91e63;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">FS</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">CocoCarer</span>
+                        <span class="dog-info">Coco (Poodle, 13yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">3 days ago</div>
+                </div>
+                <span class="category-badge" style="background:#fff9c4;color:#f9a825;">⭐ Product Review</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Honest review: 5 orthopedic dog beds — which one is actually worth it</h2>
+            <p class="post-excerpt" itemprop="description">Big Barker, K9, Kmart and IKEA hacks tested with Coco (13, arthritis) and Buddy (7). Here's what is genuinely worth it and what to avoid when buying an orthopedic bed for your senior dog.</p>
+            <div class="post-tags">
+                <span class="post-tag">Product Review</span><span class="post-tag">Beds</span><span class="post-tag">Arthritis</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>89</span></button>
+                <button class="action-btn" onclick="openDetail('p6')" aria-label="View 67 comments">💬 <span>67</span></button>
+                <span class="action-btn" aria-label="634 views">👁 <span>634</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="question" class="post-card post-seo-card" aria-label="Question: palliative care timing Oscar">
+            <meta itemprop="datePublished" content="2026-07-01">
+            <meta itemprop="author" content="OscarDad">
+            <meta itemprop="headline" content="When did you start palliative care for your dog? How did you know it was time?">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#00bcd4;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">TH</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">OscarDad</span>
+                        <span class="dog-info">Oscar (French Bulldog, 9yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">4 days ago</div>
+                </div>
+                <span class="category-badge" style="background:#e3f2fd;color:#1565c0;">❓ Question</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">When did you start palliative care for your dog? How did you know it was time?</h2>
+            <p class="post-excerpt" itemprop="description">Oscar is 9 and was diagnosed with a Grade 4 heart murmur. Vet says it's manageable but I want to prepare for what's ahead. Seeking real experiences from dog parents who've been through this.</p>
+            <div class="post-tags">
+                <span class="post-tag">Heart Disease</span><span class="post-tag">Quality of Life</span><span class="post-tag">Support</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>156</span></button>
+                <button class="action-btn" onclick="openDetail('p7')" aria-label="View 89 comments">💬 <span>89</span></button>
+                <span class="action-btn" aria-label="1108 views">👁 <span>1108</span></span>
+            </div>
+        </article>
+        <article itemscope itemtype="https://schema.org/Article" itemprop="article" data-category="tip" class="post-card post-seo-card" aria-label="Tips: free symptom tracking spreadsheet Max">
+            <meta itemprop="datePublished" content="2026-06-30">
+            <meta itemprop="author" content="MaxOwner">
+            <meta itemprop="headline" content="Free symptom tracking spreadsheet: built this for Max and happy to share">
+            <div class="post-top">
+                <div class="user-avatar" style="background:#e67e22;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">DL</span>
+                </div>
+                <div class="post-meta">
+                    <div class="post-user" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <span itemprop="name">MaxOwner</span>
+                        <span class="dog-info">Max (Border Collie, 10yo)</span>
+                    </div>
+                    <div class="post-time" itemprop="datePublished">5 days ago</div>
+                </div>
+                <span class="category-badge" style="background:#f3e5f5;color:#7c3aed;">💡 Tips</span>
+            </div>
+            <h2 class="post-title" itemprop="headline">Free symptom tracking spreadsheet — built this for Max and happy to share</h2>
+            <p class="post-excerpt" itemprop="description">Built a weekly symptom tracker in Google Sheets. It helped us spot patterns in Max's bad days and figure out triggers. Sharing the template for free.</p>
+            <div class="post-tags">
+                <span class="post-tag">Arthritis</span><span class="post-tag">Tracking</span><span class="post-tag">Tips</span>
+            </div>
+            <div class="post-actions" role="group" aria-label="Post actions">
+                <button class="action-btn" onclick="this.classList.toggle('liked')" aria-label="Like this post">❤️ <span>73</span></button>
+                <button class="action-btn" onclick="openDetail('p8')" aria-label="View 28 comments">💬 <span>28</span></button>
+                <span class="action-btn" aria-label="445 views">👁 <span>445</span></span>
+            </div>
+        </article>
+        </div>
+            <button class="load-more" id="loadMoreBtn" onclick="loadMore()" style="display:none;">Load More Discussions</button>
+        </main>
+
+        <!-- ====== SIDEBAR ====== -->
+        <aside class="sidebar" role="complementary" aria-label="Community sidebar">
+            <div class="sidebar-card">
+                <button class="write-btn" onclick="openWriteModal()" aria-label="Write a new post">
+                    ✍️ Share Your Story
+                </button>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Forum Topics</h3>
+                <button class="topic-btn active" onclick="filterCategory('all', this)" aria-label="Show all topics">
+                    <span class="icon">📋</span> All Discussions <span class="topic-count" id="count-all">—</span>
+                </button>
+                <button class="topic-btn" onclick="filterCategory('health-case', this)" aria-label="Show health case studies">
+                    <span class="icon">📋</span> Health Cases <span class="topic-count" id="count-health-case">—</span>
+                </button>
+                <button class="topic-btn" onclick="filterCategory('question', this)" aria-label="Show questions">
+                    <span class="icon">❓</span> Q&amp;A / Questions <span class="topic-count" id="count-question">—</span>
+                </button>
+                <button class="topic-btn" onclick="filterCategory('tip', this)" aria-label="Show tips">
+                    <span class="icon">💡</span> Tips &amp; Hacks <span class="topic-count" id="count-tip">—</span>
+                </button>
+                <button class="topic-btn" onclick="filterCategory('product', this)" aria-label="Show product reviews">
+                    <span class="icon">⭐</span> Product Reviews <span class="topic-count" id="count-product">—</span>
+                </button>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Community Stats</h3>
+                <div class="stat-row"><span>Total Discussions</span><strong>127</strong></div>
+                <div class="stat-row"><span>Health Cases Shared</span><strong>48</strong></div>
+                <div class="stat-row"><span>Questions Answered</span><strong>89</strong></div>
+                <div class="stat-row"><span>Active Members</span><strong>312</strong></div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>Popular Dog Breeds Here</h3>
+                <div class="breed-row"><span class="breed-icon">🦡</span><span class="breed-name">Golden Retriever</span><span class="breed-count">48 members</span></div>
+                <div class="breed-bar" style="--pct:72%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐶</span><span class="breed-name">Cavalier King Charles</span><span class="breed-count">36 members</span></div>
+                <div class="breed-bar" style="--pct:54%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕</span><span class="breed-name">Labrador</span><span class="breed-count">31 members</span></div>
+                <div class="breed-bar" style="--pct:46%;"></div>
+                <div class="breed-row"><span class="breed-icon">🦮</span><span class="breed-name">German Shepherd</span><span class="breed-count">27 members</span></div>
+                <div class="breed-bar" style="--pct:40%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕‍🦺</span><span class="breed-name">Border Collie</span><span class="breed-count">22 members</span></div>
+                <div class="breed-bar" style="--pct:33%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐩</span><span class="breed-name">Poodle / Cavoodle</span><span class="breed-count">19 members</span></div>
+                <div class="breed-bar" style="--pct:28%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐶</span><span class="breed-name">French Bulldog</span><span class="breed-count">16 members</span></div>
+                <div class="breed-bar" style="--pct:24%;"></div>
+                <div class="breed-row"><span class="breed-icon">🐕</span><span class="breed-name">Maltese</span><span class="breed-count">12 members</span></div>
+                <div class="breed-bar" style="--pct:18%;"></div>
+                <p style="font-size:0.72rem;color:#aaa;margin-top:0.5rem;">Based on 312 community members</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>About PawWell Community</h3>
+                <p>A safe space for Australian dog parents to share senior dog health experiences — arthritis, kidney disease, heart conditions and more.</p>
+                <p>All stories are real dog parents sharing real experiences. Always consult your vet for medical advice.</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer" role="contentinfo">
+        <p>© 2026 PawWell. All rights reserved.</p>
+        <p style="margin-top:0.5rem;">
+            <a href="./index.html">Home</a> ·
+            <a href="./assessment.html">AI Health Check</a> ·
+            <a href="./community.html">Community</a>
+        </p>
+    </footer>
+
+    <!-- ========== WRITE POST MODAL ========== -->
+    <div class="modal-overlay" id="writeModal" role="dialog" aria-labelledby="writeModalTitle" aria-modal="true">
+        <div class="modal">
+            <button class="modal-close" onclick="closeWriteModal()" aria-label="Close dialog">✕</button>
+            <h2 id="writeModalTitle">✍️ Share Your Story</h2>
+            <div class="form-group">
+                <label for="postTitle">Post Title *</label>
+                <input type="text" id="postTitle" placeholder="e.g. How we managed Max's arthritis naturally..." maxlength="120">
+            </div>
+            <div class="form-group">
+                <label for="postCategory">Topic Category *</label>
+                <select id="postCategory">
+                    <option value="health-case">📋 Health Case — Share your dog's health journey</option>
+                    <option value="question">❓ Q&A — Ask the community for advice</option>
+                    <option value="tip">💡 Tips — Share what worked for your dog</option>
+                    <option value="product">⭐ Product Review — Beds, supplements, food</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="postContent">Your Story / Message *</label>
+                <textarea id="postContent" placeholder="Share your experience, what you tried, what worked, and what you'd recommend to others..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="postTags">Tags (comma-separated, optional)</label>
+                <input type="text" id="postTags" placeholder="e.g. Arthritis, Supplements, Recovery">
+            </div>
+            <button class="submit-post" onclick="submitPost()">Post to Community</button>
+        </div>
+    </div>
+
+    <!-- ========== POST DETAIL MODAL ========== -->
+    <div class="modal-overlay detail-modal" id="detailModal" role="dialog" aria-labelledby="detailModalTitle" aria-modal="true">
+        <div class="modal">
+            <button class="modal-close" onclick="closeDetailModal()" aria-label="Close dialog">✕</button>
+            <div id="detailContent"></div>
+        </div>
+    </div>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "PawWell Community Forum",
+      "description": "Senior dog health community forum. Share arthritis, kidney disease and heart condition cases with fellow Australian dog parents.",
+      "url": "https://agedpawwell.com/community.html",
+      "author": { "@type": "Organization", "name": "PawWell" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
+      "datePublished": "2026-07-05"
+    }
+    </script>
+
+    <!-- Supabase SDK + Nav + Community Data -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 数据库接口：community_db_port = 3004 | user_db_port = 3005 -->
+    <script src="js/supabase-init.js"></script>
+    <script defer src="./_shared/assets/nav.js"></script>
+    <script src="js/community-data.js"></script>
+    <script>
+        var currentCategory = 'all';
+        var postsPerPage = 5;
+        var currentPage = 1;
+        var allPosts = [];
+
+        function getUserById(uid) {
+            return MOCK_USERS.find(function(u) { return u.id === uid; }) || MOCK_USERS[0];
+        }
+
+        function getCatConfig(cat) {
+            return CATEGORY_CONFIG[cat] || CATEGORY_CONFIG['health-case'];
+        }
+
+        function formatNum(n) {
+            if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+            return String(n);
+        }
+
+        function renderPostCard(post) {
+            var user = getUserById(post.userId);
+            var cat = getCatConfig(post.category);
+            return '<article class="post-card" data-id="' + post.id + '">' +
+                '<div class="post-top">' +
+                '<div class="user-avatar" style="background:' + user.color + ';" aria-label="' + user.name + ' avatar">' + user.avatar + '</div>' +
+                '<div class="post-meta">' +
+                '<div class="post-user">' + user.nickname + ' <span class="dog-info">· ' + user.dogs[0].avatar + ' ' + user.dogs[0].name + ' (' + user.dogs[0].breed + ', ' + user.dogs[0].age + 'yo)</span></div>' +
+                '<div class="post-time">' + post.createdAt + '</div>' +
+                '</div>' +
+                '<span class="category-badge" style="background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
+                '</div>' +
+                '<h2 class="post-title" onclick="openDetail(\'' + post.id + '\')">' + post.title + '</h2>' +
+                '<p class="post-excerpt">' + post.excerpt + '</p>' +
+                '<div class="post-tags">' +
+                post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') +
+                '</div>' +
+                '<div class="post-actions" role="group" aria-label="Post actions">' +
+                '<button class="action-btn like-btn" onclick="likePost(\'' + post.id + '\', this)" aria-label="Like this post">' +
+                '❤️ ' + post.likes + '</button>' +
+                '<button class="action-btn" onclick="openDetail(\'' + post.id + '\')" aria-label="View comments">' +
+                '💬 ' + post.comments + '</button>' +
+                '<button class="action-btn" aria-label="Share this post">' +
+                '↗️ Share</button>' +
+                '<button class="action-btn" onclick="openDetail(\'' + post.id + '\')" aria-label="Read full post">' +
+                'Read more →</button>' +
+                '</div>' +
+                '</article>';
+        }
+
+        function renderFeed() {
+            var filtered = currentCategory === 'all' ? allPosts : allPosts.filter(function(p) { return p.category === currentCategory; });
+            var start = 0;
+            var page = filtered.slice(start, postsPerPage);
+            document.getElementById('postFeed').innerHTML = page.map(renderPostCard).join('');
+            document.getElementById('postCount').textContent = filtered.length + ' discussions';
+            var btn = document.getElementById('loadMoreBtn');
+            btn.style.display = filtered.length > postsPerPage ? 'block' : 'none';
+            currentPage = 1;
+        }
+
+        function loadMore() {
+            var filtered = currentCategory === 'all' ? allPosts : allPosts.filter(function(p) { return p.category === currentCategory; });
+            currentPage++;
+            var start = (currentPage - 1) * postsPerPage;
+            var page = filtered.slice(start, start + postsPerPage);
+            document.getElementById('postFeed').innerHTML += page.map(renderPostCard).join('');
+            document.getElementById('loadMoreBtn').style.display = start + postsPerPage >= filtered.length ? 'none' : 'block';
+        }
+
+        function filterCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.topic-btn').forEach(function(b) { b.classList.remove('active'); });
+            if (btn) btn.classList.add('active');
+            renderFeed();
+        }
+
+        function likePost(postId, btn) {
+            btn.classList.toggle('liked');
+            var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
+            if (post) {
+                if (btn.classList.contains('liked')) {
+                    post.likes++;
+                    btn.textContent = '❤️ ' + post.likes;
+                } else {
+                    post.likes--;
+                    btn.textContent = '🤍 ' + post.likes;
+                }
+            }
+            // 数据库接口：community_db_port — likes_count 更新
+            CommunityDB.likePost(postId);
+        }
+
+        function openDetail(postId) {
+            var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
+            if (!post) return;
+            var user = getUserById(post.userId);
+            var cat = getCatConfig(post.category);
+            var comments = MOCK_COMMENTS[postId] || [];
+            var commentsHtml = comments.map(function(c) {
+                var cu = getUserById(c.userId);
+                return '<div class="comment-item">' +
+                    '<div class="comment-avatar" style="background:' + cu.color + ';">' + cu.avatar + '</div>' +
+                    '<div class="comment-body">' +
+                    '<span class="comment-user">' + cu.nickname + '</span>' +
+                    '<span class="comment-time">' + c.time + '</span>' +
+                    '<p class="comment-text">' + c.text + '</p>' +
+                    '</div></div>';
+            }).join('');
+
+            document.getElementById('detailContent').innerHTML =
+                '<div class="detail-header">' +
+                '<span class="category-badge" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
+                '<h2 class="detail-title" id="detailModalTitle" style="margin-top:0.6rem;">' + post.title + '</h2>' +
+                '<div class="detail-meta">' +
+                '<div class="user-avatar" style="background:' + user.color + ';width:38px;height:38px;font-size:0.85rem;">' + user.avatar + '</div>' +
+                '<div>' +
+                '<div style="font-weight:700;font-size:0.88rem;">' + user.nickname + ' <span style="font-weight:400;color:#7a8a9a;">· ' + user.dogs[0].avatar + ' ' + user.dogs[0].name + ' (' + user.dogs[0].breed + ', ' + user.dogs[0].age + 'yo)</span></div>' +
+                '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + post.views + ' views</div>' +
+                '</div>' +
+                '</div></div>' +
+                '<div class="detail-content">' + post.content + '</div>' +
+                '<div class="post-tags">' + post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') + '</div>' +
+                '<div class="post-actions">' +
+                '<button class="action-btn" onclick="likePost(\'' + postId + '\')">❤️ ' + post.likes + '</button>' +
+                '<button class="action-btn">💬 ' + post.comments + ' comments</button>' +
+                '</div>' +
+                '<div class="comments-section">' +
+                '<div class="comments-title">💬 ' + comments.length + ' Comments</div>' +
+                (commentsHtml || '<p style="color:#aaa;font-size:0.88rem;">Be the first to comment...</p>') +
+                '<div class="comment-input-wrap">' +
+                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\')">' +
+                '<button class="comment-send" onclick="addComment(\'' + postId + '\')">Send</button>' +
+                '</div></div>';
+            document.getElementById('detailModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function addComment(postId) {
+            var input = document.getElementById('commentInput');
+            if (!input || !input.value.trim()) return;
+            var text = input.value.trim();
+            // 数据库接口：community_db_port — addComment()
+            CommunityDB.addComment(postId, text).then(function(comment) {
+                var newComment = '<div class="comment-item">' +
+                    '<div class="comment-avatar" style="background:#7c3aed;">ME</div>' +
+                    '<div class="comment-body">' +
+                    '<span class="comment-user">You</span><span class="comment-time">Just now</span>' +
+                    '<p class="comment-text">' + text + '</p></div></div>';
+                var section = document.querySelector('.comments-section');
+                var existing = section.querySelector('.comment-input-wrap');
+                existing.insertAdjacentHTML('beforebegin', newComment);
+                input.value = '';
+            });
+        }
+
+        function openWriteModal() {
+            document.getElementById('writeModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWriteModal() {
+            document.getElementById('writeModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function submitPost() {
+            var title = document.getElementById('postTitle').value.trim();
+            var category = document.getElementById('postCategory').value;
+            var content = document.getElementById('postContent').value.trim();
+            var tagsRaw = document.getElementById('postTags').value.trim();
+            if (!title || !content) {
+                alert('Please fill in the title and your story.');
+                return;
+            }
+            var tags = tagsRaw ? tagsRaw.split(',').map(function(t) { return t.trim(); }).filter(function(t) { return t; }) : [];
+            var newPost = {
+                id: 'p_new_' + Date.now(),
+                userId: 'u1',
+                category: category,
+                title: title,
+                excerpt: content.substring(0, 150) + '...',
+                content: content,
+                dog: MOCK_USERS[0].dogs[0],
+                createdAt: 'Just now',
+                likes: 0,
+                comments: 0,
+                views: 1,
+                tags: tags,
+                pinned: false
+            };
+            // 数据库接口：community_db_port — createPost()
+            CommunityDB.createPost(newPost).then(function() {
+                MOCK_POSTS.unshift(newPost);
+                filterCategory(currentCategory, null);
+                closeWriteModal();
+                document.getElementById('postTitle').value = '';
+                document.getElementById('postContent').value = '';
+                document.getElementById('postTags').value = '';
+            });
+        }
+
+        // ESC to close modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeWriteModal();
+                closeDetailModal();
+            }
+        });
+
+        // Init
+        CommunityDB.getPosts().then(function(posts) {
+            allPosts = posts;
+            renderFeed();
+            // Count per category
+            document.getElementById('count-all').textContent = posts.length;
+            document.getElementById('count-health-case').textContent = posts.filter(function(p) { return p.category === 'health-case'; }).length;
+            document.getElementById('count-question').textContent = posts.filter(function(p) { return p.category === 'question'; }).length;
+            document.getElementById('count-tip').textContent = posts.filter(function(p) { return p.category === 'tip'; }).length;
+            document.getElementById('count-product').textContent = posts.filter(function(p) { return p.category === 'product'; }).length;
+        });
+    </script>
+</body>
+</html>

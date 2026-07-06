@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milo's 18-Month Arthritis Journey: What Actually Worked | PawWell</title>
+    <meta name="description" content="After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Full breakdown of what worked, what did not, and cost analysis.">
+    <meta name="keywords" content="arthritis senior dogs, osteoarthritis dogs, joint supplements dogs, glucosamine dogs, MSM dogs, arthritis treatment dogs">
+    <meta name="robots" content="index, follow">
+    <!-- 数据库接口：blog_db_port = 3002 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f8f9fb; }
+        /* ====== STICKY NAV ====== */
+        .top-bar { background: white; padding: 0.7rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+        .top-bar-inner { max-width: 1100px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .top-bar-inner a { text-decoration: none; color: #2c3e50; font-weight: 600; }
+        .top-bar-inner a:hover { color: #ff6b6b; }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: #aaa; }
+        .breadcrumb a { color: #ff6b6b; font-weight: 600; }
+        /* ====== HERO COVER ====== */
+        .cover { height: 420px; background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-top: 52px; }
+        .cover::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(transparent, #f8f9fb); }
+        .cover-emoji { font-size: 8rem; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.2)); position: relative; z-index: 1; }
+        /* ====== ARTICLE CONTAINER ====== */
+        .article-wrap { max-width: 780px; margin: 0 auto; padding: 0 18px 4rem; }
+        /* ====== ARTICLE HEADER ====== */
+        .article-header { padding: 2rem 0 1.5rem; border-bottom: 2px solid #f0f0f0; margin-bottom: 2rem; }
+        .article-meta-top { display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+        .article-cat { padding: 5px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; background: #ff6b6b; color: white; }
+        .article-date { font-size: 0.82rem; color: #aaa; }
+        .article-read { font-size: 0.82rem; color: #aaa; }
+        .article-title { font-size: 2rem; font-weight: 700; color: #2c3e50; line-height: 1.3; margin-bottom: 0.8rem; }
+        .article-subtitle { font-size: 1.1rem; color: #7a8a9a; line-height: 1.6; margin-bottom: 1.2rem; }
+        .author-row { display: flex; align-items: center; gap: 10px; }
+        .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: #ff6b6b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; }
+        .author-info .author-name { font-weight: 700; font-size: 0.92rem; color: #2c3e50; }
+        .author-info .author-sub { font-size: 0.8rem; color: #aaa; }
+        /* ====== KEY TAKEAWAY ====== */
+        .key-takeaway { background: #fff0eb; border-left: 5px solid #ff6b6b; border-radius: 0 14px 14px 0; padding: 1.2rem 1.4rem; margin-bottom: 2rem; }
+        .key-takeaway-title { font-weight: 700; color: #ff6b6b; font-size: 0.85rem; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .key-takeaway p { font-size: 1rem; color: #2c3e50; line-height: 1.6; font-weight: 500; }
+        /* ====== TABLE OF CONTENTS ====== */
+        .toc { background: white; border-radius: 16px; padding: 1.4rem; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .toc h3 { font-size: 0.95rem; color: #2c3e50; margin-bottom: 0.8rem; font-weight: 700; }
+        .toc ol { padding-left: 1.4rem; }
+        .toc li { margin-bottom: 0.5rem; }
+        .toc a { font-size: 0.9rem; color: #4a6a8a; text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: #ff6b6b; }
+        /* ====== CONTENT SECTIONS ====== */
+        .content h2 { font-size: 1.4rem; color: #2c3e50; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #ff6b6b; display: inline-block; }
+        .content h3 { font-size: 1.1rem; color: #2c3e50; margin: 1.5rem 0 0.7rem; font-weight: 700; }
+        .content p { font-size: 1rem; color: #3d5060; line-height: 1.85; margin-bottom: 1rem; }
+        .content strong { color: #2c3e50; }
+        .content ul, .content ol { padding-left: 1.6rem; margin-bottom: 1.2rem; }
+        .content li { font-size: 1rem; color: #3d5060; line-height: 1.8; margin-bottom: 0.4rem; }
+        /* ====== PHOTO CARD ====== */
+        .photo-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1); margin: 1.5rem 0; }
+        .photo-card-img { height: 260px; background: linear-gradient(135deg, #ff8e53, #ffb347); display: flex; align-items: center; justify-content: center; font-size: 5rem; }
+        .photo-card-caption { padding: 1rem 1.2rem; font-size: 0.85rem; color: #7a8a9a; font-style: italic; }
+        /* ====== CHECKLIST ====== */
+        .checklist { background: white; border-radius: 16px; padding: 1.5rem; margin: 1.5rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .checklist h3 { font-size: 1rem; color: #2c3e50; margin-bottom: 1rem; font-weight: 700; }
+        .checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; transition: opacity 0.2s; }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item.done { opacity: 0.5; }
+        .checklist-item.done .check-text { text-decoration: line-through; }
+        .check-box { width: 22px; height: 22px; border-radius: 6px; border: 2px solid #e0e0e0; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: white; transition: all 0.2s; cursor: pointer; }
+        .check-box.checked { background: #ff6b6b; border-color: #ff6b6b; }
+        .check-text { font-size: 0.92rem; color: #3d5060; line-height: 1.5; }
+        .checklist-note { font-size: 0.82rem; color: #aaa; margin-top: 0.8rem; font-style: italic; }
+        /* ====== SEVERITY CARDS ====== */
+        .severity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
+        .severity-card { border-radius: 16px; padding: 1.2rem; text-align: center; }
+        .severity-card.green { background: #e8f5e9; border: 2px solid #4caf50; }
+        .severity-card.yellow { background: #fffde7; border: 2px solid #f9a825; }
+        .severity-card.red { background: #ffebee; border: 2px solid #e53935; }
+        .severity-emoji { font-size: 2rem; margin-bottom: 0.4rem; }
+        .severity-label { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+        .severity-card.green .severity-label { color: #2e7d32; }
+        .severity-card.yellow .severity-label { color: #f57f17; }
+        .severity-card.red .severity-label { color: #c62828; }
+        .severity-symptoms { font-size: 0.82rem; color: #5a6c7d; line-height: 1.5; margin-bottom: 0.5rem; }
+        .severity-treatment { font-size: 0.82rem; color: #2c3e50; font-weight: 600; }
+        .severity-cost { font-size: 0.8rem; color: #aaa; margin-top: 0.3rem; }
+        /* ====== SUPPLEMENT TABLE ====== */
+        .supp-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .supp-table th { background: #ff6b6b; color: white; font-weight: 700; font-size: 0.85rem; padding: 12px 14px; text-align: left; }
+        .supp-table td { padding: 11px 14px; font-size: 0.88rem; color: #3d5060; border-bottom: 1px solid #f0f0f0; }
+        .supp-table tr:last-child td { border-bottom: none; }
+        .supp-table tr:nth-child(even) td { background: #fafafa; }
+        .supp-table .price { font-weight: 700; color: #27ae60; }
+        .supp-table .rating { color: #f9a825; }
+        /* ====== SECTION DIVIDER ====== */
+        .divider { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0; }
+        .divider-line { flex: 1; height: 1px; background: #e0e0e0; }
+        .divider-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff6b6b; }
+        /* ====== COMMUNITY EMBED ====== */
+        .community-section { background: white; border-radius: 18px; padding: 1.5rem; margin: 2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.07); }
+        .community-section h2 { font-size: 1.1rem; color: #2c3e50; margin-bottom: 1rem; border-bottom: none; padding-bottom: 0; }
+        .comm-post { padding: 1rem; border-radius: 12px; border: 1.5px solid #f0f0f0; margin-bottom: 0.8rem; cursor: pointer; transition: all 0.3s; }
+        .comm-post:hover { border-color: #ff6b6b; box-shadow: 0 4px 12px rgba(255,107,107,0.1); }
+        .comm-post:hover h3 { color: #ff6b6b; }
+        .comm-user { display: flex; align-items: center; gap: 8px; margin-bottom: 0.4rem; }
+        .comm-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 700; color: white; }
+        .comm-name { font-size: 0.82rem; font-weight: 700; color: #2c3e50; }
+        .comm-time { font-size: 0.75rem; color: #aaa; }
+        .comm-post h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.3rem; transition: color 0.2s; line-height: 1.4; }
+        .comm-meta { font-size: 0.75rem; color: #aaa; }
+        .comm-more { display: block; text-align: center; padding: 12px; border: 2px solid #ff6b6b; border-radius: 12px; color: #ff6b6b; font-weight: 700; font-size: 0.88rem; text-decoration: none; margin-top: 0.8rem; transition: all 0.3s; }
+        .comm-more:hover { background: #ff6b6b; color: white; }
+        /* ====== IN-ARTICLE CTA ====== */
+        .article-cta { background: linear-gradient(135deg, #ff6b6b, #ff8e53); border-radius: 18px; padding: 2rem; text-align: center; color: white; margin: 2rem 0; }
+        .article-cta h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .article-cta p { opacity: 0.9; font-size: 0.92rem; margin-bottom: 1.2rem; }
+        .article-cta a { display: inline-block; padding: 14px 32px; background: white; color: #ff6b6b; font-weight: 700; border-radius: 30px; text-decoration: none; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        /* ====== BOTTOM CTA ====== */
+        .bottom-cta { background: linear-gradient(135deg, #1a2a3a, #2c4a5c); border-radius: 20px; padding: 2.5rem 2rem; text-align: center; color: white; margin: 2rem 0 3rem; }
+        .bottom-cta h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+        .bottom-cta p { opacity: 0.8; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .bottom-cta a { display: inline-block; padding: 15px 36px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; font-weight: 700; border-radius: 30px; text-decoration: none; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 16px rgba(255,107,107,0.4); }
+        .bottom-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,107,0.5); }
+        /* ====== RELATED ARTICLES ====== */
+        .related-articles { margin: 2rem 0; }
+        .related-articles h2 { font-size: 1.2rem; color: #2c3e50; margin-bottom: 1rem; }
+        .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+        .related-card { background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: all 0.3s; cursor: pointer; }
+        .related-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+        .related-card-cover { height: 90px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+        .related-card-body { padding: 0.8rem; }
+        .related-card-body h3 { font-size: 0.85rem; color: #2c3e50; line-height: 1.4; margin-bottom: 0.3rem; }
+        .related-card-body .meta { font-size: 0.72rem; color: #aaa; }
+        /* ====== AUTHOR BOX ====== */
+        .author-box { background: white; border-radius: 16px; padding: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; margin: 2rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .author-box-avatar { width: 60px; height: 60px; border-radius: 50%; background: #ff6b6b; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; flex-shrink: 0; }
+        .author-box h3 { font-size: 1rem; color: #2c3e50; margin-bottom: 0.3rem; }
+        .author-box p { font-size: 0.88rem; color: #7a8a9a; line-height: 1.6; }
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .article-title { font-size: 1.5rem; }
+            .severity-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr 1fr; }
+            .cover { height: 280px; }
+            .cover-emoji { font-size: 5rem; }
+            .supp-table { font-size: 0.82rem; }
+        }
+        @media (max-width: 500px) {
+            .related-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP BAR -->
+    <div class="top-bar" role="banner">
+        <div class="top-bar-inner">
+            <a href="./index.html" aria-label="PawWell Home">← PawWell</a>
+            <div class="breadcrumb">
+                <a href="./blog.html">Blog</a> /
+                <a href="./arthritis.html">Arthritis</a> /
+                <span>Health Case</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- COVER -->
+    <div class="cover" role="img" aria-label="Golden Retriever hero image">
+        <div class="cover-emoji" aria-hidden="true">🦡</div>
+    </div>
+
+    <!-- ARTICLE -->
+    <div class="article-wrap">
+        <!-- HEADER -->
+        <header class="article-header">
+            <div class="article-meta-top">
+                <span class="article-cat">📋 Health Case</span>
+                <span class="article-date">🗓 5 July 2026</span>
+                <span class="article-read">⏱ 8 min read</span>
+            </div>
+            <h1 class="article-title">Milo's 18-Month Arthritis Journey: What Actually Worked</h1>
+            <p class="article-subtitle">After being diagnosed with moderate osteoarthritis at age 10, Milo has been on a combination of glucosamine, MSM and fish oil for 18 months. Here is the complete breakdown of what changed, what did not, and what we wish we knew earlier.</p>
+            <div class="author-row">
+                <div class="author-avatar" aria-hidden="true">SM</div>
+                <div class="author-info">
+                    <div class="author-name">Sarah M. (MiloMum)</div>
+                    <div class="author-sub">Melbourne, Australia · Milo (Golden Retriever, 11yo)</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- KEY TAKEAWAY -->
+        <div class="key-takeaway" role="note">
+            <div class="key-takeaway-title">💡 Key Takeaway</div>
+            <p>1 in 3 senior dogs develop arthritis after age 7. Early detection and consistent supplement management can dramatically improve quality of life. Milo's story proves it — he is like a new dog 18 months later.</p>
+        </div>
+
+        <!-- TABLE OF CONTENTS -->
+        <nav class="toc" aria-label="Article contents">
+            <h3>📑 Contents</h3>
+            <ol>
+                <li><a href="#diagnosis">The Diagnosis: What the Vet Found</a></li>
+                <li><a href="#symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</a></li>
+                <li><a href="#severity">Understanding Severity Levels</a></li>
+                <li><a href="#supplements">What We Tried: Supplements &amp; Their Real Costs</a></li>
+                <li><a href="#exercise">Exercise &amp; Lifestyle Changes</a></li>
+                <li><a href="#results">18-Month Results: What Worked &amp; What Did Not</a></li>
+                <li><a href="#community">What the Community Says</a></li>
+            </ol>
+        </nav>
+
+        <!-- CONTENT -->
+        <div class="content">
+            <h2 id="diagnosis">The Diagnosis: What the Vet Found</h2>
+            <p>Milo was 10 years old when our vet confirmed moderate osteoarthritis in his hips and both elbows. He had been slowing down on walks, struggling to get up from his bed, and seemed stiff first thing in the morning.</p>
+            <p>What surprised us most was how gradual it had been. We almost did not notice — we just thought he was getting older. But when the vet showed us the X-rays, it was clear: the cartilage in his hip joints had worn down significantly.</p>
+
+            <div class="photo-card" role="img" aria-label="Milo at the beach">
+                <div class="photo-card-img" style="background: linear-gradient(135deg, #87CEEB, #FFE4B5);">🦡🏖️</div>
+                <div class="photo-card-caption">Milo at St Kilda Beach, Melbourne — every Friday since he recovered his energy. January 2026.</div>
+            </div>
+
+            <h2 id="symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</h2>
+            <p>Use this checklist to track whether your senior dog might be showing signs of arthritis. Check the ones that apply to your dog:</p>
+
+            <div class="checklist" aria-label="Arthritis symptoms checklist">
+                <h3>👀 Common Arthritis Symptoms</h3>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Stiffness after rest, especially in the morning</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Difficulty getting up from lying down</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Limping or favoring one or more legs</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Reluctance to jump, climb stairs, or run</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Licking or chewing at specific joints</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Muscle loss in affected limbs</span>
+                </div>
+                <div class="checklist-item" onclick="this.classList.toggle('done'); this.querySelector('.check-box').classList.toggle('checked')">
+                    <div class="check-box" aria-hidden="true">✓</div>
+                    <span class="check-text">Slowing down on walks or reduced stamina</span>
+                </div>
+                <p class="checklist-note">Checked 3 or more? We recommend a vet visit for a proper assessment.</p>
+            </div>
+
+            <div class="article-cta">
+                <h3>🩺 Get a Free AI Health Check</h3>
+                <p>2 minutes. No vet visit needed. Get a personalized assessment for your dog.</p>
+                <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start AI Health Check →</a>
+            </div>
+
+            <h2 id="severity">Understanding Severity Levels</h2>
+            <p>Arthritis severity varies significantly. Here is how vets typically classify it:</p>
+
+            <div class="severity-grid">
+                <div class="severity-card green">
+                    <div class="severity-emoji" aria-hidden="true">🟢</div>
+                    <div class="severity-label">Mild</div>
+                    <div class="severity-symptoms">Slight stiffness, occasional limp. Still active and happy.</div>
+                    <div class="severity-treatment">Supplements + weight management</div>
+                    <div class="severity-cost">~$30–80/month</div>
+                </div>
+                <div class="severity-card yellow">
+                    <div class="severity-emoji" aria-hidden="true">🟡</div>
+                    <div class="severity-label">Moderate</div>
+                    <div class="severity-symptoms">Noticeable stiffness, reduced activity. Pain visible some days.</div>
+                    <div class="severity-treatment">Supplements + vet pain medication</div>
+                    <div class="severity-cost">~$80–200/month</div>
+                </div>
+                <div class="severity-card red">
+                    <div class="severity-emoji" aria-hidden="true">🔴</div>
+                    <div class="severity-label">Severe</div>
+                    <div class="severity-symptoms">Significant pain, difficulty moving. Quality of life impacted.</div>
+                    <div class="severity-treatment">Vet medication + surgery evaluation</div>
+                    <div class="severity-cost">$1,000+/month</div>
+                </div>
+            </div>
+
+            <h2 id="supplements">What We Tried: Supplements &amp; Their Real Costs</h2>
+            <p>After a lot of research and conversations with our vet, here is what Milo's daily routine looks like. All prices are from Australian retailers in 2026:</p>
+
+            <table class="supp-table" aria-label="Supplement comparison table">
+                <thead>
+                    <tr>
+                        <th>Supplement</th>
+                        <th>Daily Dose</th>
+                        <th>Monthly Cost</th>
+                        <th>Our Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Glucosamine &amp; Chondroitin</strong></td>
+                        <td>1000mg glucosamine</td>
+                        <td class="price">~$35</td>
+                        <td class="rating">⭐⭐⭐⭐⭐ Essential</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MSM (Methylsulfonylmethane)</strong></td>
+                        <td>500mg</td>
+                        <td class="price">~$18</td>
+                        <td class="rating">⭐⭐⭐⭐ Very helpful</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Omega-3 Fish Oil</strong></td>
+                        <td>1 teaspoon</td>
+                        <td class="price">~$25</td>
+                        <td class="rating">⭐⭐⭐⭐ Great anti-inflammatory</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Green-Lipped Mussel</strong></td>
+                        <td>1 capsule</td>
+                        <td class="price">~$40</td>
+                        <td class="rating">⭐⭐⭐⭐⭐ Made a real difference</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Total monthly cost: approximately $118/month</strong> — roughly the cost of two vet visits. For us, it has been worth every cent.</p>
+
+            <div class="divider"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
+            <h2 id="exercise">Exercise &amp; Lifestyle Changes</h2>
+            <p>Supplements alone are not enough. Here is what we changed at home:</p>
+            <h3>Morning Routine</h3>
+            <p>We give Milo his supplements mixed into his breakfast — he does not even notice them. We keep walks to 20 minutes on soft grass in the mornings when he is least stiff.</p>
+            <h3>Swimming Therapy</h3>
+            <p>The single best thing we did was start swimming sessions. Milo loves our backyard pool — the vet confirmed that swimming is the best exercise for arthritic dogs because it builds muscle without loading the joints. We do 15–20 minutes, 2–3 times per week in summer.</p>
+            <h3>Home Modifications</h3>
+            <ul>
+                <li>Memory foam orthopedic bed (~$180, Big Barker — expensive but genuinely the best)</li>
+                <li>Non-slip rugs on all hard floors to prevent slipping</li>
+                <li>Ramp for the car boot (~$30, DIY from Bunnings)</li>
+                <li>Raised food bowls to reduce neck strain</li>
+            </ul>
+
+            <div class="article-cta">
+                <h3>🩺 Still Have Questions About Your Dog's Joints?</h3>
+                <p>Take our free AI health check — it only takes 2 minutes.</p>
+                <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start AI Health Check →</a>
+            </div>
+
+            <h2 id="results">18-Month Results: What Worked &amp; What Did Not</h2>
+            <p><strong>What worked:</strong> Consistency with supplements. We never skip a dose. Green-lipped mussel was the biggest game-changer for Milo's elbow pain. Swimming built up his back leg muscles noticeably.</p>
+            <p><strong>What did not work:</strong> We tried a cheap glucosamine from eBay — it made zero difference. Brand matters. We also wasted money on a cooling gel bed (not appropriate for arthritis dogs — they need warmth, not cooling).</p>
+            <p><strong>The biggest lesson:</strong> Start supplements early. The earlier you catch it, the better the results. Milo's elbows will never be perfect, but he is active, happy, and moves like a much younger dog.</p>
+
+            <!-- COMMUNITY SECTION -->
+            <div class="community-section" id="community">
+                <h2>💬 What the Community Says</h2>
+                <div class="comm-post" onclick="window.open('community.html','_blank')">
+                    <div class="comm-user">
+                        <div class="comm-avatar" style="background:#7c3aed;">MR</div>
+                        <div>
+                            <div class="comm-name">RockyDad</div>
+                            <div class="comm-time">1 day ago · 💡 Tips</div>
+                        </div>
+                    </div>
+                    <h3>"The $30 Bunnings ramp that changed everything for Rocky — no more jumping"</h3>
+                    <div class="comm-meta">❤️ 124 · 💬 45 comments</div>
+                </div>
+                <div class="comm-post" onclick="window.open('community.html','_blank')">
+                    <div class="comm-user">
+                        <div class="comm-avatar" style="background:#27ae60;">FS</div>
+                        <div>
+                            <div class="comm-name">CocoCarer</div>
+                            <div class="comm-time">3 days ago · ⭐ Product Review</div>
+                        </div>
+                    </div>
+                    <h3>"Honest review: 5 orthopedic dog beds — which one is actually worth it"</h3>
+                    <div class="comm-meta">❤️ 89 · 💬 67 comments</div>
+                </div>
+                <div class="comm-post" onclick="window.open('community.html','_blank')">
+                    <div class="comm-user">
+                        <div class="comm-avatar" style="background:#e67e22;">DL</div>
+                        <div>
+                            <div class="comm-name">MaxOwner</div>
+                            <div class="comm-time">5 days ago · 💡 Tips</div>
+                        </div>
+                    </div>
+                    <h3>"Free symptom tracking spreadsheet — spotted patterns we never noticed"</h3>
+                    <div class="comm-meta">❤️ 73 · 💬 28 comments</div>
+                </div>
+                <a href="./community.html" class="comm-more" aria-label="View all community discussions on arthritis">➕ Join the Discussion / View All 89 Comments →</a>
+            </div>
+
+            <!-- AUTHOR BOX -->
+            <div class="author-box">
+                <div class="author-box-avatar" aria-hidden="true">SM</div>
+                <div>
+                    <h3>About Sarah M. (MiloMum)</h3>
+                    <p>Milo's mum, based in Melbourne. Sharing Milo's arthritis management journey to help other dog parents going through the same thing. Not a vet — just a dog parent who learned the hard way. Always consult your vet for medical advice.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="bottom-cta">
+            <h2>Is Your Dog Showing Signs of Arthritis?</h2>
+            <p>Take our free 2-minute AI health check to assess your dog's joint health and get personalized recommendations.</p>
+            <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
+        </div>
+
+        <!-- RELATED ARTICLES -->
+        <div class="related-articles">
+            <h2>📚 Related Reading</h2>
+            <div class="related-grid">
+                <div class="related-card" onclick="window.location.href='kidney-early-detection.html'">
+                    <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);">🫘</div>
+                    <div class="related-card-body">
+                        <h3>Charlie's Skin Issues Turned Out to Be Kidney Disease</h3>
+                        <div class="meta">📋 Health Case · 10 min</div>
+                    </div>
+                </div>
+                <div class="related-card" onclick="window.location.href='bunnings-ramp-30-dollars.html'">
+                    <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);">🐕</div>
+                    <div class="related-card-body">
+                        <h3>The $30 Bunnings Ramp That Changed Everything</h3>
+                        <div class="meta">💡 Tips · 5 min</div>
+                    </div>
+                </div>
+                <div class="related-card" onclick="window.location.href='heart-murmur-grade-2.html'">
+                    <div class="related-card-cover" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">❤️</div>
+                    <div class="related-card-body">
+                        <h3>Duke's Grade 2 Heart Murmur — What We Learned</h3>
+                        <div class="meta">❓ Q&A · 12 min</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schema.org Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Milo's 18-Month Arthritis Journey: What Actually Worked",
+      "description": "After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Full breakdown of what worked.",
+      "author": { "@type": "Person", "name": "Sarah M.", "alternateName": "MiloMum" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
+      "datePublished": "2026-07-05",
+      "dateModified": "2026-07-05",
+      "keywords": ["arthritis senior dogs", "osteoarthritis dogs", "joint supplements dogs", "glucosamine dogs"]
+    }
+    </script>
+
+    <!-- Supabase + Nav -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 数据库接口：blog_db_port = 3002 -->
+    <script src="js/supabase-init.js"></script>
+    <script defer src="./_shared/assets/nav.js"></script>
+</body>
+</html>

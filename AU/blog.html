@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | PawWell — Senior Dog Health Articles & Real Stories</title>
+    <meta name="description" content="Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.">
+    <meta name="robots" content="index, follow">
+    <!-- 数据库接口：blog_db_port = 3002 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f4f6f9; min-height: 100vh; }
+        /* HEADER */
+        .site-header { background: white; padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-img { height: 40px; display: block; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
+        .nav a:hover { background: #f5f5f5; }
+        /* HERO */
+        .hero { background: linear-gradient(135deg, #1a2a3a 0%, #2c4a5c 100%); color: white; padding: 5rem 18px 2.5rem; text-align: center; margin-top: 60px; }
+        .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 0.6rem; }
+        .hero p { font-size: 1rem; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+        /* CATEGORIES */
+        .cat-bar { background: white; padding: 1rem 18px; display: flex; gap: 0.5rem; overflow-x: auto; justify-content: center; flex-wrap: wrap; }
+        .cat-btn { padding: 7px 18px; border-radius: 25px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: 2px solid #e0e0e0; background: white; color: #2c3e50; transition: all 0.3s; white-space: nowrap; font-family: inherit; }
+        .cat-btn:hover { border-color: #ff6b6b; color: #ff6b6b; }
+        .cat-btn.active { background: #ff6b6b; color: white; border-color: #ff6b6b; }
+        /* GRID */
+        .grid { max-width: 1200px; margin: 2rem auto; padding: 0 18px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+        .card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: all 0.3s; cursor: pointer; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .card-cover { height: 180px; background: linear-gradient(135deg, var(--c1), var(--c2)); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; overflow: hidden; }
+        .card-cover .cover-icon { filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); }
+        .card-cat { position: absolute; top: 12px; left: 12px; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; background: rgba(255,255,255,0.9); color: var(--c1); }
+        .card-pinned { position: absolute; top: 12px; right: 12px; font-size: 1.2rem; }
+        .card-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+        .card-meta { display: flex; gap: 1rem; font-size: 0.75rem; color: #aaa; margin-bottom: 0.6rem; }
+        .card-title { font-size: 1rem; font-weight: 700; color: #2c3e50; line-height: 1.4; margin-bottom: 0.5rem; flex: 1; }
+        .card-excerpt { font-size: 0.84rem; color: #7a8a9a; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid #f0f0f0; }
+        .card-author { display: flex; align-items: center; gap: 6px; }
+        .card-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--c1); color: white; font-size: 0.65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        .card-author span { font-size: 0.78rem; color: #5a6c7d; font-weight: 600; }
+        .card-stats { font-size: 0.75rem; color: #aaa; }
+        /* FEATURED CARD */
+        .card.featured { grid-column: 1 / -1; flex-direction: row; }
+        .card.featured .card-cover { height: auto; min-height: 260px; flex: 0 0 45%; }
+        .card.featured .card-body { padding: 1.8rem; }
+        .card.featured .card-title { font-size: 1.4rem; }
+        .card.featured .card-excerpt { -webkit-line-clamp: 5; font-size: 0.92rem; }
+        /* CTA STRIP */
+        .cta-strip { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; text-align: center; padding: 2.5rem 18px; margin: 1rem 0; }
+        .cta-strip h2 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-strip p { opacity: 0.9; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .cta-strip .cta-btn { display: inline-block; padding: 14px 32px; background: white; color: #ff6b6b; font-weight: 700; border-radius: 30px; text-decoration: none; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 14px rgba(0,0,0,0.15); }
+        .cta-strip .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        /* FOOTER */
+        .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; }
+        .site-footer a { color: #ff8e53; text-decoration: none; }
+        /* RESPONSIVE */
+        @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 700px) {
+            .grid { grid-template-columns: 1fr; }
+            .card.featured { flex-direction: column; }
+            .card.featured .card-cover { min-height: 200px; }
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .hero h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="./index.html" aria-label="PawWell Home"><img src="./_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+                <a href="./index.html">Home</a>
+                <a href="./assessment.html">AI Health Check</a>
+                <a href="./arthritis.html">Arthritis Guide</a>
+                <a href="./kidney.html">Kidney Disease</a>
+                <a href="./heart.html">Heart Disease</a>
+                <a href="./community.html">Community</a>
+                <a href="./blog.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero" role="banner">
+        <h1>Senior Dog Health Blog</h1>
+        <p>Real stories, expert guidance and community experiences from Australian dog parents</p>
+    </div>
+
+    <div class="cat-bar" role="navigation" aria-label="Article categories">
+        <button class="cat-btn active" onclick="filterBlog('all', this)">All Articles</button>
+        <button class="cat-btn" onclick="filterBlog('health-case', this)">📋 Health Cases</button>
+        <button class="cat-btn" onclick="filterBlog('tip', this)">💡 Tips & Guides</button>
+        <button class="cat-btn" onclick="filterBlog('qa', this)">❓ Q&A</button>
+        <button class="cat-btn" onclick="filterBlog('review', this)">⭐ Reviews</button>
+    </div>
+
+    <div class="grid" id="blogGrid"></div>
+
+    <div class="cta-strip">
+        <h2>Is Your Dog Showing Warning Signs?</h2>
+        <p>Take our free 2-minute AI health check — get a personalized assessment instantly</p>
+        <a href="./assessment.html" class="cta-btn">Start Free AI Health Check →</a>
+    </div>
+
+    <footer class="site-footer" role="contentinfo">
+        <p>© 2026 PawWell. All rights reserved.</p>
+        <p style="margin-top:0.5rem;">
+            <a href="./index.html">Home</a> ·
+            <a href="./assessment.html">AI Health Check</a> ·
+            <a href="./community.html">Community</a> ·
+            <a href="./blog.html">Blog</a>
+        </p>
+    </footer>
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "PawWell Senior Dog Health Blog",
+      "description": "Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.",
+      "url": "https://agedpawwell.com/blog.html",
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" }
+    }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 数据库接口：blog_db_port = 3002 -->
+    <script src="js/supabase-init.js"></script>
+    <script defer src="./_shared/assets/nav.js"></script>
+    <script>
+        // 博客文章数据（未来替换为 Supabase fetch）
+        var ARTICLES = [
+            {
+                id: 'blog1', slug: 'arthritis-18-months', category: 'health-case',
+                title: "Milo's 18-Month Arthritis Journey: What Actually Worked",
+                excerpt: 'After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Here is the complete breakdown of what changed, what did not, and what we wish we knew earlier.',
+                coverIcon: '🦡', c1: '#ff6b6b', c2: '#ff8e53',
+                author: 'Sarah M.', avatarInitials: 'SM', avatarColor: '#ff6b6b',
+                readTime: '8 min', date: '2026-07-05', likes: 47, comments: 12,
+                pinned: false, tags: ['Arthritis', 'Supplements', 'Recovery', 'Golden Retriever'],
+                featured: true
+            },
+            {
+                id: 'blog2', slug: 'kidney-early-detection', category: 'health-case',
+                title: "Charlie's Skin Problems Turned Out to Be Kidney Disease",
+                excerpt: 'Months of coat deterioration and scratching. Two vets missed it. The third did a full senior blood panel and found Stage 2 CKD. A hard lesson in early detection and advocating for your dog.',
+                coverIcon: '🫘', c1: '#4a9eb8', c2: '#00bcd4',
+                author: 'Amy W.', avatarInitials: 'AW', avatarColor: '#4a9eb8',
+                readTime: '10 min', date: '2026-07-03', likes: 201, comments: 58,
+                pinned: true, tags: ['Kidney Disease', 'Early Detection', 'Cavoodle'],
+                featured: false
+            },
+            {
+                id: 'blog3', slug: 'bunnings-ramp-30-dollars', category: 'tip',
+                title: 'The $30 Bunnings Ramp That Changed Everything for Rocky',
+                excerpt: 'Rocky is 12 with bad hips. One piece of plywood and some non-slip rubber matting. No more lifting him onto the couch. Simple solutions are sometimes the best.',
+                coverIcon: '🐕', c1: '#7c3aed', c2: '#9c27b0',
+                author: 'Mark R.', avatarInitials: 'MR', avatarColor: '#7c3aed',
+                readTime: '5 min', date: '2026-07-01', likes: 124, comments: 45,
+                pinned: false, tags: ['Arthritis', 'Home Tips', 'Labrador', 'Mobility'],
+                featured: false
+            },
+            {
+                id: 'blog4', slug: 'heart-murmur-grade-2', category: 'qa',
+                title: "Duke's Grade 2 Heart Murmur — What We Learned at the Cardiologist",
+                excerpt: 'Our 9-year-old German Shepherd developed a cough after exercise. Grade 2 murmur confirmed. Here is everything the veterinary cardiologist told us about MVD in large breeds.',
+                coverIcon: '❤️', c1: '#c0392b', c2: '#e74c3c',
+                author: 'James K.', avatarInitials: 'JK', avatarColor: '#c0392b',
+                readTime: '12 min', date: '2026-06-28', likes: 83, comments: 34,
+                pinned: false, tags: ['Heart Disease', 'Heart Murmur', 'German Shepherd', 'Q&A'],
+                featured: false
+            },
+            {
+                id: 'blog5', slug: 'orthopedic-beds-review', category: 'review',
+                title: 'Honest Review: 5 Orthopedic Dog Beds for Arthritic Dogs',
+                excerpt: 'Big Barker, K9, Kmart, IKEA hack, and cooling gel beds — tested with Coco (13, arthritis) and Buddy (7). Here is what is worth the money and what to avoid.',
+                coverIcon: '🛏️', c1: '#27ae60', c2: '#2ecc71',
+                author: 'Fiona S.', avatarInitials: 'FS', avatarColor: '#27ae60',
+                readTime: '7 min', date: '2026-06-25', likes: 89, comments: 67,
+                pinned: false, tags: ['Product Review', 'Arthritis', 'Beds', 'Poodle'],
+                featured: false
+            },
+            {
+                id: 'blog6', slug: 'symptom-tracking-spreadsheet', category: 'tip',
+                title: 'Free Symptom Tracker That Helped Us Spot Patterns in Max',
+                excerpt: 'Built a weekly Google Sheets tracker for Max\'s mobility. Found out he is always worse on cold days and after skipping his evening glucosamine. Sharing the template for free.',
+                coverIcon: '📊', c1: '#e67e22', c2: '#f39c12',
+                author: 'David L.', avatarInitials: 'DL', avatarColor: '#e67e22',
+                readTime: '6 min', date: '2026-06-20', likes: 73, comments: 28,
+                pinned: false, tags: ['Arthritis', 'Tracking', 'Tips', 'Border Collie'],
+                featured: false
+            },
+            {
+                id: 'blog7', slug: 'kidney-diet-costs', category: 'qa',
+                title: 'How Much Does Kidney Disease Management Actually Cost? A Real Budget Breakdown',
+                excerpt: 'From prescription food to vet visits and supplements — what we spend per month managing Charlie\'s Stage 2 CKD. An honest look at the financial side of senior dog health.',
+                coverIcon: '💰', c1: '#4a9eb8', c2: '#16a085',
+                author: 'Amy W.', avatarInitials: 'AW', avatarColor: '#4a9eb8',
+                readTime: '9 min', date: '2026-06-15', likes: 112, comments: 39,
+                pinned: false, tags: ['Kidney Disease', 'Cost', 'Budget', 'Cavoodle'],
+                featured: false
+            },
+            {
+                id: 'blog8', slug: 'palliative-care-quality-of-life', category: 'qa',
+                title: "When It Was Time to Say Goodbye — Oscar's Quality of Life Journey",
+                excerpt: "OscarDad shares the hardest decision he ever had to make. What signs told him it was time, how he knew, and what he wishes he had done differently. Raw and honest.",
+                coverIcon: '💙', c1: '#00bcd4', c2: '#2980b9',
+                author: 'Tom H.', avatarInitials: 'TH', avatarColor: '#00bcd4',
+                readTime: '14 min', date: '2026-06-10', likes: 287, comments: 94,
+                pinned: false, tags: ['Quality of Life', 'Heart Disease', 'Support', 'French Bulldog'],
+                featured: false
+            }
+        ];
+
+        function filterBlog(cat, btn) {
+            document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            renderGrid(cat);
+        }
+
+        function renderGrid(cat) {
+            var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return a.category === cat; });
+            var html = '';
+            var featured = filtered.find(function(a) { return a.featured; });
+            var rest = filtered.filter(function(a) { return !a.featured; });
+
+            if (featured) {
+                html += renderCard(featured, true);
+            }
+            html += rest.map(function(a) { return renderCard(a, false); }).join('');
+            document.getElementById('blogGrid').innerHTML = html || '<p style="text-align:center;padding:3rem;color:#aaa;grid-column:1/-1;">No articles in this category yet.</p>';
+        }
+
+        function renderCard(a, isFeatured) {
+            var catLabel = { 'health-case': '📋 Health Case', 'tip': '💡 Tips', 'qa': '❓ Q&A', 'review': '⭐ Review' }[a.category] || a.category;
+            return '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + a.slug + '.html\'" role="article" aria-label="' + a.title + '">' +
+                '<div class="card-cover" style="--c1:' + a.c1 + ';--c2:' + a.c2 + ';">' +
+                '<span class="cover-icon" aria-hidden="true">' + a.coverIcon + '</span>' +
+                '<span class="card-cat" style="--c1:' + a.c1 + ';">' + catLabel + '</span>' +
+                (a.pinned ? '<span class="card-pinned" aria-label="Pinned article">📌</span>' : '') +
+                '</div>' +
+                '<div class="card-body">' +
+                '<div class="card-meta"><span>🗓 ' + a.date + '</span><span>⏱ ' + a.readTime + ' read</span></div>' +
+                '<h2 class="card-title">' + a.title + '</h2>' +
+                '<p class="card-excerpt">' + a.excerpt + '</p>' +
+                '<div class="card-footer">' +
+                '<div class="card-author">' +
+                '<div class="card-avatar" style="--c1:' + a.avatarColor + ';background:' + a.avatarColor + ';">' + a.avatarInitials + '</div>' +
+                '<span>' + a.author + '</span>' +
+                '</div>' +
+                '<span class="card-stats">❤️ ' + a.likes + ' · 💬 ' + a.comments + '</span>' +
+                '</div></div></article>';
+        }
+
+        // Init
+        renderGrid('all');
+    </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawWell | Free AI Health Check for Senior Dogs | Arthritis, Kidney & Heart</title>
+    <meta name="description" content="Free AI health check for senior dogs in Australia. Early detection of arthritis, kidney disease, and heart conditions. Expert guides, community support and 100% free assessment.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://agedpawwell.com/">
+    <!-- 数据库接口：blog_db_port = 3002 | 数据库接口：assessment_db_port = 3003 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
+        /* ====== HEADER ====== */
+        .site-header { background: rgba(255, 255, 255, 0.97); padding: 0.8rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-wrap { display: flex; align-items: center; gap: 6px; text-decoration: none; }
+        .logo-img { height: 40px; display: block; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
+        .nav a:hover { background: #f5f5f5; }
+        .nav a.highlight { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
+        /* ====== HERO ====== */
+        .hero { padding: 6rem 18px 2rem; text-align: center; position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 0.5rem; line-height: 1.2; }
+        .hero h1 span { background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.05rem; color: #5a6c7d; line-height: 1.7; max-width: 480px; margin: 0 auto 0.5rem; }
+        .slogan { font-size: 0.95rem; color: #ff6b6b; font-weight: 700; margin-bottom: 1.5rem; letter-spacing: 0.5px; }
+        /* ====== BIG BUTTONS ====== */
+        .big-buttons { padding: 0 18px 2rem; max-width: 480px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .big-btn { display: flex; align-items: center; gap: 1rem; padding: 18px 24px; border-radius: 18px; text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.3s; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        .big-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
+        .big-btn-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .big-btn-text { flex: 1; text-align: left; }
+        .big-btn-sub { display: block; font-size: 0.8rem; font-weight: 400; opacity: 0.85; margin-top: 2px; }
+        .big-btn-arrow { font-size: 1.2rem; opacity: 0.5; }
+        .big-btn-health { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
+        .big-btn-health:hover { box-shadow: 0 8px 28px rgba(255,107,107,0.35); }
+        .big-btn-community { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+        .big-btn-community:hover { box-shadow: 0 8px 28px rgba(102,126,234,0.35); }
+        .big-btn-blog { background: white; color: #2c3e50; border: 2px solid #e0e0e0; }
+        .big-btn-blog:hover { border-color: #ff6b6b; color: #ff6b6b; }
+        /* ====== HEALTH AREAS ====== */
+        .health-areas { padding: 0 18px 1.5rem; max-width: 700px; margin: 0 auto; }
+        .health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        .health-card { background: white; border-radius: 18px; padding: 1.5rem 1rem; text-align: center; box-shadow: 0 4px 14px rgba(0,0,0,0.07); transition: all 0.3s; }
+        .health-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(0,0,0,0.12); }
+        .health-card h3 { font-size: 0.92rem; color: #2c3e50; margin-bottom: 0.3rem; }
+        .health-card p { font-size: 0.8rem; color: #7a8a9a; line-height: 1.4; }
+        /* ====== STATS ====== */
+        .stats-bar { background: white; border-radius: 14px; padding: 1rem 1.5rem; margin: 0 18px 2rem; max-width: 700px; margin-left: auto; margin-right: auto; box-shadow: 0 4px 14px rgba(0,0,0,0.06); }
+        .stats-bar p { text-align: center; font-size: 0.88rem; color: #7a8a9a; }
+        .stats-bar strong { color: #ff6b6b; }
+        /* ====== ARTICLES ====== */
+        .articles-section { padding: 1rem 18px 3rem; max-width: 700px; margin: 0 auto; }
+        .section-title { font-size: 1.5rem; margin-bottom: 1.2rem; text-align: center; }
+        .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+        .article-card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.07); transition: all 0.3s; display: flex; flex-direction: column; }
+        .article-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .article-img { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .article-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+        .article-tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .tag-joint { background: #fff0eb; color: #ff6b6b; }
+        .tag-kidney { background: #e8f4f8; color: #4a9eb8; }
+        .tag-heart { background: #fce8e8; color: #c0392b; }
+        .tag-care { background: #f0ebff; color: #7c3aed; }
+        .article-card h3 { font-size: 0.98rem; color: #2c3e50; margin-bottom: 0.4rem; line-height: 1.3; }
+        .article-card p { font-size: 0.83rem; color: #7a8a9a; line-height: 1.5; flex: 1; }
+        .read-more { display: inline-block; margin-top: 0.8rem; color: #ff6b6b; font-weight: 700; font-size: 0.88rem; text-decoration: none; }
+        .read-more:hover { text-decoration: underline; }
+        /* ====== FOOTER ====== */
+        .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 2rem; }
+        .site-footer a { color: #ff8e53; text-decoration: none; }
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .hero h1 { font-size: 2rem; }
+            .hero { padding-top: 5.5rem; }
+            .health-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 0.6rem; }
+            .health-card { padding: 1rem 0.5rem; }
+            .health-card h3 { font-size: 0.8rem; }
+            .health-card p { font-size: 0.72rem; }
+            .big-btn { padding: 16px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <a href="./index.html" class="logo-wrap" aria-label="PawWell - Go to homepage">
+                <img src="./_shared/assets/logo.png" alt="PawWell - Smart Health for Senior Dogs" class="logo-img">
+            </a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+                <a href="./index.html" class="highlight">Home</a>
+                <a href="./assessment.html">AI Health Check</a>
+                <a href="./arthritis.html">Arthritis Guide</a>
+                <a href="./kidney.html">Kidney Disease</a>
+                <a href="./heart.html">Heart Disease</a>
+                <a href="./community.html">Community</a>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        <!-- Hero -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <h1 id="hero-heading">Help Your <span>Senior Dog</span> Live Better</h1>
+            <div class="slogan">Smart Health for Your Aging Dog</div>
+            <p>Free AI health check for dogs 7+ years. Early detection of <strong>arthritis</strong>, <strong>kidney disease</strong>, and <strong>heart conditions</strong>.</p>
+        </section>
+
+        <!-- Big Action Buttons -->
+        <section class="big-buttons" aria-label="Main actions">
+            <a href="./assessment.html" class="big-btn big-btn-health" aria-label="Start free AI Health Check for your senior dog">
+                <div class="big-btn-icon" aria-hidden="true">🤖</div>
+                <div class="big-btn-text">
+                    AI Health Check
+                    <span class="big-btn-sub">2-minute assessment · 100% Free</span>
+                </div>
+                <div class="big-btn-arrow" aria-hidden="true">→</div>
+            </a>
+            <a href="./community.html" class="big-btn big-btn-community" aria-label="Join the PawWell senior dog community">
+                <div class="big-btn-icon" aria-hidden="true">👥</div>
+                <div class="big-btn-text">
+                    Community
+                    <span class="big-btn-sub">Share stories and advice</span>
+                </div>
+                <div class="big-btn-arrow" aria-hidden="true">→</div>
+            </a>
+            <a href="#blog" class="big-btn big-btn-blog" aria-label="Read expert blog articles about senior dog health">
+                <div class="big-btn-icon" aria-hidden="true">📖</div>
+                <div class="big-btn-text">
+                    Blog
+                    <span class="big-btn-sub">Expert articles and guides</span>
+                </div>
+                <div class="big-btn-arrow" aria-hidden="true">→</div>
+            </a>
+        </section>
+
+        <!-- Three Health Areas -->
+        <section class="health-areas" aria-labelledby="health-areas-heading">
+            <h2 id="health-areas-heading" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Common Senior Dog Health Conditions</h2>
+            <div class="health-grid">
+                <article class="health-card" aria-label="Joint and mobility issues">
+                    <div class="health-icon" aria-hidden="true" style="font-size:2.5rem;margin-bottom:0.6rem;">🦴</div>
+                    <h3>Joint & Mobility</h3>
+                    <p>Arthritis, hip dysplasia, stiffness and pain management for aging dogs</p>
+                </article>
+                <article class="health-card" aria-label="Kidney and urinary issues">
+                    <div class="health-icon" aria-hidden="true" style="font-size:2.5rem;margin-bottom:0.6rem;">🫘</div>
+                    <h3>Kidney & Urinary</h3>
+                    <p>Chronic kidney disease, excessive thirst and urinary issues in senior dogs</p>
+                </article>
+                <article class="health-card" aria-label="Heart and circulation issues">
+                    <div class="health-icon" aria-hidden="true" style="font-size:2.5rem;margin-bottom:0.6rem;">❤️</div>
+                    <h3>Heart & Circulation</h3>
+                    <p>Heart murmurs, coughing and breathing difficulties in senior dogs</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <aside class="stats-bar" aria-label="Site statistics">
+            <p>🦴 <strong>10,000+</strong> Australian dogs assessed &nbsp;|&nbsp; 🩺 <strong>100% Free</strong> &nbsp;|&nbsp; ⏱️ <strong>2 Minutes</strong></p>
+        </aside>
+
+        <!-- Blog / Featured Articles -->
+        <section class="articles-section" id="blog" aria-labelledby="articles-heading">
+            <h2 id="articles-heading" class="section-title">Featured Articles</h2>
+            <div class="article-grid">
+                <article class="article-card">
+                    <div class="article-img" style="background: linear-gradient(135deg, #fff0eb, #ffe8d6);" aria-hidden="true">🦴</div>
+                    <div class="article-body">
+                        <span class="article-tag tag-joint">Joint & Mobility</span>
+                        <h3>Complete Guide to Canine Arthritis</h3>
+                        <p>10 chapters covering early signs, supplements, exercise, and pain management for senior dogs.</p>
+                        <a href="./arthritis.html" class="read-more" aria-label="Read complete guide to canine arthritis">Read Complete Guide to Canine Arthritis →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-img" style="background: linear-gradient(135deg, #e8f4f8, #d0eef8);" aria-hidden="true">🫘</div>
+                    <div class="article-body">
+                        <span class="article-tag tag-kidney">Kidney & Urinary</span>
+                        <h3>Kidney Disease Diet for Senior Dogs</h3>
+                        <p>Low-phosphorus foods, hydration tips, and recipes to support kidney function in aging dogs.</p>
+                        <a href="./kidney.html" class="read-more" aria-label="Read kidney disease diet guide for senior dogs">Read Kidney Disease Diet Guide →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-img" style="background: linear-gradient(135deg, #fce8e8, #fcd5d5);" aria-hidden="true">❤️</div>
+                    <div class="article-body">
+                        <span class="article-tag tag-heart">Heart Health</span>
+                        <h3>Recognizing Heart Problems in Dogs</h3>
+                        <p>Coughing, fatigue, and breathing difficulties: when to see a vet and what tests to expect.</p>
+                        <a href="./heart.html" class="read-more" aria-label="Read guide to recognizing heart problems in dogs">Read Heart Problems Guide →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-img" style="background: linear-gradient(135deg, #f0ebff, #e8e0ff);" aria-hidden="true">🏠</div>
+                    <div class="article-body">
+                        <span class="article-tag tag-care">Daily Care</span>
+                        <h3>Home Modifications for Senior Dogs</h3>
+                        <p>Ramps, orthopedic beds, and non-slip flooring to make your home comfortable for aging dogs.</p>
+                        <a href="#" class="read-more" aria-label="Read home modifications guide for senior dogs">Read Home Modifications Guide →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="site-footer" role="contentinfo">
+        <p>© 2026 PawWell. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="./index.html">Home</a> ·
+            <a href="./assessment.html">AI Health Check</a> ·
+            <a href="./arthritis.html">Arthritis Guide</a> ·
+            <a href="./kidney.html">Kidney Disease</a> ·
+            <a href="./heart.html">Heart Disease</a> ·
+            <a href="./community.html">Community</a>
+        </p>
+    </footer>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "PawWell",
+      "url": "https://agedpawwell.com",
+      "description": "Free AI health check and expert guides for senior dogs in Australia. Covering arthritis, kidney disease, and heart conditions.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "PawWell",
+        "url": "https://agedpawwell.com"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://agedpawwell.com/assessment.html",
+        "query-input": "required name=breed"
+      }
+    }
+    </script>
+
+    <script defer src="./_shared/assets/nav.js"></script>
+</body>
+</html>

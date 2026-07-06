@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Check | Senior Dog Health</title>
+    <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
+    <meta name="robots" content="index, follow">
+    <!-- 数据库接口：assessment_db_port = 3003 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
+        
+        .header { background: rgba(255, 255, 255, 0.97); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 800; background: linear-gradient(135deg, #ff6b6b, #ff8e53); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .logo-img { height: 40px; display: block; }
+        .hamburger { display: none; background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        .nav { display: flex; gap: 0.3rem; }
+        .nav a { text-decoration: none; color: #2c3e50; font-weight: 600; padding: 8px 14px; border-radius: 25px; transition: all 0.3s; font-size: 0.9rem; }
+        .nav a:hover { background: #f5f5f5; }
+        .nav a.highlight { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; }
+        
+        .main { padding: 5.5rem 18px 3rem; max-width: 560px; margin: 0 auto; }
+        
+        /* Walking Paws */
+        .paw-walk { display: flex; justify-content: center; gap: 0; margin-bottom: 1rem; }
+        .paw { font-size: 52px; display: inline-block; transition: opacity 0.25s ease, transform 0.25s ease; }
+        .paw.left { animation: pawLeft 1s ease-in-out infinite; }
+        .paw.right { animation: pawRight 1s ease-in-out infinite; animation-delay: 0.5s; }
+        @keyframes pawLeft {
+            0%, 100% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+            50% { opacity: 1; transform: translateY(-8px) scale(1.1); }
+        }
+        @keyframes pawRight {
+            0%, 100% { opacity: 1; transform: translateY(-8px) scale(1.1); }
+            50% { opacity: 0.15; transform: translateY(0) scale(0.9); }
+        }
+        
+        .section-title { text-align: center; font-size: 1.5rem; margin-bottom: 0.2rem; }
+        .section-sub { text-align: center; color: #7a8a9a; margin-bottom: 1.5rem; font-size: 0.88rem; }
+        
+        .form-card { background: white; padding: 1.5rem; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 1rem; }
+        
+        .form-page { display: none; }
+        .form-page.active { display: block; }
+        
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.92rem; color: #2c3e50; }
+        
+        /* Native Select - most reliable */
+        .native-select { width: 100%; padding: 13px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; color: #2c3e50; background: white; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23aaa' d='M6 8L0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; transition: border-color 0.3s; }
+        .native-select:focus { outline: none; border-color: #ff6b6b; }
+        
+        .form-group input[type="text"], .form-group input[type="email"] { width: 100%; padding: 13px 14px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 1rem; transition: all 0.3s; }
+        .form-group input:focus { outline: none; border-color: #ff6b6b; }
+        
+        /* Checkboxes */
+        .checkbox-grid { display: grid; grid-template-columns: 1fr; gap: 0.6rem; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 0.7rem; padding: 11px 12px; background: #f8f9fa; border-radius: 10px; transition: all 0.3s; cursor: pointer; }
+        .checkbox-item:hover { background: #fff0eb; }
+        .checkbox-item.checked { background: #fff0eb; border: 1.5px solid #ff6b6b; }
+        .checkbox-item input { margin-top: 2px; width: 18px; height: 18px; cursor: pointer; accent-color: #ff6b6b; flex-shrink: 0; }
+        .checkbox-item label { flex: 1; font-size: 0.9rem; line-height: 1.4; cursor: pointer; color: #2c3e50; }
+        
+        /* Buttons */
+        .btn { display: block; width: 100%; padding: 16px; border-radius: 50px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: all 0.3s; text-align: center; text-decoration: none; }
+        .btn-primary { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; box-shadow: 0 6px 20px rgba(255,107,107,0.3); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,107,107,0.4); }
+        .btn-secondary { background: white; color: #ff6b6b; border: 2px solid #ff6b6b; margin-top: 0.8rem; }
+        .btn-secondary:hover { background: #fff5f0; }
+        
+        /* Report */
+        .report-card { display: none; }
+        .report-card.active { display: block; }
+        .report-header { background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; padding: 1.5rem; border-radius: 16px 16px 0 0; text-align: center; }
+        .report-header h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+        .report-header p { font-size: 0.88rem; opacity: 0.9; }
+        .report-body { background: white; padding: 1.5rem; border-radius: 0 0 16px 16px; }
+        .report-section { margin-bottom: 1.3rem; }
+        .report-section h3 { font-size: 0.95rem; color: #ff6b6b; margin-bottom: 0.4rem; border-bottom: 2px solid #ffe8d6; padding-bottom: 0.3rem; }
+        .report-section p { font-size: 0.88rem; color: #5a6c7d; line-height: 1.6; white-space: pre-line; }
+        .report-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+        .tag-joint { background: #fff0eb; color: #ff6b6b; }
+        .tag-kidney { background: #e8f4f8; color: #4a9eb8; }
+        .tag-heart { background: #fce8e8; color: #c0392b; }
+        .tag-skin { background: #fff9e6; color: #d4a000; }
+        .tag-digest { background: #e8f8e8; color: #27ae60; }
+        .tag-neuro { background: #f0ebff; color: #7c3aed; }
+        .report-note { background: #f8f9fa; padding: 0.9rem; border-radius: 10px; font-size: 0.83rem; color: #7a8a9a; line-height: 1.5; border-left: 3px solid #ff6b6b; margin-top: 0.5rem; }
+        
+        .footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; margin-top: 3rem; }
+        .footer a { color: #ff8e53; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .hamburger { display: block; }
+            .nav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            .nav.open { display: flex; }
+            .nav a { text-align: center; padding: 10px; width: 100%; }
+            .form-card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="header-inner">
+            <a href="./index.html" class="logo" aria-label="PawWell - Go to homepage"><img src="./_shared/assets/logo.png" alt="PawWell - Free AI Health Check for Senior Dogs" class="logo-img"></a>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+                <a href="./index.html">Home</a>
+                <a href="./assessment.html" class="highlight">AI Health Check</a>
+                <a href="./arthritis.html">Arthritis Guide</a>
+                <a href="./kidney.html">Kidney Disease</a>
+                <a href="./heart.html">Heart Disease</a>
+                <a href="./community.html">Community</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" role="main">
+        <!-- Page 1: Breed + Gender + Nickname + Next -->
+        <section class="form-page active" id="page1" aria-labelledby="page1-heading">
+            <div style="text-align:center;">
+                <h1 class="section-title" id="page1-heading">AI Health Check for Senior Dogs</h1>
+                <p class="section-sub">Step 1 of 2 — About your dog</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="form-group">
+                    <label for="breed">Breed *</label>
+                    <select id="breed" class="native-select" onchange="onBreedChange()">
+                        <option value="">Select breed...</option>
+                        <option value="Cavoodle">Cavoodle</option>
+                        <option value="Labrador">Labrador</option>
+                        <option value="Golden Retriever">Golden Retriever</option>
+                        <option value="French Bulldog">French Bulldog</option>
+                        <option value="German Shepherd">German Shepherd</option>
+                        <option value="Border Collie">Border Collie</option>
+                        <option value="Groodle">Groodle</option>
+                        <option value="Mini Dachshund">Mini Dachshund</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="Cavalier King Charles">Cavalier King Charles</option>
+                        <option value="Australian Kelpie">Australian Kelpie</option>
+                        <option value="Staffy">Staffy</option>
+                        <option value="Labradoodle">Labradoodle</option>
+                        <option value="Spoodle">Spoodle</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="Maltese">Maltese</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender *</label>
+                    <select id="gender" class="native-select">
+                        <option value="">Select gender...</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" id="nickname" placeholder="e.g. Buddy, Max, Bella...">
+                </div>
+                
+                <button class="btn btn-primary" onclick="goToPage2()">Next →</button>
+            </div>
+        </section>
+
+        <!-- Page 2: Symptoms + Email + Submit -->
+        <section class="form-page" id="page2" aria-labelledby="page2-heading">
+            <div style="text-align:center;">
+                <h1 class="section-title" id="page2-heading">Symptoms Check</h1>
+                <p class="section-sub">Step 2 of 2 — Select all symptoms noticed</p>
+            </div>
+            
+            <div class="form-card">
+                <div class="checkbox-grid" id="symptomsGrid"></div>
+                
+                <div class="form-group" style="margin-top: 1.2rem;">
+                    <label for="email">Your Email (to receive full report)</label>
+                    <input type="email" id="email" placeholder="you@example.com">
+                </div>
+                
+                <button class="btn btn-primary" onclick="submitForm()">🐾 Get My Report</button>
+                <button class="btn btn-secondary" onclick="goToPage1()">← Back</button>
+            </div>
+        </section>
+
+        <!-- Report -->
+        <section class="report-card" id="report" aria-labelledby="report-heading">
+            <div class="report-header">
+                <h2 id="report-heading">🦴 <span id="reportDog">Dog</span>'s Health Report</h2>
+                <p><span id="reportCount">0</span> symptom(s) detected</p>
+            </div>
+            <div class="report-body">
+                <div class="report-section">
+                    <h3>⚠️ Detected Areas</h3>
+                    <div class="report-tags" id="reportTags"></div>
+                </div>
+                <div class="report-section">
+                    <h3>📋 Summary</h3>
+                    <p id="reportSummary"></p>
+                </div>
+                <div class="report-section">
+                    <h3>💡 Recommendations</h3>
+                    <p id="reportRec"></p>
+                </div>
+                <div class="report-note">
+                    📧 A detailed report has been sent to <strong id="reportEmail"></strong>
+                </div>
+                <div style="margin-top:1.2rem;">
+                    <a href="./index.html" class="btn btn-primary" style="display:block;">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <p>© 2026 PawWell</p>
+        <p style="margin-top:0.5rem;">
+            <a href="./index.html">Home</a> · <a href="./assessment.html">AI Health Check</a> · <a href="./arthritis.html">Arthritis</a> · <a href="./kidney.html">Kidney Disease</a> · <a href="./heart.html">Heart Disease</a> · <a href="./community.html">Community</a>
+        </p>
+    </footer>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "AI Health Check - Senior Dog Assessment",
+      "description": "Free AI-powered health assessment tool for senior dogs in Australia. Check for arthritis, kidney disease and heart conditions.",
+      "url": "https://agedpawwell.com/assessment.html",
+      "author": { "@type": "Organization", "name": "PawWell" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
+      "datePublished": "2026-07-05"
+    }
+    </script>
+
+    <!-- Supabase SDK + Init（数据库接入：只需在 supabase-init.js 填入 URL 和 Key） -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 数据库接口：assessment_db_port = 3003 -->
+    <script src="js/supabase-init.js"></script>
+    <script defer src="./_shared/assets/nav.js"></script>
+
+    <!-- Assessment logic: must run inline (form interaction) -->
+    <script>
+        var symptoms = [
+            'Stiff joints, reduced mobility',
+            'Weak hind legs and lameness',
+            'Excessive thirst and increased urination',
+            'Frequent nighttime urination',
+            'Vision loss, bumping into things',
+            'Hearing loss, slow response',
+            'Dry coat and excessive shedding',
+            'Poor appetite, reduced food intake',
+            'Abnormally increased appetite',
+            'Unexplained continuous weight loss',
+            'Low stamina, lack of willingness to walk',
+            'Chronic cough worse after exercise',
+            'Resting rapid breathing',
+            'Urinary or fecal incontinence',
+            'Cognitive confusion, repetitive circling',
+            'Pale gums, poor circulation',
+            'Recurrent itching and skin inflammation',
+            'Frequent vomiting and loose stools'
+        ];
+        
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('open');
+        }
+        
+        function onBreedChange() {
+            // Just confirm selection changed
+        }
+        
+        // Build symptoms
+        var symGrid = document.getElementById('symptomsGrid');
+        symptoms.forEach(function(s, i) {
+            var idx = i + 1;
+            var div = document.createElement('div');
+            div.className = 'checkbox-item';
+            div.onclick = function() { toggleCheck(this, idx); };
+            div.innerHTML = '<input type="checkbox" id="s' + idx + '" value="' + s + '"><label for="s' + idx + '">' + s + '</label>';
+            symGrid.appendChild(div);
+        });
+        
+        function toggleCheck(item, id) {
+            var cb = document.getElementById('s' + id);
+            cb.checked = !cb.checked;
+            if (cb.checked) {
+                item.classList.add('checked');
+            } else {
+                item.classList.remove('checked');
+            }
+        }
+        
+        function goToPage2() {
+            var breed = document.getElementById('breed').value;
+            var gender = document.getElementById('gender').value;
+            if (!breed || !gender) {
+                alert('Please select breed and gender.');
+                return;
+            }
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function goToPage1() {
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('page1').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        async function submitForm() {
+            // === Supabase 提交（数据库接口：assessment_db_port = 3003）===
+            var breed = document.getElementById('breed').value;
+            var gender = document.getElementById('gender').value;
+            var nickname = document.getElementById('nickname').value || 'Your dog';
+            var email = document.getElementById('email').value;
+            
+            var selected = [];
+            for (var i = 1; i <= 18; i++) {
+                if (document.getElementById('s' + i).checked) selected.push(document.getElementById('s' + i).value);
+            }
+            
+            document.getElementById('reportDog').textContent = nickname;
+            document.getElementById('reportCount').textContent = selected.length;
+            document.getElementById('reportEmail').textContent = email || 'your email';
+            
+            var jointIds = ['s1','s2','s11'];
+            var kidneyIds = ['s3','s4','s8','s10','s14'];
+            var heartIds = ['s12','s13','s16'];
+            var skinIds = ['s7','s17'];
+            var digestIds = ['s18'];
+            var neuroIds = ['s5','s6','s15'];
+            
+            var j = jointIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var k = kidneyIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var h = heartIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var sk = skinIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var d = digestIds.filter(function(id){return document.getElementById(id).checked}).length;
+            var n = neuroIds.filter(function(id){return document.getElementById(id).checked}).length;
+            
+            var areas = [];
+            var tagsHtml = '';
+            if (j > 0) { areas.push('Joint & Mobility'); tagsHtml += '<span class="tag tag-joint">🦴 Joint (' + j + ')</span> '; }
+            if (k > 0) { areas.push('Kidney & Urinary'); tagsHtml += '<span class="tag tag-kidney">🫘 Kidney (' + k + ')</span> '; }
+            if (h > 0) { areas.push('Heart & Circulation'); tagsHtml += '<span class="tag tag-heart">❤️ Heart (' + h + ')</span> '; }
+            if (sk > 0) { areas.push('Skin & Coat'); tagsHtml += '<span class="tag tag-skin">🐕 Skin (' + sk + ')</span> '; }
+            if (d > 0) { areas.push('Digestive'); tagsHtml += '<span class="tag tag-digest">🍖 Digest (' + d + ')</span> '; }
+            if (n > 0) { areas.push('Neuro & Sensory'); tagsHtml += '<span class="tag tag-neuro">🧠 Neuro (' + n + ')</span> '; }
+            
+            document.getElementById('reportTags').innerHTML = tagsHtml || '<span class="tag" style="background:#f5f5f5;color:#999">No specific area</span>';
+            
+            var count = selected.length;
+            var summary = '';
+            if (count == 0) {
+                summary = nickname + ' shows no significant symptoms at this time. Continue monitoring and maintain regular vet checkups.';
+            } else if (count <= 3) {
+                summary = nickname + ' (' + breed + ', ' + gender + ') shows ' + count + ' symptom(s) in: ' + areas.join(', ') + '. Most are mild — see a vet within 1-2 weeks.';
+            } else if (count <= 8) {
+                summary = nickname + ' (' + breed + ', ' + gender + ') shows ' + count + ' symptoms across: ' + areas.join(', ') + '. Moderate concerns — see a vet within a week.';
+            } else {
+                summary = nickname + ' (' + breed + ', ' + gender + ') shows ' + count + ' symptoms in: ' + areas.join(', ') + '. Multiple areas affected — see a vet ASAP.';
+            }
+            document.getElementById('reportSummary').textContent = summary;
+            
+            var rec = areas.length == 0
+                ? '• Keep regular vet checkups\n• Maintain healthy diet & weight\n• Gentle daily exercise'
+                : '• Schedule a vet appointment\n• Keep a daily symptom diary\n• Monitor water intake & urine output\n• Note changes in appetite & energy';
+            document.getElementById('reportRec').textContent = rec;
+            
+            // 提交到 Supabase（静默处理，不阻塞前端展示）
+            // 数据库接口：assessment_db_port = 3003
+            if (typeof window.sb !== 'undefined') {
+                var supabaseData = {
+                    breed: breed,
+                    gender: gender,
+                    symptoms: selected,
+                    detected_areas: areas,
+                    symptom_count: selected.length,
+                    nickname: nickname,
+                    email: email || null
+                };
+                window.sb.from('assessments').insert([supabaseData]).then(function() {
+                    if (email) {
+                        window.sb.from('leads').upsert([{ email: email, source: 'assessment' }], { onConflict: 'email' });
+                    }
+                });
+            }
+
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.remove('active');
+            document.getElementById('report').classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>

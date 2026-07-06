@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PowerWell Admin</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>PowerWell Admin</strong>
+        <span>Independent data control system</span>
+      </div>
+
+      <div class="sidebar-field">
+        <label for="protocol">Database protocol</label>
+        <select id="protocol"></select>
+      </div>
+
+      <div class="sidebar-field">
+        <label for="role">Permission role</label>
+        <select id="role"></select>
+      </div>
+
+      <div class="sidebar-field">
+        <label for="actor">Operator</label>
+        <input id="actor" type="email" placeholder="admin@example.com">
+      </div>
+
+      <div class="sidebar-field">
+        <label for="authEmail">Supabase email</label>
+        <input id="authEmail" type="email" placeholder="admin@example.com">
+      </div>
+
+      <div class="sidebar-field">
+        <label for="authPassword">Password</label>
+        <input id="authPassword" type="password" placeholder="Password">
+      </div>
+
+      <div class="actions">
+        <button id="signInBtn" class="btn primary" type="button">Sign In</button>
+        <button id="signOutBtn" class="btn" type="button">Sign Out</button>
+      </div>
+
+      <div class="sidebar-field">
+        <label for="country">Country</label>
+        <input id="country" type="text" value="Australia">
+      </div>
+
+      <nav id="nav" class="nav-list" aria-label="Collections"></nav>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>Data Operations Console</h1>
+          <p id="status">Ready</p>
+        </div>
+        <div class="actions">
+          <button id="refreshBtn" class="btn">Refresh</button>
+          <button id="newBtn" class="btn primary">New Record</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="status-grid">
+          <div class="metric"><span>Records</span><strong id="metricRecords">0</strong></div>
+          <div class="metric"><span>Protocol</span><strong id="metricProtocol">-</strong></div>
+          <div class="metric"><span>Role</span><strong id="metricRole">-</strong></div>
+          <div class="metric"><span>Country</span><strong id="metricCountry">Australia</strong></div>
+        </div>
+
+        <div class="notice">
+          Real permissions must be enforced by the database or API layer. This screen mirrors role limits for operators, while the Supabase SQL extension performs server-side checks and writes audit records.
+        </div>
+
+        <div class="workspace">
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Records</h2>
+              <div class="search-row">
+                <input id="search" type="search" placeholder="Search current records">
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Country</th>
+                    <th>ID</th>
+                    <th>Content</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="panel">
+            <div class="panel-head">
+              <h2>Record Editor</h2>
+            </div>
+            <div class="editor">
+              <div class="field">
+                <label for="recordId">ID</label>
+                <input id="recordId" type="text" readonly placeholder="Generated on create">
+              </div>
+              <div class="field">
+                <label for="recordCountry">Country</label>
+                <input id="recordCountry" type="text" value="Australia">
+              </div>
+              <div class="field">
+                <label for="recordContent">Content JSON</label>
+                <textarea id="recordContent" spellcheck="false">{}</textarea>
+              </div>
+              <div class="actions">
+                <button id="saveBtn" class="btn primary">Save</button>
+                <button id="deleteBtn" class="btn danger">Delete</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Operation Trail</h2>
+            <span class="badge">local + database audit</span>
+          </div>
+          <div id="logs" class="log-list"></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script src="./admin.js"></script>
+</body>
+</html>

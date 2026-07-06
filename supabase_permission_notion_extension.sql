@@ -41,7 +41,7 @@ create table if not exists public.admin_invitations (
 create table if not exists public.permission_change_requests (
   id uuid primary key default gen_random_uuid(),
   employee_email text not null,
-  current_role text,
+  current_admin_role text,
   requested_role text not null,
   reason text,
   requested_by uuid not null references public.admin_users(id),
@@ -323,6 +323,132 @@ as $$
   ]);
 $$;
 
+create or replace function app_api.admin_list_records(
+  p_table text,
+  p_country text default 'Australia',
+  p_limit integer default 100,
+  p_offset integer default 0
+)
+returns table (
+  id uuid,
+  content jsonb,
+  created_at timestamptz,
+  updated_at timestamptz,
+  country text
+)
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_user public.admin_users;
+begin
+  v_user := app_api.require_admin_role(array['super_admin', 'admin', 'employee_viewer', 'employee_reviewer', 'employee_editor']);
+
+  if not app_api.is_admin_table_allowed(p_table) then
+    raise exception 'Table % is not allowed', p_table;
+  end if;
+
+  perform app_api.write_admin_log(
+    'read',
+    p_table,
+    null,
+    coalesce(nullif(p_country, ''), 'Australia'),
+    jsonb_build_object('limit', p_limit, 'offset', p_offset)
+  );
+
+  return query execute format(
+    'select id, content, created_at, updated_at, country
+       from public.%I
+      where country = $1
+      order by created_at desc
+      limit $2 offset $3',
+    p_table
+  )
+  using coalesce(nullif(p_country, ''), 'Australia'), greatest(p_limit, 1), greatest(p_offset, 0);
+end;
+$$;
+
+create or replace function app_api.admin_upsert_record(
+  p_table text,
+  p_id uuid,
+  p_content jsonb,
+  p_country text default 'Australia'
+)
+returns uuid
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_user public.admin_users;
+  v_id uuid;
+  v_country text := coalesce(nullif(p_country, ''), 'Australia');
+begin
+  v_user := app_api.require_admin_role(array['super_admin', 'admin', 'employee_editor']);
+
+  if not app_api.is_admin_table_allowed(p_table) then
+    raise exception 'Table % is not allowed', p_table;
+  end if;
+
+  if p_id is null then
+    execute format(
+      'insert into public.%I (content, country) values ($1, $2) returning id',
+      p_table
+    )
+    into v_id
+    using coalesce(p_content, '{}'::jsonb), v_country;
+
+    perform app_api.write_admin_log('create', p_table, v_id, v_country, coalesce(p_content, '{}'::jsonb));
+  else
+    execute format(
+      'update public.%I set content = $1, country = $2 where id = $3 returning id',
+      p_table
+    )
+    into v_id
+    using coalesce(p_content, '{}'::jsonb), v_country, p_id;
+
+    if v_id is null then
+      raise exception 'Record % not found in %', p_id, p_table;
+    end if;
+
+    perform app_api.write_admin_log('update', p_table, v_id, v_country, coalesce(p_content, '{}'::jsonb));
+  end if;
+
+  return v_id;
+end;
+$$;
+
+create or replace function app_api.admin_delete_record(
+  p_table text,
+  p_id uuid
+)
+returns void
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_user public.admin_users;
+  v_country text;
+begin
+  v_user := app_api.require_admin_role(array['super_admin']);
+
+  if not app_api.is_admin_table_allowed(p_table) then
+    raise exception 'Table % is not allowed', p_table;
+  end if;
+
+  execute format('select country from public.%I where id = $1', p_table)
+  into v_country
+  using p_id;
+
+  execute format('delete from public.%I where id = $1', p_table)
+  using p_id;
+
+  perform app_api.write_admin_log('delete', p_table, p_id, v_country, '{}'::jsonb);
+end;
+$$;
+
 create or replace function app_api.admin_invite_employee(
   p_name text,
   p_email text,
@@ -442,7 +568,7 @@ begin
 
   insert into public.permission_change_requests (
     employee_email,
-    current_role,
+    current_admin_role,
     requested_role,
     reason,
     requested_by,
@@ -637,7 +763,7 @@ as $$
 declare
   v_actor public.admin_users;
 begin
-  v_actor := app_api.require_admin_role(array['super_admin', 'admin', 'employee_reviewer'));
+  v_actor := app_api.require_admin_role(array['super_admin', 'admin', 'employee_reviewer']);
 
   return query
   select r.id, r.notion_page_id, r.notion_url, r.content_title, r.content_body, r.content_tag, r.status, r.created_at
@@ -662,7 +788,7 @@ declare
   v_item public.notion_review_pool;
   v_record_id uuid;
 begin
-  v_actor := app_api.require_admin_role(array['super_admin', 'admin'));
+  v_actor := app_api.require_admin_role(array['super_admin', 'admin']);
 
   if not app_api.is_admin_table_allowed(p_target_table) then
     raise exception 'Target table % is not allowed', p_target_table;
@@ -708,7 +834,7 @@ as $$
 declare
   v_actor public.admin_users;
 begin
-  v_actor := app_api.require_admin_role(array['super_admin', 'admin'));
+  v_actor := app_api.require_admin_role(array['super_admin', 'admin']);
 
   update public.notion_review_pool
   set status = 'notion_comment_pending',
@@ -740,7 +866,7 @@ as $$
 declare
   v_actor public.admin_users;
 begin
-  v_actor := app_api.require_admin_role(array['super_admin', 'admin'));
+  v_actor := app_api.require_admin_role(array['super_admin', 'admin']);
 
   return query
   select e.id, e.severity, e.source, e.message, e.payload, e.created_at
@@ -751,6 +877,9 @@ end;
 $$;
 
 grant execute on function app_api.current_admin_user() to authenticated;
+grant execute on function app_api.admin_list_records(text, text, integer, integer) to authenticated;
+grant execute on function app_api.admin_upsert_record(text, uuid, jsonb, text) to authenticated;
+grant execute on function app_api.admin_delete_record(text, uuid) to authenticated;
 grant execute on function app_api.admin_invite_employee(text, text, text, text[]) to authenticated;
 grant execute on function app_api.admin_activate_invitation(text) to authenticated;
 grant execute on function app_api.admin_request_permission_change(text, text, text) to authenticated;
@@ -766,4 +895,3 @@ grant execute on function app_api.admin_list_system_events(integer) to authentic
 -- Founder bootstrap example. Run once with the founder email, then keep this file in source control without real emails.
 -- insert into public.admin_users (name, email, role, permission_scopes, country, activated_at, is_active)
 -- values ('Founder', 'founder@example.com', 'super_admin', array['*'], 'Australia', now(), true);
-

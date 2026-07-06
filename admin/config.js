@@ -3,16 +3,16 @@ window.PowerWellAdminConfig = {
   defaultRole: 'employee_viewer',
   protocol: 'supabase-rpc',
   supabase: {
-    url: 'https://YOUR_PROJECT.supabase.co',
-    anonKey: 'YOUR_ANON_KEY',
-    schema: 'app_api'
+    url: 'https://cbbaejwbkenrutmgqikt.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5OTc1NzQsImV4cCI6MjA5ODU3MzU3NH0.xQD6j_uqartlIZo0APxHYGzunJHjA_sZER93A4t49rE',
+    schema: 'public'
   },
   rest: {
     baseURL: '/api/admin'
   },
   postgrest: {
-    baseURL: 'https://YOUR_PROJECT.supabase.co/rest/v1',
-    apiKey: 'YOUR_ANON_KEY'
+    baseURL: 'https://cbbaejwbkenrutmgqikt.supabase.co/rest/v1',
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5OTc1NzQsImV4cCI6MjA5ODU3MzU3NH0.xQD6j_uqartlIZo0APxHYGzunJHjA_sZER93A4t49rE'
   },
   collections: [
     { table: 'blog_articles', label: 'Blog Articles' },

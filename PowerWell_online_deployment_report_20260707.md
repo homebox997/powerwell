@@ -122,6 +122,45 @@ Not configured because Vercel is blocked:
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY` or equivalent, if the Vercel project later uses a build system.
 - Domain allowlist / Site URL settings for final production URL.
 
-## Current blocker
+## Final deployment completion update
 
-The deployment cannot honestly be marked complete until Vercel authentication is restored and Cloudflare DNS is configured. Database import and GitHub code push are complete.
+Status: completed after Vercel and Cloudflare sessions were confirmed connected.
+
+Production URLs:
+- Public site: https://www.agedpawwell.com/
+- Root domain: https://agedpawwell.com/ redirects to https://www.agedpawwell.com/AU/
+- Admin entry: https://www.agedpawwell.com/admin/
+- Vercel fallback domain: https://powerwell-sigma.vercel.app/
+
+Vercel:
+- Project: `powerwell`
+- GitHub branch: `main`
+- Latest production deployment: `f99ba09` / Ready / Production
+- Root domain `agedpawwell.com` moved from the previous `pet-five` project to `powerwell`.
+- `agedpawwell.com` is configured as a 308 redirect to `www.agedpawwell.com`.
+- `www.agedpawwell.com` is configured as the production domain.
+
+Cloudflare DNS:
+- `agedpawwell.com` A `76.76.21.21` proxied.
+- `www.agedpawwell.com` CNAME `cname.vercel-dns.com` proxied.
+- Existing MX and SPF TXT mail records kept DNS-only.
+
+Cloudflare HTTPS and cache:
+- Cloudflare Universal SSL certificate is active.
+- HTTP root-domain request returns 301 to HTTPS `www`.
+- Cache rule deployed: `agedpawwell.com static asset cache`.
+- Cache rule matches static extensions: `css`, `js`, `mjs`, `png`, `jpg`, `jpeg`, `gif`, `webp`, `svg`, `ico`, `woff`, `woff2`, `map`.
+- Cache action: eligible for cache.
+
+Final production tests:
+- `https://www.agedpawwell.com/`: HTTP 200.
+- `https://www.agedpawwell.com/admin/`: HTTP 200, `PowerWell Admin`.
+- `https://www.agedpawwell.com/admin/config.js`: Supabase URL present, `schema: 'public'`, no placeholder values.
+- Browser root-domain test: `https://agedpawwell.com/` resolves to `https://www.agedpawwell.com/AU/` and loads the PawWell AU site.
+- Admin browser login: passed with a temporary test account.
+- Public form RPC `submit_assessment`: passed.
+- Admin CRUD RPC: create, list, update, delete all passed.
+- Temporary assessment row and temporary admin/auth test account were cleaned.
+
+Final note:
+- The admin UI role label still mirrors the local role selector until changed in the UI, but server-side permission enforcement was verified through authenticated Supabase RPC calls.

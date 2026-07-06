@@ -242,6 +242,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- 数据库接口：assessment_db_port = 3003 -->
     <script src="js/supabase-init.js"></script>
+    <script src="js/api-client.js"></script>
     <script defer src="./_shared/assets/nav.js"></script>
 
     <!-- Assessment logic: must run inline (form interaction) -->
@@ -375,8 +376,8 @@
             
             // 提交到 Supabase（静默处理，不阻塞前端展示）
             // 数据库接口：assessment_db_port = 3003
-            if (typeof window.sb !== 'undefined') {
-                // 统一接口入口见 db-api.js -> PawWellDB.assessment.submit()
+            // 前端接口（前后端解耦）：PawWellAPI.assessment.submit() → POST /api/assessments
+            if (typeof PawWellAPI !== 'undefined') {
                 var supabaseData = {
                     breed: breed,
                     gender: gender,
@@ -387,10 +388,8 @@
                     email: email || null,
                     country: 'AU'
                 };
-                window.sb.from('assessments').insert([supabaseData]).then(function() {
-                    if (email) {
-                        window.sb.from('leads').upsert([{ email: email, source: 'assessment' }], { onConflict: 'email' });
-                    }
+                PawWellAPI.assessment.submit(supabaseData).catch(function(err) {
+                    console.warn('[assessment] submit failed (non-blocking):', err);
                 });
             }
 

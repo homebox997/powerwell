@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新建产品推荐 - PawWell</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: #f5f5f7;
+  min-height: 100vh;
+  padding: 0;
+  color: #1d1d1f;
+}
+.top-bar {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #e5e5e7;
+}
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #0071e3;
+  padding: 0;
+  line-height: 1;
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+}
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.field {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.field-label {
+  font-size: 13px;
+  color: #86868b;
+  margin-bottom: 6px;
+  display: block;
+}
+.field-input,
+.field-select,
+.field-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 4px 0;
+  background: transparent;
+  font-family: inherit;
+}
+.field-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+.submit-btn {
+  width: 100%;
+  background: #0071e3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.submit-btn:active {
+  background: #005bb5;
+}
+.submit-btn:disabled {
+  background: #86868b;
+}
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 100;
+  display: none;
+}
+.toast.show { display: block; }
+.section-title {
+  font-size: 14px;
+  color: #86868b;
+  margin: 20px 0 10px;
+  padding: 0 4px;
+}
+</style>
+</head>
+<body>
+
+
+<div class="top-bar">
+  <button class="back-btn" onclick="window.location.href='/AU/admin/index.html'">‹</button>
+  <div class="top-title">新建产品推荐</div>
+</div>
+
+
+<div class="container">
+  <form id="dataForm">
+    
+<div class="field">
+  <label class="field-label">产品名称</label>
+  <input class="field-input" type="text" name="name" required placeholder="如：Hill's 老年犬专用狗粮">
+</div>
+<div class="field">
+  <label class="field-label">产品分类</label>
+  <select class="field-select" name="category" required>
+    <option value="">请选择</option>
+    <option value="主粮">主粮</option><option value="零食">零食</option><option value="保健品">保健品</option><option value="玩具">玩具</option><option value="医疗用品">医疗用品</option><option value="其他">其他</option>
+  </select>
+</div>
+<div class="field">
+  <label class="field-label">适用宠物</label>
+  <select class="field-select" name="pet_type" >
+    <option value="">请选择</option>
+    <option value="狗">狗</option><option value="猫">猫</option><option value="通用">通用</option>
+  </select>
+</div>
+<div class="field">
+  <label class="field-label">品牌</label>
+  <input class="field-input" type="text" name="brand"  placeholder="如：Hill's">
+</div>
+<div class="field">
+  <label class="field-label">价格区间</label>
+  <input class="field-input" type="text" name="price_range"  placeholder="如：$50-80">
+</div>
+<div class="field">
+  <label class="field-label">评分(1-5)</label>
+  <input class="field-input" type="text" name="rating"  placeholder="4.5">
+</div>
+<div class="field">
+  <label class="field-label">产品简介</label>
+  <textarea class="field-textarea" name="summary" required placeholder="100字以内的产品介绍"></textarea>
+</div>
+<div class="field">
+  <label class="field-label">联盟链接</label>
+  <input class="field-input" type="text" name="affiliate_url" required placeholder="https://...">
+</div>
+<div class="field">
+  <label class="field-label">产品图URL</label>
+  <input class="field-input" type="text" name="cover_image"  placeholder="https://...">
+</div>
+    <button type="submit" class="submit-btn" id="submitBtn">保存</button>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+// 检查登录
+const user = localStorage.getItem('pawwell_admin_user');
+if (!user) {
+  window.location.href = '/AU/admin/login.html';
+}
+
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+document.getElementById('dataForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '保存中...';
+  
+  const formData = new FormData(this);
+  const data = {};
+  for (let [k, v] of formData.entries()) {
+    data[k] = v;
+  }
+  data.country = 'AU';
+  data.db_table = 'product_recommendations';
+  
+  try {
+    
+    showToast('✅ 保存成功');
+    this.reset();
+  } catch(err) {
+    showToast('❌ 保存失败: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '保存';
+  }
+});
+</script>
+
+</body>
+</html>

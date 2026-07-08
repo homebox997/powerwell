@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社区管理 - PawWell</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  background: #f5f5f7;
+  min-height: 100vh;
+  padding: 0;
+  color: #1d1d1f;
+}
+.top-bar {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid #e5e5e7;
+}
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #0071e3;
+  padding: 0;
+  line-height: 1;
+}
+.top-title {
+  font-size: 18px;
+  font-weight: 600;
+  flex: 1;
+}
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.field {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.field-label {
+  font-size: 13px;
+  color: #86868b;
+  margin-bottom: 6px;
+  display: block;
+}
+.field-input,
+.field-select,
+.field-textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 4px 0;
+  background: transparent;
+  font-family: inherit;
+}
+.field-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+.submit-btn {
+  width: 100%;
+  background: #0071e3;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+}
+.submit-btn:active {
+  background: #005bb5;
+}
+.submit-btn:disabled {
+  background: #86868b;
+}
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 100;
+  display: none;
+}
+.toast.show { display: block; }
+.section-title {
+  font-size: 14px;
+  color: #86868b;
+  margin: 20px 0 10px;
+  padding: 0 4px;
+}
+
+.list-item {
+  background: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: #1d1d1f;
+  border-bottom: 1px solid #f0f0f0;
+}
+.list-item:active { background: #f5f5f7; }
+.list-icon { font-size: 32px; }
+.list-content { flex: 1; }
+.list-title { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
+.list-desc { font-size: 13px; color: #86868b; }
+.list-arrow { color: #c7c7cc; font-size: 24px; }
+</style>
+</head>
+<body>
+
+
+<div class="top-bar">
+  <button class="back-btn" onclick="window.location.href='/AU/admin/index.html'">‹</button>
+  <div class="top-title">社区管理</div>
+</div>
+
+
+<div class="container" style="padding: 0; max-width: 100%;">
+  
+<a href="#" class="list-item">
+  <div class="list-icon">💬</div>
+  <div class="list-content">
+    <div class="list-title">所有帖子</div>
+    <div class="list-desc">查看全部社区帖子</div>
+  </div>
+  <div class="list-arrow">›</div>
+</a>
+<a href="#" class="list-item">
+  <div class="list-icon">⭐</div>
+  <div class="list-content">
+    <div class="list-title">精华帖</div>
+    <div class="list-desc">已加精的帖子</div>
+  </div>
+  <div class="list-arrow">›</div>
+</a>
+<a href="#" class="list-item">
+  <div class="list-icon">🚩</div>
+  <div class="list-content">
+    <div class="list-title">待审核</div>
+    <div class="list-desc">需要审核的帖子</div>
+  </div>
+  <div class="list-arrow">›</div>
+</a>
+<a href="#" class="list-item">
+  <div class="list-icon">👤</div>
+  <div class="list-content">
+    <div class="list-title">用户管理</div>
+    <div class="list-desc">管理虚拟用户</div>
+  </div>
+  <div class="list-arrow">›</div>
+</a>
+</div>
+
+<div class="footer" style="text-align: center; padding: 30px; color: #86868b; font-size: 12px;">
+  PawWell Admin System
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+// 检查登录
+const user = localStorage.getItem('pawwell_admin_user');
+if (!user) {
+  window.location.href = '/AU/admin/login.html';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+
+</body>
+</html>

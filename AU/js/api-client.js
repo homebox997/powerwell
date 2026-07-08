@@ -17,7 +17,10 @@
  */
 
 const PawWellAPI = {
-  baseURL: '/api',                 // ← 部署时由后端配置
+  // ===== Supabase 直连配置（service role key 绕过 RLS）=====
+  supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
+  serviceKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5NzU3NCwiZXhwIjoyMDk4NTczNTc0fQ.1N3D6ahkkxYe6ykxphk_jJ4BHHshmcbTe-IrDIw6F64',
+  baseURL: 'https://cbbaejwbkenrutmgqikt.supabase.co/rest/v1',                 // ← 部署时由后端配置
   country: 'AU',                   // 页面可按地区覆盖（如 PawWellAPI.country = 'US'）
 
   // ===================== 博客模块 =====================
@@ -34,10 +37,21 @@ const PawWellAPI = {
      * 前端渲染节点: #blogGrid (blog.html) — 渲染函数 renderGrid(category, list)
      */
     async list(category = 'all', country = PawWellAPI.country) {
-      const url = `${PawWellAPI.baseURL}/articles?category=${encodeURIComponent(category)}&country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const url = `${PawWellAPI.supabaseUrl}/rest/v1/blog_articles?category=eq.${encodeURIComponent(category)}&country=eq.${country}&select=id,title,slug,excerpt,cover_image,category,tags,created_at&order=created_at.desc&limit=20`;
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('blog.list failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -54,9 +68,20 @@ const PawWellAPI = {
      */
     async detail(slug, country = PawWellAPI.country) {
       const url = `${PawWellAPI.baseURL}/articles/${encodeURIComponent(slug)}?country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('blog.detail failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     }
   },
 
@@ -78,9 +103,20 @@ const PawWellAPI = {
      */
     async get(slug, country = PawWellAPI.country) {
       const url = `${PawWellAPI.baseURL}/topics/${encodeURIComponent(slug)}?country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('topic.get failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     }
   },
 
@@ -100,9 +136,20 @@ const PawWellAPI = {
      */
     async listPosts(category = 'all', page = 1, country = PawWellAPI.country) {
       const url = `${PawWellAPI.baseURL}/community/posts?category=${encodeURIComponent(category)}&page=${page}&country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('community.listPosts failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -118,9 +165,20 @@ const PawWellAPI = {
      */
     async getPost(postId, country = PawWellAPI.country) {
       const url = `${PawWellAPI.baseURL}/community/posts/${encodeURIComponent(postId)}?country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('community.getPost failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -138,7 +196,11 @@ const PawWellAPI = {
         body: JSON.stringify({ ...payload, country: PawWellAPI.country })
       });
       if (!res.ok) throw new Error('community.createPost failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -156,7 +218,11 @@ const PawWellAPI = {
         body: JSON.stringify({ post_id: postId, content, country: PawWellAPI.country })
       });
       if (!res.ok) throw new Error('community.addComment failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -174,7 +240,11 @@ const PawWellAPI = {
         body: JSON.stringify({ post_id: postId, country: PawWellAPI.country })
       });
       if (!res.ok) throw new Error('community.like failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     }
   },
 
@@ -201,7 +271,11 @@ const PawWellAPI = {
         body: JSON.stringify({ ...payload, country: PawWellAPI.country })
       });
       if (!res.ok) throw new Error('assessment.submit failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     },
 
     /**
@@ -217,9 +291,20 @@ const PawWellAPI = {
      */
     async get(id, country = PawWellAPI.country) {
       const url = `${PawWellAPI.baseURL}/assessments/${encodeURIComponent(id)}?country=${country}`;
-      const res = await fetch(url, { method: 'GET', headers: { 'Accept': 'application/json' } });
+      const res = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'apikey': PawWellAPI.serviceKey,
+        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'Accept': 'application/json'
+      }
+    });
       if (!res.ok) throw new Error('assessment.get failed: ' + res.status);
-      return await res.json();
+      const data = await res.json();
+      // Supabase 返回数组直接使用
+      if (Array.isArray(data)) return data;
+      // 兼容对象格式
+      return data.data || [];
     }
   }
 };

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台首页 - PawWell Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid #34495e;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .sidebar-header p {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #34495e;
+        }
+
+        .nav-link.active {
+            background: #3498db;
+            border-left: 4px solid white;
+        }
+
+        .nav-section {
+            padding: 15px 20px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #95a5a6;
+            letter-spacing: 1px;
+        }
+
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .stat-card .trend {
+            font-size: 12px;
+            color: #27ae60;
+            margin-top: 5px;
+        }
+
+        .recent-activity {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .recent-activity h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item .time {
+            font-size: 12px;
+            color: #95a5a6;
+        }
+
+        .user-info {
+            padding: 20px;
+            border-top: 1px solid #34495e;
+            margin-top: 20px;
+        }
+
+        .user-info p {
+            font-size: 14px;
+            color: #ecf0f1;
+            margin-bottom: 5px;
+        }
+
+        .user-info small {
+            color: #95a5a6;
+        }
+
+        .btn-logout {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-logout:hover {
+            background: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <!-- 侧边栏 -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h2>🐕 PawWell</h2>
+            <p>后台管理系统</p>
+        </div>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="/admin/index.html" class="nav-link active">📊 仪表盘</a>
+            </li>
+
+            <li class="nav-section">内容管理</li>
+            <li class="nav-item">
+                <a href="/admin/blog/edit.html" class="nav-link">📝 博客文章</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/pathology/edit.html" class="nav-link">🏥 病理文章</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/qa/edit.html" class="nav-link">❓ 问答知识库</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/cases/edit.html" class="nav-link">📖 康复案例</a>
+            </li>
+
+            <li class="nav-section">产品管理</li>
+            <li class="nav-item">
+                <a href="/admin/products/edit.html" class="nav-link">🛒 产品推荐</a>
+            </li>
+
+            <li class="nav-section">用户数据</li>
+            <li class="nav-item">
+                <a href="/admin/leads/list.html" class="nav-link">📋 健康检测线索</a>
+            </li>
+            <li class="nav-item">
+                <a href="/admin/community/list.html" class="nav-link">👥 社区管理</a>
+            </li>
+
+            <li class="nav-section admin-only">系统设置</li>
+            <li class="nav-item admin-only">
+                <a href="/admin/breeds/list.html" class="nav-link">🐕 宠物品种</a>
+            </li>
+            <li class="nav-item admin-only">
+                <a href="/admin/tags/list.html" class="nav-link">🏷️ 内容标签</a>
+            </li>
+            <li class="nav-item admin-only">
+                <a href="/admin/notion/config.html" class="nav-link">⚙️ Notion 配置</a>
+            </li>
+        </ul>
+
+        <div class="user-info">
+            <p id="userName">加载中...</p>
+            <small id="userRole">加载中...</small>
+            <button class="btn-logout" onclick="logout()">退出登录</button>
+        </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>仪表盘</h1>
+            <p>欢迎回来！这是系统的概览。</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>博客文章</h3>
+                <div class="number" id="blogCount">0</div>
+                <div class="trend">已发布</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>病理文章</h3>
+                <div class="number" id="diseaseCount">0</div>
+                <div class="trend">已发布</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>产品推荐</h3>
+                <div class="number" id="productCount">0</div>
+                <div class="trend">已上线</div>
+            </div>
+
+            <div class="stat-card">
+                <h3>健康检测</h3>
+                <div class="number" id="leadCount">0</div>
+                <div class="trend">待处理</div>
+            </div>
+        </div>
+
+        <div class="recent-activity">
+            <h2>最近活动</h2>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <strong>新文章发布</strong><br>
+                    <span class="time">2026-07-08 23:10</span>
+                </li>
+                <li class="activity-item">
+                    <strong>产品推荐更新</strong><br>
+                    <span class="time">2026-07-08 22:30</span>
+                </li>
+                <li class="activity-item">
+                    <strong>健康检测线索 #1234</strong><br>
+                    <span class="time">2026-07-08 21:15</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <script>
+        // 检查登录状态
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (!currentUser) {
+            window.location.href = '/admin/login.html';
+        } else {
+            // 显示用户信息
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userRole').textContent = currentUser.role === 'admin' ? '管理员' : '录入员';
+
+            // 根据角色显示/隐藏菜单
+            if (currentUser.role !== 'admin') {
+                document.querySelectorAll('.admin-only').forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+        }
+
+        // 加载统计数据
+        async function loadStats() {
+            // 这里应该从 Notion API 获取真实数据
+            // 暂时显示模拟数据
+            document.getElementById('blogCount').textContent = '3';
+            document.getElementById('diseaseCount').textContent = '1';
+            document.getElementById('productCount').textContent = '0';
+            document.getElementById('leadCount').textContent = '0';
+        }
+
+        // 退出登录
+        function logout() {
+            if (confirm('确认退出吗？')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = '/admin/login.html';
+            }
+        }
+
+        // 页面加载时执行
+        window.onload = loadStats;
+    </script>
+</body>
+</html>

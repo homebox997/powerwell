@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>健康检测线索 - PawWell</title>
+<style>* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; background: #f5f5f7; min-height: 100vh; color: #1d1d1f; }
+.top-bar { background: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #e5e5e7; }
+.back-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #0071e3; padding: 0; line-height: 1; }
+.top-title { font-size: 18px; font-weight: 600; flex: 1; }
+.container { padding: 20px; max-width: 600px; margin: 0 auto; }
+.field { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.field-label { font-size: 13px; color: #86868b; margin-bottom: 6px; display: block; }
+.field-input, .field-select, .field-textarea { width: 100%; border: none; outline: none; font-size: 16px; padding: 4px 0; background: transparent; font-family: inherit; }
+.field-textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
+.submit-btn { width: 100%; background: #0071e3; color: white; border: none; border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+.submit-btn:active { background: #005bb5; }
+.submit-btn:disabled { background: #86868b; }
+.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,0,0,0.8); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 100; display: none; }
+.toast.show { display: block; }
+.msg-bar { background: #d4edda; color: #155724; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; display: none; font-size: 14px; }
+.msg-bar.error { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <button class="back-btn" onclick="window.location.href='/AU/admin/index.html'">&#9001;</button>
+  <div class="top-title">健康检测线索</div>
+</div>
+<div class="container">
+  <div class="msg-bar" id="msgBar"></div>
+  <form id="dataForm">
+    <div class="field"><label class="field-label">宠物名 *</label><input class="field-input" type="text" name="pet_name" required placeholder="如：Max"></div>
+<div class="field"><label class="field-label">宠物品种 *</label><select class="field-select" name="pet_breed" required><option value="">请选择</option><option value="贵宾犬">贵宾犬</option><option value="金毛">金毛</option><option value="拉布拉多">拉布拉多</option><option value="边牧">边牧</option><option value="柯基">柯基</option><option value="柴犬">柴犬</option><option value="哈士奇">哈士奇</option><option value="法斗">法斗</option><option value="比熊">比熊</option><option value="雪纳瑞">雪纳瑞</option><option value="吉娃娃">吉娃娃</option><option value="马尔济斯">马尔济斯</option><option value="猫">猫</option><option value="其他">其他</option></select></div>
+<div class="field"><label class="field-label">性别</label><select class="field-select" name="pet_gender" ><option value="">请选择</option><option value="公">公</option><option value="母">母</option></select></div>
+<div class="field"><label class="field-label">年龄</label><input class="field-input" type="text" name="pet_age"  placeholder="如：8岁"></div>
+<div class="field"><label class="field-label">主要症状 *</label><input class="field-input" type="text" name="symptoms" required placeholder="如：后腿无力"></div>
+<div class="field"><label class="field-label">详细描述</label><textarea class="field-textarea" name="symptoms_detail"  placeholder="补充更多症状细节..."></textarea></div>
+<div class="field"><label class="field-label">邮箱 *</label><input class="field-input" type="text" name="email" required placeholder="owner@email.com"></div>
+<div class="field"><label class="field-label">联系电话</label><input class="field-input" type="text" name="phone"  placeholder="04xx xxx xxx"></div>
+<div class="field"><label class="field-label">处理状态</label><select class="field-select" name="status" ><option value="">请选择</option><option value="待跟进">待跟进</option><option value="已联系">已联系</option><option value="已成交">已成交</option><option value="无效">无效</option></select></div>
+<div class="field"><label class="field-label">跟进备注</label><textarea class="field-textarea" name="notes"  placeholder="内部备注..."></textarea></div>
+
+    <button type="submit" class="submit-btn" id="submitBtn">保存</button>
+  </form>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+var CONFIG = {
+  notionDbId: '3970556c-dfbd-8136-8512-dc915ac72b37',
+  notionTitleCol: '宠物名',
+  supabaseTable: 'assessment_submissions',
+  notionToken: 'ntn_b1433198525X3xFz2UNpf0I17XenT22UCC4E32kDvYI5EZ',
+  supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
+  serviceKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5NzU3NCwiZXhwIjoyMDk4NTczNTc0fQ.1N3D6ahkkxYe6ykxphk_jJ4BHHshmcbTe-IrDIw6F64'
+};
+
+var user = localStorage.getItem('pawwell_admin_user');
+if (!user) window.location.href = '/AU/admin/login.html';
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show';
+  setTimeout(function() { t.className = 'toast'; }, 2500);
+}
+function showMsg(msg, isError) {
+  var m = document.getElementById('msgBar');
+  m.textContent = msg; m.className = 'msg-bar' + (isError ? ' error' : '');
+  m.style.display = 'block';
+  setTimeout(function() { m.style.display = 'none'; }, 5000);
+}
+
+var richTextFields = new Set(["pet_name", "pet_age", "symptoms", "symptoms_detail", "phone", "notes"]);
+var urlFields = new Set([]);
+var selectFields = new Set(["pet_breed", "pet_gender", "status"]);
+var multiFields = new Set([]);
+var numFields = new Set([]);
+var notionSchema = {"pet_name": "pet_name", "pet_breed": "pet_breed", "pet_gender": "pet_gender", "pet_age": "pet_age", "symptoms": "symptoms", "symptoms_detail": "symptoms_detail", "email": "email", "phone": "phone", "status": "status", "notes": "notes"};
+var supabaseColMap = {"pet_name": "pet_name", "pet_breed": "pet_breed", "pet_gender": "pet_gender", "pet_age": "pet_age", "symptoms": "symptoms", "symptoms_detail": "symptoms_detail", "email": "email", "phone": "phone", "status": "status", "notes": "notes"};
+var extraNotion = {"\u6765\u6e90": {"select": {"name": "Manual"}}};
+var supabaseExtraDefaults = {};
+
+function buildNotionProps(formData) {
+  var props = {};
+  for (var fname in notionSchema) {
+    var nfield = notionSchema[fname];
+    var val = (formData.get(fname) || '').trim();
+    if (!val) continue;
+    if (nfield === CONFIG.notionTitleCol) {
+      props[nfield] = { title: [{ text: { content: val.slice(0,2000) } }] };
+    } else if (richTextFields.has(fname)) {
+      props[nfield] = { rich_text: [{ text: { content: val.slice(0,10000) } }] };
+    } else if (urlFields.has(fname)) {
+      props[nfield] = { url: val };
+    } else if (selectFields.has(fname)) {
+      props[nfield] = { select: { name: val } };
+    } else if (multiFields.has(fname)) {
+      var items = val.split(',').map(function(t) { return { name: t.trim() }; }).filter(function(t) { return t.name; });
+      if (items.length) props[nfield] = { multi_select: items };
+    } else {
+      props[nfield] = { rich_text: [{ text: { content: val.slice(0,2000) } }] };
+    }
+  }
+  for (var k in extraNotion) props[k] = extraNotion[k];
+  return props;
+}
+
+function buildSupabaseRow(formData) {
+  var row = { country: 'AU' };
+  for (var fname in supabaseColMap) {
+    var sc = supabaseColMap[fname];
+    var val = (formData.get(fname) || '').trim();
+    if (!val) continue;
+    if (numFields.has(fname)) {
+      var n = parseFloat(val);
+      if (!isNaN(n)) row[sc] = n;
+    } else if (multiFields.has(fname)) {
+      var items = val.split(',').map(function(t) { return t.trim(); }).filter(Boolean);
+      if (items.length) row[sc] = items;
+    } else {
+      row[sc] = val;
+    }
+  }
+  // 应用默认必填字段（从表单值派生）
+  for (var sc in supabaseExtraDefaults) {
+    if (!row[sc]) {
+      var src = supabaseExtraDefaults[sc];
+      var v = (formData.get(src) || '').trim();
+      if (v) row[sc] = v;
+    }
+  }
+  // slug
+  var titleVal = formData.get('title') || formData.get('tag_name') ||
+    formData.get('breed_name_cn') || formData.get('breed_name_en') ||
+    formData.get('character_name') || formData.get('metric_name') || '';
+  if (titleVal) row.slug = slugify(titleVal);
+  if (!row.status) row.status = 'Draft';
+  return row;
+}
+
+async function writeToNotion(formData) {
+  if (!CONFIG.notionDbId) throw new Error('Notion DB not configured');
+  var props = buildNotionProps(formData);
+  var res = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + CONFIG.notionToken, 'Content-Type': 'application/json', 'Notion-Version': '2022-06-28' },
+    body: JSON.stringify({ parent: { database_id: CONFIG.notionDbId }, properties: props })
+  });
+  if (!res.ok) {
+    var err = await res.json();
+    throw new Error('Notion: ' + (err.message || res.status));
+  }
+  return await res.json();
+}
+
+async function writeToSupabase(formData) {
+  var row = buildSupabaseRow(formData);
+  var res = await fetch(CONFIG.supabaseUrl + '/rest/v1/' + CONFIG.supabaseTable, {
+    method: 'POST',
+    headers: { 'apikey': CONFIG.serviceKey, 'Authorization': 'Bearer ' + CONFIG.serviceKey, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+    body: JSON.stringify(row)
+  });
+  if (!res.ok) {
+    var err = await res.text();
+    throw new Error('Supabase: ' + err.slice(0, 150));
+  }
+  if (res.status === 201) return { ok: true };
+  return await res.json();
+}
+
+document.getElementById('dataForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = '保存中...';
+  var fd = new FormData(this);
+  try {
+    await Promise.all([writeToNotion(fd), writeToSupabase(fd)]);
+    showToast('\u2705 保存成功！已同步 Notion + 数据库');
+    this.reset();
+  } catch(err) {
+    showMsg('\u274c 保存失败: ' + err.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = '保存';
+  }
+});
+</script>
+</body>
+</html>

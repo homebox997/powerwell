@@ -44,7 +44,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, 
 <script>
 var CONFIG = {
   notionDbId: '3970556c-dfbd-8195-afcb-c6c119430969',
-  notionTitleCol: '标签名称',
+  notionTitleCol: '标签名',
   supabaseTable: 'content_tags',
   notionToken: 'ntn_b1433198525X3xFz2UNpf0I17XenT22UCC4E32kDvYI5EZ',
   supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
@@ -78,6 +78,19 @@ var supabaseExtraDefaults = {"name": "tag_name"};
 
 function buildNotionProps(formData) {
   var props = {};
+  var tag_name = (formData.get('tag_name')||'').trim();
+  var tag_type = (formData.get('tag_type')||'').trim();
+  var color = (formData.get('color')||'').trim();
+  var sort_order = (formData.get('sort_order')||'').trim();
+  var description = (formData.get('description')||'').trim();
+
+  if (tag_name) props['标签名'] = { title: [{ text: { content: tag_name.slice(0,2000) } }] };
+  if (tag_type) props['类型'] = { rich_text: [{ text: { content: tag_type.slice(0,2000) } }] };
+  if (color) props['颜色'] = { rich_text: [{ text: { content: color.slice(0,2000) } }] };
+  if (sort_order) props['排序'] = { rich_text: [{ text: { content: sort_order.slice(0,2000) } }] };
+  if (description) props['描述'] = { rich_text: [{ text: { content: description.slice(0,10000) } }] };
+  return props;
+};
   for (var fname in notionSchema) {
     var nfield = notionSchema[fname];
     var val = (formData.get(fname) || '').trim();

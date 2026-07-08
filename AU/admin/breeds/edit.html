@@ -83,6 +83,27 @@ var supabaseExtraDefaults = {"name": "breed_name_cn"};
 
 function buildNotionProps(formData) {
   var props = {};
+  var breed_name_cn = (formData.get('breed_name_cn')||'').trim();
+  var breed_name_en = (formData.get('breed_name_en')||'').trim();
+  var species = (formData.get('species')||'').trim();
+  var size_category = (formData.get('size_category')||'').trim();
+  var life_expectancy = (formData.get('life_expectancy')||'').trim();
+  var weight_range = (formData.get('weight_range')||'').trim();
+  var common_conditions = (formData.get('common_conditions')||'').trim();
+  var image_url = (formData.get('image_url')||'').trim();
+  var description = (formData.get('description')||'').trim();
+
+  if (breed_name_cn) props['品种名称'] = { title: [{ text: { content: breed_name_cn.slice(0,2000) } }] };
+  if (breed_name_en) props['英文名'] = { rich_text: [{ text: { content: breed_name_en.slice(0,2000) } }] };
+  if (species) props['分类'] = { rich_text: [{ text: { content: species.slice(0,2000) } }] };
+  if (size_category) props['体型'] = { rich_text: [{ text: { content: size_category.slice(0,2000) } }] };
+  if (life_expectancy) props['寿命'] = { rich_text: [{ text: { content: life_expectancy.slice(0,2000) } }] };
+  if (weight_range) props['体重'] = { rich_text: [{ text: { content: weight_range.slice(0,2000) } }] };
+  if (common_conditions) props['常见疾病'] = { rich_text: [{ text: { content: common_conditions.slice(0,2000) } }] };
+  if (image_url) props['图片'] = { rich_text: [{ text: { content: image_url.slice(0,2000) } }] };
+  if (description) props['描述'] = { rich_text: [{ text: { content: description.slice(0,10000) } }] };
+  return props;
+};
   for (var fname in notionSchema) {
     var nfield = notionSchema[fname];
     var val = (formData.get(fname) || '').trim();

@@ -46,7 +46,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, 
 <script>
 var CONFIG = {
   notionDbId: '3970556c-dfbd-8152-8e5e-e4bbb7d153fa',
-  notionTitleCol: '标题',
+  notionTitleCol: '帖子ID',
   supabaseTable: 'community_posts',
   notionToken: 'ntn_b1433198525X3xFz2UNpf0I17XenT22UCC4E32kDvYI5EZ',
   supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
@@ -80,6 +80,23 @@ var supabaseExtraDefaults = {};
 
 function buildNotionProps(formData) {
   var props = {};
+  var title = (formData.get('title')||'').trim();
+  var author = (formData.get('author')||'').trim();
+  var category = (formData.get('category')||'').trim();
+  var content = (formData.get('content')||'').trim();
+  var tags = (formData.get('tags')||'').trim();
+  var status = (formData.get('status')||'').trim();
+  var cover_image = (formData.get('cover_image')||'').trim();
+
+  if (title) props['标题'] = { title: [{ text: { content: title.slice(0,2000) } }] };
+  if (author) props['作者'] = { rich_text: [{ text: { content: author.slice(0,2000) } }] };
+  if (category) props['分类'] = { rich_text: [{ text: { content: category.slice(0,2000) } }] };
+  if (content) props['内容'] = { rich_text: [{ text: { content: content.slice(0,10000) } }] };
+  if (tags) props['标签'] = { rich_text: [{ text: { content: tags.slice(0,2000) } }] };
+  if (status) props['状态'] = { rich_text: [{ text: { content: status.slice(0,2000) } }] };
+  if (cover_image) props['封面图'] = { rich_text: [{ text: { content: cover_image.slice(0,2000) } }] };
+  return props;
+};
   for (var fname in notionSchema) {
     var nfield = notionSchema[fname];
     var val = (formData.get(fname) || '').trim();

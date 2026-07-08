@@ -46,7 +46,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, 
 <script>
 var CONFIG = {
   notionDbId: '3970556c-dfbd-8103-baa4-c19e24d7b456',
-  notionTitleCol: '角色名称',
+  notionTitleCol: '用户ID',
   supabaseTable: 'agent_characters',
   notionToken: 'ntn_b1433198525X3xFz2UNpf0I17XenT22UCC4E32kDvYI5EZ',
   supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
@@ -80,6 +80,25 @@ var supabaseExtraDefaults = {};
 
 function buildNotionProps(formData) {
   var props = {};
+  var character_name = (formData.get('character_name')||'').trim();
+  var character_type = (formData.get('character_type')||'').trim();
+  var bio = (formData.get('bio')||'').trim();
+  var avatar_url = (formData.get('avatar_url')||'').trim();
+  var tone_style = (formData.get('tone_style')||'').trim();
+  var status = (formData.get('status')||'').trim();
+  var sort_order = (formData.get('sort_order')||'').trim();
+
+  // 自动生成 title
+  props['用户ID'] = { title: [{ text: { content: (character_name || '未命名').slice(0,2000) } }] };
+  if (character_name) props['角色名称'] = { rich_text: [{ text: { content: character_name.slice(0,2000) } }] };
+  if (character_type) props['角色类型'] = { rich_text: [{ text: { content: character_type.slice(0,2000) } }] };
+  if (bio) props['简介'] = { rich_text: [{ text: { content: bio.slice(0,10000) } }] };
+  if (avatar_url) props['头像'] = { rich_text: [{ text: { content: avatar_url.slice(0,2000) } }] };
+  if (tone_style) props['语气风格'] = { rich_text: [{ text: { content: tone_style.slice(0,2000) } }] };
+  if (status) props['状态'] = { rich_text: [{ text: { content: status.slice(0,2000) } }] };
+  if (sort_order) props['排序'] = { rich_text: [{ text: { content: sort_order.slice(0,2000) } }] };
+  return props;
+};
   for (var fname in notionSchema) {
     var nfield = notionSchema[fname];
     var val = (formData.get(fname) || '').trim();

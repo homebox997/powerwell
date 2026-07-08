@@ -44,7 +44,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-se
         <option value="Removed">Removed</option>
       </select>
     </div>
-    <div class="field"><label class="field-label">点赞数</label><input class="field-input" type="number" name="likes" placeholder="0" min="0"></div>
+
     <button type="submit" class="submit-btn" id="submitBtn">保存</button>
   </form>
 </div>
@@ -66,27 +66,23 @@ function buildNotionProps(formData) {
   var postTitle = (formData.get('post_title')||'').trim();
   var author = (formData.get('author')||'').trim();
   var status = (formData.get('status')||'').trim() || 'Pending';
-  var likesStr = (formData.get('likes')||'').trim();
   var props = {};
   if (content) props.UserComment = { title: [{ text: { content: content.slice(0,2000) } }] };
   if (postId) props.PostID = { rich_text: [{ text: { content: postId.slice(0,500) } }] };
   if (postTitle) props.PostTitle = { rich_text: [{ text: { content: postTitle.slice(0,500) } }] };
   if (author) props.AuthorName = { rich_text: [{ text: { content: author.slice(0,200) } }] };
   props.Status = { select: { name: status } };
-  if (likesStr) { var n = parseInt(likesStr); if (!isNaN(n)) props.LikeCount = { number: n }; }
   return props;
 }
 
 function buildSupabaseRow(formData) {
   var row = { country: 'AU' };
   var fd = new FormData(formData);
-  var fields = ['content','post_id','post_title','author','status','likes'];
+  var fields = ['content','post_id','post_title','author','status'];
   for (var i=0; i<fields.length; i++) {
     var k = fields[i];
     var v = (fd.get(k)||'').trim();
-    if (!v) continue;
-    if (k === 'likes') { var n = parseInt(v); if (!isNaN(n)) row[k] = n; }
-    else row[k] = v;
+    if (v) row[k] = v;
   }
   row.status = row.status || 'Pending';
   return row;

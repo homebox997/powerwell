@@ -4,23 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>社区评论 - PawWell</title>
-<style>* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; background: #f5f5f7; min-height: 100vh; color: #1d1d1f; }
-.top-bar { background: white; padding: 16px 20px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 10; border-bottom: 1px solid #e5e5e7; }
-.back-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #0071e3; padding: 0; line-height: 1; }
-.top-title { font-size: 18px; font-weight: 600; flex: 1; }
-.container { padding: 20px; max-width: 600px; margin: 0 auto; }
-.field { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-.field-label { font-size: 13px; color: #86868b; margin-bottom: 6px; display: block; }
-.field-input, .field-select, .field-textarea { width: 100%; border: none; outline: none; font-size: 16px; padding: 4px 0; background: transparent; font-family: inherit; }
-.field-textarea { resize: vertical; min-height: 100px; line-height: 1.5; }
-.submit-btn { width: 100%; background: #0071e3; color: white; border: none; border-radius: 12px; padding: 16px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 12px; }
-.submit-btn:active { background: #005bb5; }
-.submit-btn:disabled { background: #86868b; }
-.toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: rgba(0,0,0,0.8); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 100; display: none; }
-.toast.show { display: block; }
-.msg-bar { background: #d4edda; color: #155724; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; display: none; font-size: 14px; }
-.msg-bar.error { background: #f8d7da; color: #721c24; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;background:#f5f5f7;min-height:100vh;color:#1d1d1f}
+.top-bar{background:white;padding:16px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;border-bottom:1px solid #e5e5e7}
+.back-btn{background:none;border:none;font-size:24px;cursor:pointer;color:#0071e3;padding:0;line-height:1}
+.top-title{font-size:18px;font-weight:600;flex:1}
+.container{padding:20px;max-width:600px;margin:0 auto}
+.field{background:white;border-radius:12px;padding:16px;margin-bottom:12px}
+.field-label{font-size:13px;color:#86868b;margin-bottom:6px;display:block}
+.field-input,.field-select,.field-textarea{width:100%;border:none;outline:none;font-size:16px;padding:4px 0;background:transparent;font-family:inherit}
+.field-textarea{resize:vertical;min-height:100px;line-height:1.5}
+.submit-btn{width:100%;background:#0071e3;color:white;border:none;border-radius:12px;padding:16px;font-size:16px;font-weight:600;cursor:pointer;margin-top:12px}
+.submit-btn:active{background:#005bb5}
+.submit-btn:disabled{background:#86868b}
+.toast{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.8);color:white;padding:12px 24px;border-radius:8px;font-size:14px;z-index:100;display:none}
+.toast.show{display:block}
+.msg-bar{background:#d4edda;color:#155724;padding:12px 16px;border-radius:8px;margin-bottom:16px;display:none;font-size:14px}
+.msg-bar.error{background:#f8d7da;color:#721c24}
 </style>
 </head>
 <body>
@@ -38,40 +39,102 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, 
     <div class="field"><label class="field-label">审核状态</label>
       <select class="field-select" name="status">
         <option value="">请选择</option>
-        <option value="待审核">待审核</option>
-        <option value="通过">通过</option>
-        <option value="删除">删除</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Removed">Removed</option>
       </select>
     </div>
+    <div class="field"><label class="field-label">点赞数</label><input class="field-input" type="number" name="likes" placeholder="0" min="0"></div>
     <button type="submit" class="submit-btn" id="submitBtn">保存</button>
   </form>
 </div>
 <div class="toast" id="toast"></div>
 <script>
+var NT = 'ntn_b1433198525X3xFz2UNpf0I17XenT22UCC4E32kDvYI5EZ';
+var NOTION_DB_ID = '3970556c-dfbd-8184-a865-c213d5311374';
+var SB = 'https://cbbaejwbkenrutmgqikt.supabase.co';
+var SK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5NzU3NCwiZXhwIjoyMDk4NTczNTc0fQ.1N3D6ahkkxYe6ykxphk_jJ4BHHshmcbTe-IrDIw6F64';
 var user = localStorage.getItem('pawwell_admin_user');
 if (!user) window.location.href = '/AU/admin/login.html';
+
 function showToast(msg) { var t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast show'; setTimeout(function(){ t.className = 'toast'; }, 2500); }
 function showMsg(msg, isError) { var m = document.getElementById('msgBar'); m.textContent = msg; m.className = 'msg-bar' + (isError ? ' error' : ''); m.style.display = 'block'; setTimeout(function(){ m.style.display = 'none'; }, 5000); }
+
+function buildNotionProps(formData) {
+  var content = (formData.get('content')||'').trim();
+  var postId = (formData.get('post_id')||'').trim();
+  var postTitle = (formData.get('post_title')||'').trim();
+  var author = (formData.get('author')||'').trim();
+  var status = (formData.get('status')||'').trim() || 'Pending';
+  var likesStr = (formData.get('likes')||'').trim();
+  var props = {};
+  if (content) props.UserComment = { title: [{ text: { content: content.slice(0,2000) } }] };
+  if (postId) props.PostID = { rich_text: [{ text: { content: postId.slice(0,500) } }] };
+  if (postTitle) props.PostTitle = { rich_text: [{ text: { content: postTitle.slice(0,500) } }] };
+  if (author) props.AuthorName = { rich_text: [{ text: { content: author.slice(0,200) } }] };
+  props.Status = { select: { name: status } };
+  if (likesStr) { var n = parseInt(likesStr); if (!isNaN(n)) props.LikeCount = { number: n }; }
+  return props;
+}
+
+function buildSupabaseRow(formData) {
+  var row = { country: 'AU' };
+  var fd = new FormData(formData);
+  var fields = ['content','post_id','post_title','author','status','likes'];
+  for (var i=0; i<fields.length; i++) {
+    var k = fields[i];
+    var v = (fd.get(k)||'').trim();
+    if (!v) continue;
+    if (k === 'likes') { var n = parseInt(v); if (!isNaN(n)) row[k] = n; }
+    else row[k] = v;
+  }
+  row.status = row.status || 'Pending';
+  return row;
+}
+
+async function writeToNotion(formData) {
+  var props = buildNotionProps(formData);
+  var res = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + NT, 'Content-Type': 'application/json', 'Notion-Version': '2022-06-28' },
+    body: JSON.stringify({ parent: { database_id: NOTION_DB_ID }, properties: props })
+  });
+  if (!res.ok) {
+    var err = await res.json();
+    throw new Error('Notion: ' + (err.message || res.status));
+  }
+  return await res.json();
+}
+
+async function writeToSupabase(formData) {
+  var row = buildSupabaseRow(formData);
+  var res = await fetch(SB + '/rest/v1/community_comments', {
+    method: 'POST',
+    headers: { 'apikey': SK, 'Authorization': 'Bearer ' + SK, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
+    body: JSON.stringify(row)
+  });
+  if (!res.ok) {
+    var err = await res.text();
+    throw new Error('Supabase: ' + err.slice(0,150));
+  }
+  if (res.status === 201) return { ok: true };
+  return await res.json();
+}
+
 document.getElementById('dataForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   var btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = '保存中...';
   var fd = new FormData(this);
-  var row = { country: 'AU' };
-  for (var k of ['content','post_id','post_title','author']) { var v = (fd.get(k)||'').trim(); if(v) row[k]=v; }
-  row.status = (fd.get('status')||'').trim() || '待审核';
   try {
-    var SK = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5NzU3NCwiZXhwIjoyMDk4NTczNTc0fQ.1N3D6ahkkxYe6ykxphk_jJ4BHHshmcbTe-IrDIw6F64';
-    var res = await fetch('https://cbbaejwbkenrutmgqikt.supabase.co/rest/v1/community_comments', {
-      method: 'POST',
-      headers: { 'apikey': SK, 'Authorization': 'Bearer ' + SK, 'Content-Type': 'application/json', 'Prefer': 'return=representation' },
-      body: JSON.stringify(row)
-    });
-    if (!res.ok) throw new Error((await res.text()).slice(0,100));
-    showToast('\u2705 保存成功！');
+    await Promise.all([writeToNotion(fd), writeToSupabase(fd)]);
+    showToast('\u2705 保存成功！已同步 Notion + 数据库');
     this.reset();
-  } catch(err) { showMsg('\u274c 保存失败: ' + err.message, true);
-  } finally { btn.disabled = false; btn.textContent = '保存'; }
+  } catch(err) {
+    showMsg('\u274c 保存失败: ' + err.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = '保存';
+  }
 });
 </script>
 </body>

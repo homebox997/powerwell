@@ -529,7 +529,7 @@
     <!-- 数据库接口:community_db_port = 3004 | user_db_port = 3005 -->
     <script src="js/supabase-init.js"></script>
     <script defer src="./_shared/nav.js"></script>
-    <script src="js/community-data-20260711082356.js"></script>
+    <script src="js/community-data-20260711093000.js"></script>
     <script>
 const ARTICLES = [
   {
@@ -1111,12 +1111,15 @@ const ARTICLES = [
         function renderPostCard(post) {
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
+            var stats = CommunityDB.getCachedStats(post.id) || { likes: post.likes, views: post.views, comments: post.comments };
+            var likedSaved = false;
+            try { var ls = JSON.parse(localStorage.getItem('pawwell_liked') || '{}'); likedSaved = !!ls[post.id]; } catch (e) {}
             return '<article class="post-card" data-id="' + post.id + '">' +
                 '<div class="post-top">' +
                 '<div class="user-avatar" style="background:' + author.color + ';" aria-label="' + author.name + ' avatar">' + author.initials + '</div>' +
                 '<div class="post-meta">' +
                 '<div class="post-user">' + author.name + ' <span class="dog-info">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
-                '<div class="post-time">' + post.createdAt + '</div>' +
+                '<div class="post-time">' + post.createdAt + ' · ' + stats.views + ' views</div>' +
                 '</div>' +
                 '<span class="category-badge" style="background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
                 '</div>' +
@@ -1126,10 +1129,10 @@ const ARTICLES = [
                 post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') +
                 '</div>' +
                 '<div class="post-actions" role="group" aria-label="Post actions">' +
-                '<button class="action-btn like-btn" onclick="likePost(\'' + post.id + '\', this)" aria-label="Like this post">' +
-                '❤️ ' + post.likes + '</button>' +
+                '<button class="action-btn like-btn' + (likedSaved ? ' liked' : '') + '" onclick="likePost(\'' + post.id + '\', this)" aria-label="Like this post">' +
+                (likedSaved ? '❤️ ' : '🤍 ') + stats.likes + '</button>' +
                 '<button class="action-btn" onclick="openDetail(\'' + post.id + '\')" aria-label="View comments">' +
-                '💬 ' + post.comments + '</button>' +
+                '💬 ' + stats.comments + '</button>' +
                 '<button class="action-btn" aria-label="Share this post">' +
                 '↗️ Share</button>' +
                 '<button class="action-btn" onclick="openDetail(\'' + post.id + '\')" aria-label="Read full post">' +
@@ -1167,18 +1170,22 @@ const ARTICLES = [
 
         function likePost(postId, btn) {
             btn.classList.toggle('liked');
-            var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
-            if (post) {
-                if (btn.classList.contains('liked')) {
-                    post.likes++;
-                    btn.textContent = '❤️ ' + post.likes;
-                } else {
-                    post.likes--;
-                    btn.textContent = '🤍 ' + post.likes;
-                }
-            }
-            // 数据库接口:community_db_port - likes_count 更新
-            CommunityDB.likePost(postId);
+            var liked = btn.classList.contains('liked');
+            var cached = CommunityDB.getCachedStats(postId);
+            var baseLikes = cached ? cached.likes : 0;
+            // 乐观更新显示
+            btn.textContent = (liked ? '❤️ ' : '🤍 ') + (liked ? baseLikes + 1 : baseLikes);
+            // 真实写入数据库（点赞+1 / 取消-1）
+            var op = liked ? CommunityDB.like(postId) : CommunityDB.unlike(postId);
+            op.then(function(res) {
+                if (res && res.likes != null) btn.textContent = (liked ? '❤️ ' : '🤍 ') + res.likes;
+            }).catch(function(e) { console.error('like failed:', e); });
+            // 本地记住点赞状态（刷新后保持红色）
+            try {
+                var likedSet = JSON.parse(localStorage.getItem('pawwell_liked') || '{}');
+                if (liked) likedSet[postId] = true; else delete likedSet[postId];
+                localStorage.setItem('pawwell_liked', JSON.stringify(likedSet));
+            } catch (e) {}
         }
 
         // slug → 老评论表 key (p1-p8) 兼容映射
@@ -1197,22 +1204,33 @@ const ARTICLES = [
             return map[postId] || postId;
         }
 
-        function openDetail(postId) {
+                function openDetail(postId) {
             var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
             if (!post) return;
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
-            var comments = MOCK_COMMENTS[commentKeyFor(postId)] || [];
+            var stats = CommunityDB.getCachedStats(postId) || { likes: post.likes, views: post.views, comments: post.comments };
+
+            // 从数据库加载真实评论（异步）
+            var comments = [];
+            CommunityDB.getComments(postId).then(function(c) { comments = c; }).catch(function(e) { console.error('getComments failed:', e); });
+            // 阅读量自增（best-effort）
+            CommunityDB.view(postId);
+
             var commentsHtml = comments.map(function(c) {
-                var cu = getUserById(c.userId);
+                var ca = commentAvatar(c.author);
                 return '<div class="comment-item">' +
-                    '<div class="comment-avatar" style="background:' + cu.color + ';">' + cu.avatar + '</div>' +
+                    '<div class="comment-avatar" style="background:' + ca.color + ';">' + ca.initials + '</div>' +
                     '<div class="comment-body">' +
-                    '<span class="comment-user">' + cu.nickname + '</span>' +
+                    '<span class="comment-user">' + escapeHtml(c.author) + '</span>' +
                     '<span class="comment-time">' + c.time + '</span>' +
-                    '<p class="comment-text">' + c.text + '</p>' +
+                    '<p class="comment-text">' + escapeHtml(c.text) + '</p>' +
                     '</div></div>';
             }).join('');
+
+            // 本地点赞状态
+            var liked = false;
+            try { var likedSet = JSON.parse(localStorage.getItem('pawwell_liked') || '{}'); liked = !!likedSet[postId]; } catch (e) {}
 
             document.getElementById('detailContent').innerHTML =
                 '<div class="detail-header">' +
@@ -1222,27 +1240,47 @@ const ARTICLES = [
                 '<div class="user-avatar" style="background:' + author.color + ';width:38px;height:38px;font-size:0.85rem;">' + author.initials + '</div>' +
                 '<div>' +
                 '<div style="font-weight:700;font-size:0.88rem;">' + author.name + ' <span style="font-weight:400;color:#7a8a9a;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
-                '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + post.views + ' views</div>' +
+                '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + stats.views + ' views</div>' +
                 '</div>' +
                 '</div></div>' +
                 '<div class="detail-content">' + post.content + '</div>' +
                 '<div class="post-tags">' + post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') + '</div>' +
                 '<div class="post-actions">' +
-                '<button class="action-btn" onclick="likePost(\'' + postId + '\')">❤️ ' + post.likes + '</button>' +
-                '<button class="action-btn">💬 ' + post.comments + ' comments</button>' +
+                '<button class="action-btn ' + (liked ? 'liked' : '') + '" id="detailLikeBtn" onclick="likePost(\' ' + postId + '\', this)">' + (liked ? '❤️ ' : '🤍 ') + stats.likes + '</button>' +
+                '<button class="action-btn">💬 ' + comments.length + ' comments</button>' +
                 '</div>' +
                 '<div class="comments-section">' +
                 '<div class="comments-title">💬 ' + comments.length + ' Comments</div>' +
                 (commentsHtml || '<p style="color:#aaa;font-size:0.88rem;">Be the first to comment...</p>') +
                 '<div class="comment-input-wrap">' +
-                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\')">' +
-                '<button class="comment-send" onclick="addComment(\'' + postId + '\')">Send</button>' +
+                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\' ' + postId + '\')">' +
+                '<button class="comment-send" onclick="addComment(\' ' + postId + '\')">Send</button>' +
                 '</div></div>';
             document.getElementById('detailModal').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeDetailModal() {
+        // HTML 转义（防止评论 XSS）
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // 评论作者头像（根据名字生成）
+        function commentAvatar(name) {
+            if (name === 'You') return { initials: 'ME', color: '#7c3aed' };
+            var initials = name.split(/\s+/).map(function(w) { return w.charAt(0); }).join('').substring(0, 2).toUpperCase();
+            var colors = ['#e67e22', '#3498db', '#2ecc71', '#e74c3c', '#9b59b6', '#1abc9c', '#f39c12', '#34495e'];
+            var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) % colors.length;
+            return { initials: initials, color: colors[h] };
+        }
+
+function closeDetailModal() {
             document.getElementById('detailModal').classList.remove('open');
             document.body.style.overflow = '';
         }
@@ -1251,26 +1289,25 @@ const ARTICLES = [
             var input = document.getElementById('commentInput');
             if (!input || !input.value.trim()) return;
             var text = input.value.trim();
-            // 数据库接口:community_db_port - addComment()
-            CommunityDB.addComment(postId, text).then(function(comment) {
-                // 持久化到 MOCK_COMMENTS（关闭详情再打开仍在）
-                var ckey = commentKeyFor(postId);
-                if (!MOCK_COMMENTS[ckey]) MOCK_COMMENTS[ckey] = [];
-                MOCK_COMMENTS[ckey].push({ userId: 'u_me', text: text, time: 'Just now' });
-
+            // 真实写入 Supabase
+            CommunityDB.addComment(postId, 'You', text).then(function(comment) {
+                var ca = commentAvatar(comment.author);
                 var newComment = '<div class="comment-item">' +
-                    '<div class="comment-avatar" style="background:#7c3aed;">ME</div>' +
+                    '<div class="comment-avatar" style="background:' + ca.color + ';">' + ca.initials + '</div>' +
                     '<div class="comment-body">' +
-                    '<span class="comment-user">You</span><span class="comment-time">Just now</span>' +
-                    '<p class="comment-text">' + text + '</p></div></div>';
+                    '<span class="comment-user">' + escapeHtml(comment.author) + '</span><span class="comment-time">Just now</span>' +
+                    '<p class="comment-text">' + escapeHtml(comment.text) + '</p></div></div>';
                 var section = document.querySelector('.comments-section');
                 if (!section) return;
                 var existing = section.querySelector('.comment-input-wrap');
                 if (existing) existing.insertAdjacentHTML('beforebegin', newComment);
-                // 更新评论数
+                // 更新评论数（从缓存读取已自增后的值）
+                var stats = CommunityDB.getCachedStats(postId);
+                var count = (stats ? stats.comments : 0);
                 var titleEl = section.querySelector('.comments-title');
-                if (titleEl) titleEl.textContent = '💬 ' + MOCK_COMMENTS[ckey].length + ' Comments';
-                // 移除"Be the first"提示
+                if (titleEl) titleEl.textContent = '💬 ' + count + ' Comments';
+                // 刷新 Feed 卡片上的评论数
+                if (typeof window.__refreshFeedStats === 'function') window.__refreshFeedStats();
                 var firstHint = section.querySelector('p[style*="color:#aaa"]');
                 if (firstHint) firstHint.remove();
                 input.value = '';
@@ -1278,6 +1315,7 @@ const ARTICLES = [
                 console.error('addComment failed:', e);
             });
         }
+
 
         function openWriteModal() {
             document.getElementById('writeModal').classList.add('open');
@@ -1332,6 +1370,29 @@ const ARTICLES = [
                 closeDetailModal();
             }
         });
+
+        // 统计加载完成后刷新 Feed 卡片上的点赞/评论数
+        window.__refreshFeedStats = function() {
+            if (!window.CommunityDB) return;
+            var cards = document.querySelectorAll('.post-card');
+            cards.forEach(function(card) {
+                var id = card.getAttribute('data-id');
+                var stats = CommunityDB.getCachedStats(id);
+                if (!stats) return;
+                var likeBtn = card.querySelector('.like-btn');
+                if (likeBtn) {
+                    var liked = likeBtn.classList.contains('liked');
+                    likeBtn.textContent = (liked ? '❤️ ' : '🤍 ') + (liked ? stats.likes + 1 : stats.likes);
+                }
+                var btns = card.querySelectorAll('.action-btn');
+                for (var i = 0; i < btns.length; i++) {
+                    if (btns[i].textContent.indexOf('💬') >= 0) {
+                        btns[i].textContent = '💬 ' + stats.comments;
+                        break;
+                    }
+                }
+            });
+        };
 
         // Init
         CommunityDB.getPosts().then(function(posts) {

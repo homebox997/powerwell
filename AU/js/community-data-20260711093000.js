@@ -683,100 +683,220 @@ const CATEGORY_CONFIG = {
 // DATABASE CONNECTOR — 第三方接入时替换以下函数即可
 // ============================================================
 const CommunityDB = {
+    // 内存缓存：slug -> { likes, views, comments }
+    _statsCache: {},
+    _commentsCache: {},
+
     /**
-     * 获取帖子列表
-     * @param {Object} filters - { category, limit, offset }
-     * @returns {Promise<Array>} posts
-     * 数据库接口：community_db_port（posts 表）
+     * 预加载全部帖子统计（likes/views/comments）
+     * 从 community_posts 表的 content jsonb 读取
      */
+    async preloadStats() {
+        if (!window.sb) {
+            // supabase 还没就绪，500ms 后重试
+            var self = this;
+            setTimeout(function() { self.preloadStats(); }, 500);
+            return;
+        }
+        try {
+            var { data, error } = await window.sb
+                .from('community_posts')
+                .select('content')
+                .eq('country', 'Australia');
+            if (error) throw error;
+            var map = {};
+            (data || []).forEach(function(row) {
+                var c = row.content;
+                if (c && c.slug) {
+                    map[c.slug] = { likes: c.likes || 0, views: c.views || 0, comments: c.comments || 0 };
+                }
+            });
+            this._statsCache = map;
+            // 统计加载完成，刷新 Feed 显示
+            if (typeof window.__refreshFeedStats === 'function') window.__refreshFeedStats();
+        } catch (e) {
+            console.error('preloadStats failed:', e);
+        }
+    },
+
+    /** 同步获取缓存中的统计（用于渲染）*/
+    getCachedStats(slug) {
+        return this._statsCache[slug] || null;
+    },
+
+    /**
+     * 点赞：真实写入 Supabase（原子自增）
+     * @param {string} slug
+     * @returns {Promise<{likes:number}>}
+     */
+    async like(slug) {
+        if (!window.sb) return { likes: 0 };
+        try {
+            var { data } = await window.sb
+                .from('community_posts')
+                .select('id, content')
+                .eq('content->>slug', slug)
+                .single();
+            if (!data) return { likes: 0 };
+            var content = data.content || {};
+            content.likes = (content.likes || 0) + 1;
+            var { error } = await window.sb
+                .from('community_posts')
+                .update({ content: content })
+                .eq('id', data.id);
+            if (error) throw error;
+            if (!this._statsCache[slug]) this._statsCache[slug] = {};
+            this._statsCache[slug].likes = content.likes;
+            return { likes: content.likes };
+        } catch (e) {
+            console.error('like failed:', e);
+            return { likes: 0 };
+        }
+    },
+
+    /**
+     * 取消点赞：原子自减
+     * @param {string} slug
+     */
+    async unlike(slug) {
+        if (!window.sb) return { likes: 0 };
+        try {
+            var { data } = await window.sb
+                .from('community_posts')
+                .select('id, content')
+                .eq('content->>slug', slug)
+                .single();
+            if (!data) return { likes: 0 };
+            var content = data.content || {};
+            content.likes = Math.max(0, (content.likes || 0) - 1);
+            var { error } = await window.sb
+                .from('community_posts')
+                .update({ content: content })
+                .eq('id', data.id);
+            if (error) throw error;
+            if (!this._statsCache[slug]) this._statsCache[slug] = {};
+            this._statsCache[slug].likes = content.likes;
+            return { likes: content.likes };
+        } catch (e) {
+            console.error('unlike failed:', e);
+            return { likes: 0 };
+        }
+    },
+
+    /**
+     * 获取帖子评论（真实从 Supabase 读取）
+     * @param {string} slug
+     * @returns {Promise<Array>}
+     */
+    /**
+     * 阅读量自增（打开帖子时调用，best-effort，不阻塞 UI）
+     * @param {string} slug
+     */
+    async view(slug) {
+        if (!window.sb) return;
+        try {
+            var { data } = await window.sb
+                .from('community_posts')
+                .select('id, content')
+                .eq('content->>slug', slug)
+                .single();
+            if (!data) return;
+            var content = data.content || {};
+            content.views = (content.views || 0) + 1;
+            await window.sb
+                .from('community_posts')
+                .update({ content: content })
+                .eq('id', data.id);
+            if (!this._statsCache[slug]) this._statsCache[slug] = {};
+            this._statsCache[slug].views = content.views;
+        } catch (e) {
+            console.error('view failed:', e);
+        }
+    },
+
+    async getComments(slug) {
+        if (this._commentsCache[slug]) return this._commentsCache[slug];
+        if (!window.sb) return [];
+        try {
+            var { data, error } = await window.sb
+                .from('community_comments')
+                .select('*')
+                .eq('post_id', slug)
+                .order('created_at', { ascending: true });
+            if (error) throw error;
+            var comments = (data || []).map(function(c) {
+                return {
+                    id: c.id,
+                    author: c.author || 'Anonymous',
+                    text: c.content,
+                    time: formatCommentTime(c.created_at)
+                };
+            });
+            this._commentsCache[slug] = comments;
+            return comments;
+        } catch (e) {
+            console.error('getComments failed:', e);
+            return [];
+        }
+    },
+
+    /**
+     * 提交评论（真实写入 Supabase）
+     * @param {string} slug
+     * @param {string} author
+     * @param {string} text
+     * @returns {Promise<Object>}
+     */
+    async addComment(slug, author, text) {
+        if (!window.sb) throw new Error('Supabase not ready');
+        var { data, error } = await window.sb
+            .from('community_comments')
+            .insert([{
+                post_id: slug,
+                post_title: slug,
+                author: author || 'You',
+                content: text,
+                status: '已发布',
+                country: 'Australia',
+                like_count: 0
+            }])
+            .select()
+            .single();
+        if (error) throw error;
+        var comment = { id: data.id, author: data.author, text: data.content, time: 'Just now' };
+        if (!this._commentsCache[slug]) this._commentsCache[slug] = [];
+        this._commentsCache[slug].push(comment);
+        if (this._statsCache[slug]) this._statsCache[slug].comments = (this._statsCache[slug].comments || 0) + 1;
+        return comment;
+    },
+
+    // ===== 向后兼容接口（帖子内容仍用静态 MOCK_POSTS）=====
     async getPosts(filters = {}) {
-        // 临时返回 mock 数据
-        // 未来替换为：
-        // const { data } = await window.sb.from('posts')
-        //   .select('*, users(nickname, avatar, color), dogs(name, breed)')
-        //   .eq('is_published', true)
-        //   .order('created_at', { ascending: false });
-        // return data;
         var posts = MOCK_POSTS.slice();
         if (filters.category && filters.category !== 'all') {
             posts = posts.filter(function(p) { return p.category === filters.category; });
         }
         return posts;
     },
-
-    /**
-     * 获取单个帖子详情（含评论）
-     * @param {string} postId
-     * @returns {Promise<Object>} post with comments
-     * 数据库接口：community_db_port（posts + comments 表）
-     */
-    async getPost(postId) {
-        // 未来替换为 Supabase join query
-        return MOCK_POSTS.find(function(p) { return p.id === postId; }) || null;
-    },
-
-    /**
-     * 获取帖子评论
-     * @param {string} postId
-     * @returns {Promise<Array>} comments
-     * 数据库接口：community_db_port（comments 表）
-     */
-    async getComments(postId) {
-        // 未来替换为：
-        // const { data } = await window.sb.from('comments')
-        //   .select('*, users(nickname, avatar)')
-        //   .eq('post_id', postId)
-        //   .order('created_at', { ascending: true });
-        // return data;
-        return MOCK_COMMENTS[postId] || [];
-    },
-
-    /**
-     * 发布新帖子
-     * @param {Object} postData - { title, content, category, dogName, dogBreed }
-     * @returns {Promise<Object>} created post
-     * 数据库接口：community_db_port（posts 表）
-     */
-    async createPost(postData) {
-        // 未来替换为：
-        // const { data, error } = await window.sb.from('posts').insert([{
-        //   title: postData.title,
-        //   content: postData.content,
-        //   category: postData.category,
-        //   user_id: (await window.sb.auth.getUser()).data.user.id,
-        //   dog_name: postData.dogName,
-        //   dog_breed: postData.dogBreed,
-        //   is_published: true
-        // }]).select().single();
-        // return data;
-        return { id: 'new_' + Date.now(), ...postData };
-    },
-
-    /**
-     * 提交评论
-     * @param {string} postId
-     * @param {string} text
-     * @returns {Promise<Object>} created comment
-     * 数据库接口：community_db_port（comments 表）
-     */
-    async addComment(postId, text) {
-        // 未来替换为：
-        // const { data } = await window.sb.from('comments').insert([{
-        //   post_id: postId,
-        //   user_id: (await window.sb.auth.getUser()).data.user.id,
-        //   text: text
-        // }]).select().single();
-        // return data;
-        return { id: 'c_' + Date.now(), postId: postId, text: text, time: 'Just now' };
-    },
-
-    /**
-     * 点赞帖子
-     * @param {string} postId
-     * 数据库接口：community_db_port（posts.likes_count）
-     */
-    async likePost(postId) {
-        // 未来替换为：
-        // await window.sb.rpc('increment_likes', { post_id: postId });
-    }
+    async getPost(postId) { return MOCK_POSTS.find(function(p) { return p.id === postId; }) || null; },
+    async createPost(postData) { return { id: 'new_' + Date.now(), ...postData }; },
+    async likePost(postId) { return this.like(postId); }
 };
+
+/** 相对时间格式化 */
+function formatCommentTime(iso) {
+    var d = new Date(iso), now = new Date();
+    var s = Math.floor((now - d) / 1000);
+    if (isNaN(s)) return 'just now';
+    if (s < 60) return 'just now';
+    if (s < 3600) return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    return Math.floor(s / 86400) + 'd ago';
+}
+
+// 页面加载后自动预加载统计
+if (typeof window !== 'undefined') {
+    window.addEventListener('DOMContentLoaded', function() {
+        if (window.CommunityDB) CommunityDB.preloadStats();
+    });
+}

@@ -529,7 +529,7 @@
     <!-- 数据库接口:community_db_port = 3004 | user_db_port = 3005 -->
     <script src="js/supabase-init.js"></script>
     <script defer src="./_shared/nav.js"></script>
-    <script src="js/community-data-20260711002655.js"></script>
+    <script src="js/community-data-20260711082356.js"></script>
     <script>
 const ARTICLES = [
   {
@@ -1181,12 +1181,28 @@ const ARTICLES = [
             CommunityDB.likePost(postId);
         }
 
+        // slug → 老评论表 key (p1-p8) 兼容映射
+        function commentKeyFor(postId) {
+            if (MOCK_COMMENTS[postId]) return postId;
+            var map = {
+                'old-mate-struggling-on-stairs': 'p1',
+                'greyhound-osteoarthritis-diagnosis': 'p2',
+                'bunnings-ramp-for-old-cavoodle': 'p3',
+                'librela-injection-arthritis-experience': 'p4',
+                'swimming-hydrotherapy-senior-dog': 'p5',
+                'worried-night-coughing-heart': 'p6',
+                'night-coughing-heart-disease': 'p7',
+                'blood-test-kidney-values': 'p8'
+            };
+            return map[postId] || postId;
+        }
+
         function openDetail(postId) {
             var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
             if (!post) return;
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
-            var comments = MOCK_COMMENTS[postId] || [];
+            var comments = MOCK_COMMENTS[commentKeyFor(postId)] || [];
             var commentsHtml = comments.map(function(c) {
                 var cu = getUserById(c.userId);
                 return '<div class="comment-item">' +
@@ -1237,15 +1253,29 @@ const ARTICLES = [
             var text = input.value.trim();
             // 数据库接口:community_db_port - addComment()
             CommunityDB.addComment(postId, text).then(function(comment) {
+                // 持久化到 MOCK_COMMENTS（关闭详情再打开仍在）
+                var ckey = commentKeyFor(postId);
+                if (!MOCK_COMMENTS[ckey]) MOCK_COMMENTS[ckey] = [];
+                MOCK_COMMENTS[ckey].push({ userId: 'u_me', text: text, time: 'Just now' });
+
                 var newComment = '<div class="comment-item">' +
                     '<div class="comment-avatar" style="background:#7c3aed;">ME</div>' +
                     '<div class="comment-body">' +
                     '<span class="comment-user">You</span><span class="comment-time">Just now</span>' +
                     '<p class="comment-text">' + text + '</p></div></div>';
                 var section = document.querySelector('.comments-section');
+                if (!section) return;
                 var existing = section.querySelector('.comment-input-wrap');
-                existing.insertAdjacentHTML('beforebegin', newComment);
+                if (existing) existing.insertAdjacentHTML('beforebegin', newComment);
+                // 更新评论数
+                var titleEl = section.querySelector('.comments-title');
+                if (titleEl) titleEl.textContent = '💬 ' + MOCK_COMMENTS[ckey].length + ' Comments';
+                // 移除"Be the first"提示
+                var firstHint = section.querySelector('p[style*="color:#aaa"]');
+                if (firstHint) firstHint.remove();
                 input.value = '';
+            }).catch(function(e) {
+                console.error('addComment failed:', e);
             });
         }
 

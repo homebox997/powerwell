@@ -1082,6 +1082,21 @@ const ARTICLES = [
             return MOCK_USERS.find(function(u) { return u.id === uid; }) || MOCK_USERS[0];
         }
 
+        // 优先用帖子自己嵌入的作者/狗数据，回退到 MOCK_USERS 查表
+        function getPostAuthor(post) {
+            var u = getUserById(post.userId);
+            var dog = (post.dog && post.dog.name) ? post.dog : (u.dogs && u.dogs[0]) || {};
+            return {
+                name: post.authorName || u.nickname || u.name,
+                color: post.authorColor || u.color,
+                initials: post.authorInitials || u.avatar,
+                dogName: dog.name,
+                dogBreed: dog.breed,
+                dogAge: dog.age,
+                dogAvatar: dog.avatar || dog.initials || '🐕'
+            };
+        }
+
         function getCatConfig(cat) {
             return CATEGORY_CONFIG[cat] || CATEGORY_CONFIG['health-case'];
         }
@@ -1092,13 +1107,13 @@ const ARTICLES = [
         }
 
         function renderPostCard(post) {
-            var user = getUserById(post.userId);
+            var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
             return '<article class="post-card" data-id="' + post.id + '">' +
                 '<div class="post-top">' +
-                '<div class="user-avatar" style="background:' + user.color + ';" aria-label="' + user.name + ' avatar">' + user.avatar + '</div>' +
+                '<div class="user-avatar" style="background:' + author.color + ';" aria-label="' + author.name + ' avatar">' + author.initials + '</div>' +
                 '<div class="post-meta">' +
-                '<div class="post-user">' + user.nickname + ' <span class="dog-info">· ' + user.dogs[0].avatar + ' ' + user.dogs[0].name + ' (' + user.dogs[0].breed + ', ' + user.dogs[0].age + 'yo)</span></div>' +
+                '<div class="post-user">' + author.name + ' <span class="dog-info">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
                 '<div class="post-time">' + post.createdAt + '</div>' +
                 '</div>' +
                 '<span class="category-badge" style="background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
@@ -1167,7 +1182,7 @@ const ARTICLES = [
         function openDetail(postId) {
             var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
             if (!post) return;
-            var user = getUserById(post.userId);
+            var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
             var comments = MOCK_COMMENTS[postId] || [];
             var commentsHtml = comments.map(function(c) {
@@ -1186,9 +1201,9 @@ const ARTICLES = [
                 '<span class="category-badge" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
                 '<h2 class="detail-title" id="detailModalTitle" style="margin-top:0.6rem;">' + post.title + '</h2>' +
                 '<div class="detail-meta">' +
-                '<div class="user-avatar" style="background:' + user.color + ';width:38px;height:38px;font-size:0.85rem;">' + user.avatar + '</div>' +
+                '<div class="user-avatar" style="background:' + author.color + ';width:38px;height:38px;font-size:0.85rem;">' + author.initials + '</div>' +
                 '<div>' +
-                '<div style="font-weight:700;font-size:0.88rem;">' + user.nickname + ' <span style="font-weight:400;color:#7a8a9a;">· ' + user.dogs[0].avatar + ' ' + user.dogs[0].name + ' (' + user.dogs[0].breed + ', ' + user.dogs[0].age + 'yo)</span></div>' +
+                '<div style="font-weight:700;font-size:0.88rem;">' + author.name + ' <span style="font-weight:400;color:#7a8a9a;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
                 '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + post.views + ' views</div>' +
                 '</div>' +
                 '</div></div>' +

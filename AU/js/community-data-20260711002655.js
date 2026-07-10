@@ -22,7 +22,7 @@ const MOCK_USERS = [
 const MOCK_POSTS = [
     {
         id: 'old-mate-struggling-on-stairs',
-        userId: 'u_sarah',
+        userId: 'u1',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'Just noticed my old mate\'s been struggling on the stairs lately',
@@ -43,7 +43,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'greyhound-osteoarthritis-diagnosis',
-        userId: 'u_mike',
+        userId: 'u1',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'Finally got my greyhound diagnosed - osteoarthritis at 10',
@@ -64,7 +64,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'bunnings-ramp-for-old-cavoodle',
-        userId: 'u_jess',
+        userId: 'u2',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'This $45 Bunnings ramp changed everything for my old cavoodle',
@@ -85,7 +85,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'librela-injection-arthritis-experience',
-        userId: 'u_david',
+        userId: 'u6',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'Has anyone tried Librela injection for arthritis? Vets recommendation',
@@ -106,7 +106,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'swimming-hydrotherapy-senior-dog',
-        userId: 'u_amy',
+        userId: 'u5',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'Swimming for senior dogs - game changer or waste of time?',
@@ -127,7 +127,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'kelpie-stiffness-at-7-years',
-        userId: 'u_tom',
+        userId: 'u8',
         category: 'health-case',
         topic: '#JointHealth',
         title: 'Worried I\'m imagining it - or is my kelpie slowing down?',
@@ -148,7 +148,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'cavalier-night-coughing-heart',
-        userId: 'u_linda',
+        userId: 'u3',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'Night coughing for 3 weeks - vet says possible heart disease',
@@ -169,7 +169,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'elevated-kidney-values-beagle',
-        userId: 'u_peter',
+        userId: 'u1',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'Blood test showed elevated kidney values - terrified',
@@ -190,7 +190,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'grade-2-heart-murmur-labrador',
-        userId: 'u_emma',
+        userId: 'u1',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'Heart murmur grade 2 at 8 - how serious is this really?',
@@ -211,7 +211,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'border-collie-drinking-more-water',
-        userId: 'u_chris',
+        userId: 'u1',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'Drinking heaps more water lately - should I be worried?',
@@ -232,7 +232,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'cardiologist-visit-cost-breakdown',
-        userId: 'u_nicole',
+        userId: 'u1',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'Cardiologist visit cost breakdown - so you know what to expect',
@@ -253,7 +253,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'multiple-medications-senior-dog',
-        userId: 'u_rob',
+        userId: 'u1',
         category: 'health-case',
         topic: '#HeartKidney',
         title: 'My old mate is on 4 medications now - anyone else managing this?',
@@ -274,7 +274,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'golden-retriever-persistent-scratching',
-        userId: 'u_michelle',
+        userId: 'u1',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Golden retriever won\'t stop scratching - we\'ve tried everything',
@@ -295,7 +295,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'german-shepherd-recurring-hot-spots',
-        userId: 'u_james',
+        userId: 'u2',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Hot spots keep coming back every summer - predictable pattern',
@@ -316,7 +316,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'shih-tzu-coat-thinning-senior',
-        userId: 'u_rachel',
+        userId: 'u1',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Isapooy coat has gone really thin - should I panic?',
@@ -337,7 +337,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'raw-diet-cleared-staffy-skin',
-        userId: 'u_ben',
+        userId: 'u1',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Raw food diet cleared up my Staffy\'s skin - anyone else tried this?',
@@ -358,7 +358,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'allergy-test-paw-licking-diagnosis',
-        userId: 'u_sophie',
+        userId: 'u1',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Licked his paws until they bled - finally got a proper diagnosis',
@@ -379,7 +379,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'oatmeal-baths-itchy-dogs',
-        userId: 'u_danielle',
+        userId: 'u1',
         category: 'health-case',
         topic: '#SkinCare',
         title: 'Oatmeal baths for itchy dogs - does it actually work?',
@@ -400,7 +400,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'when-switch-senior-food-border-collie',
-        userId: 'u_mark',
+        userId: 'u4',
         category: 'tip',
         topic: '#DailyCare',
         title: 'When did you switch your dog to senior food? Is 7 actually old?',
@@ -421,7 +421,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'hiding-dog-medication-tricks',
-        userId: 'u_helen',
+        userId: 'u1',
         category: 'tip',
         topic: '#DailyCare',
         title: 'Tips for giving a senior dog their medication disguised in food?',
@@ -442,7 +442,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'best-elevated-bowls-arthritic-dog',
-        userId: 'u_kevin',
+        userId: 'u1',
         category: 'tip',
         topic: '#DailyCare',
         title: 'Best elevated dog bowls for arthritic dogs?',
@@ -463,7 +463,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'daily-teeth-brushing-senior-dog',
-        userId: 'u_angela',
+        userId: 'u1',
         category: 'tip',
         topic: '#DailyCare',
         title: 'How often do you brush your senior dog\'s teeth? Dentist says daily',
@@ -484,7 +484,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'car-ramp-for-small-senior-dog',
-        userId: 'u_paul',
+        userId: 'u1',
         category: 'tip',
         topic: '#DailyCare',
         title: 'Ramp for car - is it worth getting one? Mine hates the boot',
@@ -505,7 +505,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'mentally-stimulating-old-dog',
-        userId: 'u_fiona',
+        userId: 'u1',
         category: 'tip',
         topic: '#DailyCare',
         title: 'How do you mentally stimulate an old dog who\'s slowing down physically?',
@@ -526,7 +526,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'senior-dog-refusing-kibble',
-        userId: 'u_gary',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Dog suddenly refusing his kibble - any ideas?',
@@ -547,7 +547,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'fresh-food-diet-senior-labrador',
-        userId: 'u_kate',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Has anyone switched to fresh/freeze-dried food? Cost vs benefit?',
@@ -568,7 +568,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'bone-broth-senior-dog-joints',
-        userId: 'u_sandra',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Homemade bone broth - is it actually good for old dogs?',
@@ -589,7 +589,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'fish-oil-dosage-senior-dog',
-        userId: 'u_victor',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Fish oil supplements - how much is too much?',
@@ -610,7 +610,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'training-treats-for-senior-dog',
-        userId: 'u_maria',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Dog biscuits as training treats - okay for a 10-year-old?',
@@ -631,7 +631,7 @@ const MOCK_POSTS = [
     },
     {
         id: 'daily-feeding-schedule-13-year-old-staffy',
-        userId: 'u_steve',
+        userId: 'u1',
         category: 'tip',
         topic: '#FoodNutrition',
         title: 'Complete guide: what I feed my 13-year-old staffy every single day',

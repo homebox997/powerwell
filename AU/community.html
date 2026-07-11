@@ -1255,8 +1255,8 @@ const ARTICLES = [
                 '<div class="comments-title">💬 ' + comments.length + ' Comments</div>' +
                 (commentsHtml || '<p style="color:#aaa;font-size:0.88rem;">Be the first to comment...</p>') +
                 '<div class="comment-input-wrap">' +
-                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\' ' + postId + '\')">' +
-                '<button class="comment-send" onclick="addComment(\' ' + postId + '\')">Send</button>' +
+                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\')">' +
+                '<button class="comment-send" onclick="addComment(\'' + postId + '\')">Send</button>' +
                 '</div></div>';
             document.getElementById('detailModal').classList.add('open');
             document.body.style.overflow = 'hidden';
@@ -1288,6 +1288,7 @@ function closeDetailModal() {
         }
 
         function addComment(postId) {
+            postId = String(postId || '').trim();
             var input = document.getElementById('commentInput');
             if (!input || !input.value.trim()) return;
             var text = input.value.trim();
@@ -1410,7 +1411,6 @@ function closeDetailModal() {
     </script>
 </body>
 </html>
-
 
 
 

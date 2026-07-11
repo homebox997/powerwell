@@ -815,6 +815,7 @@ const CommunityDB = {
     },
 
     async getComments(slug) {
+        slug = String(slug || '').trim();
         if (this._commentsCache[slug]) return this._commentsCache[slug];
         if (!window.sb) return [];
         try {
@@ -848,6 +849,7 @@ const CommunityDB = {
      * @returns {Promise<Object>}
      */
     async addComment(slug, author, text) {
+        slug = String(slug || '').trim();
         if (!window.sb) throw new Error('Supabase not ready');
         var { data, error } = await window.sb
             .from('community_comments')

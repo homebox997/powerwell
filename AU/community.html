@@ -7,7 +7,7 @@
     <meta name="description" content="Join the PawWell community to share senior dog health cases, ask questions about arthritis, kidney disease and heart conditions, and connect with fellow Australian dog parents.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://agedpawwell.com/community.html">
-    <!-- 数据库接口:community_db_port = 3004(posts 表、comments 表) -->
+    <!-- 数据库接口:community_db_port = 3004(posts 表、comments 表) | v2026-07-11-12-30 -->
     <!-- 数据库接口:user_db_port = 3005(用户资料表) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
@@ -1204,17 +1204,19 @@ const ARTICLES = [
             return map[postId] || postId;
         }
 
-                function openDetail(postId) {
+                async function openDetail(postId) {
             var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
             if (!post) return;
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
             var stats = CommunityDB.getCachedStats(postId) || { likes: post.likes, views: post.views, comments: post.comments };
 
-            // 从数据库加载真实评论（异步）
+            // 异步加载真实评论 - 修复版（之前 comments=[] 在 await 之前被使用）
             var comments = [];
-            CommunityDB.getComments(postId).then(function(c) { comments = c; }).catch(function(e) { console.error('getComments failed:', e); });
-            // 阅读量自增（best-effort）
+            try {
+                comments = await CommunityDB.getComments(postId);
+            } catch (e) { console.error('getComments failed:', e); }
+            // 阅读量自增（best-effort，不阻塞 UI）
             CommunityDB.view(postId);
 
             var commentsHtml = comments.map(function(c) {

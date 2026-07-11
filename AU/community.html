@@ -529,7 +529,7 @@
     <!-- 数据库接口:community_db_port = 3004 | user_db_port = 3005 -->
     <script src="js/supabase-init.js"></script>
     <script defer src="./_shared/nav.js"></script>
-    <script src="js/community-data-20260711120000.js"></script>
+    <script src="js/community-data-20260711133744.js"></script>
     <script>
 const ARTICLES = [
   {
@@ -1292,34 +1292,29 @@ function closeDetailModal() {
             var input = document.getElementById('commentInput');
             if (!input || !input.value.trim()) return;
             var text = input.value.trim();
-            // 真实写入 Supabase
             CommunityDB.addComment(postId, 'You', text).then(function(comment) {
                 var ca = commentAvatar(comment.author);
                 var newComment = '<div class="comment-item">' +
                     '<div class="comment-avatar" style="background:' + ca.color + ';">' + ca.initials + '</div>' +
                     '<div class="comment-body">' +
-                    '<span class="comment-user">' + escapeHtml(comment.author) + '</span><span class="comment-time">Just now</span>' +
+                    '<span class="comment-user">' + escapeHtml(comment.author) + '</span>' +
+                    '<span class="comment-time">Just now</span>' +
                     '<p class="comment-text">' + escapeHtml(comment.text) + '</p></div></div>';
                 var section = document.querySelector('.comments-section');
                 if (!section) return;
-                var existing = section.querySelector('.comment-input-wrap');
-                if (existing) existing.insertAdjacentHTML('beforebegin', newComment);
-                // 更新评论数（从缓存读取已自增后的值）
-                var stats = CommunityDB.getCachedStats(postId);
-                var count = (stats ? stats.comments : 0);
+                var wrap = section.querySelector('.comment-input-wrap');
+                if (wrap) wrap.insertAdjacentHTML('beforebegin', newComment);
+                var hint = section.querySelector('p[style*="color:#aaa"]');
+                if (hint) hint.remove();
+                var items = section.querySelectorAll('.comment-item');
+                var newCount = items.length;
                 var titleEl = section.querySelector('.comments-title');
-                if (titleEl) titleEl.textContent = '💬 ' + count + ' Comments';
-                // 刷新 Feed 卡片上的评论数
-                if (typeof window.__refreshFeedStats === 'function') window.__refreshFeedStats();
-                var firstHint = section.querySelector('p[style*="color:#aaa"]');
-                if (firstHint) firstHint.remove();
+                if (titleEl) titleEl.textContent = '\u2665 ' + newCount + ' Comment' + (newCount === 1 ? '' : 's');
                 input.value = '';
             }).catch(function(e) {
                 console.error('addComment failed:', e);
             });
         }
-
-
         function openWriteModal() {
             document.getElementById('writeModal').classList.add('open');
             document.body.style.overflow = 'hidden';

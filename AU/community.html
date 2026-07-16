@@ -1218,6 +1218,8 @@ const ARTICLES = [
 
                 async function openDetail(postId) {
             var post = MOCK_POSTS.find(function(p) { return p.id === postId; });
+            // Also check DB for dynamically submitted posts (which have Supabase UUIDs)
+            if (!post) { try { post = await CommunityDB.getPost(postId); } catch(e) {} }
             if (!post) return;
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
@@ -1246,31 +1248,51 @@ const ARTICLES = [
             var liked = false;
             try { var likedSet = JSON.parse(localStorage.getItem('pawwell_liked') || '{}'); liked = !!likedSet[postId]; } catch (e) {}
 
-            document.getElementById('detailContent').innerHTML =
-                '<div class="detail-header">' +
-                '<span class="category-badge" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
-                '<h2 class="detail-title" id="detailModalTitle" style="margin-top:0.6rem;">' + post.title + '</h2>' +
-                '<div class="detail-meta">' +
-                '<div class="user-avatar" style="background:' + author.color + ';width:38px;height:38px;font-size:0.85rem;">' + author.initials + '</div>' +
-                '<div>' +
-                '<div style="font-weight:700;font-size:0.88rem;">' + author.name + ' <span style="font-weight:400;color:#7a8a9a;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
-                '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + stats.views + ' views</div>' +
-                '</div>' +
-                '</div></div>' +
-                '<div class="detail-content">' + post.content + '</div>' +
-                '<div class="post-tags">' + post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') + '</div>' +
-                '<div class="post-actions">' +
-                '<button class="action-btn ' + (liked ? 'liked' : '') + '" id="detailLikeBtn" onclick="likePost(\' ' + postId + '\', this)">' + (liked ? '❤️ ' : '🤍 ') + stats.likes + '</button>' +
-                '<button class="action-btn">💬 ' + comments.length + ' comments</button>' +
-                '</div>' +
-                '<div class="comments-section">' +
-                '<div class="comments-title">💬 ' + comments.length + ' Comments</div>' +
-                (commentsHtml || '<p style="color:#aaa;font-size:0.88rem;">Be the first to comment...</p>') +
-                '<div class="comment-input-wrap">' +
-                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\')">' +
-                '<button class="comment-send" onclick="addComment(\'' + postId + '\')">Send</button>' +
-                '</div></div>';
-            document.getElementById('detailModal').classList.add('open');
+                            '
+                <article class="post-article" itemscope itemtype="https://schema.org/DiscussionForumPosting">
+                <header class="detail-header">
+                <span class="category-badge" itemprop="articleSection" style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:700;background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>
+                <h1 class="detail-title" id="detailModalTitle" style="margin-top:0.6rem;" itemprop="headline">' + post.title + '</h1>
+                <div class="detail-meta" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                '<div class="user-avatar" style="background:' + author.color + ';width:38px;height:38px;font-size:0.85rem;" aria-hidden="true">' + author.initials + '</div>
+                <div>
+                '<div style="font-weight:700;font-size:0.88rem;" itemprop="name">' + author.name + ' <span style="font-weight:400;color:#7a8a9a;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ')</span></div>
+                '<time style="font-size:0.78rem;color:#aaa;" itemprop="datePublished">' + post.createdAt + '</time>
+                '<span style="font-size:0.78rem;color:#aaa;"> · ' + stats.views + ' views</span>
+                </div></div>
+                </header>
+                '<section class="detail-content" itemprop="articleBody">' + post.content + '</section>
+                <footer class="detail-footer">
+                '<div class="post-tags" aria-label="Post tags">' + post.tags.map(function(t) { return '<span class="post-tag" itemprop="keywords">' + t + '</span>'; }).join('') + '</div>
+                <div class="post-actions" role="group" aria-label="Post interactions">
+                '<button class="action-btn ' + (liked ? 'liked' : '') + '" id="detailLikeBtn" onclick="likePost(postId, this)" aria-label="Like this post">' + (liked ? '\u2764\ufe0f ' : '\U0001f90d ') + stats.likes + '</button>
+                '<button class="action-btn" onclick="document.querySelector(\'.comments-section\').scrollIntoView()" aria-label="Jump to comments">\U0001f4ac ' + comments.length + ' comments</button>
+                </div></footer></article>
+                <section class="comments-section" aria-label="Discussion comments">
+                '<h2 class="comments-title">\U0001f4ac ' + comments.length + ' Comments</h2>'
+                (commentsHtml || '<p style="color:#aaa;font-size:0.88rem;">Be the first to share your experience...</p>')
+                <div class="comment-input-wrap" role="form" aria-label="Add a comment">
+                '<label for="commentInput" class="sr-only">Your comment</label>'
+                '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\'\')" aria-required="true">'
+                '<button class="comment-send" onclick="addComment(\'' + postId + '\'\')">Send</button>'
+                </div></section>
+                '<script type="application/ld+json">' + JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "DiscussionForumPosting",
+                    headline: post.title,
+                    articleBody: post.content,
+                    author: { "@type": "Person", name: author.name },
+                    datePublished: post.createdAt,
+                    articleSection: cat.label,
+                    keywords: (post.tags || []).join(", "),
+                    url: "https://agedpawwell.com/community.html#post-" + postId,
+                    interactionStatistic: [
+                        { "@type": "InteractionCounter", interactionType: "https://schema.org/LikeAction", userInteractionCount: stats.likes },
+                        { "@type": "InteractionCounter", interactionType: "https://schema.org/CommentAction", userInteractionCount: comments.length }
+                    ]
+                }) +
+                '</scr' + 'ipt>';
+document.getElementById('detailModal').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
@@ -1338,21 +1360,29 @@ function closeDetailModal() {
         }
 
         function submitPost() {
-            var title = document.getElementById('postTitle').value.trim();
-            var category = document.getElementById('postCategory').value;
-            var content = document.getElementById('postContent').value.trim();
-            var tagsRaw = document.getElementById('postTags').value.trim();
-            if (!title || !content) {
-                alert('Please fill in the title and your story.');
+            // 1) Capture values immediately while DOM is still visible
+            var elTitle = document.getElementById('postTitle');
+            var elContent = document.getElementById('postContent');
+            var elTags = document.getElementById('postTags');
+            var title = elTitle ? elTitle.value.trim() : '';
+            var content = elContent ? elContent.value.trim() : '';
+            var category = (document.getElementById('postCategory') || {}).value || 'health-case';
+            var tagsRaw = elTags ? elTags.value.trim() : '';
+            // 2) Precise validation with specific feedback
+            if (!title && !content) {
+                alert('Please fill in your post title and story before posting.');
+                if (elTitle) elTitle.focus();
                 return;
             }
+            if (!title) { alert('Please add a title for your post.'); if (elTitle) elTitle.focus(); return; }
+            if (!content) { alert('Please write your story before posting.'); if (elContent) elContent.focus(); return; }
             var tags = tagsRaw ? tagsRaw.split(',').map(function(t) { return t.trim(); }).filter(function(t) { return t; }) : [];
             var newPost = {
                 id: 'p_new_' + Date.now(),
                 userId: 'u1',
                 category: category,
                 title: title,
-                excerpt: content.substring(0, 150) + '...',
+                excerpt: content.substring(0, 150) + (content.length > 150 ? '...' : ''),
                 content: content,
                 dog: MOCK_USERS[0].dogs[0],
                 createdAt: 'Just now',
@@ -1362,17 +1392,18 @@ function closeDetailModal() {
                 tags: tags,
                 pinned: false
             };
-            // 数据库接口:community_db_port - createPost()
+            // 3) Save to Supabase
             CommunityDB.createPost(newPost).then(function(saved) {
-                // 立即把新帖插入本地列表并刷新（来自真实 DB 返回）
+                // 4) Success: update feed, clear form, close
+                //    Clear BEFORE closeWriteModal (which hides the modal)
                 allPosts.unshift(saved);
                 filterCategory(currentCategory, null);
+                if (elTitle) elTitle.value = '';
+                if (elContent) elContent.value = '';
+                if (elTags) elTags.value = '';
                 closeWriteModal();
-                document.getElementById('postTitle').value = '';
-                document.getElementById('postContent').value = '';
-                document.getElementById('postTags').value = '';
             }).catch(function(err) {
-                alert('Post failed: ' + err.message);
+                alert('Post failed: ' + (err && err.message ? err.message : JSON.stringify(err)));
             });
         }
 

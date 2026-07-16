@@ -1363,13 +1363,16 @@ function closeDetailModal() {
                 pinned: false
             };
             // 数据库接口:community_db_port - createPost()
-            CommunityDB.createPost(newPost).then(function() {
-                MOCK_POSTS.unshift(newPost);
+            CommunityDB.createPost(newPost).then(function(saved) {
+                // 立即把新帖插入本地列表并刷新（来自真实 DB 返回）
+                allPosts.unshift(saved);
                 filterCategory(currentCategory, null);
                 closeWriteModal();
                 document.getElementById('postTitle').value = '';
                 document.getElementById('postContent').value = '';
                 document.getElementById('postTags').value = '';
+            }).catch(function(err) {
+                alert('Post failed: ' + err.message);
             });
         }
 

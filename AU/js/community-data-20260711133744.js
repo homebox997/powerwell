@@ -872,16 +872,120 @@ const CommunityDB = {
         return comment;
     },
 
-    // ===== 向后兼容接口（帖子内容仍用静态 MOCK_POSTS）=====
+    // ===== 列表/详情：从 Supabase 读取，MOCK_POSTS 仅作 fallback =====
     async getPosts(filters = {}) {
+        // ① 优先从数据库读
+        if (window.sb) {
+            try {
+                var q = window.sb
+                    .from('community_posts')
+                    .select('*')
+                    .eq('country', 'Australia')
+                    .eq('is_approved', true)
+                    .order('created_at', { ascending: false })
+                    .limit(60);
+                if (filters.category && filters.category !== 'all') {
+                    q = q.eq('category', filters.category);
+                }
+                var { data, error } = await q;
+                if (!error && data && data.length > 0) {
+                    var posts = data.map(function(row) {
+                        var c = row.content || {};
+                        return {
+                            id: row.id,
+                            title: row.title,
+                            category: row.category,
+                            content: c.body || '',
+                            excerpt: c.excerpt || c.body ? c.body.substring(0,150)+'...' : '',
+                            slug: c.slug || row.id,
+                            tags: c.tags || [],
+                            likes: c.likes || row.like_count || 0,
+                            comments: c.comments || 0,
+                            views: c.views || 0,
+                            createdAt: row.created_at,
+                            author: row.author || 'Anonymous',
+                            dog: null
+                        };
+                    });
+                    return posts;
+                }
+            } catch(e) {
+                console.warn('getPosts from DB failed, using MOCK:', e);
+            }
+        }
+        // ② Fallback：静态种子数据
         var posts = MOCK_POSTS.slice();
         if (filters.category && filters.category !== 'all') {
             posts = posts.filter(function(p) { return p.category === filters.category; });
         }
         return posts;
     },
-    async getPost(postId) { return MOCK_POSTS.find(function(p) { return p.id === postId; }) || null; },
-    async createPost(postData) { return { id: 'new_' + Date.now(), ...postData }; },
+    async getPost(postId) {
+        if (window.sb) {
+            try {
+                var { data } = await window.sb.from('community_posts').select('*').eq('id', postId).single();
+                if (data) {
+                    var c = data.content || {};
+                    return {
+                        id: data.id, title: data.title, category: data.category,
+                        content: c.body || '', excerpt: c.excerpt || '',
+                        slug: c.slug || data.id, tags: c.tags || [],
+                        likes: c.likes || 0, comments: c.comments || 0, views: c.views || 0,
+                        createdAt: data.created_at, author: data.author || 'Anonymous', dog: null
+                    };
+                }
+            } catch(e) { console.warn('getPost DB failed:', e); }
+        }
+        return MOCK_POSTS.find(function(p) { return p.id === postId; }) || null;
+    },
+    // ===== 发帖：真写 Supabase community_posts =====
+    async createPost(postData) {
+        if (!window.sb) throw new Error('Supabase not ready. Please refresh and try again.');
+        var slugBase = String(postData.title || 'story')
+            .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
+        var slug = (slugBase || 'story') + '-' + Date.now();
+        var payload = {
+            post_id: 'p_' + Date.now(),
+            title: postData.title,
+            category: postData.category || 'health-case',
+            content: {
+                slug: slug,
+                body: postData.content,
+                tags: postData.tags || [],
+                excerpt: postData.excerpt || (postData.content ? postData.content.substring(0,150)+'...' : ''),
+                likes: 0,
+                views: 1,
+                comments: 0
+            },
+            author: 'Anonymous',
+            country: 'Australia',
+            status: '已发布',
+            like_count: 0,
+            is_approved: true
+        };
+        var { data, error } = await window.sb.from('community_posts').insert([payload]).select().single();
+        if (error) {
+            console.error('createPost failed:', error);
+            throw new Error('Failed to save post: ' + (error.message || JSON.stringify(error)));
+        }
+        // 返回保存后的数据（供调用方立即渲染）
+        var c = data.content || {};
+        return {
+            id: data.id,
+            title: data.title,
+            category: data.category,
+            content: c.body || '',
+            excerpt: c.excerpt || '',
+            slug: c.slug || data.id,
+            tags: c.tags || [],
+            likes: 0,
+            comments: 0,
+            views: 1,
+            createdAt: 'Just now',
+            author: data.author || 'Anonymous',
+            dog: null
+        };
+    },
     async likePost(postId) { return this.like(postId); }
 };
 

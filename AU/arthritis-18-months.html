@@ -9,8 +9,7 @@
     <meta name="description" content="After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Full breakdown of what worked, what did not, and cost analysis.">
     <meta name="keywords" content="arthritis senior dogs, osteoarthritis dogs, joint supplements dogs, glucosamine dogs, MSM dogs, arthritis treatment dogs">
     <meta name="robots" content="index, follow">
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f8f9fb; }
@@ -152,6 +151,15 @@
             .related-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Milo's 18-Month Arthritis Journey: What Actually W","item":"https://agedpawwell.com/arthritis-18-months.html"}]
+    }
+    </script>
 </head>
 <body>
     <!-- TOP BAR -->
@@ -416,9 +424,7 @@
             <p>Take our free 2-minute AI health check to assess your dog's joint health and get personalized recommendations.</p>
             <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
         </div>
-
-        <!-- DB: arthritis-18-months content ready for dynamic load -->
-        <!-- RELATED ARTICLES -->
+<!-- RELATED ARTICLES -->
         <div class="related-articles">
             <h2>📚 Related Reading</h2>
             <div class="related-grid">
@@ -464,8 +470,7 @@
 
     <!-- Supabase + Nav -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
-    <script src="js/supabase-init.js"></script>
+<script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>
 </body>

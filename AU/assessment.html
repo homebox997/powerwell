@@ -9,8 +9,7 @@
     <title>AI Health Check | Senior Dog Health</title>
     <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
     <meta name="robots" content="index, follow">
-    <!-- DB: assessment_db_port=3003 (assessments) -->
-    <style>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
         
@@ -104,6 +103,15 @@
             .form-card { padding: 1.2rem; }
         }
     </style>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},{"@type":"ListItem","position":2,"name":"AI Health Check | Senior Dog Health","item":"https://agedpawwell.com/assessment.html"}]
+    }
+    </script>
 </head>
 <body>
     <header class="header" role="banner">
@@ -245,8 +253,7 @@
 
     <!-- Supabase SDK init: fill URL and anon key in supabase-init.js -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- DB: assessment_db_port=3003 (assessments) -->
-    <script src="js/supabase-init.js"></script>
+<script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>
 
@@ -317,7 +324,6 @@
         }
         
         async function submitForm() {
-            // === Supabase 提交（数据库接口：assessment_db_port = 3003）===
             var breed = document.getElementById('breed').value;
             var gender = document.getElementById('gender').value;
             var nickname = document.getElementById('nickname').value || 'Your dog';
@@ -376,7 +382,6 @@
             document.getElementById('reportRec').textContent = rec;
             
             // 提交到 Supabase（静默处理，不阻塞前端展示）
-            // 数据库接口：assessment_db_port = 3003
             // 前端接口（前后端解耦）：PawWellAPI.assessment.submit() → POST /api/assessments
             if (typeof PawWellAPI !== 'undefined') {
                 var supabaseData = {

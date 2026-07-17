@@ -169,6 +169,24 @@
             .related-grid { grid-template-columns: 1fr; }
         }
     </style>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Kidney Guide","item":"https://agedpawwell.com/kidney.html"}]
+    }
+    </script>
+
+        <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{"@type":"Question","name":"What are the early signs of kidney disease in dogs?","acceptedAnswer":{"@type":"Answer","text":"Early signs include increased thirst (polydipsia) and more frequent urination (polyuria), decreased appetite, weight loss, dull coat, and lethargy. These signs are often subtle at first and develop gradually."}},{"@type":"Question","name":"Can kidney disease in dogs be reversed?","acceptedAnswer":{"@type":"Answer","text":"Acute kidney injury (sudden onset) can sometimes be reversed with aggressive treatment including IV fluids and medication. Chronic kidney disease (CKD) is progressive and cannot be reversed, but early detection and proper management including a renal diet can slow progression and maintain quality of life for months or years."}},{"@type":"Question","name":"What diet is best for dogs with kidney disease?","acceptedAnswer":{"@type":"Answer","text":"The recommended diet is low in phosphorus, moderate in high-quality protein, and enriched with omega-3 fatty acids. Prescription renal diets like Hills k/d or Royal Canin Renal are specifically formulated. Avoid high-protein treats, rawhide, and phosphorus-rich foods like cheese and organ meats."}},{"@type":"Question","name":"How is kidney disease diagnosed in dogs?","acceptedAnswer":{"@type":"Answer","text":"Diagnosis involves blood tests measuring creatinine and BUN (blood urea nitrogen) levels, urinalysis checking urine concentration and protein content, blood pressure measurement, and sometimes ultrasound imaging. The IRIS staging system classifies severity from Stage 1 (mild) to Stage 4 (severe)."}},{"@type":"Question","name":"What is the life expectancy for dogs with kidney disease?","acceptedAnswer":{"@type":"Answer","text":"Life expectancy depends on the stage at diagnosis. Dogs diagnosed at IRIS Stage 1 or 2 can live 1-3+ years with proper management. Stage 3 dogs typically have 6-18 months, and Stage 4 dogs may have days to months. Early detection significantly improves outcomes."}}]
+    }
+    </script>
 </head>
 <body>
     <!-- TOP BAR (with mobile hamburger) -->
@@ -386,9 +404,7 @@
                 <a href="./heart.html" class="n-heart">❤️ Heart Disease Guide →</a>
                 <a href="./assessment.html" class="n-arth">🩺 AI Health Check →</a>
             </nav>
-
-            <!-- DB: kidney disease content ready for dynamic load via PawWellDB.articles.getDiseaseArticle() -->
-            <!-- RELATED ARTICLES -->
+<!-- RELATED ARTICLES -->
             <section class="related-articles" aria-labelledby="related-heading">
                 <h2 id="related-heading">📚 Related Reading</h2>
                 <div class="related-grid">
@@ -472,8 +488,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
-    <script src="js/supabase-init.js"></script>
+<script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>
     <script>

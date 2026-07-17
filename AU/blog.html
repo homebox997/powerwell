@@ -9,8 +9,7 @@
     <title>Blog | PawWell — Senior Dog Health Articles & Real Stories</title>
     <meta name="description" content="Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.">
     <meta name="robots" content="index, follow">
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f4f6f9; min-height: 100vh; }
@@ -76,6 +75,15 @@
             .hero h1 { font-size: 1.7rem; }
         }
     </style>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://agedpawwell.com/blog.html"}]
+    }
+    </script>
 </head>
 <body>
     <header class="site-header" role="banner">
@@ -138,9 +146,7 @@
       "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" }
     }
     </script>
-
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
-    <script>
+<script>
         var ARTICLES = [
             {
                 id: 'blog1', slug: 'allergy-test-paw-licking-diagnosis', category: 'health-case',
@@ -498,8 +504,7 @@
         // Init
         renderGrid('all');
     </script>
-    <!-- DB: blog entry point (blog page does not depend on this) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-init.js" defer></script>
     <script src="js/api-client.js" defer></script>
     <script defer src="./_shared/nav.js"></script>

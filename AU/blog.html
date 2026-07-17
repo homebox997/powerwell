@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./_shared/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | PawWell — Senior Dog Health Articles & Real Stories</title>
     <meta name="description" content="Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.">
     <meta name="robots" content="index, follow">
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -85,8 +86,8 @@
                 <a href="./arthritis.html">Arthritis Guide</a>
                 <a href="./kidney.html">Kidney Disease</a>
                 <a href="./heart.html">Heart Disease</a>
-                <a href="./community.html">Community</a> ·
-            <a href="./submit.html">Contribute</a>
+                <a href="./community.html">Community</a>
+                <a href="./submit.html">Contribute</a>
                 <a href="./blog.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Blog</a>
             </nav>
         </div>
@@ -119,8 +120,8 @@
             <a href="./index.html">Home</a> ·
             <a href="./assessment.html">AI Health Check</a> ·
             <a href="./community.html">Community</a> ·
-            <a href="./blog.html">Blog</a>
-                <a href="./submit.html">Contribute</a>
+            <a href="./blog.html">Blog</a> ·
+            <a href="./submit.html">Contribute</a>
         </p>
     </footer>
 
@@ -136,141 +137,321 @@
     }
     </script>
 
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <script>
         var ARTICLES = [
             {
-                id: 'blog12', slug: '/blog/senior-dog-arthritis-when-to-see-your-veterinarian', category: 'tip',
-                title: 'Senior Dog Arthritis: When to See Your Veterinarian',
-                excerpt: 'Occasional stiffness may improve with rest, but certain signs should never be ignored. Learn which arthritis symptoms mean it is time for a vet visit.',
-                coverIcon: '🦴', c1: '#c0392b', c2: '#e74c3c',
-                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#c0392b',
-                readTime: '5 min', date: '2026-07-09', likes: 0, comments: 0,
-                pinned: false, tags: ['Arthritis', 'Senior Care', 'Vet Care', 'Tips'],
+                id: 'blog1', slug: 'allergy-test-paw-licking-diagnosis', category: 'health-case',
+                title: 'Licked his paws until they bled - finally got a proper diagnosis | Paw...',
+                excerpt: 'Milo licked his paws for 2 years. Three vets, no answers. Saw a dermatologist, got proper allergy testing. Found grass s',
+                coverIcon: '🦴', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: true
             },
             {
-                id: 'blog11', slug: '/blog/german-shepherd-skin-problems-5-common-conditions-every-owner-should-know', category: 'health-case',
-                title: 'German Shepherd Skin Problems: 5 Common Conditions Every Owner Should Know',
-                excerpt: 'From allergic dermatitis to mange - the five most common skin conditions affecting German Shepherds and how Australian owners can identify, treat and prevent them.',
-                coverIcon: '\U0001F9AC', c1: '#c0392b', c2: '#e74c3c',
-                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#c0392b',
-                readTime: '6 min', date: '2026-07-09', likes: 0, comments: 0,
-                pinned: false, tags: ['Skin', 'German Shepherd', 'Dermatitis', 'Health Case'],
+                id: 'blog2', slug: 'arthritis-18-months', category: 'health-case',
+                title: 'Milo\'s 18-Month Arthritis Journey: What Actually Worked | PawWell...',
+                excerpt: 'After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 mont',
+                coverIcon: '💊', c1: '#fce8e8', c2: '#c0392b',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce8e8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: true
+            },
+            {
+                id: 'blog3', slug: 'best-elevated-bowls-arthritic-dog', category: 'health-case',
+                title: 'Best elevated dog bowls for arthritic dogs? | PawWell Community...',
+                excerpt: 'Vet recommended elevated bowls for Barney&#x27;s joints. French Bulldog, 8 years old. Looking for stable, good-quality r',
+                coverIcon: '❤️', c1: '#f0ebff', c2: '#7c3aed',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#f0ebff',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: true
+            },
+            {
+                id: 'blog4', slug: 'bone-broth-senior-dog-joints', category: 'health-case',
+                title: 'Homemade bone broth - is it actually good for old dogs? | PawWell Comm...',
+                excerpt: 'Mum makes bone broth for 11-year-old Cattle Dog. Claimed benefits for joints. Seeking evidence on whether bone broth act',
+                coverIcon: '🦷', c1: '#fff9e6', c2: '#f39c12',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fff9e6',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog1', slug: 'arthritis-18-months', category: 'health-case',
-                title: "Milo's 18-Month Arthritis Journey: What Actually Worked",
-                excerpt: 'After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Here is the complete breakdown of what changed, what did not, and what we wish we knew earlier.',
-                coverIcon: '🦡', c1: '#ff6b6b', c2: '#ff8e53',
-                author: 'Sarah M.', avatarInitials: 'SM', avatarColor: '#ff6b6b',
-                readTime: '8 min', date: '2026-07-05', likes: 47, comments: 12,
-                pinned: false, tags: ['Arthritis', 'Supplements', 'Recovery', 'Golden Retriever'],
+                id: 'blog5', slug: 'border-collie-drinking-more-water', category: 'health-case',
+                title: 'Drinking heaps more water lately - should I be worried? | PawWell Comm...',
+                excerpt: 'Cooper drinking twice as much water as before. 9-year-old Border Collie. Possible kidney, diabetes or Cushings. Vet appo',
+                coverIcon: '🍖', c1: '#e8f5e9', c2: '#27ae60',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f5e9',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog2', slug: 'kidney-early-detection', category: 'health-case',
-                title: "Charlie's Skin Problems Turned Out to Be Kidney Disease",
-                excerpt: 'Months of coat deterioration and scratching. Two vets missed it. The third did a full senior blood panel and found Stage 2 CKD. A hard lesson in early detection and advocating for your dog.',
-                coverIcon: '🫘', c1: '#4a9eb8', c2: '#00bcd4',
-                author: 'Amy W.', avatarInitials: 'AW', avatarColor: '#4a9eb8',
-                readTime: '10 min', date: '2026-07-03', likes: 201, comments: 58,
-                pinned: true, tags: ['Kidney Disease', 'Early Detection', 'Cavoodle'],
+                id: 'blog6', slug: 'bunnings-ramp-for-old-cavoodle', category: 'health-case',
+                title: 'This $45 Bunnings ramp changed everything for my old cavoodle | PawWel...',
+                excerpt: 'Jess shares how a $45 Bunnings dog ramp brought Molly back to sleeping on the couch. Simple fix for an 11-year-old Cavoo',
+                coverIcon: '💧', c1: '#fce4ec', c2: '#e91e63',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce4ec',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog3', slug: '/blog/the-bunnings-ramp-that-changed-everything-for-rocky', category: 'tip',
-                title: 'The $30 Bunnings Ramp That Changed Everything for Rocky',
-                excerpt: 'Rocky is 12 with arthritic hips. A $30 Bunnings ramp built in 20 minutes gave him back his independence. Here are 9 home safety tweaks that transformed his daily comfort.rocky',
-                coverIcon: '🐕', c1: '#7c3aed', c2: '#9c27b0',
-                author: 'Mark R.', avatarInitials: 'MR', avatarColor: '#7c3aed',
-                readTime: '5 min', date: '2026-07-01', likes: 124, comments: 45,
-                pinned: false, tags: ['Arthritis', 'Home Tips', 'Labrador', 'Mobility'],
+                id: 'blog7', slug: 'car-ramp-for-small-senior-dog', category: 'health-case',
+                title: 'Ramp for car - is it worth getting one? Mine hates the boot | PawWell ...',
+                excerpt: '12-year-old Maltese struggling with car boot. Considering a ramp but worried dog won&#x27;t use it. Successful ramp trai',
+                coverIcon: '🧠', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog4', slug: 'heart-murmur-grade-2', category: 'qa',
-                title: "Duke's Grade 2 Heart Murmur — What We Learned at the Cardiologist",
-                excerpt: 'Our 9-year-old German Shepherd developed a cough after exercise. Grade 2 murmur confirmed. Here is everything the veterinary cardiologist told us about MVD in large breeds.',
-                coverIcon: '❤️', c1: '#c0392b', c2: '#e74c3c',
-                author: 'James K.', avatarInitials: 'JK', avatarColor: '#c0392b',
-                readTime: '12 min', date: '2026-06-28', likes: 83, comments: 34,
-                pinned: false, tags: ['Heart Disease', 'Heart Murmur', 'German Shepherd', 'Q&A'],
+                id: 'blog8', slug: 'cardiologist-visit-cost-breakdown', category: 'review',
+                title: 'Cardiologist visit cost breakdown - so you know what to expect | PawWe...',
+                excerpt: 'Honest cost breakdown from a recent cardiologist visit for Freddie&#x27;s heart condition. $480 initial consult, $95 tes',
+                coverIcon: '🛁', c1: '#fce8e8', c2: '#c0392b',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce8e8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog5', slug: 'orthopedic-beds-review', category: 'review',
-                title: 'Honest Review: 5 Orthopedic Dog Beds for Arthritic Dogs',
-                excerpt: 'Big Barker, K9, Kmart, IKEA hack, and cooling gel beds — tested with Coco (13, arthritis) and Buddy (7). Here is what is worth the money and what to avoid.',
-                coverIcon: '🛏️', c1: '#27ae60', c2: '#2ecc71',
-                author: 'Fiona S.', avatarInitials: 'FS', avatarColor: '#27ae60',
-                readTime: '7 min', date: '2026-06-25', likes: 89, comments: 67,
-                pinned: false, tags: ['Product Review', 'Arthritis', 'Beds', 'Poodle'],
+                id: 'blog9', slug: 'cavalier-night-coughing-heart', category: 'health-case',
+                title: 'Night coughing for 3 weeks - vet says possible heart disease | PawWell...',
+                excerpt: '10-year-old Cavalier King Charles Spaniel coughing at night. X-ray shows enlarged heart. Vet wants more tests. Seeking C',
+                coverIcon: '🚶', c1: '#f0ebff', c2: '#7c3aed',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#f0ebff',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog6', slug: 'symptom-tracking-spreadsheet', category: 'tip',
-                title: 'Free Symptom Tracker That Helped Us Spot Patterns in Max',
-                excerpt: 'Built a weekly Google Sheets tracker for Max\'s mobility. Found out he is always worse on cold days and after skipping his evening glucosamine. Sharing the template for free.',
-                coverIcon: '📊', c1: '#e67e22', c2: '#f39c12',
-                author: 'David L.', avatarInitials: 'DL', avatarColor: '#e67e22',
-                readTime: '6 min', date: '2026-06-20', likes: 73, comments: 28,
-                pinned: false, tags: ['Arthritis', 'Tracking', 'Tips', 'Border Collie'],
+                id: 'blog10', slug: 'daily-feeding-schedule-13-year-old-staffy', category: 'health-case',
+                title: 'Complete guide: what I feed my 13-year-old staffy every single day | P...',
+                excerpt: 'Steve shares his complete daily feeding schedule for 13-year-old Staffy. Senior kibble, sardines, chicken, glucosamine. ',
+                coverIcon: '❤️‍🩹', c1: '#fff9e6', c2: '#f39c12',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fff9e6',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog7', slug: 'kidney-diet-costs', category: 'qa',
-                title: 'How Much Does Kidney Disease Management Actually Cost? A Real Budget Breakdown',
-                excerpt: 'From prescription food to vet visits and supplements — what we spend per month managing Charlie\'s Stage 2 CKD. An honest look at the financial side of senior dog health.',
-                coverIcon: '💰', c1: '#4a9eb8', c2: '#16a085',
-                author: 'Amy W.', avatarInitials: 'AW', avatarColor: '#4a9eb8',
-                readTime: '9 min', date: '2026-06-15', likes: 112, comments: 39,
-                pinned: false, tags: ['Kidney Disease', 'Cost', 'Budget', 'Cavoodle'],
+                id: 'blog11', slug: 'daily-teeth-brushing-senior-dog', category: 'health-case',
+                title: 'How often do you brush your senior dog&#x27;s teeth? Dentist says dail...',
+                excerpt: 'Vet recommends daily teeth brushing for 11-year-old Pomeranian. Dental disease risks discussed. Tips for making daily br',
+                coverIcon: '💉', c1: '#e8f5e9', c2: '#27ae60',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f5e9',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog8', slug: 'palliative-care-quality-of-life', category: 'qa',
-                title: "When It Was Time to Say Goodbye — Oscar's Quality of Life Journey",
-                excerpt: "OscarDad shares the hardest decision he ever had to make. What signs told him it was time, how he knew, and what he wishes he had done differently. Raw and honest.",
-                coverIcon: '💙', c1: '#00bcd4', c2: '#2980b9',
-                author: 'Tom H.', avatarInitials: 'TH', avatarColor: '#00bcd4',
-                readTime: '14 min', date: '2026-06-10', likes: 287, comments: 94,
-                pinned: false, tags: ['Quality of Life', 'Heart Disease', 'Support', 'French Bulldog'],
+                id: 'blog12', slug: 'elevated-kidney-values-beagle', category: 'health-case',
+                title: 'Blood test showed elevated kidney values - terrified | PawWell Communi...',
+                excerpt: 'Buddy&#x27;s blood test showed Stage 2 kidney disease. 11-year-old Beagle still seems fine in himself. Terrified owner s',
+                coverIcon: '🏊', c1: '#fce4ec', c2: '#e91e63',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce4ec',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog9', slug: '/blog/senior-dog-joint-supplement-guide', category: 'tip',
-                title: 'Senior Dog Joint Supplement Guide — What Works and What to Avoid',
-                excerpt: 'Senior dogs often need extra support for their joints. A complete guide to glucosamine, chondroitin, MSM, omega-3s, green-lipped mussel, and turmeric for ageing dogs in Australia.',
-                coverIcon: '🦴', c1: '#7c3aed', c2: '#9c27b0',
-                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#7c3aed',
-                readTime: '5 min', date: '2026-07-09', likes: 0, comments: 0,
-                pinned: false, tags: ['Supplements', 'Joints', 'Arthritis', 'Guide'],
+                id: 'blog13', slug: 'fish-oil-dosage-senior-dog', category: 'health-case',
+                title: 'Fish oil supplements - how much is too much? | PawWell Community...',
+                excerpt: '7-year-old Rottweiler on fish oil for joints. Conflicting dosing advice online. What dose works for your large senior do',
+                coverIcon: '🍲', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog10', slug: '/blog/old-dog-stomach-problem-remedies', category: 'tip',
-                title: 'Old Dog Stomach Problem Remedies — Safe Home Care for Senior Digestion',
-                excerpt: 'Stomach problems become more common as dogs age. Learn about causes of vomiting, diarrhoea and loss of appetite in senior dogs, plus safe home remedies and when to see a vet.',
-                coverIcon: '🍚', c1: '#e67e22', c2: '#f39c12',
-                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e67e22',
-                readTime: '5 min', date: '2026-07-09', likes: 0, comments: 0,
-                pinned: false, tags: ['Digestion', 'Stomach', 'Senior Care', 'Remedies'],
+                id: 'blog14', slug: 'fresh-food-diet-senior-labrador', category: 'health-case',
+                title: 'Has anyone switched to fresh/freeze-dried food? Cost vs benefit? | Paw...',
+                excerpt: 'Healthy 8-year-old Labrador on regular dry food. Considering fresh food diet. Is the 3x cost justified? Seeking honest e',
+                coverIcon: '💊', c1: '#fce8e8', c2: '#c0392b',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce8e8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
             },
             {
-                id: 'blog14', slug: '/blog/senior-dog-home-safety-simple-changes-for-big-comfort-australian-guide', category: 'tip',
-                title: 'Senior Dog Home Safety: Simple Changes for Big Comfort (Australian Guide)',
-                excerpt: '9 practical home adjustments to help your senior dog move safely and rest comfortably—from orthopedic beds to non-slip flooring.',
-                coverIcon: '🏠', c1: '#27ae60', c2: '#2ecc71',
-                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#27ae60',
-                readTime: '5 min', date: '2026-07-09', likes: 0, comments: 0,
-                pinned: false, tags: ['Home Safety', 'Senior Care', 'Tips', 'Australia'],
+                id: 'blog15', slug: 'german-shepherd-recurring-hot-spots', category: 'health-case',
+                title: 'Hot spots keep coming back every summer - predictable pattern | PawWel...',
+                excerpt: 'German Shepherd gets hot spots every summer. Same spot, same time. Seeking proactive prevention tips for the upcoming su',
+                coverIcon: '🩺', c1: '#f0ebff', c2: '#7c3aed',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#f0ebff',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
                 featured: false
-            }
-        
-        ];
+            },
+            {
+                id: 'blog16', slug: 'golden-retriever-persistent-scratching', category: 'health-case',
+                title: 'Golden retriever won&#x27;t stop scratching - we&#x27;ve tried everyth...',
+                excerpt: '7-year-old Golden Retriever scratching for 4 months. Vet found no parasites. Steroids helped temporarily. Food change di',
+                coverIcon: '🦴', c1: '#fff9e6', c2: '#f39c12',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fff9e6',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog17', slug: 'grade-2-heart-murmur-labrador', category: 'health-case',
+                title: 'Heart murmur grade 2 at 8 - how serious is this really? | PawWell Comm...',
+                excerpt: 'Grade 2 heart murmur found during emergency surgery. 8-year-old Labrador. Vet says monitor every 6 months. Seeking long-',
+                coverIcon: '🧬', c1: '#e8f5e9', c2: '#27ae60',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f5e9',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog18', slug: 'greyhound-osteoarthritis-diagnosis', category: 'health-case',
+                title: 'Finally got my greyhound diagnosed - osteoarthritis at 10 | PawWell Co...',
+                excerpt: 'Buster the 10-year-old Greyhound diagnosed with osteoarthritis in both hind legs. On anti-inflammatories and physio. Loo',
+                coverIcon: '🐾', c1: '#fce4ec', c2: '#e91e63',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce4ec',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog19', slug: 'hiding-dog-medication-tricks', category: 'tip',
+                title: 'Tips for giving a senior dog their medication disguised in food? | Paw...',
+                excerpt: '10-year-old CKCS has figured out every medication hiding trick. What&#x27;s worked for your clever stubborn senior dog? ',
+                coverIcon: '🏥', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog20', slug: 'kelpie-stiffness-at-7-years', category: 'health-case',
+                title: 'Worried I&#x27;m imagining it - or is my kelpie slowing down? | PawWel...',
+                excerpt: 'Duke the 7-year-old Kelpie seems stiffer in the mornings. Is 7 too young for arthritis signs? Seeking perspective from o',
+                coverIcon: '🌿', c1: '#fce8e8', c2: '#c0392b',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce8e8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog21', slug: 'librela-injection-arthritis-experience', category: 'health-case',
+                title: 'Has anyone tried Librela injection for arthritis? Vets recommendation ...',
+                excerpt: 'Vet recommended monthly Librela injection for Oscar&#x27;s arthritis. Looking for owner experiences before committing - ',
+                coverIcon: '🩺', c1: '#f0ebff', c2: '#7c3aed',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#f0ebff',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog22', slug: 'mentally-stimulating-old-dog', category: 'health-case',
+                title: 'How do you mentally stimulate an old dog who&#x27;s slowing down physi...',
+                excerpt: '10-year-old Blue Heeler physically slowing down but mentally very alert. Needs more mental stimulation. Seeking enrichme',
+                coverIcon: '💚', c1: '#fff9e6', c2: '#f39c12',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fff9e6',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog23', slug: 'multiple-medications-senior-dog', category: 'health-case',
+                title: 'My old mate is on 4 medications now - anyone else managing this? | Paw...',
+                excerpt: '12-year-old Staffy on 4 different medications daily. Exhausted owner seeking tips for managing multiple medications and ',
+                coverIcon: '🦴', c1: '#e8f5e9', c2: '#27ae60',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f5e9',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog24', slug: 'oatmeal-baths-itchy-dogs', category: 'health-case',
+                title: 'Oatmeal baths for itchy dogs - does it actually work? | PawWell Commun...',
+                excerpt: 'Regular oatmeal baths for Poppy&#x27;s itchy skin. Seems to help but is there science behind it? Seeking evidence-based ',
+                coverIcon: '💊', c1: '#fce4ec', c2: '#e91e63',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce4ec',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog25', slug: 'old-mate-struggling-on-stairs', category: 'health-case',
+                title: 'Just noticed my old mate&#x27;s been struggling on the stairs lately |...',
+                excerpt: 'Charlie&#x27;s 9-year-old Golden Retriever is struggling with stairs. Vet mentioned early arthritis. Seeking advice from',
+                coverIcon: '❤️', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog26', slug: 'raw-diet-cleared-staffy-skin', category: 'health-case',
+                title: 'Raw food diet cleared up my Staffy&#x27;s skin - anyone else tried thi...',
+                excerpt: 'Switched 6-year-old Staffy to raw food diet after chronic skin issues. Dramatic improvement in 3 months. Sharing experie',
+                coverIcon: '🦷', c1: '#fce8e8', c2: '#c0392b',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce8e8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog27', slug: 'senior-dog-refusing-kibble', category: 'health-case',
+                title: 'Dog suddenly refusing his kibble - any ideas? | PawWell Community...',
+                excerpt: '9-year-old Bull Arab suddenly refusing his usual kibble. Warming it up helps. Could indicate health issue or just senior',
+                coverIcon: '🍖', c1: '#f0ebff', c2: '#7c3aed',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#f0ebff',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog28', slug: 'shih-tzu-coat-thinning-senior', category: 'health-case',
+                title: 'Isapooy coat has gone really thin - should I panic? | PawWell Communit...',
+                excerpt: '10-year-old Shih Tzu coat has thinned dramatically. Otherwise healthy. Wondering if thyroid or just normal ageing. Seeki',
+                coverIcon: '💧', c1: '#fff9e6', c2: '#f39c12',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fff9e6',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog29', slug: 'swimming-hydrotherapy-senior-dog', category: 'health-case',
+                title: 'Swimming for senior dogs - game changer or waste of time? | PawWell Co...',
+                excerpt: 'Vet physio recommended hydrotherapy for Ruby&#x27;s hip issues. German Shepherd, 9 years old. Anyone tried dog swimming ',
+                coverIcon: '🧠', c1: '#e8f5e9', c2: '#27ae60',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f5e9',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog30', slug: 'training-treats-for-senior-dog', category: 'health-case',
+                title: 'Dog biscuits as training treats - okay for a 10-year-old? | PawWell Co...',
+                excerpt: 'Still training 10-year-old Jack Russell with biscuits. Worried about additives and whether there are better treat option',
+                coverIcon: '🛁', c1: '#fce4ec', c2: '#e91e63',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#fce4ec',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+            {
+                id: 'blog31', slug: 'when-switch-senior-food-border-collie', category: 'health-case',
+                title: 'When did you switch your dog to senior food? Is 7 actually old? | PawW...',
+                excerpt: '7-year-old Border Collie still acts like a puppy. Vet mentioned senior food. Is 7 actually old for a collie? Struggling ',
+                coverIcon: '🚶', c1: '#e8f4f8', c2: '#4a9eb8',
+                author: 'PawWell Team', avatarInitials: 'PW', avatarColor: '#e8f4f8',
+                readTime: '5 min', date: '2026-07-01', likes: 0, comments: 0,
+                pinned: false, tags: ['Senior Dog', 'Health', 'Australia'],
+                featured: false
+            },
+        ]
+
 
         function filterBlog(cat, btn) {
             document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
@@ -315,7 +496,7 @@
         // Init
         renderGrid('all');
     </script>
-    <!-- 数据库接入点（不影响博客渲染）-->
+    <!-- DB: blog entry point (blog page does not depend on this) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-init.js" defer></script>
     <script src="js/api-client.js" defer></script>

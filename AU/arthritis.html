@@ -8,20 +8,24 @@
     <meta name="keywords" content="arthritis senior dogs, osteoarthritis dogs, joint pain dogs, dog arthritis symptoms, arthritis treatment dogs Australia">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://agedpawwell.com/arthritis.html">
+    <link rel="stylesheet" href="./_shared/styles.css">
     <meta property="og:title" content="Arthritis in Senior Dogs: Complete Guide 2026 | PawWell">
     <meta property="og:description" content="1 in 4 senior dogs develop arthritis. Complete guide with symptom checker, severity levels and real community case studies.">
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://agedpawwell.com/arthritis.html">
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: #f8f9fb; }
         /* ====== STICKY NAV ====== */
         .top-bar { background: white; padding: 0.7rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
-        .top-bar-inner { max-width: 1100px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; }
-        .top-bar-inner a { text-decoration: none; color: #2c3e50; font-weight: 600; font-size: 0.88rem; }
-        .top-bar-inner a:hover { color: #ff6b6b; }
+        .top-bar-inner { max-width: 1100px; margin: 0 auto; padding: 0 18px; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+        .top-bar-inner > a { text-decoration: none; color: #2c3e50; font-weight: 600; font-size: 0.88rem; }
+        .top-bar-inner > a:hover { color: #ff6b6b; }
+        .top-bar-inner nav { display: flex; gap: 0.2rem; flex-wrap: wrap; align-items: center; }
+        .top-bar-inner nav a { text-decoration: none; color: #2c3e50; font-weight: 600; font-size: 0.82rem; padding: 6px 10px; border-radius: 20px; transition: all 0.2s; }
+        .top-bar-inner nav a:hover { background: #f5f5f5; color: #ff6b6b; }
         .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #aaa; flex-wrap: wrap; }
         .breadcrumb a { color: #ff6b6b; font-weight: 600; }
         /* ====== COVER ====== */
@@ -158,12 +162,15 @@
     <!-- TOP BAR -->
     <div class="top-bar" role="banner">
         <div class="top-bar-inner">
-            <a href="./index.html" aria-label="PawWell Home">← PawWell</a>
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="./index.html">Home</a> /
-                <a href="./blog.html">Blog</a>
-                <a href="./submit.html">Contribute</a> /
-                <span>Arthritis Guide</span>
+            <a href="./index.html" aria-label="PawWell Home" style="font-weight:800;font-size:1.1rem;background:linear-gradient(135deg,#ff6b6b,#ff8e53);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">PawWell</a>
+            <nav aria-label="Main navigation" style="display:flex;gap:0.3rem;align-items:center;">
+                <a href="./index.html">Home</a>
+                <a href="./assessment.html">AI Health Check</a>
+                <a href="./arthritis.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Arthritis</a>
+                <a href="./kidney.html">Kidney</a>
+                <a href="./heart.html">Heart</a>
+                <a href="./community.html">Community</a>
+                <a href="./submit.html">Contribute</a>
             </nav>
         </div>
     </div>
@@ -337,7 +344,7 @@
                 <a href="./assessment.html" class="n-arth">🩺 AI Health Check →</a>
             </nav>
 
-            <!-- DB HOOK: 病种正文未来用 PawWellDB.articles.getDiseaseArticle('arthritis').body 替换本静态正文 -->
+            <!-- DB: arthritis content ready for dynamic load via PawWellDB.articles.getDiseaseArticle() -->
             <!-- RELATED ARTICLES -->
             <section class="related-articles" aria-labelledby="related-heading">
                 <h2 id="related-heading">📚 Related Reading</h2>
@@ -349,14 +356,14 @@
                             <div class="meta">📋 Health Case · 8 min · Sarah M.</div>
                         </div>
                     </div>
-                    <div class="related-card" onclick="window.location.href='bunnings-ramp-30-dollars.html'" role="link" aria-label="Related article: Bunnings ramp tip">
+                    <div class="related-card" onclick="window.location.href='bunnings-ramp-for-old-cavoodle.html'" role="link" aria-label="Related article: Bunnings ramp tip">
                         <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);">🐕</div>
                         <div class="related-card-body">
                             <h3>The $30 Bunnings Ramp That Changed Everything</h3>
                             <div class="meta">💡 Tips · 5 min · Mark R.</div>
                         </div>
                     </div>
-                    <div class="related-card" onclick="window.location.href='kidney-early-detection.html'" role="link" aria-label="Related article: kidney disease early detection">
+                    <div class="related-card" onclick="window.location.href='kidney.html'" role="link" aria-label="Related article: kidney disease early detection">
                         <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);">🫘</div>
                         <div class="related-card-body">
                             <h3>Charlie's Skin Issues Turned Out to Be Kidney Disease</h3>
@@ -421,7 +428,7 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>

@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="PawWell Team">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PawWell | Free AI Health Check for Senior Dogs | Arthritis, Kidney & Heart</title>
     <meta name="description" content="Free AI health check for senior dogs in Australia. Early detection of arthritis, kidney disease, and heart conditions. Expert guides, community support and 100% free assessment.">
@@ -82,12 +84,20 @@
             .nav a { text-align: center; padding: 10px; width: 100%; }
             .hero h1 { font-size: 2rem; }
             .hero { padding-top: 5.5rem; }
-            .health-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 0.6rem; }
+            .health-grid { grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
             .health-card { padding: 1rem 0.5rem; }
             .health-card h3 { font-size: 0.8rem; }
             .health-card p { font-size: 0.72rem; }
             .big-btn { padding: 16px 20px; }
         }
+    
+        @media (max-width: 480px) {
+            .health-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 360px) {
+            .health-grid { grid-template-columns: 1fr; }
+        }
+
     </style>
 </head>
 <body>
@@ -243,11 +253,6 @@
         "@type": "Organization",
         "name": "PawWell",
         "url": "https://agedpawwell.com"
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://agedpawwell.com/assessment.html",
-        "query-input": "required name=breed"
       }
     }
     </script>

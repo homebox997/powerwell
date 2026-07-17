@@ -22,7 +22,7 @@ const PawWellAPI = {
   // ANON key 遵循 RLS 策略，安全地暴露在前端。
   // 获取方式：Supabase Dashboard → Project Settings → API → "anon" key
   supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
-  supabaseKey: 'ANON_KEY_REPLACE_WITH_YOUR_SUPABASE_ANON_KEY',
+  supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5OTc1NzQsImV4cCI6MjA5ODU3MzU3NH0.xQD6j_uqartlIZo0APxHYGzunJHjA_sZER93A4t49rE',
   baseURL: 'https://cbbaejwbkenrutmgqikt.supabase.co/rest/v1',                 // ← 部署时由后端配置
   country: 'AU',                   // 页面可按地区覆盖（如 PawWellAPI.country = 'US'）
 

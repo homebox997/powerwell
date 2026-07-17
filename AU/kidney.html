@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kidney Disease in Senior Dogs: Complete Guide 2026 | PawWell</title>
     <meta name="description" content="Kidney disease affects 1 in 3 senior dogs in Australia. Complete guide covering symptoms, severity levels, supplements, lifestyle changes and community case studies.">
-    <meta name="keywords" content="arthritis senior dogs, osteoarthritis dogs, joint pain dogs, dog arthritis symptoms, arthritis treatment dogs Australia">
+    <meta name="keywords" content="kidney disease dogs, chronic kidney disease dogs, senior dog kidney failure, CKD dogs, renal diet dogs Australia, dog kidney symptoms">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://agedpawwell.com/arthritis.html">
+    <link rel="canonical" href="https://agedpawwell.com/kidney.html">
     <link rel="stylesheet" href="./_shared/styles.css">
     <meta property="og:title" content="Kidney Disease in Senior Dogs: Complete Guide 2026 | PawWell">
-    <meta property="og:description" content="1 in 4 senior dogs develop arthritis. Complete guide with symptom checker, severity levels and real community case studies.">
+    <meta property="og:description" content="Kidney disease affects 1 in 3 senior dogs in Australia. Complete guide covering symptoms, severity levels, supplements, lifestyle changes and community case studies.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://agedpawwell.com/arthritis.html">
-    <!-- DB: blog_db_port=3002 (articles/articles) -->
+    <meta property="og:url" content="https://agedpawwell.com/kidney.html">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -170,11 +169,12 @@
     </style>
 </head>
 <body>
-    <!-- TOP BAR -->
+    <!-- TOP BAR (with mobile hamburger) -->
     <div class="top-bar" role="banner">
         <div class="top-bar-inner">
             <a href="./index.html" aria-label="PawWell Home" style="font-weight:800;font-size:1.1rem;background:linear-gradient(135deg,#ff6b6b,#ff8e53);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">PawWell</a>
-            <nav aria-label="Main navigation" style="display:flex;gap:0.3rem;align-items:center;">
+            <button class="hamburger" onclick="toggleKidneyNav()" aria-label="Toggle navigation" style="display:none;background:none;border:none;font-size:1.8rem;cursor:pointer;color:#2c3e50;padding:4px 10px;">&#9776;</button>
+            <nav id="kidneyNav" aria-label="Main navigation" style="display:flex;gap:0.3rem;align-items:center;flex-wrap:wrap;">
                 <a href="./index.html">Home</a>
                 <a href="./assessment.html">AI Health Check</a>
                 <a href="./arthritis.html">Arthritis</a>
@@ -185,6 +185,15 @@
             </nav>
         </div>
     </div>
+
+        /* ====== HAMBURGER (mobile) ====== */
+        .hamburger { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            #kidneyNav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
+            #kidneyNav.open { display: flex; }
+            #kidneyNav a { text-align: center; padding: 10px; width: 100%; }
+        }
 
     <!-- COVER -->
     <div class="cover" role="img" aria-label="Arthritis in senior dogs guide cover">

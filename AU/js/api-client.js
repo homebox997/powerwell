@@ -17,9 +17,12 @@
  */
 
 const PawWellAPI = {
-  // ===== Supabase 直连配置（service role key 绕过 RLS）=====
+  // ===== Supabase 直连配置（ANON key，遵循 RLS）=====
+  // SECURITY: 必须使用 ANON key（非 service_role key）。
+  // ANON key 遵循 RLS 策略，安全地暴露在前端。
+  // 获取方式：Supabase Dashboard → Project Settings → API → "anon" key
   supabaseUrl: 'https://cbbaejwbkenrutmgqikt.supabase.co',
-  serviceKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNiYmFlandia2VucnV0bWdxaWt0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4Mjk5NzU3NCwiZXhwIjoyMDk4NTczNTc0fQ.1N3D6ahkkxYe6ykxphk_jJ4BHHshmcbTe-IrDIw6F64',
+  supabaseKey: 'ANON_KEY_REPLACE_WITH_YOUR_SUPABASE_ANON_KEY',
   baseURL: 'https://cbbaejwbkenrutmgqikt.supabase.co/rest/v1',                 // ← 部署时由后端配置
   country: 'AU',                   // 页面可按地区覆盖（如 PawWellAPI.country = 'US'）
 
@@ -41,8 +44,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });
@@ -71,8 +74,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });
@@ -106,8 +109,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });
@@ -139,8 +142,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });
@@ -168,8 +171,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });
@@ -294,8 +297,8 @@ const PawWellAPI = {
       const res = await fetch(url, {
       method: 'GET',
       headers: {
-        'apikey': PawWellAPI.serviceKey,
-        'Authorization': `Bearer ${PawWellAPI.serviceKey}`,
+        'apikey': PawWellAPI.supabaseKey,
+        'Authorization': `Bearer ${PawWellAPI.supabaseKey}`,
         'Accept': 'application/json'
       }
     });

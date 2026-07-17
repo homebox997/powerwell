@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./_shared/styles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Health Check | Senior Dog Health</title>
     <meta name="description" content="Free AI health assessment for senior dogs. Check for arthritis, kidney disease, and heart conditions.">
     <meta name="robots" content="index, follow">
-    <!-- 数据库接口：assessment_db_port = 3003 -->
+    <!-- DB: assessment_db_port=3003 (assessments) -->
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #2c3e50; background: linear-gradient(135deg, #fff5f0 0%, #ffe8d6 100%); min-height: 100vh; }
@@ -113,10 +114,9 @@
                 <a href="./arthritis.html">Arthritis Guide</a>
                 <a href="./kidney.html">Kidney Disease</a>
                 <a href="./heart.html">Heart Disease</a>
-                <a href="./community.html">Community</a> ·
-            <a href="./submit.html">Contribute</a>
-                <a href="./blog.html">Blog</a>
+                <a href="./community.html">Community</a>
                 <a href="./submit.html">Contribute</a>
+                <a href="./blog.html">Blog</a>
             </nav>
         </div>
     </header>
@@ -241,9 +241,9 @@
     }
     </script>
 
-    <!-- Supabase SDK + Init（数据库接入：只需在 supabase-init.js 填入 URL 和 Key） -->
+    <!-- Supabase SDK init: fill URL and anon key in supabase-init.js -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- 数据库接口：assessment_db_port = 3003 -->
+    <!-- DB: assessment_db_port=3003 (assessments) -->
     <script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>
@@ -270,11 +270,7 @@
             'Recurrent itching and skin inflammation',
             'Frequent vomiting and loose stools'
         ];
-        
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('open');
-        }
-        
+
         function onBreedChange() {
             // Just confirm selection changed
         }

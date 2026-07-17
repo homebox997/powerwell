@@ -7,7 +7,7 @@
     <meta name="description" content="After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Full breakdown of what worked, what did not, and cost analysis.">
     <meta name="keywords" content="arthritis senior dogs, osteoarthritis dogs, joint supplements dogs, glucosamine dogs, MSM dogs, arthritis treatment dogs">
     <meta name="robots" content="index, follow">
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -415,26 +415,26 @@
             <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
         </div>
 
-        <!-- DB HOOK: 病种正文未来用 PawWellDB.articles.getDiseaseArticle('arthritis-18-months').body 替换本静态正文 -->
+        <!-- DB: arthritis-18-months content ready for dynamic load -->
         <!-- RELATED ARTICLES -->
         <div class="related-articles">
             <h2>📚 Related Reading</h2>
             <div class="related-grid">
-                <div class="related-card" onclick="window.location.href='kidney-early-detection.html'">
+                <div class="related-card" onclick="window.location.href='kidney.html'">
                     <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);">🫘</div>
                     <div class="related-card-body">
                         <h3>Charlie's Skin Issues Turned Out to Be Kidney Disease</h3>
                         <div class="meta">📋 Health Case · 10 min</div>
                     </div>
                 </div>
-                <div class="related-card" onclick="window.location.href='bunnings-ramp-30-dollars.html'">
+                <div class="related-card" onclick="window.location.href='bunnings-ramp-for-old-cavoodle.html'">
                     <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);">🐕</div>
                     <div class="related-card-body">
                         <h3>The $30 Bunnings Ramp That Changed Everything</h3>
                         <div class="meta">💡 Tips · 5 min</div>
                     </div>
                 </div>
-                <div class="related-card" onclick="window.location.href='heart-murmur-grade-2.html'">
+                <div class="related-card" onclick="window.location.href='grade-2-heart-murmur-labrador.html'">
                     <div class="related-card-cover" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">❤️</div>
                     <div class="related-card-body">
                         <h3>Duke's Grade 2 Heart Murmur — What We Learned</h3>
@@ -462,7 +462,7 @@
 
     <!-- Supabase + Nav -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <!-- 数据库接口：blog_db_port = 3002 -->
+    <!-- DB: blog_db_port=3002 (articles/articles) -->
     <script src="js/supabase-init.js"></script>
     <script src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>

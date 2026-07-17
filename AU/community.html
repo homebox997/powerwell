@@ -46,13 +46,13 @@
         .feed-title { font-size: 1.3rem; font-weight: 700; color: #2c3e50; }
         .feed-count { font-size: 0.85rem; color: #aaa; }
         /* ====== POST CARD ====== */
-        .post-card { background: white; border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s; }
+        .post-card { background: white; border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s; }
         .post-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); transform: translateY(-1px); }
         .post-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.9rem; }
         .user-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.95rem; color: white; flex-shrink: 0; }
         .post-meta { flex: 1; }
         .post-user { font-weight: 700; font-size: 0.9rem; color: #2c3e50; }
-        .post-user .dog-info { font-weight: 400; color: #7a8a9a; font-size: 0.82rem; }
+        .post-user .dog-info { font-weight: 600; color: #5a6c7d; font-size: 0.94rem; }
         .post-time { font-size: 0.78rem; color: #aaa; }
         .category-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
         .post-title { font-size: 1.05rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem; line-height: 1.4; cursor: pointer; }
@@ -63,7 +63,7 @@
         .post-actions { display: flex; gap: 1.2rem; padding-top: 0.8rem; border-top: 1px solid #f0f0f0; }
         /*  SEO ?*/
         #seoPostList { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
-        .action-btn { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; color: #aaa; cursor: pointer; background: none; border: none; font-family: inherit; transition: color 0.2s; padding: 4px 8px; border-radius: 8px; }
+        .action-btn { display: flex; align-items: center; gap: 5px; font-size: 0.82rem; color: #aaa; cursor: pointer; background: none; border: none; font-family: inherit; transition: color 0.2s; padding: 8px 12px; min-height: 42px; font-size: 0.88rem; border-radius: 8px; }
         .action-btn:hover { color: #ff6b6b; background: #fff5f5; }
         .action-btn.liked { color: #ff6b6b; }
         /* ====== LOAD MORE ====== */
@@ -83,7 +83,7 @@
         .submit-post { width: 100%; padding: 14px; background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: white; border: none; border-radius: 14px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.3s; }
         .submit-post:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,107,107,0.4); }
         /* ====== POST DETAIL ====== */
-        .detail-modal .modal { max-width: 700px; }
+        .detail-modal .modal { max-width: 900px; max-height: 92vh; }
         .detail-header { margin-bottom: 1.2rem; }
         .detail-title { font-size: 1.4rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.6rem; line-height: 1.3; }
         .detail-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -154,7 +154,26 @@
         .action-btn.report-btn{margin-left:auto;color:#ccc;font-size:.8rem;padding:4px 10px}
         .action-btn.report-btn:hover{color:#ff6b6b;background:#fff5f5}
 
-    </style>
+    
+        /* ====== FRONTEND OPTIMIZATION (2026-07-17) ====== */
+        .badge-health-case { background: #ffe3e3 !important; color: #d63031 !important; font-weight: 700; }
+        .post-card.hot { border: 2px solid #b8e6cf; box-shadow: 0 2px 14px rgba(184,230,207,0.45); }
+        .body-placeholder { color: #b0b8c0; font-style: italic; }
+        .action-btn.bookmark-btn { color: #f0a500; }
+        .action-btn.bookmark-btn.bookmarked { color: #e67e22; font-weight: 700; }
+        .detail-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.3rem; padding-top: 1.2rem; border-top: 2px solid #f0f0f0; }
+        .copy-btn { padding: 11px 16px; background: #2c3e50; color: #fff; border: none; border-radius: 12px; font-size: 0.9rem; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+        .copy-btn:hover { background: #1a2533; }
+        .detail-link-btn { padding: 11px 16px; background: #fff0eb; color: #ff6b6b; border: 2px solid #ffd9cc; border-radius: 12px; font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; font-family: inherit; transition: all 0.2s; display: inline-flex; align-items: center; }
+        .detail-link-btn:hover { background: #ffe3d6; }
+        .detail-meta .dog-info { font-size: 0.95rem; color: #5a6c7d; }
+        @media (max-width: 768px) {
+            .detail-modal .modal { width: 95%; max-width: 95%; }
+            .action-btn { padding: 10px 14px; min-height: 46px; font-size: 0.92rem; }
+            .detail-actions { flex-direction: column; }
+            .detail-link-btn, .copy-btn { width: 100%; text-align: center; justify-content: center; }
+        }
+</style>
 
     <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"PawWell Community","url":"https://agedpawwell.com/AU/community.html","description":"Join the PawWell community to share senior dog health cases, ask questions, and connect with fellow Australian dog parents.","publisher":{"@type":"Organization","name":"PawWell","url":"https://agedpawwell.com"}}
@@ -170,7 +189,7 @@
             <a href="./index.html" class="logo-wrap" aria-label="PawWell Home">
                 <img src="./_shared/assets/logo.png" alt="PawWell - Senior Dog Health Community" class="logo-img">
             </a>
-            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰/button>
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu">☰</button>
             <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
                 <a href="./index.html">Home</a>
                 <a href="./assessment.html">AI Health Check</a>
@@ -500,7 +519,7 @@
     <!-- ========== WRITE POST MODAL ========== -->
     <div class="modal-overlay" id="writeModal" role="dialog" aria-labelledby="writeModalTitle" aria-modal="true">
         <div class="modal">
-            <button class="modal-close" onclick="closeWriteModal()" aria-label="Close dialog">✅/button>
+            <button class="modal-close" onclick="closeWriteModal()" aria-label="Close dialog">✅</button>
             <h2 id="writeModalTitle">🐾 Share Your Story</h2>
             <div class="form-group">
                 <label for="postTitle">Post Title *</label>
@@ -530,7 +549,7 @@
     <!-- ========== POST DETAIL MODAL ========== -->
     <div class="modal-overlay detail-modal" id="detailModal" role="dialog" aria-labelledby="detailModalTitle" aria-modal="true">
         <div class="modal">
-            <button class="modal-close" onclick="closeDetailModal()" aria-label="Close dialog">✅/button>
+            <button class="modal-close" onclick="closeDetailModal()" aria-label="Close dialog">✅</button>
             <div id="detailContent"></div>
         </div>
     </div>
@@ -1120,23 +1139,72 @@ const ARTICLES = [
             return String(n);
         }
 
+
+        /* ====== Frontend-only helpers (no backend calls) ====== */
+        var PLACEHOLDER_TEXT = 'Click Read More to view full dog health case details';
+        function bodyOrPlaceholder(v) {
+            if (v && String(v).trim().length) return v;
+            return '<span class="body-placeholder">' + PLACEHOLDER_TEXT + '</span>';
+        }
+        function isBookmarked(id) {
+            try { var s = JSON.parse(localStorage.getItem('pawwell_bookmarks') || '{}'); return !!s[String(id)]; } catch (e) { return false; }
+        }
+        function toggleBookmark(id, btn) {
+            id = String(id || '');
+            try {
+                var s = JSON.parse(localStorage.getItem('pawwell_bookmarks') || '{}');
+                if (s[id]) { delete s[id]; if (btn) { btn.classList.remove('bookmarked'); btn.textContent = '📑 Save'; } }
+                else { s[id] = true; if (btn) { btn.classList.add('bookmarked'); btn.textContent = '🔖 Saved'; } }
+                localStorage.setItem('pawwell_bookmarks', JSON.stringify(s));
+            } catch (e) {}
+        }
+        function fallbackCopy(text, cb) {
+            try {
+                var ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+                document.body.appendChild(ta); ta.focus(); ta.select();
+                var ok = document.execCommand('copy'); document.body.removeChild(ta); if (cb) cb(ok);
+            } catch (e) { if (cb) cb(false); }
+        }
+        function copyKnowledgeText() {
+            var el = document.getElementById('detailContent');
+            if (!el) return;
+            var clone = el.cloneNode(true);
+            var acts = clone.querySelector('.detail-actions');
+            if (acts) acts.remove();
+            var text = (clone.innerText || clone.textContent || '').trim();
+            function feedback(ok) {
+                var b = document.querySelector('.copy-btn');
+                if (!b) return;
+                var old = b.getAttribute('data-label') || b.textContent;
+                b.textContent = ok ? '✅ Copied!' : '⚠️ Copy failed';
+                setTimeout(function(){ b.textContent = old; }, 1600);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function(){ feedback(true); }).catch(function(){ fallbackCopy(text, feedback); });
+            } else { fallbackCopy(text, feedback); }
+        }
+
         function renderPostCard(post) {
             var author = getPostAuthor(post);
             var cat = getCatConfig(post.category);
             var stats = CommunityDB.getCachedStats(post.id) || { likes: post.likes, views: post.views, comments: post.comments };
             var likedSaved = false;
             try { var ls = JSON.parse(localStorage.getItem('pawwell_liked') || '{}'); likedSaved = !!ls[post.id]; } catch (e) {}
-            return '<article class="post-card" data-id="' + post.id + '">' +
+            var hotClass = (stats.views >= 1500 && stats.likes >= 150) ? ' hot' : '';
+            var badgeCls = (post.category === 'health-case') ? ' badge-health-case' : '';
+            var excerptHtml = bodyOrPlaceholder(post.excerpt);
+            var bmSaved = isBookmarked(post.id);
+            return '<article class="post-card' + hotClass + '" data-id="' + post.id + '">' +
                 '<div class="post-top">' +
                 '<div class="user-avatar" style="background:' + author.color + ';" aria-label="' + author.name + ' avatar">' + author.initials + '</div>' +
                 '<div class="post-meta">' +
                 '<div class="post-user">' + author.name + ' <span class="dog-info">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
                 '<div class="post-time">' + post.createdAt + ' · ' + stats.views + ' views</div>' +
                 '</div>' +
-                '<span class="category-badge" style="background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
+                '<span class="category-badge' + badgeCls + '" style="background:' + cat.color + '1a;color:' + cat.color + ';">' + cat.icon + ' ' + cat.label + '</span>' +
                 '</div>' +
                 '<h2 class="post-title" onclick="openDetail(\'' + post.id + '\')">' + post.title + '</h2>' +
-                '<p class="post-excerpt">' + post.excerpt + '</p>' +
+                '<p class="post-excerpt">' + excerptHtml + '</p>' +
                 '<div class="post-tags">' +
                 post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') +
                 '</div>' +
@@ -1147,8 +1215,10 @@ const ARTICLES = [
                 '💬 ' + stats.comments + '</button>' +
                 '<button class="action-btn" aria-label="Share this post">' +
                 '➡️ Share</button>' +
+                '<button class="action-btn bookmark-btn' + (bmSaved ? ' bookmarked' : '') + '" onclick="toggleBookmark(\'' + post.id + '\', this)" aria-label="Save this post">' +
+                (bmSaved ? '🔖 Saved' : '📑 Save') + '</button>' +
                 '<button class="action-btn" onclick="openDetail(\'' + post.id + '\')" aria-label="Read full post">' +
-                'Read more ➡️/button>' +
+                'Read more ➡️</button>' +
                 '</div>' +
                 '</article>';
         }
@@ -1252,11 +1322,11 @@ const ARTICLES = [
                 '<div class="detail-meta">' +
                 '<div class="user-avatar" style="background:' + author.color + ';width:38px;height:38px;font-size:0.85rem;">' + author.initials + '</div>' +
                 '<div>' +
-                '<div style="font-weight:700;font-size:0.88rem;">' + author.name + ' <span style="font-weight:400;color:#7a8a9a;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
+                '<div style="font-weight:700;font-size:0.88rem;">' + author.name + ' <span style="font-weight:400;color:#5a6c7d;font-size:0.95rem;">· ' + author.dogAvatar + ' ' + author.dogName + ' (' + author.dogBreed + ', ' + author.dogAge + 'yo)</span></div>' +
                 '<div style="font-size:0.78rem;color:#aaa;">' + post.createdAt + ' · ' + stats.views + ' views</div>' +
                 '</div>' +
                 '</div></div>' +
-                '<div class="detail-content">' + post.content + '</div>' +
+                '<div class="detail-content">' + bodyOrPlaceholder(post.content) + '</div>' +
                 '<div class="post-tags">' + post.tags.map(function(t) { return '<span class="post-tag">' + t + '</span>'; }).join('') + '</div>' +
                 '<div class="post-actions">' +
                 '<button class="action-btn ' + (liked ? 'liked' : '') + '" id="detailLikeBtn" onclick="likePost(postId, this)">' + (liked ? '❤️ ' : '🤍 ') + stats.likes + '</button>' +
@@ -1277,6 +1347,11 @@ const ARTICLES = [
                 '<input type="text" class="comment-input" id="commentInput" placeholder="Share your experience or advice..." onkeypress="if(event.key===\'Enter\')addComment(\'' + postId + '\')">' +
                 '<button class="comment-send" onclick="addComment(\'' + postId + '\')>Send</button>' +
                 '</div></section>' +
+                '<div class="detail-actions">' +
+                '<button class="copy-btn" onclick="copyKnowledgeText()">📋 Copy Knowledge Text</button>' +
+                '<a class="detail-link-btn" href="/AU/blog.html" target="_self">Same Senior Dog Joint Care Blogs</a>' +
+                '<a class="detail-link-btn" href="/AU/fish-oil-dosage-senior-dog.html" target="_self">Senior Dog Supplement Products</a>' +
+                '</div>' +
                 '<scr' + 'ipt type="application/ld+json">' + JSON.stringify({
                     '@context': 'https://schema.org',
                     '@type': 'DiscussionForumPosting',
@@ -1547,7 +1622,7 @@ function closeDetailModal() {
     <!-- REPORT MODAL -->
     <div class="report-modal-overlay" id="reportModal" role="dialog" aria-labelledby="reportModalTitle" aria-modal="true">
         <div class="report-modal">
-            <button class="report-modal-close" onclick="closeReportModal()" aria-label="Close">✅/button>
+            <button class="report-modal-close" onclick="closeReportModal()" aria-label="Close">✅</button>
             <div id="reportModalContent"></div>
         </div>
     </div>

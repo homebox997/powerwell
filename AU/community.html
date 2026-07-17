@@ -1581,7 +1581,7 @@ function closeDetailModal() {
         if (window.sb) {
             try {
                 await window.sb.from('community_reports').insert({
-                    post_id: _rTarget.type === 'post' ? _rTarget.id : null,
+                    post_slug: _rTarget.type === 'post' ? _rTarget.id : null,
                     comment_id: _rTarget.type === 'comment' ? _rTarget.id : null,
                     reason: reasonText,
                     status: 'pending'

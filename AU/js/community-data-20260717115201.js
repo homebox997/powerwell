@@ -851,20 +851,22 @@ const CommunityDB = {
     async addComment(slug, author, text) {
         slug = String(slug || '').trim();
         if (!window.sb) throw new Error('Supabase not ready');
+        // community_comments schema: id, content(jsonb), created_at, updated_at, country
         var { data, error } = await window.sb
             .from('community_comments')
             .insert([{
-                post_id: slug,
-                post_title: slug,
-                author: author || 'You',
-                content: text,
-                status: '已发布',
+                content: {
+                    post_slug: slug,
+                    author: author || 'You',
+                    text: text,
+                    status: 'published'
+                },
                 country: 'Australia',
             }])
             .select()
             .single();
         if (error) throw error;
-        var comment = { id: data.id, author: data.author, text: data.content, time: 'Just now' };
+        var comment = { id: data.id, author: (data.content || {}).author || 'You', text: (data.content || {}).text || text, time: 'Just now' };
         if (!this._commentsCache[slug]) this._commentsCache[slug] = [];
         this._commentsCache[slug].push(comment);
         if (this._statsCache[slug]) this._statsCache[slug].comments = (this._statsCache[slug].comments || 0) + 1;
@@ -943,23 +945,23 @@ const CommunityDB = {
         var slugBase = String(postData.title || 'story')
             .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 50);
         var slug = (slugBase || 'story') + '-' + Date.now();
+        // community_posts table schema: id, content(jsonb), created_at, updated_at, country
         var payload = {
-            post_id: 'p_' + Date.now(),
-            title: postData.title,
-            category: postData.category || 'health-case',
             content: {
+                title: postData.title || 'My Story',
                 slug: slug,
-                body: postData.content,
+                body: postData.content || '',
                 tags: postData.tags || [],
                 excerpt: postData.excerpt || (postData.content ? postData.content.substring(0,150)+'...' : ''),
+                author: postData.author || 'Anonymous',
+                category: postData.category || 'health-case',
                 likes: 0,
                 views: 1,
-                comments: 0
+                comments: 0,
+                status: 'published',
+                is_approved: true
             },
-            author: 'Anonymous',
-            country: 'Australia',
-            status: '已发布',
-            is_approved: true
+            country: 'Australia'
         };
         var { data, error } = await window.sb.from('community_posts').insert([payload]).select().single();
         if (error) {

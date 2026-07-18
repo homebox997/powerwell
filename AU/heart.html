@@ -3,293 +3,662 @@
 <head>
     <meta charset="UTF-8">
     <meta name="author" content="PawWell Team">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart Disease in Senior Dogs: Complete Guide 2026 | PawWell</title>
-    <meta name="description" content="Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, supplements, lifestyle changes and community case studies.">
+    <meta name="description" content="Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, medications, diet and community case studies.">
     <meta name="keywords" content="heart disease dogs, heart murmur dogs, congestive heart failure dogs, senior dog heart conditions, dog cardiology Australia, dog heart symptoms">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://agedpawwell.com/heart.html">
-    <link rel="stylesheet" href="./_shared/styles.css">
+    <link rel="canonical" href="https://agedpawwell.com/AU/heart.html">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Heart Disease in Senior Dogs: Complete Guide 2026 | PawWell">
-    <meta property="og:description" content="Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, supplements, lifestyle changes and community case studies.">
+    <meta property="og:description" content="Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, medications, diet and community case studies.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://agedpawwell.com/heart.html">
-    
+    <meta property="og:url" content="https://agedpawwell.com/AU/heart.html">
+    <meta property="og:image" content="https://agedpawwell.com/AU/_shared/og-default.jpg">
 
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Heart Guide","item":"https://agedpawwell.com/heart.html"}]
-    }
-    </script>
-
-        <!-- FAQ Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{"@type":"Question","name":"What are the symptoms of heart disease in dogs?","acceptedAnswer":{"@type":"Answer","text":"Common symptoms include persistent coughing (especially at night or after exercise), rapid or laboured breathing, tiring easily on walks, weakness or collapse, reduced appetite, weight loss, abdominal swelling, and fainting episodes. Some dogs may show no symptoms in early stages."}},{"@type":"Question","name":"What causes heart murmurs in dogs?","acceptedAnswer":{"@type":"Answer","text":"Heart murmurs in dogs are caused by turbulent blood flow. Common causes include degenerative mitral valve disease (most common in small breeds), congenital heart defects, dilated cardiomyopathy (common in large breeds), and other structural heart problems."}},{"@type":"Question","name":"Can heart disease in dogs be treated?","acceptedAnswer":{"@type":"Answer","text":"Yes, while most heart disease cannot be cured, it can be managed effectively. Treatments include medications such as ACE inhibitors, diuretics to reduce fluid buildup, pimobendan to improve heart contractility, diet changes (low sodium), exercise management, and regular veterinary monitoring."}},{"@type":"Question","name":"What dog breeds are most prone to heart disease?","acceptedAnswer":{"@type":"Answer","text":"Cavalier King Charles Spaniels (mitral valve disease), Doberman Pinschers and Boxers (dilated cardiomyopathy), Great Danes (dilated cardiomyopathy), and small breeds like Miniature Poodles and Dachshunds (mitral valve disease) are at higher risk."}},{"@type":"Question","name":"How is heart disease diagnosed in dogs?","acceptedAnswer":{"@type":"Answer","text":"Diagnosis starts with a veterinary physical exam including listening to the heart with a stethoscope. Further tests may include chest X-rays to check heart size and fluid, electrocardiogram (ECG) to assess rhythm, echocardiogram (ultrasound) to evaluate structure and function, and blood tests including NT-proBNP."}}]
-    }
-    </script>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="heart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="./_shared/styles.css">
+
     <style>
-        /* ====== HAMBURGER (mobile) ====== */
-        .hamburger { background: none; border: none; font-size: 1.8rem; cursor: pointer; color: #2c3e50; padding: 4px 10px; }
+        /* ==============================================================
+           Heart Disease — Disease-Specific Styles
+           ============================================================== */
+
+        /* -- Cover Banner -- */
+        .disease-cover {
+            margin-top: var(--pw-header-h);
+            height: 220px;
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .disease-cover-img {
+            font-size: 6rem;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .disease-cover::after {
+            content: "Heart Disease in Senior Dogs";
+            position: absolute;
+            bottom: 16px;
+            left: 0; right: 0;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            opacity: 0.85;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* -- Article Wrapper -- */
+        .article-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--pw-page-pad);
+        }
+        .article-header { text-align: center; padding: 1.8rem 0 1rem; }
+        .article-meta-top {
+            display: flex; justify-content: center; gap: 1rem;
+            font-size: 0.82rem; color: var(--pw-muted); margin-bottom: 0.8rem; flex-wrap: wrap;
+        }
+        .article-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--pw-dark);
+            line-height: 1.3; margin-bottom: 0.6rem;
+        }
+        .article-subtitle { font-size: 0.95rem; color: var(--pw-muted); line-height: 1.6; }
+
+        /* -- Key Takeaway -- */
+        .key-takeaway {
+            background: #fff8e1; border-left: 4px solid #ffb300;
+            padding: 1.2rem 1.4rem; border-radius: 0 var(--pw-radius-card) var(--pw-radius-card) 0;
+            margin: 1.2rem 0;
+        }
+        .key-takeaway-title { font-weight: 700; font-size: 0.95rem; color: #e65100; margin-bottom: 0.3rem; }
+        .key-takeaway p { font-size: 0.9rem; color: var(--pw-dark); line-height: 1.7; }
+
+        /* -- TOC -- */
+        .toc {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.2rem 0;
+        }
+        .toc h3 { font-size: 1rem; margin-bottom: 0.6rem; }
+        .toc ol { padding-left: 1.4rem; }
+        .toc li { margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .toc a { color: #c0392b; font-weight: 600; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* -- Content Body -- */
+        .content {
+            font-size: 0.95rem; line-height: 1.8; color: var(--pw-dark);
+        }
+        .content h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.8rem;
+            color: var(--pw-dark); padding-bottom: 0.3rem; border-bottom: 2px solid #f0f0f0;
+        }
+        .content h3 {
+            font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.5rem;
+            color: var(--pw-dark);
+        }
+        .content p { margin-bottom: 0.8rem; }
+        .content ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+        .content li { margin-bottom: 0.3rem; }
+
+        /* -- Photo Card -- */
+        .photo-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            overflow: hidden; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.5rem 0;
+        }
+        .photo-card-img {
+            height: 160px; display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
+        }
+        .photo-card-caption {
+            padding: 0.8rem 1rem; font-size: 0.82rem; color: var(--pw-muted);
+            font-style: italic; line-height: 1.5;
+        }
+
+        /* -- Inline CTA -- */
+        .article-cta {
+            background: linear-gradient(135deg, #fce8e8, #f5c6c6);
+            border-radius: var(--pw-radius-card); padding: 1.4rem;
+            text-align: center; margin: 1.5rem 0;
+        }
+        .article-cta h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .article-cta p { font-size: 0.88rem; color: var(--pw-muted); margin-bottom: 0.8rem; }
+        .article-cta a {
+            display: inline-block; padding: 14px 32px;
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white; font-weight: 700; border-radius: var(--pw-radius-btn);
+            font-size: 0.95rem; text-decoration: none;
+            box-shadow: 0 4px 14px rgba(192,57,43,0.3);
+            min-height: 44px; line-height: 1.2;
+            transition: all 0.3s;
+        }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(192,57,43,0.4); }
+
+        /* -- Severity Grid -- */
+        .severity-grid {
+            display: grid; gap: 1rem; margin: 1rem 0;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .severity-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem; box-shadow: 0 2px 8px var(--pw-shadow);
+            border-top: 4px solid #ccc;
+        }
+        .severity-card.green { border-top-color: #27ae60; }
+        .severity-card.yellow { border-top-color: #f39c12; }
+        .severity-card.red { border-top-color: #e74c3c; }
+        .severity-label { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+        .severity-symptoms { font-size: 0.84rem; color: var(--pw-muted); margin-bottom: 0.5rem; line-height: 1.5; }
+        .severity-treatment { font-size: 0.84rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .severity-cost { font-size: 0.82rem; color: #c0392b; font-weight: 700; }
+
+        /* -- Tip Cards -- */
+        .tip-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow);
+            margin: 1rem 0; border-left: 4px solid #c0392b;
+        }
+        .tip-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .tip-card p { font-size: 0.88rem; color: var(--pw-muted); line-height: 1.7; margin-bottom: 0; }
+
+        /* -- Community Section -- */
+        .community-section {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.5rem 0;
+        }
+        .community-section h2 { border-bottom: none; margin-top: 0; }
+        .comm-post {
+            display: block;
+            padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0; cursor: pointer;
+            transition: background 0.2s; border-radius: 8px; padding: 0.8rem;
+            text-decoration: none; color: inherit;
+        }
+        .comm-post:hover { background: #f9f9f9; }
+        .comm-user { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
+        .comm-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 700; font-size: 0.75rem; flex-shrink: 0;
+        }
+        .comm-name { font-weight: 600; font-size: 0.84rem; line-height: 1.3; }
+        .comm-time { font-size: 0.75rem; color: var(--pw-muted); }
+        .comm-post h3 { font-size: 0.92rem; margin: 0.3rem 0; line-height: 1.4; }
+        .comm-meta { font-size: 0.8rem; color: var(--pw-muted); }
+        .comm-more {
+            display: block; text-align: center; margin-top: 0.8rem;
+            font-weight: 700; color: #c0392b; font-size: 0.88rem;
+        }
+        .comm-more:hover { text-decoration: underline; }
+
+        /* -- Author Box -- */
+        .author-box {
+            display: flex; gap: 1rem; align-items: flex-start;
+            background: #f9f9f9; border-radius: var(--pw-radius-card); padding: 1.2rem; margin: 1.5rem 0;
+        }
+        .author-box-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0;
+        }
+        .author-box h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .author-box p { font-size: 0.84rem; color: var(--pw-muted); line-height: 1.6; margin-bottom: 0; }
+
+        /* -- Nav Links -- */
+        .nav-links {
+            display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.5rem 0; justify-content: center;
+        }
+        .nav-links a {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 12px 20px; border-radius: var(--pw-radius-btn);
+            font-weight: 700; font-size: 0.9rem; text-decoration: none;
+            min-height: 44px; transition: all 0.3s;
+        }
+        .nav-links a:hover { transform: translateY(-2px); }
+        .n-kid { background: #e8f4f8; color: #4a9eb8; }
+        .n-heart { background: linear-gradient(135deg, #c0392b, #e74c3c); color: white; }
+        .n-arth { background: linear-gradient(135deg, var(--pw-red), var(--pw-orange)); color: white; }
+
+        /* -- Related Articles -- */
+        .related-articles { margin: 1.5rem 0; }
+        .related-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+        .related-card {
+            display: block;
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            overflow: hidden; box-shadow: 0 2px 8px var(--pw-shadow);
+            cursor: pointer; transition: all 0.3s;
+            text-decoration: none; color: inherit;
+        }
+        .related-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px var(--pw-shadow-hover); }
+        .related-card-cover {
+            height: 100px; display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem;
+        }
+        .related-card-body { padding: 0.8rem; }
+        .related-card-body h3 { font-size: 0.84rem; margin-bottom: 0.3rem; line-height: 1.4; }
+        .related-card-body .meta { font-size: 0.72rem; color: var(--pw-muted); }
+
+        /* -- Interactive Checklist -- */
+        .checklist {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.2rem 0;
+        }
+        .checklist h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .checklist .subtitle { font-size: 0.82rem; color: var(--pw-muted); margin-bottom: 0.8rem; }
+        .check-item {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 10px 12px; border-radius: 10px; cursor: pointer;
+            transition: background 0.2s; margin-bottom: 0.3rem;
+            min-height: 44px;
+        }
+        .check-item:hover { background: #f5f5f5; }
+        .check-item.done { background: #e8f5e9; }
+        .check-box {
+            width: 22px; height: 22px; border-radius: 50%;
+            border: 2px solid var(--pw-border); display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.7rem; flex-shrink: 0;
+            color: transparent; transition: all 0.2s;
+        }
+        .check-box.checked {
+            background: #27ae60; border-color: #27ae60; color: white;
+        }
+        .check-text { font-size: 0.88rem; line-height: 1.4; }
+        .checklist-result {
+            margin-top: 0.8rem; padding: 0.8rem; border-radius: 10px;
+            font-size: 0.88rem; font-weight: 600; text-align: center;
+        }
+        .checklist-result.warn { background: #fff3e0; color: #e65100; }
+        .checklist-result.ok { background: #e8f5e9; color: #2e7d32; }
+
+        /* -- Bottom CTA -- */
+        .bottom-cta {
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            color: white; border-radius: var(--pw-radius-card);
+            padding: 1.8rem; text-align: center; margin: 1.5rem 0;
+        }
+        .bottom-cta h2 { font-size: 1.3rem; margin-bottom: 0.3rem; border-bottom: none; }
+        .bottom-cta p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 1rem; }
+        .bottom-cta a {
+            display: inline-block; padding: 14px 32px;
+            background: white; color: #c0392b; font-weight: 700;
+            border-radius: var(--pw-radius-btn); text-decoration: none;
+            font-size: 1rem; min-height: 44px; line-height: 1.2;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: all 0.3s;
+        }
+        .bottom-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+        /* -- Pinned Article (unused on heart page but kept for consistency) -- */
+        .pinned-article { display: none; }
+
+        /* -- Responsive -- */
         @media (max-width: 768px) {
-            .hamburger { display: block !important; }
-            #heartNav { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; left: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 0.8rem; gap: 0.3rem; z-index: 100; border-radius: 0 0 12px 12px; }
-            #heartNav.open { display: flex; }
-            #heartNav a { text-align: center; padding: 10px; width: 100%; }
+            .disease-cover { height: 150px; font-size: 3.5rem; }
+            .disease-cover::after { font-size: 0.7rem; }
+            .article-title { font-size: 1.3rem; }
+            .article-subtitle { font-size: 0.88rem; }
+            .severity-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+            .nav-links { flex-direction: column; align-items: stretch; }
+            .nav-links a { justify-content: center; }
+            .photo-card-img { height: 120px; }
+            .content h2 { font-size: 1.2rem; }
+            .article-meta-top { gap: 0.5rem; font-size: 0.75rem; flex-wrap: wrap; }
+        }
+        @media (max-width: 480px) {
+            .article-title { font-size: 1.15rem; }
+            .article-cta a, .bottom-cta a { padding: 12px 24px; font-size: 0.9rem; width: 100%; }
+            .key-takeaway, .toc, .tip-card { padding: 1rem; }
+        }
+
+        /* -- Print -- */
+        @media print {
+            .disease-cover, .pw-header, .pw-footer, .bottom-cta, .article-cta, .nav-links { display: none !important; }
+            .article-wrap { max-width: 100%; }
         }
     </style>
+</head>
+<body>
+    <!-- ================================================================
+         LAYER 1: Fixed Global Navigation
+         ================================================================ -->
+    <header class="pw-header">
+        <div class="pw-header-inner">
+            <a href="./index.html" class="pw-logo" aria-label="PawWell Home">
+                <img src="./_shared/logo.png" alt="PawWell" width="40" height="40">
+            </a>
+            <button class="pw-hamburger hamburger" onclick="toggleMenu()" aria-label="Toggle navigation" type="button">☰</button>
+            <nav id="navMenu" class="pw-nav" aria-label="Main navigation">
+                <a href="./index.html">Home</a>
+                <a href="./assessment.html">AI Health Check</a>
+                <a href="./arthritis.html">Arthritis</a>
+                <a href="./kidney.html">Kidney</a>
+                <a href="./heart.html" class="pw-active" style="background:#fce8e8;color:#c0392b;font-weight:700;">Heart</a>
+                <a href="./community.html">Community</a>
+                <a href="./submit.html">Contribute</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- COVER -->
-    <div class="cover" role="img" aria-label="Heart disease in senior dogs guide cover">
-        <div class="cover-emoji" aria-hidden="true">🦡</div>
+    <!-- ================================================================
+         LAYER 2: Cover / Hero Section
+         ================================================================ -->
+    <div class="disease-cover" role="img" aria-label="Heart disease in senior dogs guide cover">
+        <span class="disease-cover-img" aria-hidden="true">❤️</span>
     </div>
 
-    <!-- ARTICLE -->
+    <!-- ================================================================
+         LAYER 3 + 4 + 5: Article Content
+         ================================================================ -->
     <main>
-<div class="article-wrap">
-        <header class="article-header">
-            <div class="article-meta-top">
-                <span class="article-cat">📋 Complete Guide</span>
-                <span class="article-date">🗓 July 2026</span>
-                <span class="article-read">⏱ 10 min read</span>
-            </div>
-            <h1 class="article-title">Heart Disease in Senior Dogs: Complete Guide 2026</h1>
-            <p class="article-subtitle">Heart disease affects up to 10 percent of all dogs in Australia. This complete guide covers symptoms, severity levels, treatment options, lifestyle changes and real community case studies — everything you need to help your dog live comfortably.</p>
-        </header>
+        <div class="article-wrap">
 
-        <!-- KEY TAKEAWAY -->
-        <aside class="key-takeaway" role="note" aria-label="Key takeaway">
-            <div class="key-takeaway-title">💡 Key Takeaway</div>
-            <p>Heart disease is common but manageable for your dog's quality of life. With early diagnosis, proper medication, and lifestyle adjustments, most senior dogs with arthritis can live active, happy lives for years after diagnosis.</p>
-        </aside>
-
-        <!-- TABLE OF CONTENTS -->
-        <nav class="toc" aria-label="Article contents">
-            <h3>📑 Contents</h3>
-            <ol>
-                <li><a href="#what">Types of Heart Disease</a></li>
-                <li><a href="#symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</a></li>
-                <li><a href="#severity">Understanding Severity Levels</a></li>
-                <li><a href="#care">Arthritis Care &amp; Management</a></li>
-                <li><a href="#community">What the Community Says</a></li>
-                <li><a href="#checklist">Self-Assessment: Is Your Dog at Risk?</a></li>
-            </ol>
-        </nav>
-
-        <!-- CONTENT -->
-        <div class="content">
-            <h2 id="what">Types of Heart Disease in Dogs?</h2>
-            <p>Heart disease in dogs takes several forms where the protective cartilage in joints wears down over time, causing pain, stiffness, and reduced mobility. <strong>Degenerative Valve Disease (MVD)</strong> is most common in small-to-medium breeds (Cavalier KC, Poodles, Chihuahuas). The heart valves wear out and leak blood. <strong>Dilated Cardiomyopathy (DCM)</strong> affects large breeds (Dobermans, Boxers, Great Danes). The heart muscle weakens. <strong>Heart Murmurs</strong> are abnormal sounds during heartbeat cycles and should always be evaluated.</p>
-            <p>Heart disease is especially common in senior dogs over 7 years old. 75 percent of senior dogs develop some form of heart murmur. Annual vet heart checks are essential for early detection. While most forms cannot be cured, they can be managed effectively. Early diagnosis is critical. The earlier treatment begins, the better the long-term outcome.</p>
-
-            <div class="photo-card" role="img" aria-label="Senior golden retriever with arthritis">
-                <div class="photo-card-img" style="background: linear-gradient(135deg, #e74c3c, #ffb347);">🦡🐕</div>
-                <div class="photo-card-caption">Arthritis most commonly affects hips, elbows, knees and spine in senior dogs. Early signs are often subtle — look for stiffness after rest.</div>
-            </div>
-
-            <div class="article-cta">
-                <h3>🩺 Take Our Free AI Health Check</h3>
-                <p>2 minutes. Get a personalized assessment for your dog's heart health.</p>
-                <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start AI Health Check →</a>
-            </div>
-
-            <h2 id="severity">Heart Disease Severity Levels</h2>
-            <p>Arthritis severity varies significantly. Here is how vets typically classify it:</p>
-
-            <div class="severity-grid" role="list" aria-label="Arthritis severity levels">
-                <div class="severity-card green" role="listitem">
-                    <div class="severity-label">🟢 Mild</div>
-                    <div class="severity-symptoms">Often no symptoms. Found during routine vet check with a stethoscope.</div>
-                    <div class="severity-treatment">Regular monitoring + meds</div>
-                    <div class="severity-cost">$80–80/month</div>
+            <!-- HEADER -->
+            <header class="article-header">
+                <div class="article-meta-top">
+                    <span class="article-cat">📋 Complete Guide</span>
+                    <span class="article-date">🗓 July 2026</span>
+                    <span class="article-read">⏱ 10 min read</span>
                 </div>
-                <div class="severity-card yellow" role="listitem">
-                    <div class="severity-label">🟡 Moderate</div>
-                    <div class="severity-symptoms">Symptoms appear: cough, reduced stamina. Medication usually starts here.</div>
-                    <div class="severity-treatment">Vet medication + diet change</div>
-                    <div class="severity-cost">$200–200/month</div>
-                </div>
-                <div class="severity-card red" role="listitem">
-                    <div class="severity-label">🔴 Severe</div>
-                    <div class="severity-symptoms">Significant symptoms. Fluid buildup, labored breathing. Requires full cardiac care.</div>
-                    <div class="severity-treatment">Full cardiac care + palliative</div>
-                    <div class="severity-cost">$800/month</div>
-                </div>
-            </div>
+                <h1 class="article-title">Heart Disease in Senior Dogs: Complete Guide 2026</h1>
+                <p class="article-subtitle">Heart disease affects up to 10 percent of all dogs in Australia. This complete guide covers symptoms, severity levels, treatment options, lifestyle changes and real community case studies — everything you need to help your dog live comfortably.</p>
+            </header>
 
-            <h2 id="care">Heart Disease Care and Treatment</h2>
+            <!-- KEY TAKEAWAY -->
+            <aside class="key-takeaway" role="note" aria-label="Key takeaway">
+                <div class="key-takeaway-title">💡 Key Takeaway</div>
+                <p>Heart disease is common but manageable for your dog's quality of life. With early diagnosis, proper medication, and lifestyle adjustments, most senior dogs with heart disease can live active, happy lives for years after diagnosis.</p>
+            </aside>
 
-            <article class="tip-card">
-                <h3>Regular Vet Checkups and Scans</h3>
-                <p>Annual heart checks (stethoscope exam, X-rays. Even a <strong>5% reduction in body weight</strong> can significantly reduce pain in arthritic dogs. Work with your vet to find the ideal weight for your dog's breed and size.</p>
-            </article>
-            <article class="tip-card">
-                <h3>Heart Medication</h3>
-                <p>ACE inhibitors, diuretics, inotropes, omega-3 fish oil and green-lipped mussel can help Never adjust medication without vet consultation. Consistent daily dosing is essential — supplements work best when given daily without skipping doses.</p>
-            </article>
-            <article class="tip-card">
-                <h3>Controlled Exercise</h3>
-                <p>Short, gentle walks are better than long exercise and reduce pressure points. Keep bedding warm — cold weather worsens stiffness. Avoid hot weather and strenuous activity.</p>
-            </article>
-            <article class="tip-card">
-                <h3>Low-Sodium Diet</h3>
-                <p>Reducing salt intake minimizes fluid retention–30 min) on soft surfaces help maintain muscle and joint flexibility. Prescription cardiac diets (Hills h/d, Royal Canin Cardiac) exercise for arthritic dogs — builds muscle without loading the joints. Avoid running on hard ground.</p>
-            </article>
-            <article class="tip-card">
-                <h3>Keep Calm and Comfortable</h3>
-                <p>Stress worsens heart symptoms, non-slip rugs on slippery floors, raised food bowls, and easy access to water can all reduce joint stress. A calm, stable home makes a real difference a dog's quality of life.</p>
-            </article>
-
-            <!-- COMMUNITY SECTION -->
-            <section class="community-section" id="community" aria-labelledby="comm-heading">
-                <h2 id="comm-heading">💬 What the Community Says</h2>
-                <div class="comm-post" onclick="window.open('community.html','_blank')" role="article" aria-label="Community post: Milo arthritis journey">
-                    <div class="comm-user">
-                        <div class="comm-avatar" style="background:#c0392b;">SM</div>
-                        <div>
-                            <div class="comm-name">MiloMum · Milo (Golden Retriever, 11yo)</div>
-                            <div class="comm-time">2 hours ago · 📋 Health Case</div>
-                        </div>
-                    </div>
-                    <h3>"Milo's 18-month arthritis journey — what actually worked"</h3>
-                    <div class="comm-meta">❤️ 47 likes · 💬 12 comments</div>
-                </div>
-                <div class="comm-post" onclick="window.open('community.html','_blank')" role="article" aria-label="Community post: Bunnings ramp">
-                    <div class="comm-user">
-                        <div class="comm-avatar" style="background:#7c3aed;">MR</div>
-                        <div>
-                            <div class="comm-name">RockyDad · Rocky (Labrador, 12yo)</div>
-                            <div class="comm-time">1 day ago · 💡 Tips</div>
-                        </div>
-                    </div>
-                    <h3>"The $30 Bunnings ramp that changed everything — no more lifting him"</h3>
-                    <div class="comm-meta">❤️ 124 likes · 💬 45 comments</div>
-                </div>
-                <div class="comm-post" onclick="window.open('community.html','_blank')" role="article" aria-label="Community post: orthopedic beds review">
-                    <div class="comm-user">
-                        <div class="comm-avatar" style="background:#27ae60;">FS</div>
-                        <div>
-                            <div class="comm-name">CocoCarer · Coco (Poodle, 13yo)</div>
-                            <div class="comm-time">3 days ago · ⭐ Product Review</div>
-                        </div>
-                    </div>
-                    <h3>"Honest review: 5 orthopedic beds — which one is actually worth it"</h3>
-                    <div class="comm-meta">❤️ 89 likes · 💬 67 comments</div>
-                </div>
-                <a href="./community.html" class="comm-more" aria-label="View all community discussions on arthritis">➕ Join the Discussion / View All 89 Comments →</a>
-            </section>
-
-            <!-- AUTHOR BOX -->
-            <div class="author-box" role="contentinfo" aria-label="About the author">
-                <div class="author-box-avatar" aria-hidden="true">PW</div>
-                <div>
-                    <h3>About PawWell</h3>
-                    <p>PawWell is Australia's senior dog health community. Our guides are researched and reviewed by veterinary professionals. Always consult your vet for medical advice about your specific dog.</p>
-                </div>
-            </div>
-
-            <!-- NAVIGATION -->
-            <nav class="nav-links" aria-label="Related guides">
-                <a href="./kidney.html" class="n-kid">🫘 Kidney Disease Guide →</a>
-                <a href="./heart.html" class="n-heart">❤️ Heart Disease Guide →</a>
-                <a href="./assessment.html" class="n-arth">🩺 AI Health Check →</a>
+            <!-- TABLE OF CONTENTS -->
+            <nav class="toc" aria-label="Article contents">
+                <h3>📑 Contents</h3>
+                <ol>
+                    <li><a href="#what">Types of Heart Disease</a></li>
+                    <li><a href="#symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</a></li>
+                    <li><a href="#severity">Understanding Severity Levels</a></li>
+                    <li><a href="#care">Heart Disease Care &amp; Management</a></li>
+                    <li><a href="#community">What the Community Says</a></li>
+                </ol>
             </nav>
-<!-- RELATED ARTICLES -->
-            <section class="related-articles" aria-labelledby="related-heading">
-                <h2 id="related-heading">📚 Related Reading</h2>
-                <div class="related-grid">
-                    <div class="related-card" onclick="window.location.href='arthritis-18-months.html'" role="link" aria-label="Related article: Milo 18-month arthritis case">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">🦡</div>
-                        <div class="related-card-body">
-                            <h3>Milo's 18-Month Arthritis Journey: What Actually Worked</h3>
-                            <div class="meta">📋 Health Case · 8 min · Sarah M.</div>
-                        </div>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <h2 id="what">Types of Heart Disease in Dogs</h2>
+                <p>Heart disease in dogs takes several forms, affecting the heart's ability to pump blood effectively. <strong>Degenerative Valve Disease (MVD)</strong> is most common in small-to-medium breeds (Cavalier KC, Poodles, Chihuahuas). The heart valves wear out and leak blood. <strong>Dilated Cardiomyopathy (DCM)</strong> affects large breeds (Dobermans, Boxers, Great Danes). The heart muscle weakens and struggles to pump. <strong>Heart Murmurs</strong> are abnormal sounds during heartbeat cycles caused by turbulent blood flow and should always be evaluated.</p>
+                <p>Heart disease is especially common in senior dogs over 7 years old. Up to 75 percent of senior dogs develop some form of heart murmur. Annual vet heart checks are essential for early detection. While most forms cannot be cured, they can be managed effectively. Early diagnosis is critical — the earlier treatment begins, the better the long-term outcome.</p>
+
+                <!-- Photo Card -->
+                <div class="photo-card" role="img" aria-label="Senior dog with heart disease — mitral valve disease is most common in small breeds">
+                    <div class="photo-card-img" style="background: linear-gradient(135deg, #c0392b, #e74c3c);" aria-hidden="true">❤️🐕</div>
+                    <div class="photo-card-caption">Mitral valve disease is the most common heart condition in small breed dogs. Regular stethoscope exams can detect murmurs early.</div>
+                </div>
+
+                <!-- Inline CTA -->
+                <div class="article-cta">
+                    <h3>🩺 Take Our Free AI Health Check</h3>
+                    <p>2 minutes. Get a personalized assessment for your dog's heart health.</p>
+                    <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start AI Health Check →</a>
+                </div>
+
+                <h2 id="severity">Heart Disease Severity Levels</h2>
+                <p>Heart disease severity is typically classified by the ACVIM staging system. Here is a simplified overview:</p>
+
+                <div class="severity-grid" role="list" aria-label="Heart disease severity levels">
+                    <div class="severity-card green" role="listitem">
+                        <div class="severity-label">🟢 Stage B1–B2 (Mild)</div>
+                        <div class="severity-symptoms">Often no symptoms. Heart murmur found during routine vet check with a stethoscope.</div>
+                        <div class="severity-treatment">Regular monitoring ± early medication</div>
+                        <div class="severity-cost">~$80–150/month (monitoring)</div>
                     </div>
-                    <div class="related-card" onclick="window.location.href='bunnings-ramp-for-old-cavoodle.html'" role="link" aria-label="Related article: Bunnings ramp tip">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);">🐕</div>
-                        <div class="related-card-body">
-                            <h3>The $30 Bunnings Ramp That Changed Everything</h3>
-                            <div class="meta">💡 Tips · 5 min · Mark R.</div>
-                        </div>
+                    <div class="severity-card yellow" role="listitem">
+                        <div class="severity-label">🟡 Stage C (Moderate)</div>
+                        <div class="severity-symptoms">Symptoms appear: cough, reduced stamina, rapid breathing. Medication usually starts here.</div>
+                        <div class="severity-treatment">Vet medication + diet change (low sodium)</div>
+                        <div class="severity-cost">~$150–300/month</div>
                     </div>
-                    <div class="related-card" onclick="window.location.href='kidney.html'" role="link" aria-label="Related article: kidney disease early detection">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);">🫘</div>
-                        <div class="related-card-body">
-                            <h3>Charlie's Skin Issues Turned Out to Be Kidney Disease</h3>
-                            <div class="meta">📋 Health Case · 10 min · Amy W.</div>
-                        </div>
+                    <div class="severity-card red" role="listitem">
+                        <div class="severity-label">🔴 Stage D (Severe)</div>
+                        <div class="severity-symptoms">Significant symptoms: fluid buildup, labored breathing at rest. Requires full cardiac care.</div>
+                        <div class="severity-treatment">Full cardiac care + palliative management</div>
+                        <div class="severity-cost">~$500–1,000+/month</div>
                     </div>
                 </div>
-            </section>
 
-            
-            <h2 id="symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</h2>
-            <p>Use this interactive checklist to track whether your senior dog might be showing signs of arthritis. Check the ones that apply:</p>
+                <h2 id="care">Heart Disease Care &amp; Treatment</h2>
 
-            <div class="checklist" aria-label="Arthritis symptoms interactive checklist">
-                <h3>👀 Common Arthritis Symptoms</h3>
-                <p class="subtitle">Tap to check the symptoms your dog has shown recently:</p>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Persistent coughing, especially worse at night or after exercise</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Labored or rapid breathing, even at rest</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Reduced stamina - tiring quickly on walks</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Fainting or collapsing episodes</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Swollen belly (fluid buildup from heart failure)</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Pale or blue-tinged gums</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span class="check-text">Restlessness, especially at night</span></div>
-                <div class="checklist-result" id="symptomResult"></div>
-            </div>
+                <article class="tip-card">
+                    <h3>Regular Vet Checkups and Scans</h3>
+                    <p>Annual heart checks including stethoscope exam, chest X-rays, and echocardiograms help track disease progression. Even a <strong>6-month checkup cycle</strong> can make a significant difference — early detection of changes allows medication adjustments before symptoms worsen.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Heart Medication</h3>
+                    <p>Common medications include ACE inhibitors (enalapril, benazepril) to reduce cardiac workload, diuretics (furosemide) to manage fluid buildup, and pimobendan to strengthen heart contractions. Never adjust medication without vet consultation. Consistent daily dosing is essential.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Controlled Exercise</h3>
+                    <p>Short, gentle walks are better than long or strenuous exercise. Avoid hot weather and strenuous activity that puts stress on the heart. Watch for signs of fatigue — if your dog lies down mid-walk, it's time to head home. Swimming is generally not recommended for dogs with significant heart disease.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Low-Sodium Diet</h3>
+                    <p>Reducing salt intake minimizes fluid retention and reduces strain on the heart. Prescription cardiac diets (Hills h/d, Royal Canin Cardiac) are formulated with controlled sodium levels. Avoid salty human foods, commercial treats, and table scraps. Check ingredient labels carefully.</p>
+                </article>
+                <article class="tip-card">
+                    <h3>Keep Calm and Comfortable</h3>
+                    <p>Stress worsens heart symptoms. Provide a calm, stable home environment with non-slip flooring, easy access to food and water, and a comfortable resting area. Avoid exciting situations like boarding kennels or noisy gatherings. A calm, stable home makes a real difference to your dog's quality of life.</p>
+                </article>
 
-<!-- BOTTOM CTA -->
-            <div class="bottom-cta" role="complementary" aria-label="Call to action">
-                <h2>Is Your Dog Showing Signs of Arthritis?</h2>
-                <p>Take our free 2-minute AI health check to assess your dog's heart health.</p>
-                <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
+                <!-- =====================================================
+                     LAYER 4: Disease Cross-Navigation
+                     ===================================================== -->
+                <nav class="nav-links" aria-label="Related disease guides">
+                    <a href="./arthritis.html" class="n-arth">🦡 Arthritis Guide →</a>
+                    <a href="./kidney.html" class="n-kid">🫘 Kidney Disease Guide →</a>
+                    <a href="./assessment.html" class="n-heart">🩺 AI Health Check →</a>
+                </nav>
+
+                <!-- =====================================================
+                     LAYER 4b: Related Reading
+                     ===================================================== -->
+                <section class="related-articles" aria-labelledby="related-heading">
+                    <h2 id="related-heading">📚 Related Reading</h2>
+                    <div class="related-grid">
+                        <a href="cavalier-night-coughing-heart.html" class="related-card" aria-label="Related article: cavalier night coughing heart story">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #c0392b, #e74c3c);" aria-hidden="true">❤️</div>
+                            <div class="related-card-body">
+                                <h3>My Cavalier's Night Coughing Turned Out to Be Heart Disease</h3>
+                                <div class="meta">📋 Health Case · 8 min · Jane D.</div>
+                            </div>
+                        </a>
+                        <a href="grade-2-heart-murmur-labrador.html" class="related-card" aria-label="Related article: grade 2 heart murmur labrador">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);" aria-hidden="true">🐕</div>
+                            <div class="related-card-body">
+                                <h3>Grade 2 Heart Murmur in My Labrador — What Happened Next</h3>
+                                <div class="meta">📋 Health Case · 6 min · Tom K.</div>
+                            </div>
+                        </a>
+                        <a href="kidney.html" class="related-card" aria-label="Related article: kidney disease early detection">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);" aria-hidden="true">🫘</div>
+                            <div class="related-card-body">
+                                <h3>Charlie's Skin Issues Turned Out to Be Kidney Disease</h3>
+                                <div class="meta">📋 Health Case · 10 min · Amy W.</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <h2 id="symptoms">Symptoms Checklist — Is Your Dog Showing These Signs?</h2>
+                <p>Use this interactive checklist to track whether your senior dog might be showing signs of heart disease. Check the ones that apply:</p>
+
+                <div class="checklist" aria-label="Heart disease symptoms interactive checklist">
+                    <h3>👀 Common Heart Disease Symptoms</h3>
+                    <p class="subtitle">Tap to check the symptoms your dog has shown recently:</p>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Persistent coughing, especially worse at night or after exercise</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Labored or rapid breathing, even at rest</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Reduced stamina — tiring quickly on walks</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Fainting or collapsing episodes</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Swollen belly (fluid buildup from heart failure)</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Pale or blue-tinged gums</span>
+                    </div>
+                    <div class="check-item" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')event.preventDefault();toggleCheck(this)">
+                        <div class="check-box">✓</div>
+                        <span class="check-text">Restlessness, especially at night</span>
+                    </div>
+                    <div class="checklist-result" id="symptomResult"></div>
+                </div>
+
+                <!-- =====================================================
+                     LAYER 5: Community Section
+                     ===================================================== -->
+                <section class="community-section" id="community" aria-labelledby="comm-heading">
+                    <h2 id="comm-heading">💬 Browse Community Stories</h2>
+                    <a href="community.html" class="comm-post" aria-label="Community post: Cavalier heart disease journey">
+                        <div class="comm-user">
+                            <div class="comm-avatar" style="background:#c0392b;">JD</div>
+                            <div>
+                                <div class="comm-name">JanesMum · Bella (Cavalier KC, 9yo)</div>
+                                <div class="comm-time">3 hours ago · 📋 Health Case</div>
+                            </div>
+                        </div>
+                        <h3>"My Cavalier's night coughing turned out to be mitral valve disease — here's what happened"</h3>
+                        <div class="comm-meta">❤️ 63 likes · 💬 21 comments</div>
+                    </a>
+                    <a href="community.html" class="comm-post" aria-label="Community post: low sodium diet for heart disease">
+                        <div class="comm-user">
+                            <div class="comm-avatar" style="background:#e67e22;">TK</div>
+                            <div>
+                                <div class="comm-name">TommysCarer · Tommy (Cocker Spaniel, 10yo)</div>
+                                <div class="comm-time">1 day ago · 💡 Tips</div>
+                            </div>
+                        </div>
+                        <h3>"Switching to a low-sodium cardiac diet — what I wish I knew before we started"</h3>
+                        <div class="comm-meta">❤️ 98 likes · 💬 34 comments</div>
+                    </a>
+                    <a href="community.html" class="comm-post" aria-label="Community post: heart medication management">
+                        <div class="comm-user">
+                            <div class="comm-avatar" style="background:#8e44ad;">LW</div>
+                            <div>
+                                <div class="comm-name">LexiMum · Lexi (Doberman, 8yo)</div>
+                                <div class="comm-time">2 days ago · 📋 Health Case</div>
+                            </div>
+                        </div>
+                        <h3>"DCM diagnosis at age 8 — pimobendan, furosemide and 18 months later she's still here"</h3>
+                        <div class="comm-meta">❤️ 142 likes · 💬 56 comments</div>
+                    </a>
+                    <a href="./community.html" class="comm-more" aria-label="View all community discussions">➕ Join the Discussion / Share Your Story →</a>
+                </section>
+
+                <!-- AUTHOR BOX -->
+                <div class="author-box" role="contentinfo" aria-label="About the author">
+                    <div class="author-box-avatar" aria-hidden="true">PW</div>
+                    <div>
+                        <h3>About PawWell</h3>
+                        <p>PawWell is Australia's senior dog health community. Our guides are researched and reviewed by veterinary professionals. Always consult your vet for medical advice about your specific dog.</p>
+                    </div>
+                </div>
+
+                <!-- BOTTOM CTA -->
+                <div class="bottom-cta" role="complementary" aria-label="Call to action">
+                    <h2>Is Your Dog Showing Signs of Heart Disease?</h2>
+                    <p>Take our free 2-minute AI health check to assess your dog's heart health.</p>
+                    <a href="./assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
+                </div>
             </div>
         </div>
-    </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="site-footer" role="contentinfo">
+    <!-- ================================================================
+         LAYER 6: Footer
+         ================================================================ -->
+    <footer class="pw-footer" role="contentinfo">
         <p>© 2026 PawWell. All rights reserved.</p>
-        <p style="margin-top:0.5rem;">
+        <div class="pw-footer-links">
             <a href="./index.html">Home</a> ·
             <a href="./assessment.html">AI Health Check</a> ·
             <a href="./community.html">Community</a> ·
             <a href="./submit.html">Contribute</a> ·
             <a href="./blog.html">Blog</a>
-        </p>
+        </div>
     </footer>
 
-    <!-- Schema.org Article -->
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://agedpawwell.com"},
+        {"@type":"ListItem","position":2,"name":"Heart Guide","item":"https://agedpawwell.com/AU/heart.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What are the symptoms of heart disease in dogs?","acceptedAnswer":{"@type":"Answer","text":"Common symptoms include persistent coughing (especially at night or after exercise), rapid or laboured breathing, tiring easily on walks, weakness or collapse, reduced appetite, weight loss, abdominal swelling, and fainting episodes. Some dogs may show no symptoms in early stages."}},
+        {"@type":"Question","name":"What causes heart murmurs in dogs?","acceptedAnswer":{"@type":"Answer","text":"Heart murmurs in dogs are caused by turbulent blood flow. Common causes include degenerative mitral valve disease (most common in small breeds), congenital heart defects, dilated cardiomyopathy (common in large breeds), and other structural heart problems."}},
+        {"@type":"Question","name":"Can heart disease in dogs be treated?","acceptedAnswer":{"@type":"Answer","text":"Yes, while most heart disease cannot be cured, it can be managed effectively. Treatments include medications such as ACE inhibitors, diuretics to reduce fluid buildup, pimobendan to improve heart contractility, diet changes (low sodium), exercise management, and regular veterinary monitoring."}},
+        {"@type":"Question","name":"What dog breeds are most prone to heart disease?","acceptedAnswer":{"@type":"Answer","text":"Cavalier King Charles Spaniels (mitral valve disease), Doberman Pinschers and Boxers (dilated cardiomyopathy), Great Danes (dilated cardiomyopathy), and small breeds like Miniature Poodles and Dachshunds (mitral valve disease) are at higher risk."}},
+        {"@type":"Question","name":"How is heart disease diagnosed in dogs?","acceptedAnswer":{"@type":"Answer","text":"Diagnosis starts with a veterinary physical exam including listening to the heart with a stethoscope. Further tests may include chest X-rays to check heart size and fluid, electrocardiogram (ECG) to assess rhythm, echocardiogram (ultrasound) to evaluate structure and function, and blood tests including NT-proBNP."}}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Heart Disease in Senior Dogs: Complete Guide 2026",
-      "description": "Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, supplements, lifestyle changes and community case studies.",
+      "description": "Heart disease affects up to 10 percent of all dogs in Australia. Complete guide covering symptoms, severity levels, medications, diet changes and community case studies.",
       "author": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
       "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://agedpawwell.com" },
       "datePublished": "2026-07-05",
       "dateModified": "2026-07-05",
-      "keywords": ["heart disease senior dogs", "osteoarthritis dogs", "joint pain dogs", "dog arthritis symptoms Australia", "arthritis treatment dogs"],
-      "about": { "@type": "MedicalCondition", "name": "Canine Heart Disease", "description": "Progressive joint disease in dogs causing pain, stiffness and reduced mobility" }
+      "keywords": ["heart disease senior dogs", "heart murmur dogs Australia", "congestive heart failure dogs", "dog cardiac care", "canine cardiology"],
+      "about": { "@type": "MedicalCondition", "name": "Canine Heart Disease", "description": "Cardiovascular disease in dogs affecting heart valves, muscles or rhythm, impairing blood circulation" }
     }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-init.js"></script>
-    <script src="js/api-client.js"></script>
+    <!-- Scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="js/supabase-init.js"></script>
+    <script defer src="js/api-client.js"></script>
     <script defer src="./_shared/nav.js"></script>
     <script>
         function toggleCheck(el) {

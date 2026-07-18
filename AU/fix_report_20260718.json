@@ -1,0 +1,540 @@
+{
+  "generated_at": "2026-07-18T09:12:35.956097+00:00",
+  "total_changes": 75,
+  "by_priority": {
+    "C2/C8": 31,
+    "C3": 30,
+    "C6/C7": 1,
+    "C5": 7,
+    "H4": 2,
+    "H5/M8": 2,
+    "M5": 2
+  },
+  "changes": [
+    {
+      "file": "allergy-test-paw-licking-diagnosis.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "allergy-test-paw-licking-diagnosis.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "best-elevated-bowls-arthritic-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "best-elevated-bowls-arthritic-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "bone-broth-senior-dog-joints.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "bone-broth-senior-dog-joints.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "border-collie-drinking-more-water.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "border-collie-drinking-more-water.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "bunnings-ramp-for-old-cavoodle.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "bunnings-ramp-for-old-cavoodle.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "car-ramp-for-small-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "car-ramp-for-small-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "cardiologist-visit-cost-breakdown.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "cardiologist-visit-cost-breakdown.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "cavalier-night-coughing-heart.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "cavalier-night-coughing-heart.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "community.html",
+      "prio": "C6/C7",
+      "action": "JSON-LD url /AU/ -> /community/",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/community/[slug]"
+    },
+    {
+      "file": "daily-feeding-schedule-13-year-old-staffy.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "daily-feeding-schedule-13-year-old-staffy.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "daily-teeth-brushing-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "daily-teeth-brushing-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "elevated-kidney-values-beagle.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "elevated-kidney-values-beagle.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "fish-oil-dosage-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "fish-oil-dosage-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "fresh-food-diet-senior-labrador.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "fresh-food-diet-senior-labrador.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "german-shepherd-recurring-hot-spots.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "german-shepherd-recurring-hot-spots.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "golden-retriever-persistent-scratching.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "golden-retriever-persistent-scratching.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "grade-2-heart-murmur-labrador.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "grade-2-heart-murmur-labrador.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "greyhound-osteoarthritis-diagnosis.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "greyhound-osteoarthritis-diagnosis.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "hiding-dog-medication-tricks.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "hiding-dog-medication-tricks.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "kelpie-stiffness-at-7-years.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "kelpie-stiffness-at-7-years.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "librela-injection-arthritis-experience.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "librela-injection-arthritis-experience.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "mentally-stimulating-old-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "mentally-stimulating-old-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "multiple-medications-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "multiple-medications-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "oatmeal-baths-itchy-dogs.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "oatmeal-baths-itchy-dogs.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "old-mate-struggling-on-stairs.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "old-mate-struggling-on-stairs.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "raw-diet-cleared-staffy-skin.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "raw-diet-cleared-staffy-skin.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "senior-dog-refusing-kibble.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "senior-dog-refusing-kibble.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "shih-tzu-coat-thinning-senior.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "shih-tzu-coat-thinning-senior.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "submit.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "swimming-hydrotherapy-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "swimming-hydrotherapy-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "training-treats-for-senior-dog.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "training-treats-for-senior-dog.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "when-switch-senior-food-border-collie.html",
+      "prio": "C2/C8",
+      "action": "canonical /AU/ -> /",
+      "before": "agedpawwell.com/AU/[slug]",
+      "after": "agedpawwell.com/[slug]"
+    },
+    {
+      "file": "when-switch-senior-food-border-collie.html",
+      "prio": "C3",
+      "action": "nav trailing-dot fix",
+      "before": "agedpawwell.com./blog.html",
+      "after": "agedpawwell.com/blog.html"
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "aria-label=\"Arthritis in senior dogs guide cover\"",
+      "after": "aria-label=\"Kidney disease in senior dogs guide cover\""
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "most senior dogs with arthritis can live active, happy lives",
+      "after": "most senior dogs with kidney disease can live active, happy "
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "<li><a href=\"#care\">Arthritis Care &amp; Management</a></li>",
+      "after": "<li><a href=\"#care\">Kidney Care &amp; Management</a></li>"
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "Arthritis severity varies significantly",
+      "after": "Kidney disease severity varies significantly"
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "aria-label=\"Arthritis severity levels\"",
+      "after": "aria-label=\"Kidney disease severity levels\""
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "content arthritis->kidney string fix",
+      "before": "significantly reduce pain in arthritic dogs",
+      "after": "significantly reduce pain in dogs with kidney disease"
+    },
+    {
+      "file": "kidney.html",
+      "prio": "C5",
+      "action": "photo caption arthritis->kidney",
+      "before": "<div class=\"photo-card-caption\">Arthritis most commonly affe",
+      "after": "Kidney disease is graded by IRIS stages..."
+    },
+    {
+      "file": "community.html",
+      "prio": "H4",
+      "action": "added defer to Supabase scripts",
+      "before": "<script src=supabase-js@2>",
+      "after": "<script defer src=supabase-js@2>"
+    },
+    {
+      "file": "kidney.html",
+      "prio": "H4",
+      "action": "added defer to Supabase scripts",
+      "before": "<script src=supabase-js@2>",
+      "after": "<script defer src=supabase-js@2>"
+    },
+    {
+      "file": "js/community-data-20260717115201.js",
+      "prio": "H5/M8",
+      "action": "deleted dead file",
+      "before": "exists",
+      "after": "removed"
+    },
+    {
+      "file": "js/gs-api-client.js",
+      "prio": "H5/M8",
+      "action": "deleted dead file",
+      "before": "exists",
+      "after": "removed"
+    },
+    {
+      "file": "robots.txt",
+      "prio": "M5",
+      "action": "created",
+      "before": "(missing)",
+      "after": "User-agent: * Allow: /"
+    },
+    {
+      "file": "sitemap.xml",
+      "prio": "M5",
+      "action": "created",
+      "before": "(missing)",
+      "after": "69 URLs"
+    }
+  ]
+}

@@ -3,4 +3,4 @@ Allow: /
 
 # Disallow admin/internal paths (none currently)
 
-Sitemap: https://agedpawwell.com/sitemap.xml
+Sitemap: https://www.agedpawwell.com/AU/sitemap.xml

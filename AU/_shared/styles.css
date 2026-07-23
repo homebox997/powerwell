@@ -46,6 +46,8 @@ body {
     background: var(--pw-bg);
     min-height: 100vh;
     line-height: 1.6;
+
+    overflow-x: hidden;
 }
 a { text-decoration: none; color: inherit; }
 button { cursor: pointer; font-family: var(--pw-font); }

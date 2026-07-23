@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="border-collie-drinking-more-water.css">
     <title>Drinking heaps more water lately - should I be worried? | PawWell Community</title>
     <meta name="description" content="Cooper drinking twice as much water as before. 9-year-old Border Collie. Possible kidney, diabetes or Cushings. Vet appointment booked.">
     <meta name="robots" content="index, follow">
@@ -30,33 +34,6 @@
     }
     </script>
 
-    <!-- Share -->
-    <div class="share-bar">
-        <span>Share this article:</span>
-        <a class="share-btn fb" id="share-fb" href="#" onclick="shareFacebook();return false;">&#128100; Facebook</a>
-        <a class="share-btn tw" href="#" onclick="shareTwitter();return false;">&#128038; Twitter</a>
-        <a class="share-btn wa" href="#" onclick="shareWhatsApp();return false;">&#128172; WhatsApp</a>
-        <a class="share-btn copy" href="#" onclick="copyLink();return false;">&#128203; Copy Link</a>
-    </div>
-    <script>
-    var pageUrl = window.location.href;
-    var pageTitle = document.title;
-    function shareFacebook() {
-        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl), '_blank', 'width=600,height=400');
-    }
-    function shareTwitter() {
-        window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(pageUrl) + '&text=' + encodeURIComponent(pageTitle), '_blank', 'width=600,height=400');
-    }
-    function shareWhatsApp() {
-        window.open('https://wa.me/?text=' + encodeURIComponent(pageTitle + ' ' + pageUrl), '_blank');
-    }
-    function copyLink() {
-        navigator.clipboard.writeText(pageUrl).then(function() {
-            var btn = document.getElementById('share-fb');
-            if (btn) { var orig = btn.textContent; btn.textContent = 'Copied!'; setTimeout(function(){ btn.textContent = orig; }, 2000); }
-        });
-    }
-    </script>
     <!-- Article Schema -->
     <script type="application/ld+json">
     {
@@ -70,25 +47,24 @@
       "dateModified": "2026-07-11"
     }
     </script>
-    <link rel="stylesheet" href="border-collie-drinking-more-water.css">
     </head>
 <body>
-    <header class="site-header">
+    <header class="site-header" role="banner">
         <div class="header-inner">
-            <a href="https://agedpawwell.com/AU/index.html"><img src="https://agedpawwell.com/AU/_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
-            <button class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('open')">☰</button>
-            <nav class="nav" id="navMenu">
-                <a href="https://agedpawwell.com/AU/index.html">Home</a><a href="https://agedpawwell.com/AU/assessment.html">AI Health Check</a>
-                <a href="https://agedpawwell.com/AU/arthritis.html">Arthritis</a><a href="https://agedpawwell.com/AU/kidney.html">Kidney</a>
-                <a href="https://agedpawwell.com/AU/heart.html">Heart</a><a href="https://agedpawwell.com/AU/community.html" class="active">Community</a>
-                <a href="https://agedpawwell.com/AU/blog.html">Blog</a><a href="https://agedpawwell.com/AU/submit.html">Contribute</a>
+            <a href="/AU/index.html" aria-label="PawWell Home"><img src="/AU/_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
+            <button class="hamburger" onclick="document.getElementById('navMenu').classList.toggle('open')" aria-label="Toggle menu">☰</button>
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+                <a href="/AU/index.html">Home</a><a href="/AU/assessment.html">AI Health Check</a>
+                <a href="/AU/arthritis.html">Arthritis</a><a href="/AU/kidney.html">Kidney</a>
+                <a href="/AU/heart.html">Heart</a><a href="/AU/community.html" class="active">Community</a>
+                <a href="/AU/blog.html">Blog</a><a href="/AU/submit.html">Contribute</a>
             </nav>
         </div>
     </header>
     <div class="article-wrap">
         <nav class="breadcrumb">
-            <a href="https://agedpawwell.com/AU/index.html">Home</a> &rsaquo;
-            <a href="https://agedpawwell.com/AU/community.html">Community</a> &rsaquo;
+            <a href="/AU/index.html">Home</a> &rsaquo;
+            <a href="/AU/community.html">Community</a> &rsaquo;
             <span>Drinking heaps more water lately - should I be wor...</span>
         </nav>
         <article class="forum-post" itemscope itemtype="https://schema.org/DiscussionForumPosting">
@@ -165,10 +141,39 @@ Read online this could be kidneys, could be diabetes, could be Cushings. All sou
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"Comment","author":{"@type":"Person","name":"Rob F."}},{"@type":"Comment","author":{"@type":"Person","name":"Brett C."}},{"@type":"Comment","author":{"@type":"Person","name":"Gary M."}},{"@type":"Comment","author":{"@type":"Person","name":"Karen H."}},{"@type":"Comment","author":{"@type":"Person","name":"Dave T."}},{"@type":"Comment","author":{"@type":"Person","name":"Tracy L."}},{"@type":"Comment","author":{"@type":"Person","name":"Nina B."}},{"@type":"Comment","author":{"@type":"Person","name":"Sue P."}}]}
 </script>
+        <div class="share-bar">
+            <span>Share this article:</span>
+            <a class="share-btn fb" id="share-fb" href="#" onclick="shareFacebook();return false;">&#128100; Facebook</a>
+            <a class="share-btn tw" href="#" onclick="shareTwitter();return false;">&#128038; Twitter</a>
+            <a class="share-btn wa" href="#" onclick="shareWhatsApp();return false;">&#128172; WhatsApp</a>
+            <a class="share-btn copy" href="#" onclick="copyLink();return false;">&#128203; Copy Link</a>
+        </div>
+        <noscript>
+            <p style="text-align:center;color:#7a8a9a;font-size:.85rem;padding:10px;">Share buttons require JavaScript. You can still share via your browser's address bar.</p>
+        </noscript>
+        <script>
+        var pageUrl = window.location.href;
+        var pageTitle = document.title;
+        function shareFacebook() {
+            window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(pageUrl), '_blank', 'width=600,height=400');
+        }
+        function shareTwitter() {
+            window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(pageUrl) + '&text=' + encodeURIComponent(pageTitle), '_blank', 'width=600,height=400');
+        }
+        function shareWhatsApp() {
+            window.open('https://wa.me/?text=' + encodeURIComponent(pageTitle + ' ' + pageUrl), '_blank');
+        }
+        function copyLink() {
+            navigator.clipboard.writeText(pageUrl).then(function() {
+                var btn = document.getElementById('share-fb');
+                if (btn) { var orig = btn.textContent; btn.textContent = 'Copied!'; setTimeout(function(){ btn.textContent = orig; }, 2000); }
+            });
+        }
+        </script>
         <div class="cta-strip">
             <h2>Have a story to share?</h2>
             <p>Join Australia's growing community of senior dog parents.</p>
-            <a href="https://agedpawwell.com/AU/community.html" class="cta-btn">Browse More Discussions</a>
+            <a href="/AU/community.html" class="cta-btn">Browse More Discussions</a>
         </div>
     </div>
     <footer class="site-footer">

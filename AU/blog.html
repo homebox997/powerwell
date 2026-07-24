@@ -488,7 +488,28 @@
             renderGrid(cat);
         }
 
-        function renderGrid(cat) {
+                var communitySlugs = [
+            'allergy-test-paw-licking-diagnosis','arthritis-18-months','best-elevated-bowls-arthritic-dog',
+            'bone-broth-senior-dog-joints','border-collie-drinking-more-water','bunnings-ramp-for-old-cavoodle',
+            'car-ramp-for-small-senior-dog','cardiologist-visit-cost-breakdown','cavalier-night-coughing-heart',
+            'daily-feeding-schedule-13-year-old-staffy','daily-teeth-brushing-senior-dog',
+            'elevated-kidney-values-beagle','fish-oil-dosage-senior-dog','fresh-food-diet-senior-labrador',
+            'german-shepherd-recurring-hot-spots','golden-retriever-persistent-scratching',
+            'grade-2-heart-murmur-labrador','greyhound-osteoarthritis-diagnosis',
+            'hiding-dog-medication-tricks','kelpie-stiffness-at-7-years','librela-injection-arthritis-experience',
+            'mentally-stimulating-old-dog','multiple-medications-senior-dog','oatmeal-baths-itchy-dogs',
+            'old-mate-struggling-on-stairs','raw-diet-cleared-staffy-skin',
+            'senior-dog-refusing-kibble','shih-tzu-coat-thinning-senior',
+            'swimming-hydrotherapy-senior-dog','training-treats-for-senior-dog',
+            'when-switch-senior-food-border-collie'
+        ];
+        function getArticlePath(slug) {
+            return communitySlugs.indexOf(slug) >= 0
+                ? './community/' + slug + '.html'
+                : './blog/' + slug + '.html';
+        }
+
+function renderGrid(cat) {
             var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return a.category === cat; });
             var html = '';
             var featured = filtered.find(function(a) { return a.featured; });
@@ -503,7 +524,7 @@
 
         function renderCard(a, isFeatured) {
             var catLabel = { 'health-case': '📋 Health Case', 'tip': '💡 Tips', 'qa': '❓ Q&A', 'review': '⭐ Review' }[a.category] || a.category;
-            return '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + a.slug + '.html\'" role="article" aria-label="' + a.title + '">' +
+            return '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + getArticlePath(a.slug) + \''" role="article" aria-label="' + a.title + '">' +
                 '<div class="card-cover" style="--c1:' + a.c1 + ';--c2:' + a.c2 + ';">' +
                 '<span class="cover-icon" aria-hidden="true">' + a.coverIcon + '</span>' +
                 '<span class="card-cat" style="--c1:' + a.c1 + ';">' + catLabel + '</span>' +

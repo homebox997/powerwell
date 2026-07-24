@@ -489,28 +489,9 @@
             btn.classList.add('active');
             renderGrid(cat);
         }
-
-                var communitySlugs = [
-            'allergy-test-paw-licking-diagnosis','best-elevated-bowls-arthritic-dog',
-            'bone-broth-senior-dog-joints','border-collie-drinking-more-water','bunnings-ramp-for-old-cavoodle',
-            'car-ramp-for-small-senior-dog','cardiologist-visit-cost-breakdown','cavalier-night-coughing-heart',
-            'daily-feeding-schedule-13-year-old-staffy','daily-teeth-brushing-senior-dog',
-            'elevated-kidney-values-beagle','fish-oil-dosage-senior-dog','fresh-food-diet-senior-labrador',
-            'german-shepherd-recurring-hot-spots','golden-retriever-persistent-scratching',
-            'grade-2-heart-murmur-labrador','greyhound-osteoarthritis-diagnosis',
-            'hiding-dog-medication-tricks','kelpie-stiffness-at-7-years','librela-injection-arthritis-experience',
-            'mentally-stimulating-old-dog','multiple-medications-senior-dog','oatmeal-baths-itchy-dogs',
-            'old-mate-struggling-on-stairs','raw-diet-cleared-staffy-skin',
-            'senior-dog-refusing-kibble','shih-tzu-coat-thinning-senior',
-            'swimming-hydrotherapy-senior-dog','training-treats-for-senior-dog',
-            'when-switch-senior-food-border-collie'
-        ];
-        var auRootSlugs = ['arthritis-18-months'];
         function getArticlePath(slug) {
-            if (auRootSlugs.indexOf(slug) >= 0) return './' + slug + '.html';
-            return communitySlugs.indexOf(slug) >= 0
-                ? './community/' + slug + '.html'
-                : './blog/' + slug + '.html';
+            // All articles live at /AU/<slug>.html (root)
+            return './' + slug + '.html';
         }
 
 function renderGrid(cat) {

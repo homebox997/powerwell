@@ -489,7 +489,7 @@
         }
 
                 var communitySlugs = [
-            'allergy-test-paw-licking-diagnosis','arthritis-18-months','best-elevated-bowls-arthritic-dog',
+            'allergy-test-paw-licking-diagnosis','best-elevated-bowls-arthritic-dog',
             'bone-broth-senior-dog-joints','border-collie-drinking-more-water','bunnings-ramp-for-old-cavoodle',
             'car-ramp-for-small-senior-dog','cardiologist-visit-cost-breakdown','cavalier-night-coughing-heart',
             'daily-feeding-schedule-13-year-old-staffy','daily-teeth-brushing-senior-dog',
@@ -503,7 +503,9 @@
             'swimming-hydrotherapy-senior-dog','training-treats-for-senior-dog',
             'when-switch-senior-food-border-collie'
         ];
+        var auRootSlugs = ['arthritis-18-months'];
         function getArticlePath(slug) {
+            if (auRootSlugs.indexOf(slug) >= 0) return './' + slug + '.html';
             return communitySlugs.indexOf(slug) >= 0
                 ? './community/' + slug + '.html'
                 : './blog/' + slug + '.html';

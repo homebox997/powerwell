@@ -74,6 +74,8 @@
         <button class="cat-btn" onclick="filterBlog('tip', this)">💡 Tips & Guides</button>
         <button class="cat-btn" onclick="filterBlog('qa', this)">❓ Q&A</button>
         <button class="cat-btn" onclick="filterBlog('review', this)">⭐ Reviews</button>
+        <button class="cat-btn" onclick="filterBlog('heart', this)">💗 Heart</button>
+        <button class="cat-btn" onclick="filterBlog('joint', this)">🦴 Joint</button>
     </div>
 
     <div class="grid" id="blogGrid"></div>
@@ -525,7 +527,7 @@ function renderGrid(cat) {
         }
 
         function renderCard(a, isFeatured) {
-            var catLabel = { 'health-case': '📋 Health Case', 'tip': '💡 Tips', 'qa': '❓ Q&A', 'review': '⭐ Review' }[a.category] || a.category;
+            var catLabel = { 'health-case': '📋 Health Case', 'tip': '💡 Tips', 'qa': '❓ Q&A', 'review': '⭐ Review', 'heart': 'Heart', 'joint': 'Joint' }[a.category] || a.category;
             return '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + getArticlePath(a.slug) + \''" role="article" aria-label="' + a.title + '">' +
                 '<div class="card-cover" style="--c1:' + a.c1 + ';--c2:' + a.c2 + ';">' +
                 '<span class="cover-icon" aria-hidden="true">' + a.coverIcon + '</span>' +

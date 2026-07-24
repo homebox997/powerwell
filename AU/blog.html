@@ -526,25 +526,22 @@ function renderGrid(cat) {
             document.getElementById('blogGrid').innerHTML = html || '<p style="text-align:center;padding:3rem;color:#aaa;grid-column:1/-1;">No articles in this category yet.</p>';
         }
 
-        function renderCard(a, isFeatured) {
-            var catLabel = { 'health-case': '📋 Health Case', 'tip': '💡 Tips', 'qa': '❓ Q&A', 'review': '⭐ Review', 'heart': 'Heart', 'joint': 'Joint' }[a.category] || a.category;
-            return '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + getArticlePath(a.slug) + \''" role="article" aria-label="' + a.title + '">' +
-                '<div class="card-cover" style="--c1:' + a.c1 + ';--c2:' + a.c2 + ';">' +
-                '<span class="cover-icon" aria-hidden="true">' + a.coverIcon + '</span>' +
-                '<span class="card-cat" style="--c1:' + a.c1 + ';">' + catLabel + '</span>' +
-                (a.pinned ? '<span class="card-pinned" aria-label="Pinned article">📌</span>' : '') +
-                '</div>' +
-                '<div class="card-body">' +
-                '<div class="card-meta"><span>🗓 ' + a.date + '</span><span>⏱ ' + a.readTime + ' read</span></div>' +
-                '<h2 class="card-title">' + a.title + '</h2>' +
-                '<p class="card-excerpt">' + a.excerpt + '</p>' +
-                '<div class="card-footer">' +
-                '<div class="card-author">' +
-                '<div class="card-avatar" style="--c1:' + a.avatarColor + ';background:' + a.avatarColor + ';">' + a.avatarInitials + '</div>' +
-                '<span>' + a.author + '</span>' +
-                '</div>' +
-                '<span class="card-stats">❤️ ' + a.likes + ' · 💬 ' + a.comments + '</span>' +
-                '</div></div></article>';
+                function renderCard(a, isFeatured) {
+            var catLabel = { "health-case": "✋ Health Case", "tip": "💡 Tips", "qa": "❓ Q&A", "review": "🌟 Review", "heart": "Heart", "joint": "Joint" }[a.category] || a.category;
+            var excerpt = a.excerpt || "";
+            var likeCount = typeof a.likes === "number" ? a.likes : 0;
+            var commentCount = typeof a.comments === "number" ? a.comments : 0;
+            var href = getArticlePath(a.slug);
+            var cardHTML =
+                '<article class="card' + (isFeatured ? ' featured' : '') + '" onclick="window.location.href=\'' + href + '\'" role="article" aria-label="' + a.title + '">' +
+                '<div class="card-header" style="background:' + a.c1 + '">' +
+                '<span class="cover-icon">' + (a.coverIcon || "✋") + '</span>' +
+                '<span class="cat-label">' + catLabel + '</span></div>' +
+                '<div class="card-body"><h3>' + a.title + '</h3>' +
+                '<div class="card-meta"><span class="card-date">' + a.date + '</span>' +
+                '<div class="card-stats"><span class="likes">❤ ' + likeCount + '</span><span class="comments">💬 ' + commentCount + '</span></div></div>' +
+                '<p class="card-excerpt">' + excerpt + '</p></div></article>';
+            return cardHTML;
         }
 
         // Init

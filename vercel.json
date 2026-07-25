@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "api/inject.js": {
+      "runtime": "edge"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/AU/([^/]+).html",
+      "destination": "/api/inject?slug=$1"
+    }
+  ]
+}

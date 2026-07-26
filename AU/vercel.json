@@ -18,6 +18,14 @@
     }
   ],
   "routes": [
+    { "src": "/blog.html", "dest": "/AU/blog.html", "status": 301 },
+    { "src": "/heart.html", "dest": "/AU/heart.html", "status": 301 },
+    { "src": "/kidney.html", "dest": "/AU/kidney.html", "status": 301 },
+    { "src": "/arthritis.html", "dest": "/AU/arthritis.html", "status": 301 },
+    { "src": "/assessment.html", "dest": "/AU/assessment.html", "status": 301 },
+    { "src": "/community.html", "dest": "/AU/community.html", "status": 301 },
+    { "src": "/submit.html", "dest": "/AU/submit.html", "status": 301 },
+    { "src": "/(?!AU/|blog/|_shared/|_next/|js/)(.*)", "dest": "/AU/$1", "status": 301 },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/$1" }
   ]

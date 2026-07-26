@@ -1,0 +1,4 @@
+# Vercel redirect rules
+# Source              Destination            Status
+/blog.html            /AU/blog.html          301
+/blog                 /AU/blog.html          301

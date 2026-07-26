@@ -189,7 +189,7 @@
             var catLabels = { "heart": "Heart", "kidney": "Kidney", "arthritis": "Arthritis", "other": "Others" };
             var label = catLabels[a.category] || a.category;
             var safeTitle = a.title.replace(/"/g, '&quot;');
-            return '<a href="./blog/' + a.slug + '.html" class="blog-card">' +
+            return '<a href="/blog/' + a.slug + '.html" class="blog-card">' +
                 '<div class="card-img-wrap"><img src="' + a.img + '" alt="' + safeTitle + '" loading="lazy"></div>' +
                 '<div class="card-body">' +
                 '<div class="card-meta"><span class="card-cat">' + label + '</span> &middot; ' + a.date + ' &middot; ' + a.readTime + '</div>' +

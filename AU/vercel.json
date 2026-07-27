@@ -13,12 +13,13 @@
     {
       "source": "/(.*).html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" }
       ]
     }
   ],
   "routes": [
     { "src": "/blog.html", "dest": "/AU/blog.html", "status": 301 },
+    { "src": "/blog/(.*)", "dest": "/AU/blog/$1", "status": 301 },
     { "src": "/heart.html", "dest": "/AU/heart.html", "status": 301 },
     { "src": "/kidney.html", "dest": "/AU/kidney.html", "status": 301 },
     { "src": "/arthritis.html", "dest": "/AU/arthritis.html", "status": 301 },

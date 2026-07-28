@@ -350,3 +350,80 @@ img { max-width: 100%; height: auto; display: block; }
     .pw-header, .pw-footer, .pw-cta-strip { display: none; }
     body { background: white; color: black; }
 }
+
+/* === BLOG GRID (blog.html) === */
+#blogGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.blog-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--pw-white);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px var(--pw-shadow);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+.blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px var(--pw-shadow-hover);
+}
+
+.card-img-wrap {
+    height: 180px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--pw-orange), var(--pw-red));
+    flex-shrink: 0;
+}
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-body {
+    padding: 1.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.card-meta {
+    font-size: 0.78rem;
+    color: var(--pw-muted);
+    margin-bottom: 0.5rem;
+}
+.card-cat {
+    font-weight: 700;
+    color: var(--pw-red);
+}
+.card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--pw-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    flex: 1;
+}
+.card-summary {
+    font-size: 0.84rem;
+    color: var(--pw-muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 640px) {
+    #blogGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}

@@ -49,7 +49,18 @@
         /* FOOTER */
         .site-footer { background: #2c3e50; color: white; padding: 2rem 18px; text-align: center; }
         .site-footer a { color: #ff8e53; text-decoration: none; }
-        /* RESPONSIVE */
+        /* ARTICLE LINK STYLES */
+.blog-card a { text-decoration: none; color: inherit; display: block; }
+
+/* CARD IMAGE REPONSIVE — safety redundancy */
+.card-img-wrap { height: 180px; overflow: hidden; background: linear-gradient(135deg, #ff8e53, #ff6b6b); flex-shrink: 0; position: relative; }
+.card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (max-width: 640px) {
+    .card-img-wrap { height: auto; aspect-ratio: 16 / 9; position: relative; }
+    .card-img-wrap img { position: absolute; inset: 0; object-fit: cover; }
+}
+
+/* RESPONSIVE */
         @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 700px) {
             .grid { grid-template-columns: 1fr; }

@@ -7,25 +7,126 @@
     {
       "source": "/js/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     },
     {
       "source": "/(.*).html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, no-cache, must-revalidate" },
-        { "key": "X-Config-Test", "value": "applied" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate"
+        },
+        {
+          "key": "X-Config-Test",
+          "value": "applied"
+        }
       ]
     }
   ],
   "redirects": [
-    { "source": "/blog.html", "destination": "/AU/blog.html", "permanent": true },
-    { "source": "/blog/(.*)", "destination": "/AU/blog/$1", "permanent": true },
-    { "source": "/heart.html", "destination": "/AU/heart.html", "permanent": true },
-    { "source": "/kidney.html", "destination": "/AU/kidney.html", "permanent": true },
-    { "source": "/arthritis.html", "destination": "/AU/arthritis.html", "permanent": true },
-    { "source": "/assessment.html", "destination": "/AU/assessment.html", "permanent": true },
-    { "source": "/community.html", "destination": "/AU/community.html", "permanent": true },
-    { "source": "/submit.html", "destination": "/AU/submit.html", "permanent": true }
+    {
+      "source": "/blog.html",
+      "destination": "/AU/blog.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/(.*)",
+      "destination": "/AU/blog/$1",
+      "permanent": true
+    },
+    {
+      "source": "/heart.html",
+      "destination": "/AU/heart.html",
+      "permanent": true
+    },
+    {
+      "source": "/kidney.html",
+      "destination": "/AU/kidney.html",
+      "permanent": true
+    },
+    {
+      "source": "/arthritis.html",
+      "destination": "/AU/arthritis.html",
+      "permanent": true
+    },
+    {
+      "source": "/assessment.html",
+      "destination": "/AU/assessment.html",
+      "permanent": true
+    },
+    {
+      "source": "/community.html",
+      "destination": "/AU/community.html",
+      "permanent": true
+    },
+    {
+      "source": "/submit.html",
+      "destination": "/AU/submit.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-.html",
+      "destination": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-aussie-family.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/is-your-senior-small-dog-coughing-at-night-its-not-just-old-age-it-cou.html",
+      "destination": "/AU/blog/is-your-senior-small-dog-coughing-at-night-its-not-just-old-age-could-be-heart.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/your-dogs-heart-murmur-what-every-aussie-owner-needs-to-know-about-can.html",
+      "destination": "/AU/blog/your-dogs-heart-murmur-what-every-aussie-owner-needs-to-know-about-canine-heart-disease.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/a-9-year-old-cocker-spaniels-sudden-pot-belly-what-every-aussie-dog-ow.html",
+      "destination": "/AU/blog/a-9-year-old-cocker-spaniels-sudden-pot-belly-what-every-aussie-dog-owner-should-know.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/increased-thirst-urination-early-signs-canine-kidney-disease.html",
+      "destination": "/AU/blog/increased-thirst-and-urination-early-signs-canine-kidney-disease.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/senior-dog-kidney-disease-diet-treatment-complete-guide.html",
+      "destination": "/AU/blog/kidney-disease-senior-dogs-diet-treatment-complete-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/early-signs-of-joint-pain-in-dogs-and-how-to-help-your-aussie-mate-sta.html",
+      "destination": "/AU/blog/early-signs-joint-pain-dogs-how-to-help-your-aussie-mate-stay-active.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/7-silent-signs-your-senior-dogs-heart-needs-a-check-up-and-what-to-do-.html",
+      "destination": "/AU/blog/7-silent-signs-senior-dog-heart-needs-check-up-what-to-do-tonight.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/why-a-swollen-belly-in-your-big-dog-could-signal-heart-trouble-lilys-s.html",
+      "destination": "/AU/blog/why-swollen-belly-in-your-big-dog-could-signal-heart-trouble-lilys-story.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/heart-failure-in-dogs-from-silent-belly-bloat-to-deadly-blood-clots-on.html",
+      "destination": "/AU/blog/heart-failure-in-dogs-from-silent-belly-bloat-to-deadly-blood-clots.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/when-to-worry-about-your-senior-dog-stiffness.html",
+      "destination": "/AU/blog/when-to-worry-about-senior-dog-stiffness.html",
+      "permanent": true
+    },
+    {
+      "source": "/AU/blog/kidney-biopsy-dogs-what-it-reveals-why-it-matters.html",
+      "destination": "/AU/blog/kidney-biopsy-in-dogs-what-it-reveals-and-why-it-matters.html",
+      "permanent": true
+    }
   ]
 }

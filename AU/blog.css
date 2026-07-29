@@ -55,6 +55,22 @@
 /* CARD IMAGE REPONSIVE — safety redundancy */
 .card-img-wrap { height: 180px; overflow: hidden; background: linear-gradient(135deg, #ff8e53, #ff6b6b); flex-shrink: 0; position: relative; }
 .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.more-articles { max-width: 1200px; margin: 3rem auto 1rem; }
+.more-articles > h2 { text-align: center; font-size: 1.8rem; color: #2c3e50; }
+.more-articles > p { text-align: center; color: #7a8a9a; padding: 0 18px; }
+.more-articles-grid { margin-top: 1.5rem; }
+.orphan-card-cover {
+    min-height: 92px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    font-weight: 700;
+    letter-spacing: .02em;
+}
 @media (max-width: 640px) {
     .card-img-wrap { height: auto; aspect-ratio: 16 / 9; position: relative; }
     .card-img-wrap img { position: absolute; inset: 0; object-fit: cover; }

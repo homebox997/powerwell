@@ -31,4 +31,4 @@ Allow: /
 
 # Disallow admin/internal paths (none currently)
 
-Sitemap: https://www.agedpawwell.com/AU/sitemap.xml
+Sitemap: https://www.agedpawwell.com/sitemap.xml

@@ -1,7 +1,7 @@
 {
-  "buildCommand": "echo 'Static HTML - no build needed'",
+  "buildCommand": "npm install --silent",
   "outputDirectory": ".",
-  "installCommand": "echo 'No dependencies - static site'",
+  "installCommand": "npm install",
   "framework": null,
   "headers": [
     {

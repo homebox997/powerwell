@@ -254,31 +254,41 @@ const PawWellAPI = {
   // ===================== 自测模块（AI 健康体检）=====================
   assessment: {
     /**
-     * 提交体检结果
-     * 接口路径: POST {baseURL}/assessments
+     * 提交体检结果 → Vercel Serverless Function /api/assessment
+     * ────────────────────────────────────────────────────────────────────
+     * Security: 所有敏感逻辑（Google Sheets 写入、Resend 发送）均在服务端完成。
+     * 前端仅调用 /api/assessment，不接触任何第三方 API。
+     * ────────────────────────────────────────────────────────────────────
+     * 接口路径: POST /api/assessment
      * 请求方式: POST
      * 入参(body): {
      *   "breed":"...", "gender":"...", "nickname":"...",
-     *   "symptoms":["Limping","..."], "symptom_count":3,
-     *   "email":"user@example.com"(可空), "country":"AU"
+     *   "symptoms":["..."], "email":"user@example.com"(可空), "country":"AU"
      * }
-     * 返回JSON: { "id":"a_new", "created_at":"2026-..." }
+     * 返回JSON: {
+     *   "success": true,
+     *   "message": "Assessment submitted successfully",
+     *   "healthResult": { "areas":["..."], "urgency":"...", "timeframe":"...", "summary":"..." },
+     *   "sheetWritten": true|false,
+     *   "customerEmailSent": true|false,
+     *   "ownerEmailSent": true|false
+     * }
      * 前端触发: assessment.html submitForm()
      * 注意: 结果已在本地计算回显（reportDog / reportCount / reportTags / reportSummary / reportRec），
      *       此提交为静默同步，失败不阻塞前端展示。
      */
     async submit(payload) {
-      const res = await fetch(`${PawWellAPI.baseURL}/assessments`, {
+      const res = await fetch('/api/assessment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...payload, country: PawWellAPI.country })
+        body: JSON.stringify(payload)
       });
-      if (!res.ok) throw new Error('assessment.submit failed: ' + res.status);
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({ error: 'Unknown error' }));
+        throw new Error(errData.error || `assessment.submit failed: ${res.status}`);
+      }
       const data = await res.json();
-      // Supabase 返回数组直接使用
-      if (Array.isArray(data)) return data;
-      // 兼容对象格式
-      return data.data || [];
+      return data;
     },
 
     /**

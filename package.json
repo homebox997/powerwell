@@ -1,0 +1,12 @@
+{
+  "name": "agedpawwell",
+  "version": "2.0.0",
+  "description": "Aged Paw Well - AI Pet Health Platform",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "googleapis": "^140.0.0"
+  },
+  "devDependencies": {}
+}

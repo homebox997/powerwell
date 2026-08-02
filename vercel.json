@@ -1,5 +1,4 @@
 {
-  "buildCommand": "npm install --silent",
   "outputDirectory": ".",
   "installCommand": "npm install",
   "framework": null,
@@ -25,6 +24,12 @@
           "value": "applied"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/go/:slug",
+      "destination": "/api/staff-entry?slug=:slug"
     }
   ],
   "redirects": [

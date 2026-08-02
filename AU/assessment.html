@@ -377,9 +377,11 @@
                     });
             }
 
+                    // NOTE: statusBanner visibility is managed ONLY by .then()/.catch() callbacks.
+                    // DO NOT set display:none on submission-status here — it will fight with .then()/.catch().
+
             document.getElementById('page1').classList.remove('active');
             document.getElementById('page2').classList.remove('active');
-            document.getElementById('submission-status').style.display = 'none';
             document.getElementById('report').classList.add('active');
             window.scrollTo({top: 0, behavior: 'smooth'});
         }

@@ -177,58 +177,93 @@ function calculateHealthResult(data) {
 }
 
 // ─── Google Sheets Write ──────────────────────────────────────────────────────
-async function writeToGoogleSheet(data, healthResult) {
+const SHEET_TIMEOUT_MS = 8000;   // 8s hard timeout
+const SHEET_RETRIES = 2;          // 2 retries (total 3 attempts)
+const SHEET_RETRY_DELAY_MS = 1500; // 1.5s between retries
+
+async function writeToGoogleSheet(data, healthResult, logger) {
   if (!GOOGLE_SERVICE_ACCOUNT_KEY || !GOOGLE_SHEETS_ID) {
-    console.warn('[assessment] Google Sheets not configured, skipping write');
-    return null;
+    logger.warn('[sheet] not configured, skipping');
+    return { ok: false, reason: 'env_not_set' };
   }
 
-  try {
-    const credentials = JSON.parse(GOOGLE_SERVICE_ACCOUNT_KEY);
-    const auth = new google.auth.GoogleAuth({
-      credentials,
-      scopes: ['https://www.googleapis.com/auth/spreadsheets']
-    });
-    const sheets = google.sheets({ version: 'v4', auth });
+  const timestamp = new Date().toISOString();
+  const row = [
+    timestamp,
+    data.nickname || '',
+    data.email || '',
+    data.breed,
+    data.gender,
+    healthResult.symptomCount,
+    healthResult.areas.join(', '),
+    data.symptoms.join(', '),
+    healthResult.urgency,
+    data.country || 'AU'
+  ];
 
-    const timestamp = new Date().toISOString();
-    const row = [
-      timestamp,
-      data.nickname || '',
-      data.email || '',
-      data.breed,
-      data.gender,
-      healthResult.symptomCount,
-      healthResult.areas.join(', '),
-      data.symptoms.join(', '),
-      healthResult.urgency,
-      data.country || 'AU'
-    ];
+  for (let attempt = 1; attempt <= SHEET_RETRIES + 1; attempt++) {
+    try {
+      const credentials = JSON.parse(GOOGLE_SERVICE_ACCOUNT_KEY);
+      const auth = new google.auth.GoogleAuth({
+        credentials,
+        scopes: ['https://www.googleapis.com/auth/spreadsheets']
+      });
+      const sheets = google.sheets({ version: 'v4', auth });
 
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: GOOGLE_SHEETS_ID,
-      range: 'Sheet1!A:J',
-      valueInputOption: 'USER_ENTERED',
-      resource: { values: [row] }
-    });
+      // Wrap Sheets call in a Promise + timeout race
+      const writePromise = sheets.spreadsheets.values.append({
+        spreadsheetId: GOOGLE_SHEETS_ID,
+        range: 'Sheet1!A:J',
+        valueInputOption: 'USER_ENTERED',
+        resource: { values: [row] }
+      });
 
-    console.log('[assessment] Google Sheet write success');
-    return timestamp;
-  } catch (err) {
-    console.error('[assessment] Google Sheet write error:', err.message);
-    // Non-fatal: don't block the rest of the flow
-    return null;
+      await Promise.race([
+        writePromise,
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Sheets API timeout')), SHEET_TIMEOUT_MS)
+        )
+      ]);
+
+      logger.info(`[sheet] write success (attempt ${attempt}), timestamp=${timestamp}`);
+      return { ok: true, timestamp, attempt };
+    } catch (err) {
+      const isLastAttempt = attempt > SHEET_RETRIES;
+      const logFn = isLastAttempt ? logger.error.bind(logger) : logger.warn.bind(logger);
+      logFn(`[sheet] write failed attempt ${attempt}/${SHEET_RETRIES + 1}: ${err.message}`);
+
+      if (isLastAttempt) {
+        // Log structured error entry for monitoring/debugging
+        logger.error(JSON.stringify({
+          event: 'sheet_write_final_failure',
+          timestamp,
+          email: data.email || 'no_email',
+          error: err.message,
+          stack: err.stack || '',
+          data: { breed: data.breed, gender: data.gender, symptomCount: healthResult.symptomCount }
+        }));
+        return { ok: false, reason: 'all_retries_failed', lastError: err.message };
+      }
+
+      // Wait before retry (don't wait after last attempt)
+      await new Promise(r => setTimeout(r, SHEET_RETRY_DELAY_MS));
+    }
   }
 }
 
 // ─── Resend Email ─────────────────────────────────────────────────────────────
-async function sendEmail(to, subject, html) {
+const EMAIL_TIMEOUT_MS = 6000; // 6s hard timeout
+
+async function sendEmail(to, subject, html, logger) {
   if (!RESEND_API_KEY) {
-    console.warn('[assessment] Resend not configured, skipping email');
+    logger.warn('[email] Resend not configured, skipping');
     return null;
   }
 
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), EMAIL_TIMEOUT_MS);
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -240,20 +275,36 @@ async function sendEmail(to, subject, html) {
         to: [to],
         subject,
         html
-      })
+      }),
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       const errBody = await response.text();
-      console.error('[assessment] Resend error:', response.status, errBody);
+      logger.error(`[email] send failed to ${to}: HTTP ${response.status} ${errBody}`);
+      logger.error(JSON.stringify({
+        event: 'email_send_failure',
+        to,
+        subject,
+        httpStatus: response.status,
+        errorBody: errBody
+      }));
       return null;
     }
 
     const result = await response.json();
-    console.log('[assessment] Email sent:', result.id);
+    logger.info(`[email] sent ${result.id} to ${to}`);
     return result.id;
   } catch (err) {
-    console.error('[assessment] Resend fetch error:', err.message);
+    logger.error(`[email] exception sending to ${to}: ${err.message}`);
+    logger.error(JSON.stringify({
+      event: 'email_send_exception',
+      to,
+      subject,
+      error: err.message
+    }));
     return null;
   }
 }
@@ -419,7 +470,13 @@ module.exports = async function handler(req, res) {
   const healthResult = calculateHealthResult(data);
 
   // ── Step 5: Write to Google Sheet ──────────────────────────────────────────
-  const sheetTimestamp = await writeToGoogleSheet(data, healthResult);
+  // Wrap console with namespace for structured logging
+  const logger = {
+    info: (...args) => console.log('[assessment]', new Date().toISOString(), ...args),
+    warn: (...args) => console.warn('[assessment][WARN]', new Date().toISOString(), ...args),
+    error: (...args) => console.error('[assessment][ERR]', new Date().toISOString(), ...args)
+  };
+  const sheetResult = await writeToGoogleSheet(data, healthResult, logger);
 
   // ── Step 6: Send Customer Email (if email provided) ─────────────────────────
   let customerEmailId = null;
@@ -428,7 +485,8 @@ module.exports = async function handler(req, res) {
     customerEmailId = await sendEmail(
       data.email,
       `🐾 ${data.nickname || 'Your dog'}'s Health Report is Ready`,
-      customerHtml
+      customerHtml,
+      logger
     );
   }
 
@@ -437,7 +495,8 @@ module.exports = async function handler(req, res) {
   const ownerEmailId = await sendEmail(
     OWNER_EMAIL,
     `[PawWell] New AI Health Check — ${data.breed} (${data.email || 'No email'}) — ${healthResult.symptomCount} symptoms — Urgency: ${healthResult.urgency}`,
-    ownerHtml
+    ownerHtml,
+    logger
   );
 
   // ── Step 8: Return Success ──────────────────────────────────────────────────
@@ -446,7 +505,7 @@ module.exports = async function handler(req, res) {
     symptoms: data.symptoms.length,
     areas: healthResult.areas,
     urgency: healthResult.urgency,
-    sheetWritten: !!sheetTimestamp,
+    sheetWritten: sheetResult.ok,
     customerEmailSent: !!customerEmailId,
     ownerEmailSent: !!ownerEmailId
   });
@@ -460,7 +519,7 @@ module.exports = async function handler(req, res) {
       timeframe: healthResult.timeframe,
       summary: healthResult.summary
     },
-    sheetWritten: !!sheetTimestamp,
+    sheetWritten: sheetResult.ok,
     customerEmailSent: !!customerEmailId,
     ownerEmailSent: !!ownerEmailId
   });

@@ -327,7 +327,7 @@ function buildCustomerEmail(data, healthResult) {
 
 function buildOwnerEmail(data, healthResult) {
   const { nickname, email, breed, gender } = data;
-  const timestamp = new Date().toLocaleString('Australia/Sydney', { timeZone: 'Australia/Sydney' });
+  const timestamp = new Date().toLocaleString('en-AU', { timeZone: 'Australia/Sydney' });
 
   return `<!DOCTYPE html>
 <html>

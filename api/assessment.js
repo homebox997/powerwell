@@ -369,13 +369,17 @@ function buildOwnerEmail(data, healthResult) {
 
 // ─── Main Handler ─────────────────────────────────────────────────────────────
 module.exports = async function handler(req, res) {
+  for (const [name, value] of Object.entries(CORS_HEADERS)) {
+    res.setHeader(name, value);
+  }
+
   // CORS preflight
   if (req.method === 'OPTIONS') {
-    return res.status(200).set(CORS_HEADERS).send('');
+    return res.status(200).send('');
   }
 
   if (req.method !== 'POST') {
-    return res.status(405).set(CORS_HEADERS).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   // Parse body
@@ -383,13 +387,13 @@ module.exports = async function handler(req, res) {
   try {
     data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
   } catch (e) {
-    return res.status(400).set(CORS_HEADERS).json({ error: 'Invalid JSON body' });
+    return res.status(400).json({ error: 'Invalid JSON body' });
   }
 
   // ── Step 1: Validation ──────────────────────────────────────────────────────
   const validationErrors = validateFields(data);
   if (validationErrors.length > 0) {
-    return res.status(400).set(CORS_HEADERS).json({
+    return res.status(400).json({
       error: 'Validation failed',
       details: validationErrors
     });
@@ -400,12 +404,12 @@ module.exports = async function handler(req, res) {
   if (isBot(data, headers)) {
     console.warn('[assessment] Bot detected, rejecting submission');
     // Return success to bot to not reveal detection
-    return res.status(200).set(CORS_HEADERS).json({ success: true, message: 'Report generated' });
+    return res.status(200).json({ success: true, message: 'Report generated' });
   }
 
   // ── Step 3: Duplicate Check ─────────────────────────────────────────────────
   if (isDuplicate(data.email)) {
-    return res.status(429).set(CORS_HEADERS).json({
+    return res.status(429).json({
       error: 'Duplicate submission',
       message: 'Please wait before submitting again.'
     });
@@ -447,7 +451,7 @@ module.exports = async function handler(req, res) {
     ownerEmailSent: !!ownerEmailId
   });
 
-  return res.status(200).set(CORS_HEADERS).json({
+  return res.status(200).json({
     success: true,
     message: 'Assessment submitted successfully',
     healthResult: {

@@ -262,6 +262,10 @@
         .related-card-body { padding: 0.8rem; }
         .related-card-body h3 { font-size: 0.84rem; margin-bottom: 0.3rem; line-height: 1.4; }
         .related-card-body .meta { font-size: 0.72rem; color: var(--pw-muted); }
+.related-card-excerpt { font-size: 0.8rem; color: var(--pw-muted); line-height: 1.45; margin: 0.35rem 0 0; }
+.view-all-btn { display: inline-block; margin-top: 1.1rem; padding: 12px 26px; background: #e8780c; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.view-all-btn:hover { background: #cf6a05; }
+
 
         /* -- Interactive Checklist -- */
         .checklist {
@@ -497,32 +501,11 @@
             </article>
 
             <!-- 6. RELATED ARTICLES (curated, with View All) -->
-            <section class="related-articles" aria-labelledby="related-heading">
+                        <!-- 6. RELATED ARTICLES (auto from blog index, refreshed on each publish) -->
+            <section class="related-articles" aria-labelledby="related-heading" data-disease="arthritis">
                 <h2 id="related-heading">&#128214; Related Articles</h2>
-                <div class="related-grid">
-                    <a href="./blog/early-signs-joint-pain-dogs-how-to-help-your-aussie-mate-stay-active.html" class="related-card" aria-label="Related article: Early signs of joint pain">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #ff6b6b, #ff8e53);" aria-hidden="true">&#128021;</div>
-                        <div class="related-card-body">
-                            <h3>Early Signs of Joint Pain in Dogs &amp; How to Help</h3>
-                            <div class="meta">&#128203; Health Guide &middot; 7 min</div>
-                        </div>
-                    </a>
-                    <a href="./blog/when-to-worry-about-senior-dog-stiffness.html" class="related-card" aria-label="Related article: When to worry about stiffness">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #7c3aed, #9c27b0);" aria-hidden="true">&#128021;</div>
-                        <div class="related-card-body">
-                            <h3>When to Worry About Your Senior Dog&rsquo;s Stiffness</h3>
-                            <div class="meta">&#128203; Health Guide &middot; 6 min</div>
-                        </div>
-                    </a>
-                    <a href="./blog/when-your-senior-dog-needs-the-vet-for-arthritis.html" class="related-card" aria-label="Related article: When to see the vet">
-                        <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);" aria-hidden="true">&#128021;</div>
-                        <div class="related-card-body">
-                            <h3>When Your Senior Dog Needs the Vet for Arthritis</h3>
-                            <div class="meta">&#128203; Health Guide &middot; 8 min</div>
-                        </div>
-                    </a>
-                </div>
-                <a href="./blog.html" class="comm-more" aria-label="View all senior dog articles">View All Senior Dog Articles &rarr;</a>
+                <div id="related-articles-grid" class="related-grid" data-disease="arthritis"></div>
+                <a href="./blog.html?cat=arthritis" class="view-all-btn" aria-label="View all Arthritis articles">View All Arthritis Articles &rarr;</a>
             </section>
 
             <!-- 7. HOW A VET MAY ASSESS -->
@@ -669,5 +652,7 @@
             }catch(e){}
         }
     </script>
+    <script defer src="./_shared/blog-data.js"></script>
+    <script defer src="./_shared/related-articles.js"></script>
 </body>
 </html>

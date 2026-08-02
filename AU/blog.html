@@ -390,7 +390,7 @@
         }
 
         function renderGrid(cat) {
-            var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return a.category === cat; });
+            var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return (a.category || '').toLowerCase() === cat.toLowerCase(); });
             filtered.sort(function(a, b) {
                 return new Date(b.date) - new Date(a.date);
             });
@@ -413,6 +413,24 @@
 
         // Init
         renderGrid('all');
+        (function(){
+            try{
+                var c = new URLSearchParams(location.search).get('cat');
+                if(c){
+                    c = c.toLowerCase();
+                    var valid = {'all':1,'heart':1,'kidney':1,'arthritis':1,'other':1};
+                    if(valid[c]){
+                        var btns = document.querySelectorAll('.cat-btn');
+                        var target = null;
+                        btns.forEach(function(b){
+                            var om = (b.getAttribute('onclick')||'').match(/filterBlog\('([^']+)'/);
+                            if(om && om[1]===c) target = b;
+                        });
+                        if(target) filterBlog(c, target);
+                    }
+                }
+            }catch(e){}
+        })();
 
     </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>

@@ -15,6 +15,7 @@ module.exports = async function handler(req, res) {
     try {
       credentials = JSON.parse(key);
       result.steps.push('json_parse=ok');
+      result.steps.push('sa_client_email=' + (credentials.client_email || 'unknown'));
     } catch (e) {
       result.steps.push('json_parse_ERROR=' + e.message);
       res.status(200).send(JSON.stringify(result)); return;

@@ -144,6 +144,7 @@ function logStaffClick(entry, req) {
 
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
+  res.setHeader('X-Staff-Log-Version', 'v3-await-write');
 
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD');

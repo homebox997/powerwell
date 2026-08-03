@@ -33,10 +33,12 @@ const STAFF_ENTRIES = Object.freeze({
 });
 
 // Google Sheet where staff clicks are recorded (StaffClicks tab).
-// This is the Fuel_Card_Dataset spreadsheet; the Service Account already
-// has write access. Not a secret — safe to reference as a constant.
+// The Fuel_Card_Dataset spreadsheet (1GouQ3np...) — shared with the Vercel
+// Service Account (pawwell-sheets-writer) as Editor, and the local SA already
+// owns it. The StaffClicks tab was created there. Not a secret.
 const STAFF_SHEET_ID = '1GouQ3np_tU93JHwUiPAvpReqUbw1hFZJb3JoJ_Tc6jw';
 const STAFF_SHEET_TAB = 'StaffClicks';
+let tabEnsured = false;
 
 const SOURCE = 'staff_promotion';
 const MEDIUM = 'employee_referral';
@@ -127,12 +129,48 @@ function logStaffClick(entry, req) {
     String(req.headers.referer || '')
   ];
 
+  const appendRow = () => sheets.spreadsheets.values.append({
+    spreadsheetId: STAFF_SHEET_ID,
+    range: `${STAFF_SHEET_TAB}!A:G`,
+    valueInputOption: 'USER_ENTERED',
+    resource: { values: [row] }
+  });
+
+  // Ensure the tab exists (create once per cold start if missing).
+  if (!tabEnsured) {
+    try {
+      await sheets.spreadsheets.values.get({
+        spreadsheetId: STAFF_SHEET_ID,
+        range: `${STAFF_SHEET_TAB}!A1:A1`
+      });
+    } catch (e) {
+      try {
+        await sheets.spreadsheets.batchUpdate({
+          spreadsheetId: STAFF_SHEET_ID,
+          resource: { requests: [{ addSheet: { properties: { title: STAFF_SHEET_TAB } } }] }
+        });
+        await sheets.spreadsheets.values.update({
+          spreadsheetId: STAFF_SHEET_ID,
+          range: `${STAFF_SHEET_TAB}!A1:G1`,
+          valueInputOption: 'USER_ENTERED',
+          resource: { values: [['Timestamp', 'StaffID', 'Disease', 'Campaign', 'LandingPage', 'UserAgent', 'Referer']] }
+        });
+        console.log('[staff-click] created tab + header');
+      } catch (e2) {
+        console.warn('[staff-click] tab ensure failed:', e2.message);
+      }
+    }
+    tabEnsured = true;
+  }
+
   return Promise.race([
-    sheets.spreadsheets.values.append({
-      spreadsheetId: STAFF_SHEET_ID,
-      range: `${STAFF_SHEET_TAB}!A:G`,
-      valueInputOption: 'USER_ENTERED',
-      resource: { values: [row] }
+    appendRow().catch(async (err) => {
+      // Retry once if the tab was just created
+      if (String(err.message).includes('Unable to parse range')) {
+        await appendRow();
+      } else {
+        throw err;
+      }
     }),
     new Promise((_, reject) =>
       setTimeout(() => reject(new Error('Sheets API timeout')), 5000)
@@ -144,7 +182,6 @@ function logStaffClick(entry, req) {
 
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
-  res.setHeader('X-Staff-Log-Version', 'v3-await-write');
 
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD');

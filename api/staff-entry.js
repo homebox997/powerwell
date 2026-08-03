@@ -3,7 +3,13 @@
  *
  * Whitelisted staff promotion redirects. The target URLs are fixed local
  * landing pages; request parameters can never change the redirect target.
+ *
+ * Each click is also logged to a Google Sheet (StaffClicks tab) for the
+ * daily staff-traffic report. The Sheet write is non-blocking: it runs
+ * after the 302 response is sent, so the redirect is never delayed.
  */
+
+const { google } = require('googleapis');
 
 const STAFF_ENTRIES = Object.freeze({
   sa: Object.freeze({
@@ -25,6 +31,12 @@ const STAFF_ENTRIES = Object.freeze({
     campaign: 'kidney_au'
   })
 });
+
+// Google Sheet where staff clicks are recorded (StaffClicks tab).
+// This is the Fuel_Card_Dataset spreadsheet; the Service Account already
+// has write access. Not a secret — safe to reference as a constant.
+const STAFF_SHEET_ID = '1GouQ3np_tU93JHwUiPAvpReqUbw1hFZJb3JoJ_Tc6jw';
+const STAFF_SHEET_TAB = 'StaffClicks';
 
 const SOURCE = 'staff_promotion';
 const MEDIUM = 'employee_referral';
@@ -80,6 +92,56 @@ function buildDestination(entry) {
   return `${destination.pathname}${destination.search}`;
 }
 
+/**
+ * Non-blocking: append one click row to the StaffClicks tab.
+ * Failures are logged but never thrown (must not affect the redirect).
+ */
+function logStaffClick(entry, req) {
+  const key = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+  if (!key) {
+    console.warn('[staff-click] GOOGLE_SERVICE_ACCOUNT_KEY not set, skip');
+    return Promise.resolve();
+  }
+
+  let credentials;
+  try {
+    credentials = JSON.parse(key);
+  } catch (e) {
+    console.error('[staff-click] invalid SA key:', e.message);
+    return Promise.resolve();
+  }
+
+  const auth = new google.auth.GoogleAuth({
+    credentials,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets']
+  });
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  const row = [
+    new Date().toISOString(),
+    entry.staffId,
+    entry.disease,
+    entry.campaign,
+    entry.landingPage,
+    String(req.headers['user-agent'] || ''),
+    String(req.headers.referer || '')
+  ];
+
+  return Promise.race([
+    sheets.spreadsheets.values.append({
+      spreadsheetId: STAFF_SHEET_ID,
+      range: `${STAFF_SHEET_TAB}!A:G`,
+      valueInputOption: 'USER_ENTERED',
+      resource: { values: [row] }
+    }),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('Sheets API timeout')), 5000)
+    )
+  ])
+    .then(() => console.log(`[staff-click] logged ${entry.staffId} -> ${entry.disease}`))
+    .catch(err => console.error('[staff-click] write failed:', err.message));
+}
+
 module.exports = function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 
@@ -125,7 +187,12 @@ module.exports = function handler(req, res) {
 
   res.setHeader('Set-Cookie', responseCookies);
   res.setHeader('Location', buildDestination(entry));
-  return res.status(302).end();
+  res.status(302).end();
+
+  // Non-blocking: log the click AFTER the response is sent.
+  res.on('finish', () => {
+    logStaffClick(entry, req);
+  });
 };
 
 module.exports.STAFF_ENTRIES = STAFF_ENTRIES;

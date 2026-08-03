@@ -98,7 +98,7 @@ function buildDestination(entry) {
  * Non-blocking: append one click row to the StaffClicks tab.
  * Failures are logged but never thrown (must not affect the redirect).
  */
-function logStaffClick(entry, req) {
+async function logStaffClick(entry, req) {
   const key = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
   if (!key) {
     console.warn('[staff-click] GOOGLE_SERVICE_ACCOUNT_KEY not set, skip');

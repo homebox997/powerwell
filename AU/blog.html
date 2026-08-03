@@ -411,7 +411,17 @@
 
         function renderCard(a) {
             var catLabels = { "heart": "Heart", "kidney": "Kidney", "arthritis": "Arthritis", "other": "Others" };
-            var label = catLabels[a.category] || a.category;
+            var label = catLabels[
+    {
+      slug: 'why-large-senior-dogs-face-more-heart-problems',
+      title: 'Why Large Senior Dogs Face More Heart Problems',
+      category: 'heart',
+      excerpt: 'Learn how breed, age and body condition shape heart risk in large senior dogs, what changes to watch for and when to call a vet.',
+      date: 'August 3, 2026',
+      readTime: '55 min',
+      img: '/AU/assets/heart-og.jpg',
+      pinned: false
+    },a.category] || a.category;
             var safeTitle = a.title.replace(/"/g, '&quot;');
             return '<a href="/AU/blog/' + a.slug + '.html" class="blog-card">' +
                 '<div class="card-img-wrap"><img src="' + a.img + '" alt="' + safeTitle + '" loading="lazy"></div>' +

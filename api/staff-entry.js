@@ -142,7 +142,7 @@ function logStaffClick(entry, req) {
     .catch(err => console.error('[staff-click] write failed:', err.message));
 }
 
-module.exports = function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 
   if (req.method !== 'GET' && req.method !== 'HEAD') {
@@ -187,12 +187,19 @@ module.exports = function handler(req, res) {
 
   res.setHeader('Set-Cookie', responseCookies);
   res.setHeader('Location', buildDestination(entry));
-  res.status(302).end();
 
-  // Non-blocking: log the click AFTER the response is sent.
-  res.on('finish', () => {
-    logStaffClick(entry, req);
-  });
+  // Log the click BEFORE responding. Await with a hard timeout so a slow
+  // or failing Sheets call can never delay or break the redirect.
+  try {
+    await Promise.race([
+      logStaffClick(entry, req),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('staff log timeout')), 5000))
+    ]);
+  } catch (e) {
+    console.warn('[staff-click] skipped (timeout/error):', e.message);
+  }
+
+  res.status(302).end();
 };
 
 module.exports.STAFF_ENTRIES = STAFF_ENTRIES;

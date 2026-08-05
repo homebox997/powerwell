@@ -9,9 +9,18 @@
  * after the 302 response is sent, so the redirect is never delayed.
  *
  * Country detection (priority order):
- *   1. cf-ipcountry   — Cloudflare CDN header (2-letter ISO code)
+ *   1. cf-ipcountry       — Cloudflare CDN header (2-letter ISO code)
  *   2. x-vercel-ip-country — Vercel Edge header (2-letter ISO code)
- *   3. ''             — unknown (local dev / proxy stripped headers)
+ *   3. ''                 — unknown (local dev / proxy stripped headers)
+ *
+ * City detection:
+ *   1. cf-ipcity         — Cloudflare CDN header (city name)
+ *   2. x-vercel-ip-city  — Vercel Edge header
+ *
+ * IP detection:
+ *   1. cf-connecting-ip  — Cloudflare CDN real client IP
+ *   2. x-real-ip         — Vercel / proxy real IP
+ *   3. x-forwarded-for   — first IP in chain
  */
 
 const { google } = require('googleapis');
@@ -52,6 +61,23 @@ function getCountry(req) {
   return (
     String(req.headers['cf-ipcountry'] || '').trim().toUpperCase() ||
     String(req.headers['x-vercel-ip-country'] || '').trim().toUpperCase() ||
+    ''
+  );
+}
+
+function getCity(req) {
+  return (
+    String(req.headers['cf-ipcity'] || '').trim() ||
+    String(req.headers['x-vercel-ip-city'] || '').trim() ||
+    ''
+  );
+}
+
+function getIP(req) {
+  return (
+    String(req.headers['cf-connecting-ip'] || '').trim() ||
+    String(req.headers['x-real-ip'] || '').trim() ||
+    String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
     ''
   );
 }
@@ -144,12 +170,15 @@ async function logStaffClick(entry, req) {
     entry.landingPage,
     String(req.headers['user-agent'] || ''),
     String(req.headers.referer || ''),
-    getCountry(req)
+    getCountry(req),
+    getIP(req),
+    getCity(req),
+    buildDestination(entry)
   ];
 
   const appendRow = () => sheets.spreadsheets.values.append({
     spreadsheetId: STAFF_SHEET_ID,
-    range: `${STAFF_SHEET_TAB}!A:H`,
+    range: `${STAFF_SHEET_TAB}!A:K`,
     valueInputOption: 'USER_ENTERED',
     resource: { values: [row] }
   });
@@ -171,7 +200,7 @@ async function logStaffClick(entry, req) {
           spreadsheetId: STAFF_SHEET_ID,
           range: `${STAFF_SHEET_TAB}!A1:G1`,
           valueInputOption: 'USER_ENTERED',
-          resource: { values: [['Timestamp', 'StaffID', 'Disease', 'Campaign', 'LandingPage', 'UserAgent', 'Referer', 'Country']] }
+          resource: { values: [['Timestamp', 'StaffID', 'Disease', 'Campaign', 'LandingPage', 'UserAgent', 'Referer', 'Country', 'IP', 'City', 'FullLandingURL']] }
         });
         console.log('[staff-click] created tab + header');
       } catch (e2) {

@@ -7,6 +7,11 @@
  * Each click is also logged to a Google Sheet (StaffClicks tab) for the
  * daily staff-traffic report. The Sheet write is non-blocking: it runs
  * after the 302 response is sent, so the redirect is never delayed.
+ *
+ * Country detection (priority order):
+ *   1. cf-ipcountry   — Cloudflare CDN header (2-letter ISO code)
+ *   2. x-vercel-ip-country — Vercel Edge header (2-letter ISO code)
+ *   3. ''             — unknown (local dev / proxy stripped headers)
  */
 
 const { google } = require('googleapis');
@@ -38,6 +43,18 @@ const STAFF_ENTRIES = Object.freeze({
 // owns it. The StaffClicks tab was created there. Not a secret.
 const STAFF_SHEET_ID = '1GouQ3np_tU93JHwUiPAvpReqUbw1hFZJb3JoJ_Tc6jw';
 const STAFF_SHEET_TAB = 'StaffClicks';
+
+/**
+ * Returns the 2-letter country code of the client, or '' if unknown.
+ * Prefers Cloudflare's cf-ipcountry header; falls back to Vercel's header.
+ */
+function getCountry(req) {
+  return (
+    String(req.headers['cf-ipcountry'] || '').trim().toUpperCase() ||
+    String(req.headers['x-vercel-ip-country'] || '').trim().toUpperCase() ||
+    ''
+  );
+}
 let tabEnsured = false;
 
 const SOURCE = 'staff_promotion';
@@ -126,12 +143,13 @@ async function logStaffClick(entry, req) {
     entry.campaign,
     entry.landingPage,
     String(req.headers['user-agent'] || ''),
-    String(req.headers.referer || '')
+    String(req.headers.referer || ''),
+    getCountry(req)
   ];
 
   const appendRow = () => sheets.spreadsheets.values.append({
     spreadsheetId: STAFF_SHEET_ID,
-    range: `${STAFF_SHEET_TAB}!A:G`,
+    range: `${STAFF_SHEET_TAB}!A:H`,
     valueInputOption: 'USER_ENTERED',
     resource: { values: [row] }
   });
@@ -153,7 +171,7 @@ async function logStaffClick(entry, req) {
           spreadsheetId: STAFF_SHEET_ID,
           range: `${STAFF_SHEET_TAB}!A1:G1`,
           valueInputOption: 'USER_ENTERED',
-          resource: { values: [['Timestamp', 'StaffID', 'Disease', 'Campaign', 'LandingPage', 'UserAgent', 'Referer']] }
+          resource: { values: [['Timestamp', 'StaffID', 'Disease', 'Campaign', 'LandingPage', 'UserAgent', 'Referer', 'Country']] }
         });
         console.log('[staff-click] created tab + header');
       } catch (e2) {

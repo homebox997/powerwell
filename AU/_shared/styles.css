@@ -436,3 +436,31 @@ img[width]:not([width="auto"]) { height: auto !important; } /* override inline f
         gap: 1rem;
     }
 }
+
+/* Breadcrumb Navigation */
+.breadcrumb {
+    background: #f8f9fa;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #e9ecef;
+    margin: 0;
+}
+
+.breadcrumb a {
+    color: #2d7a4f;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+    color: #1d5a3f;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+}

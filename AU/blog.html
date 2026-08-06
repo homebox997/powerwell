@@ -1,180 +1,872 @@
-﻿﻿﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="PawWell Team">
-
-    <link rel="stylesheet" href="./_shared/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H7DBWWV06J"></script>
-<script>
- window.dataLayer = window.dataLayer || [];
- function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
- gtag('config', 'G-H7DBWWV06J');
-</script>
-
-    <title>Blog | PawWell - Senior Dog Health Articles & Real Stories</title>
-    <meta name="description" content="Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.">
-    <meta property="og:type" content="article">
-    <meta property="og:title" content="Senior Dog Health Blog | PawWell">
-    <meta property="og:description" content="Expert guides, real stories and veterinary insights about caring for your senior dog in Australia.">
-    <meta property="og:url" content="https://www.agedpawwell.com/AU/blog.html">
-    <meta property="og:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="PawWell">
-    <meta property="og:locale" content="en_AU">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Senior Dog Health Blog | PawWell">
-    <meta name="twitter:description" content="Expert guides, real stories and veterinary insights about caring for your senior dog in Australia.">
-    <meta name="twitter:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
-    <meta name="theme-color" content="#ff8a4c">
-    <link rel="icon" type="image/png" sizes="32x32" href="./_shared/assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./_shared/assets/favicon-16x16.png">
-    <link rel="canonical" href="https://www.agedpawwell.com/AU/blog.html">
-    <link rel="apple-touch-icon" sizes="180x180" href="./_shared/assets/apple-touch-icon.png">
-    <meta name="robots" content="index, follow">
-    <link rel="icon" type="image/png" sizes="32x32" href="./_shared/assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./_shared/assets/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./_shared/assets/apple-touch-icon.png">
-
-
-    <!-- Breadcrumb Schema -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://www.agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.agedpawwell.com/AU/blog.html"}]
-    }
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
-    <link rel="stylesheet" href="blog.css">
-    </head>
-<body>
-    <header class="site-header" role="banner">
-        <div class="header-inner">
-            <a href="./index.html" aria-label="PawWell Home"><img src="./_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
-            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
-            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
-                <a href="./index.html">Home</a>
-                <a href="./assessment.html">AI Health Check</a>
-                <a href="./arthritis.html">Arthritis Guide</a>
-                <a href="./kidney.html">Kidney Disease</a>
-                <a href="./heart.html">Heart Disease</a>
-                <a href="./blog.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Blog</a>
-                <a href="./faq.html">FAQ</a>
-            </nav>
-        </div>
-    </header>
-
-    <div class="hero" role="banner">
-        <h1>Senior Dog Health Blog</h1>
-        <p>Real stories, expert guidance and community experiences from Australian dog parents</p>
-    </div>
-
-        <div class="cat-bar" role="navigation" aria-label="Article categories">
-        <button class="cat-btn active" onclick="filterBlog('all', this)">All Articles</button>
-        <button class="cat-btn" onclick="filterBlog('heart', this)">❤ Heart</button>
-        <button class="cat-btn" onclick="filterBlog('kidney', this)">Kidney</button>
-        <button class="cat-btn" onclick="filterBlog('arthritis', this)">Arthritis</button>
-        <button class="cat-btn" onclick="filterBlog('other', this)">Others</button>
-    </div>
-
-    <div class="grid" id="blogGrid"></div>
-
-    <section class="more-articles" aria-labelledby="more-articles-title">
-        <h2 id="more-articles-title">More Articles</h2>
-        <p>Practical guides and real experiences from Australian senior dog owners.</p>
-        <div class="grid more-articles-grid">
-            <a href="./allergy-test-paw-licking-diagnosis.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Licked His Paws Until They Bled: Finally a Proper Diagnosis</h3><p class="card-summary">What one family learned from specialist allergy testing after years of paw licking.</p></div></a>
-            <a href="./arthritis-18-months.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Milo's 18-Month Arthritis Journey: What Actually Worked</h3><p class="card-summary">An honest look at supplements, daily care, results and costs.</p></div></a>
-            <a href="./best-elevated-bowls-arthritic-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Best Elevated Dog Bowls for Arthritic Dogs?</h3><p class="card-summary">What to consider when choosing a stable, joint-friendly feeding setup.</p></div></a>
-            <a href="./bone-broth-senior-dog-joints.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Is Homemade Bone Broth Good for Old Dogs?</h3><p class="card-summary">A practical discussion of bone broth and senior dog joint health.</p></div></a>
-            <a href="./border-collie-drinking-more-water.html" class="blog-card"><div class="orphan-card-cover">Kidney Health</div><div class="card-body"><h3 class="card-title">My Border Collie Is Drinking More Water: Should I Worry?</h3><p class="card-summary">Why increased thirst deserves attention in an older dog.</p></div></a>
-            <a href="./bunnings-ramp-for-old-cavoodle.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">The $45 Ramp That Helped an Old Cavoodle</h3><p class="card-summary">A simple home change that made the couch accessible again.</p></div></a>
-            <a href="./car-ramp-for-small-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Is a Car Ramp Worth It for a Small Senior Dog?</h3><p class="card-summary">Owner experiences and tips for helping a reluctant dog use a ramp.</p></div></a>
-            <a href="./cardiologist-visit-cost-breakdown.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Dog Cardiologist Visit: Australian Cost Breakdown</h3><p class="card-summary">A real-world guide to consultation, testing and follow-up costs.</p></div></a>
-            <a href="./cavalier-night-coughing-heart.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Night Coughing and Possible Heart Disease in a Cavalier</h3><p class="card-summary">What happened after three weeks of coughing and an enlarged-heart finding.</p></div></a>
-            <a href="./daily-feeding-schedule-13-year-old-staffy.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">What I Feed My 13-Year-Old Staffy Every Day</h3><p class="card-summary">A complete daily feeding schedule shared by an experienced owner.</p></div></a>
-            <a href="./daily-teeth-brushing-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Dental Health</div><div class="card-body"><h3 class="card-title">Should You Brush a Senior Dog's Teeth Daily?</h3><p class="card-summary">Why dental care matters and how owners make brushing less stressful.</p></div></a>
-            <a href="./dog-back-pain-arthritis-spondylosis-early-signs.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Back Pain and Spondylosis in Older Dogs</h3><p class="card-summary">Early signs of spinal arthritis every Aussie owner should know.</p></div></a>
-            <a href="./dog-heart-health-mitral-valve-disease-aussie-pet-owners.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Mitral Valve Disease in Dogs: Australian Guide</h3><p class="card-summary">Symptoms, staging, treatment costs and life expectancy explained.</p></div></a>
-            <a href="./dog-limping-guide-aussie-owners.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Limping in Senior Dogs: An Aussie Owner's Guide</h3><p class="card-summary">How to recognise, investigate and manage limping in an older dog.</p></div></a>
-            <a href="./dogs-recover-pulmonary-hypertension-heart-disease.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Pulmonary Hypertension in Dogs: Diagnosis and Recovery</h3><p class="card-summary">Causes, diagnostic tests, treatment and what recovery may look like.</p></div></a>
-            <a href="./elevated-kidney-values-beagle.html" class="blog-card"><div class="orphan-card-cover">Kidney Health</div><div class="card-body"><h3 class="card-title">My Beagle's Blood Test Showed Elevated Kidney Values</h3><p class="card-summary">Support and practical next steps after an early kidney disease result.</p></div></a>
-            <a href="./fish-oil-dosage-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Fish Oil for Senior Dogs: How Much Is Too Much?</h3><p class="card-summary">Questions to ask before choosing a fish oil dose for joint support.</p></div></a>
-            <a href="./fresh-food-diet-senior-labrador.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Fresh Food for a Senior Labrador: Cost vs Benefit</h3><p class="card-summary">Owners discuss whether the higher price produced meaningful results.</p></div></a>
-            <a href="./german-shepherd-recurring-hot-spots.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Recurring Summer Hot Spots in a German Shepherd</h3><p class="card-summary">How to prepare for a predictable seasonal skin problem.</p></div></a>
-            <a href="./golden-retriever-persistent-scratching.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Golden Retriever Won't Stop Scratching</h3><p class="card-summary">What to investigate when parasites, steroids and a food change do not solve it.</p></div></a>
-            <a href="./grade-2-heart-murmur-labrador.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Grade 2 Heart Murmur in an Eight-Year-Old Labrador</h3><p class="card-summary">What a low-grade murmur can mean and why monitoring matters.</p></div></a>
-            <a href="./greyhound-osteoarthritis-diagnosis.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">A Greyhound's Osteoarthritis Diagnosis at Age 10</h3><p class="card-summary">Treatment, physiotherapy and lessons from the first stages of management.</p></div></a>
-            <a href="./heart-disease-dogs-early-signs.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Heart Disease in Dogs: Early Warning Signs</h3><p class="card-summary">The symptoms every Australian senior dog owner should recognise.</p></div></a>
-            <a href="./hiding-dog-medication-tricks.html" class="blog-card"><div class="orphan-card-cover">Daily Care</div><div class="card-body"><h3 class="card-title">Ways to Give a Senior Dog Medication in Food</h3><p class="card-summary">Fresh ideas for a clever dog who finds every hidden tablet.</p></div></a>
-            <a href="./kelpie-stiffness-at-7-years.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Is My Seven-Year-Old Kelpie Slowing Down?</h3><p class="card-summary">Morning stiffness, early arthritis signs and when to arrange a check.</p></div></a>
-            <a href="./librela-injection-arthritis-experience.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Owner Experiences With Librela for Arthritis</h3><p class="card-summary">Questions about costs, effects and monthly treatment for an older dog.</p></div></a>
-            <a href="./mentally-stimulating-old-dog.html" class="blog-card"><div class="orphan-card-cover">Enrichment</div><div class="card-body"><h3 class="card-title">Mental Stimulation for a Dog Slowing Down Physically</h3><p class="card-summary">Low-impact enrichment ideas for a bright senior dog.</p></div></a>
-            <a href="./multiple-medications-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Daily Care</div><div class="card-body"><h3 class="card-title">Managing Four Medications for a Senior Dog</h3><p class="card-summary">Practical owner tips for schedules, doses and reducing daily stress.</p></div></a>
-            <a href="./oatmeal-baths-itchy-dogs.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Do Oatmeal Baths Help Itchy Dogs?</h3><p class="card-summary">What owners notice and what to consider with this common home remedy.</p></div></a>
-            <a href="./old-mate-struggling-on-stairs.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">My Old Mate Is Struggling on the Stairs</h3><p class="card-summary">Early arthritis advice from owners who have managed the same change.</p></div></a>
-            <a href="./older-dog-arthritis-signs-management.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Arthritis in Senior Dogs: Signs and Management</h3><p class="card-summary">Australian treatment options and everyday mobility support.</p></div></a>
-            <a href="./raw-diet-cleared-staffy-skin.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">A Raw Diet and One Staffy's Skin Improvement</h3><p class="card-summary">An owner's experience after changing food for chronic skin problems.</p></div></a>
-            <a href="./senior-dog-refusing-kibble.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Why Is My Senior Dog Suddenly Refusing Kibble?</h3><p class="card-summary">Possible health and behaviour reasons for a sudden appetite change.</p></div></a>
-            <a href="./shih-tzu-coat-thinning-senior.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">A Senior Shih Tzu's Coat Is Getting Thin</h3><p class="card-summary">Ageing, thyroid disease and other changes worth discussing with a vet.</p></div></a>
-            <a href="./swimming-hydrotherapy-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Swimming and Hydrotherapy for Senior Dogs</h3><p class="card-summary">Owner perspectives on low-impact exercise for older joints.</p></div></a>
-            <a href="./training-treats-for-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Training Treats for a 10-Year-Old Dog</h3><p class="card-summary">How to keep rewarding an older learner without overfeeding.</p></div></a>
-            <a href="./when-switch-senior-food-border-collie.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">When Should a Border Collie Switch to Senior Food?</h3><p class="card-summary">Why age alone does not always determine the right time to change diets.</p></div></a>
-        </div>
-    </section>
-
-    <div class="cta-strip">
-        <h2>Is Your Dog Showing Warning Signs?</h2>
-        <p>Take our free 2-minute AI health check - get a personalized assessment instantly</p>
-        <a href="./assessment.html" class="cta-btn">Start Free AI Health Check</a>
-    </div>
-
-    
-<footer class="site-footer" role="contentinfo">
-    <p>&copy; 2026 Aged Paw Well. All rights reserved.</p>
-    <p style="margin-top:.5rem;">
-        <a href="/AU/index.html">Home</a> &middot;
-        <a href="/AU/assessment.html">AI Health Check</a> &middot;
-        <a href="/AU/blog.html">Blog</a> &middot;
-        <a href="/AU/contact.html">Contact Us</a> &middot;
-        <a href="/AU/privacy.html">Privacy Policy</a> &middot;
-        <a href="/AU/disclaimer.html">Disclaimer</a> &middot;
-        <a href="/AU/terms.html">Terms &amp; Conditions</a>
-    </p>
-</footer>
-
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "PawWell Senior Dog Health Blog",
-      "description": "Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.",
-      "url": "https://www.agedpawwell.com/AU/blog.html",
-      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://www.agedpawwell.com" }
-    }
-    </script>
-<script>
-                var ARTICLES = [
-  {
-    slug: 'senior-dog-walking-slower-not-just-age',
-    title: 'Senior Dog Walking Slower? It May Not Be Just Age',
-    category: 'arthritis',
-    excerpt: 'A slower pace is not always just old age. Learn which walking changes in senior dogs signal joint pain, weakness, or other conditions worth a vet check.',
-    date: 'August 5, 2026',
-    readTime: '7 min read',
-    img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
-    pinned: false
-  },
-  
-    
+﻿﻿﻿<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+
+
+
+
+<head>
+
+
+
+
+    <meta charset="UTF-8">
+
+
+
+
+    <meta name="author" content="PawWell Team">
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="./_shared/styles.css">
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<!-- Google tag (gtag.js) -->
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H7DBWWV06J"></script>
+
+
+
+
+<script>
+
+
+
+
+ window.dataLayer = window.dataLayer || [];
+
+
+
+
+ function gtag(){dataLayer.push(arguments);}
+
+
+
+
+ gtag('js', new Date());
+
+
+
+
+ gtag('config', 'G-H7DBWWV06J');
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+    <title>Blog | PawWell - Senior Dog Health Articles & Real Stories</title>
+
+
+
+
+    <meta name="description" content="Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.">
+
+
+
+
+    <meta property="og:type" content="article">
+
+
+
+
+    <meta property="og:title" content="Senior Dog Health Blog | PawWell">
+
+
+
+
+    <meta property="og:description" content="Expert guides, real stories and veterinary insights about caring for your senior dog in Australia.">
+
+
+
+
+    <meta property="og:url" content="https://www.agedpawwell.com/AU/blog.html">
+
+
+
+
+    <meta property="og:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
+
+
+
+
+    <meta property="og:image:width" content="1200">
+
+
+
+
+    <meta property="og:image:height" content="630">
+
+
+
+
+    <meta property="og:site_name" content="PawWell">
+
+
+
+
+    <meta property="og:locale" content="en_AU">
+
+
+
+
+    <meta name="twitter:card" content="summary_large_image">
+
+
+
+
+    <meta name="twitter:title" content="Senior Dog Health Blog | PawWell">
+
+
+
+
+    <meta name="twitter:description" content="Expert guides, real stories and veterinary insights about caring for your senior dog in Australia.">
+
+
+
+
+    <meta name="twitter:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
+
+
+
+
+    <meta name="theme-color" content="#ff8a4c">
+
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./_shared/assets/favicon-32x32.png">
+
+
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="./_shared/assets/favicon-16x16.png">
+
+
+
+
+    <link rel="canonical" href="https://www.agedpawwell.com/AU/blog.html">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./_shared/assets/apple-touch-icon.png">
+
+
+
+
+    <meta name="robots" content="index, follow">
+
+
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./_shared/assets/favicon-32x32.png">
+
+
+
+
+    <link rel="icon" type="image/png" sizes="16x16" href="./_shared/assets/favicon-16x16.png">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="./_shared/assets/apple-touch-icon.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Breadcrumb Schema -->
+
+
+
+
+    <script type="application/ld+json">
+
+
+
+
+    {
+
+
+
+
+      "@context": "https://schema.org",
+
+
+
+
+      "@type": "BreadcrumbList",
+
+
+
+
+      "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://www.agedpawwell.com"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.agedpawwell.com/AU/blog.html"}]
+
+
+
+
+    }
+
+
+
+
+    </script>
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+
+
+
+
+    <link rel="stylesheet" href="blog.css">
+
+
+
+
+    </head>
+
+
+
+
+<body>
+
+
+
+
+    <header class="site-header" role="banner">
+
+
+
+
+        <div class="header-inner">
+
+
+
+
+            <a href="./index.html" aria-label="PawWell Home"><img src="./_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
+
+
+
+
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+
+
+
+
+            <nav class="nav" id="navMenu" role="navigation" aria-label="Main navigation">
+
+
+
+
+                <a href="./index.html">Home</a>
+
+
+
+
+                <a href="./assessment.html">AI Health Check</a>
+
+
+
+
+                <a href="./arthritis.html">Arthritis Guide</a>
+
+
+
+
+                <a href="./kidney.html">Kidney Disease</a>
+
+
+
+
+                <a href="./heart.html">Heart Disease</a>
+
+
+
+
+                <a href="./blog.html" style="background:#fff0eb;color:#ff6b6b;font-weight:700;">Blog</a>
+
+
+
+
+                <a href="./faq.html">FAQ</a>
+
+
+
+
+            </nav>
+
+
+
+
+        </div>
+
+
+
+
+    </header>
+
+
+
+
+
+
+
+
+
+    <div class="hero" role="banner">
+
+
+
+
+        <h1>Senior Dog Health Blog</h1>
+
+
+
+
+        <p>Real stories, expert guidance and community experiences from Australian dog parents</p>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+        <div class="cat-bar" role="navigation" aria-label="Article categories">
+
+
+
+
+        <button class="cat-btn active" onclick="filterBlog('all', this)">All Articles</button>
+
+
+
+
+        <button class="cat-btn" onclick="filterBlog('heart', this)">❤ Heart</button>
+
+
+
+
+        <button class="cat-btn" onclick="filterBlog('kidney', this)">Kidney</button>
+
+
+
+
+        <button class="cat-btn" onclick="filterBlog('arthritis', this)">Arthritis</button>
+
+
+
+
+        <button class="cat-btn" onclick="filterBlog('other', this)">Others</button>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="grid" id="blogGrid"></div>
+
+
+
+
+
+
+
+
+
+    <section class="more-articles" aria-labelledby="more-articles-title">
+
+
+
+
+        <h2 id="more-articles-title">More Articles</h2>
+
+
+
+
+        <p>Practical guides and real experiences from Australian senior dog owners.</p>
+
+
+
+
+        <div class="grid more-articles-grid">
+
+
+
+
+            <a href="./allergy-test-paw-licking-diagnosis.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Licked His Paws Until They Bled: Finally a Proper Diagnosis</h3><p class="card-summary">What one family learned from specialist allergy testing after years of paw licking.</p></div></a>
+
+
+
+
+            <a href="./arthritis-18-months.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Milo's 18-Month Arthritis Journey: What Actually Worked</h3><p class="card-summary">An honest look at supplements, daily care, results and costs.</p></div></a>
+
+
+
+
+            <a href="./best-elevated-bowls-arthritic-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Best Elevated Dog Bowls for Arthritic Dogs?</h3><p class="card-summary">What to consider when choosing a stable, joint-friendly feeding setup.</p></div></a>
+
+
+
+
+            <a href="./bone-broth-senior-dog-joints.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Is Homemade Bone Broth Good for Old Dogs?</h3><p class="card-summary">A practical discussion of bone broth and senior dog joint health.</p></div></a>
+
+
+
+
+            <a href="./border-collie-drinking-more-water.html" class="blog-card"><div class="orphan-card-cover">Kidney Health</div><div class="card-body"><h3 class="card-title">My Border Collie Is Drinking More Water: Should I Worry?</h3><p class="card-summary">Why increased thirst deserves attention in an older dog.</p></div></a>
+
+
+
+
+            <a href="./bunnings-ramp-for-old-cavoodle.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">The $45 Ramp That Helped an Old Cavoodle</h3><p class="card-summary">A simple home change that made the couch accessible again.</p></div></a>
+
+
+
+
+            <a href="./car-ramp-for-small-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Is a Car Ramp Worth It for a Small Senior Dog?</h3><p class="card-summary">Owner experiences and tips for helping a reluctant dog use a ramp.</p></div></a>
+
+
+
+
+            <a href="./cardiologist-visit-cost-breakdown.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Dog Cardiologist Visit: Australian Cost Breakdown</h3><p class="card-summary">A real-world guide to consultation, testing and follow-up costs.</p></div></a>
+
+
+
+
+            <a href="./cavalier-night-coughing-heart.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Night Coughing and Possible Heart Disease in a Cavalier</h3><p class="card-summary">What happened after three weeks of coughing and an enlarged-heart finding.</p></div></a>
+
+
+
+
+            <a href="./daily-feeding-schedule-13-year-old-staffy.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">What I Feed My 13-Year-Old Staffy Every Day</h3><p class="card-summary">A complete daily feeding schedule shared by an experienced owner.</p></div></a>
+
+
+
+
+            <a href="./daily-teeth-brushing-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Dental Health</div><div class="card-body"><h3 class="card-title">Should You Brush a Senior Dog's Teeth Daily?</h3><p class="card-summary">Why dental care matters and how owners make brushing less stressful.</p></div></a>
+
+
+
+
+            <a href="./dog-back-pain-arthritis-spondylosis-early-signs.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Back Pain and Spondylosis in Older Dogs</h3><p class="card-summary">Early signs of spinal arthritis every Aussie owner should know.</p></div></a>
+
+
+
+
+            <a href="./dog-heart-health-mitral-valve-disease-aussie-pet-owners.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Mitral Valve Disease in Dogs: Australian Guide</h3><p class="card-summary">Symptoms, staging, treatment costs and life expectancy explained.</p></div></a>
+
+
+
+
+            <a href="./dog-limping-guide-aussie-owners.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Limping in Senior Dogs: An Aussie Owner's Guide</h3><p class="card-summary">How to recognise, investigate and manage limping in an older dog.</p></div></a>
+
+
+
+
+            <a href="./dogs-recover-pulmonary-hypertension-heart-disease.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Pulmonary Hypertension in Dogs: Diagnosis and Recovery</h3><p class="card-summary">Causes, diagnostic tests, treatment and what recovery may look like.</p></div></a>
+
+
+
+
+            <a href="./elevated-kidney-values-beagle.html" class="blog-card"><div class="orphan-card-cover">Kidney Health</div><div class="card-body"><h3 class="card-title">My Beagle's Blood Test Showed Elevated Kidney Values</h3><p class="card-summary">Support and practical next steps after an early kidney disease result.</p></div></a>
+
+
+
+
+            <a href="./fish-oil-dosage-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Fish Oil for Senior Dogs: How Much Is Too Much?</h3><p class="card-summary">Questions to ask before choosing a fish oil dose for joint support.</p></div></a>
+
+
+
+
+            <a href="./fresh-food-diet-senior-labrador.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Fresh Food for a Senior Labrador: Cost vs Benefit</h3><p class="card-summary">Owners discuss whether the higher price produced meaningful results.</p></div></a>
+
+
+
+
+            <a href="./german-shepherd-recurring-hot-spots.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Recurring Summer Hot Spots in a German Shepherd</h3><p class="card-summary">How to prepare for a predictable seasonal skin problem.</p></div></a>
+
+
+
+
+            <a href="./golden-retriever-persistent-scratching.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Golden Retriever Won't Stop Scratching</h3><p class="card-summary">What to investigate when parasites, steroids and a food change do not solve it.</p></div></a>
+
+
+
+
+            <a href="./grade-2-heart-murmur-labrador.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Grade 2 Heart Murmur in an Eight-Year-Old Labrador</h3><p class="card-summary">What a low-grade murmur can mean and why monitoring matters.</p></div></a>
+
+
+
+
+            <a href="./greyhound-osteoarthritis-diagnosis.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">A Greyhound's Osteoarthritis Diagnosis at Age 10</h3><p class="card-summary">Treatment, physiotherapy and lessons from the first stages of management.</p></div></a>
+
+
+
+
+            <a href="./heart-disease-dogs-early-signs.html" class="blog-card"><div class="orphan-card-cover">Heart Health</div><div class="card-body"><h3 class="card-title">Heart Disease in Dogs: Early Warning Signs</h3><p class="card-summary">The symptoms every Australian senior dog owner should recognise.</p></div></a>
+
+
+
+
+            <a href="./hiding-dog-medication-tricks.html" class="blog-card"><div class="orphan-card-cover">Daily Care</div><div class="card-body"><h3 class="card-title">Ways to Give a Senior Dog Medication in Food</h3><p class="card-summary">Fresh ideas for a clever dog who finds every hidden tablet.</p></div></a>
+
+
+
+
+            <a href="./kelpie-stiffness-at-7-years.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Is My Seven-Year-Old Kelpie Slowing Down?</h3><p class="card-summary">Morning stiffness, early arthritis signs and when to arrange a check.</p></div></a>
+
+
+
+
+            <a href="./librela-injection-arthritis-experience.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Owner Experiences With Librela for Arthritis</h3><p class="card-summary">Questions about costs, effects and monthly treatment for an older dog.</p></div></a>
+
+
+
+
+            <a href="./mentally-stimulating-old-dog.html" class="blog-card"><div class="orphan-card-cover">Enrichment</div><div class="card-body"><h3 class="card-title">Mental Stimulation for a Dog Slowing Down Physically</h3><p class="card-summary">Low-impact enrichment ideas for a bright senior dog.</p></div></a>
+
+
+
+
+            <a href="./multiple-medications-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Daily Care</div><div class="card-body"><h3 class="card-title">Managing Four Medications for a Senior Dog</h3><p class="card-summary">Practical owner tips for schedules, doses and reducing daily stress.</p></div></a>
+
+
+
+
+            <a href="./oatmeal-baths-itchy-dogs.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">Do Oatmeal Baths Help Itchy Dogs?</h3><p class="card-summary">What owners notice and what to consider with this common home remedy.</p></div></a>
+
+
+
+
+            <a href="./old-mate-struggling-on-stairs.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">My Old Mate Is Struggling on the Stairs</h3><p class="card-summary">Early arthritis advice from owners who have managed the same change.</p></div></a>
+
+
+
+
+            <a href="./older-dog-arthritis-signs-management.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Arthritis in Senior Dogs: Signs and Management</h3><p class="card-summary">Australian treatment options and everyday mobility support.</p></div></a>
+
+
+
+
+            <a href="./raw-diet-cleared-staffy-skin.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">A Raw Diet and One Staffy's Skin Improvement</h3><p class="card-summary">An owner's experience after changing food for chronic skin problems.</p></div></a>
+
+
+
+
+            <a href="./senior-dog-refusing-kibble.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Why Is My Senior Dog Suddenly Refusing Kibble?</h3><p class="card-summary">Possible health and behaviour reasons for a sudden appetite change.</p></div></a>
+
+
+
+
+            <a href="./shih-tzu-coat-thinning-senior.html" class="blog-card"><div class="orphan-card-cover">Skin &amp; Allergies</div><div class="card-body"><h3 class="card-title">A Senior Shih Tzu's Coat Is Getting Thin</h3><p class="card-summary">Ageing, thyroid disease and other changes worth discussing with a vet.</p></div></a>
+
+
+
+
+            <a href="./swimming-hydrotherapy-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Mobility</div><div class="card-body"><h3 class="card-title">Swimming and Hydrotherapy for Senior Dogs</h3><p class="card-summary">Owner perspectives on low-impact exercise for older joints.</p></div></a>
+
+
+
+
+            <a href="./training-treats-for-senior-dog.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">Training Treats for a 10-Year-Old Dog</h3><p class="card-summary">How to keep rewarding an older learner without overfeeding.</p></div></a>
+
+
+
+
+            <a href="./when-switch-senior-food-border-collie.html" class="blog-card"><div class="orphan-card-cover">Nutrition</div><div class="card-body"><h3 class="card-title">When Should a Border Collie Switch to Senior Food?</h3><p class="card-summary">Why age alone does not always determine the right time to change diets.</p></div></a>
+
+
+
+
+        </div>
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+    <div class="cta-strip">
+
+
+
+
+        <h2>Is Your Dog Showing Warning Signs?</h2>
+
+
+
+
+        <p>Take our free 2-minute AI health check - get a personalized assessment instantly</p>
+
+
+
+
+        <a href="./assessment.html" class="cta-btn">Start Free AI Health Check</a>
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+<footer class="site-footer" role="contentinfo">
+
+
+
+
+    <p>&copy; 2026 Aged Paw Well. All rights reserved.</p>
+
+
+
+
+    <p style="margin-top:.5rem;">
+
+
+
+
+        <a href="/AU/index.html">Home</a> &middot;
+
+
+
+
+        <a href="/AU/assessment.html">AI Health Check</a> &middot;
+
+
+
+
+        <a href="/AU/blog.html">Blog</a> &middot;
+
+
+
+
+        <a href="/AU/contact.html">Contact Us</a> &middot;
+
+
+
+
+        <a href="/AU/privacy.html">Privacy Policy</a> &middot;
+
+
+
+
+        <a href="/AU/disclaimer.html">Disclaimer</a> &middot;
+
+
+
+
+        <a href="/AU/terms.html">Terms &amp; Conditions</a>
+
+
+
+
+    </p>
+
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+    <!-- Schema.org -->
+
+
+
+
+    <script type="application/ld+json">
+
+
+
+
+    {
+
+
+
+
+      "@context": "https://schema.org",
+
+
+
+
+      "@type": "Blog",
+
+
+
+
+      "name": "PawWell Senior Dog Health Blog",
+
+
+
+
+      "description": "Real health stories, expert tips and community experiences about senior dog arthritis, kidney disease and heart conditions in Australia.",
+
+
+
+
+      "url": "https://www.agedpawwell.com/AU/blog.html",
+
+
+
+
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://www.agedpawwell.com" }
+
+
+
+
+    }
+
+
+
+
+    </script>
+
+
+
+
+<script>
+
+
+
+
+                var ARTICLES = [
+
+
+
+  {
+
+
+
+    slug: 'senior-dog-walking-slower-not-just-age',
+
+
+
+    title: 'Senior Dog Walking Slower? It May Not Be Just Age',
+
+
+
+    category: 'arthritis',
+
+
+
+    excerpt: 'A slower pace is not always just old age. Learn which walking changes in senior dogs signal joint pain, weakness, or other conditions worth a vet check.',
+
+
+
+    date: 'August 5, 2026',
+
+
+
+    readTime: '7 min read',
+
+
+
+    img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
+
+
+
+    pinned: false
+
+
+
+  },
+
+
+
+  
+
+
+    
+
     
     {
       slug: 'senior-dog-slow-recovery-after-exercise',
@@ -185,362 +877,1743 @@
       readTime: '7 min',
       img: '/AU/assets/heart-og.jpg',
       pinned: false
-    },{
-      slug: 'senior-dog-vomiting-tired-kidney-warning',
-      title: 'Senior Dog Vomiting and Tired: Could It Be Kidneys? | PawWell',
-      category: 'kidney',
-      excerpt: 'Occasional vomiting and tiredness in a senior dog can have many causes. Learn when kidneys may be involved, what to record and when care is urgent.',
-      date: 'August 6, 2026',
-      readTime: '7 min',
-      img: '/AU/assets/kidney-og.jpg',
-      pinned: false
-    },{
-      slug: 'osteoarthritis-in-dogs-explained',
-      title: 'Osteoarthritis in Dogs: More Than Worn-Out Joints | PawWell',
-      category: 'arthritis',
-      excerpt: 'Osteoarthritis in dogs is more than simple wear and tear. Learn what changes inside a joint, how pain may appear and how vets build a management plan.',
-      date: 'August 6, 2026',
-      readTime: '8 min',
-      img: '/AU/assets/arthritis-og.jpg',
-      pinned: false
-    },{
-    slug: 'why-your-senior-dog-may-be-hiding-pain-and-how-to-spot-it',
-    title: 'Why Your Senior Dog May Be Hiding Pain (and How to Spot It)',
-    category: 'arthritis',
-    excerpt: 'Stiffness, slow rising and shorter walks are not just old age. Learn the subtle signs of joint pain in senior dogs and what to do.',
-    date: 'August 4, 2026',
-    readTime: '7 min read',
-    img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
-    pinned: false
-  },
-
-  {
-    slug: 'why-large-senior-dogs-face-more-heart-problems',
-    title: 'Why Large Senior Dogs Face More Heart Problems',
-    category: 'heart',
-    excerpt: 'Large senior dogs face significantly higher heart disease risk. Learn why age and size compound cardiac issues and what signs to watch for.',
-    date: 'August 3, 2026',
-    readTime: '9 min read',
-    img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&q=75',
-    pinned: false
-  },
-
-  {
-    slug: 'why-large-senior-dogs-develop-joint-problems',
-    title: 'Why Large Senior Dogs Develop Joint Problems',
-    category: 'arthritis',
-    excerpt: 'Joint problems in large senior dogs are common but manageable. Learn the early signs, risk factors and evidence-based ways to keep your dog comfortable.',
-    date: 'August 3, 2026',
-    readTime: '8 min read',
-    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
-    pinned: false
-  },
-
-  {
-    slug: 'large-senior-dogs-and-kidney-risk',
-    title: 'Large Senior Dogs and Kidney Risk: What Actually Matters?',
-    category: 'kidney',
-    excerpt: 'Kidney disease is a leading health concern for senior dogs. Understand the key risk factors, warning signs and what you can do to protect your dog.',
-    date: 'August 3, 2026',
-    readTime: '8 min read',
-    img: 'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&q=75',
-    pinned: false
-  },
-
-  {
-    slug: 'cough-and-dry-heave-in-large-senior-dogs-is-it-the-heart',
-    title: 'Senior Large-Breed Dog Coughing, Then Dry-Heaving: Could It Be Their Heart?',
-    category: 'heart',
-    excerpt: 'A cough followed by a gag can be a heart warning in older large breeds. Learn the danger signs and what to do tonight before you call the vet.',
-    date: 'August 2, 2026',
-    readTime: '9 min read',
-    img: '',
-    pinned: false
-  },
-
-{
-    slug: 'is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-aussie-fam',
-    title: 'Is Your Senior Dog Hiding Toothache? What Poppy&#x27;s Bad Breath Taught Her Aussie Family',
-    category: 'other',
-    excerpt: 'Bad breath and avoiding chew toys can be signs of hidden dental pain in senior dogs. Poppy’s story shows what owners should watch for.',
-    date: 'July 30, 2026',
-    readTime: '6 min',
-    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
-    pinned: false
-},
-{
-                slug: 'is-your-senior-small-dog-coughing-at-night-its-not-just-old-age-could-be-heart',
-                category: 'heart',
-                title: "Is Your Senior Small Dog Coughing at Night? It's Not Just Old Age \u2013 It Could Be Their Heart",
-                excerpt: "That soft, hacking cough at night could be more than old age. Learn how coughing relates to heart disease in small breed dogs.",
-                date: 'July 26, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'your-dogs-heart-murmur-simple-bedside-checks-that-could-save-their-life',
-                category: 'heart',
-                title: "Your Dog&#x27;s Heart Murmur: Simple Bedside Checks That Could Save Their Life",
-                excerpt: "Heart murmurs are graded 1 to 6 in dogs. Learn what each grade means, which tests to ask your vet for, and the simple checks you can do at home to monitor a murmur between visits.",
-                date: 'July 29, 2026', readTime: '7 min',
-                img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'heart-murmurs-and-doggy-dentals-why-your-pup-can-still-have-a-clean-pain-free-sm',
-                category: 'heart',
-                title: "Heart Murmurs and Doggy Dentals: Why Your Pup Can Still Have a Clean, Pain-Free Smile",
-                excerpt: "Many dogs with heart murmurs still need dental work under anaesthetic. Here is how vets assess the risk, what pre-anaesthetic testing looks like, and how to keep your dog safe.",
-                date: 'July 29, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: '7-silent-signs-senior-dog-heart-needs-check-up-what-to-do-tonight',
-                category: 'heart',
-                title: "7 Silent Signs Your Senior Dog's Heart Needs a Check-Up (And What to Do Tonight)",
-                excerpt: "Watch for these quiet warning signs that your older dog's heart may need attention. Early detection can make all the difference.",
-                date: 'July 26, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'heart-failure-in-dogs-from-silent-belly-bloat-to-deadly-blood-clots',
-                category: 'heart',
-                title: 'Heart Failure in Dogs: From Silent Belly Bloat to Deadly Blood Clots',
-                excerpt: "One Cavalier's story reveals the subtle signs of heart failure every senior dog owner should know about before it is too late.",
-                date: 'July 26, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'your-dogs-heart-murmur-what-every-aussie-owner-needs-to-know-about-canine-heart-disease',
-                category: 'heart',
-                title: "Your Dog's Heart Murmur: What Every Aussie Owner Needs to Know About Canine Heart Disease",
-                excerpt: "A heart murmur sounds scary, but understanding what it means can help you make the best decisions for your senior dog's care.",
-                date: 'July 26, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'why-swollen-belly-in-your-big-dog-could-signal-heart-trouble-lilys-story',
-                category: 'heart',
-                title: "Why a Swollen Belly in Your Big Dog Could Signal Heart Trouble: Lily's Story",
-                excerpt: "When Lily's belly swelled up, her owner had no idea it was linked to her heart. Learn what to watch for in large breed dogs.",
-                date: 'July 26, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'a-9-year-old-cocker-spaniels-sudden-pot-belly-what-every-aussie-dog-owner-should-know',
-                category: 'heart',
-                title: "A 9-Year-Old Cocker Spaniel's Sudden Pot Belly: What Every Aussie Dog Owner Should Know",
-                excerpt: 'When a Cocker Spaniel developed a pot belly, the cause was not what anyone expected. Learn about this uncommon but important heart condition.',
-                date: 'July 26, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1544568100-847a948585b9?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'when-to-worry-about-senior-dog-stiffness',
-                category: 'arthritis',
-                title: "When to Worry About Your Senior Dog Stiffness",
-                excerpt: "Occasional stiffness after a long walk or a cold night is common in senior dogs and often eases with a little rest. But some signs should never be...",
-                date: 'July 27, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'early-signs-joint-pain-dogs-how-to-help-your-aussie-mate-stay-active',
-                category: 'arthritis',
-                title: "Early Signs of Joint Pain in Dogs and How to Help Your Aussie Mate Stay Active",
-                excerpt: "Occasional stiffness after a long walk or a cold night is common in senior dogs and often eases with a little rest. But some signs should never be ignored.",
-                date: 'July 27, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'when-your-senior-dog-needs-the-vet-for-arthritis',
-                category: 'arthritis',
-                title: "When Your Senior Dog Needs the Vet for Arthritis",
-                excerpt: "Occasional stiffness may improve with rest, but certain signs should never be ignored. Learn when arthritis warrants a vet visit.",
-                date: 'July 27, 2026', readTime: '4 min',
-                img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'increased-thirst-and-urination-early-signs-canine-kidney-disease',
-                category: 'kidney',
-                title: "Is Your Senior Dog Drinking More Water Than Usual? Early Kidney Disease Signs",
-                excerpt: "Excessive thirst and frequent urination are the most common early signs of chronic kidney disease in senior dogs — yet they're also the easiest to dismiss. Here's what every Australian dog owner needs to know.",
-                date: 'July 27, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'kidney-disease-senior-dogs-diet-treatment-complete-guide',
-                category: 'kidney',
-                title: "Kidney Disease in Senior Dogs: Your Complete Guide to Diet, Treatment & Survival",
-                excerpt: "A diagnosis of chronic kidney disease does not mean giving up. With the right prescription diet, medical management, and regular monitoring, many senior dogs live comfortably for years. Here's everything you need to know.",
-                date: 'July 27, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400&q=75',
-                pinned: false
-            },
-{
-                slug: 'kidney-biopsy-in-dogs-what-it-reveals-and-why-it-matters',
-                category: 'kidney',
-                title: "Kidney Biopsy in Dogs: What It Reveals and Why It Changes Treatment",
-                excerpt: "A kidney biopsy can identify the exact type of kidney disease your dog has — and that information directly determines whether to use immunosuppression, kidney protection, or both. New data from 1,439 canine biopsies explains why it matters.",
-                date: 'July 27, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
-                pinned: false
-            }
-,
-{
-                slug: 'why-your-senior-dog-coughs-at-night-heart-or-just-a-hack',
-                category: 'heart',
-                title: 'Why Your Senior Dog Coughs at Night: Heart or Just a Hack?',
-                excerpt: "A night cough in your large senior dog can be a red flag for heart trouble. Learn when to worry, home comfort tips, and how to count sleeping breaths in plain Aussie English.",
-                date: 'July 31, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'what-chronic-kidney-disease-in-large-breeds-really-means-and-why-its-not-kidney-failure',
-                category: 'kidney',
-                title: 'What Chronic Kidney Disease in Large Breeds Really Means (And Why It\'s Not \'Kidney Failure\')',
-                excerpt: "A warm, chatty guide for Aussie owners: CKD is a staged condition, not immediate kidney failure. Learn what abnormal kidney values really mean and how to help your big dog.",
-                date: 'July 31, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'dog-cough-heart-or-airway-5-clues-to-record-for-your-vet',
-                category: 'heart',
-                title: 'Dog Cough: Heart or Airway? 5 Clues to Record for Your Vet',
-                excerpt: "Learn to tell if your senior large breed dog's cough is from the heart or lungs. Simple at-home clues on timing, sound, and triggers to note before the vet visit.",
-                date: 'July 31, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'your-senior-dogs-joint-map-hip-elbow-knee-spinewhats-really-going-on',
-                category: 'arthritis',
-                title: 'Your Senior Dogs Joint Map: Hip, Elbow, Knee & SpineWhats Really Going On',
-                excerpt: "Learn how different large-breed joint spots (hip, knee, elbow, spine) can show up, from a quiet hip sway to morning stiffness, and simple at-home checks you can do tonight.",
-                date: 'July 31, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'why-is-my-big-old-dog-suddenly-not-moving-personality-or-pain',
-                category: 'Kidney',
-                title: 'Why Is My Big Old Dog Suddenly Not Moving? Personality or Pain?',
-                excerpt: "A big old dog that's suddenly lying down all day might be more than lazy. Discover the top reasons and what to check at home tonight.",
-                date: 'August 01, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'senior-large-dog-suddenly-wont-move-read-this-nononsense-checklist-now',
-                category: 'Heart',
-                title: 'Senior Large Dog Suddenly Won\'t Move? Read This NoNonsense Checklist Now',
-                excerpt: "If your large senior dog has suddenly stopped wanting to walk, its likely a health issue, not laziness. Learn the warning signs and when to see a vet.",
-                date: 'August 01, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'why-your-large-dogs-bad-breath-and-mouth-sores-might-mean-kidney-worry',
-                category: 'Kidney',
-                title: 'Why Your Large Dogs Bad Breath and Mouth Sores Might Mean Kidney Worry',
-                excerpt: "Worsening breath and mouth ulcers in a senior large-breed dog could point to kidney trouble. Learn the signs, what to check at home, and when to call the vet.",
-                date: 'August 01, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'purple-gums-in-big-dogs-a-no-nonsense-guide-for-senior-large-breeds',
-                category: 'Heart',
-                title: 'Purple Gums in Big Dogs: A No-Nonsense Guide for Senior Large Breeds',
-                excerpt: "Purple or blue gums in a Labrador, Rottweiler, or other large breed can signal a heart emergency. Learn what causes it, how to check at home, and when to go to the vet right away.",
-                date: 'August 01, 2026', readTime: '5 min',
-                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
-                pinned: false
-            },
-{
-                slug: 'your-senior-dogs-limp-more-than-arthritis-a-guide-for-large-breeds',
-                category: 'Arthritis',
-                title: 'Your Senior Dogs Limp: More Than Arthritis? A Guide for Large Breeds',
-                excerpt: "A limp isnt always arthritis in older large breeds. Learn what else could be causing it, when to worry, and simple at-home checks you can do tonight.",
-                date: 'August 01, 2026', readTime: '6 min',
-                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=900&q=75',
-                pinned: false
-            }];
-;
-        
-        function filterBlog(cat, btn) {
-            document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            renderGrid(cat);
-        }
-
-        function renderGrid(cat) {
-            var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return (a.category || '').toLowerCase() === cat.toLowerCase(); });
-            filtered.sort(function(a, b) {
-                return new Date(b.date) - new Date(a.date);
-            });
-            var html = filtered.map(function(a) { return renderCard(a); }).join('');
-            document.getElementById('blogGrid').innerHTML = html || '<p style="text-align:center;padding:3rem;color:#aaa;grid-column:1/-1;">No articles in this category yet. Stay tuned!</p>';
-        }
-
-        function renderCard(a) {
-            var catLabels = { "heart": "Heart", "kidney": "Kidney", "arthritis": "Arthritis", "other": "Others" };
-            var label = catLabels[
-    {
-      slug: 'why-large-senior-dogs-face-more-heart-problems',
-      title: 'Why Large Senior Dogs Face More Heart Problems',
-      category: 'heart',
-      excerpt: 'Learn how breed, age and body condition shape heart risk in large senior dogs, what changes to watch for and when to call a vet.',
-      date: 'August 3, 2026',
-      readTime: '55 min',
-      img: '/AU/assets/heart-og.jpg',
-      pinned: false
-    },a.category] || a.category;
-            var safeTitle = a.title.replace(/"/g, '&quot;');
-            return '<a href="/AU/blog/' + a.slug + '.html" class="blog-card">' +
-                '<div class="card-img-wrap"><img src="' + a.img + '" alt="' + safeTitle + '" loading="lazy"></div>' +
-                '<div class="card-body">' +
-                '<div class="card-meta"><span class="card-cat">' + label + '</span> &middot; ' + a.date + ' &middot; ' + a.readTime + '</div>' +
-                '<h2 class="card-title">' + a.title + '</h2>' +
-                '<p class="card-summary">' + a.excerpt + '</p>' +
-                '</div></a>';
-        }
-
-        // Init
-        renderGrid('all');
-        (function(){
-            try{
-                var c = new URLSearchParams(location.search).get('cat');
-                if(c){
-                    c = c.toLowerCase();
-                    var valid = {'all':1,'heart':1,'kidney':1,'arthritis':1,'other':1};
-                    if(valid[c]){
-                        var btns = document.querySelectorAll('.cat-btn');
-                        var target = null;
-                        btns.forEach(function(b){
-                            var om = (b.getAttribute('onclick')||'').match(/filterBlog\('([^']+)'/);
-                            if(om && om[1]===c) target = b;
-                        });
-                        if(target) filterBlog(c, target);
-                    }
-                }
-            }catch(e){}
-        })();
-
-    </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-    <script src="js/supabase-init.js?v=20260728" defer></script>
-    <script src="js/api-client.js?v=20260728" defer></script>
-    <script defer src="./_shared/nav.js"></script>
-</body>
-</html>
+    },{
+
+      slug: 'senior-dog-vomiting-tired-kidney-warning',
+
+      title: 'Senior Dog Vomiting and Tired: Could It Be Kidneys? | PawWell',
+
+      category: 'kidney',
+
+      excerpt: 'Occasional vomiting and tiredness in a senior dog can have many causes. Learn when kidneys may be involved, what to record and when care is urgent.',
+
+      date: 'August 6, 2026',
+
+      readTime: '7 min',
+
+      img: '/AU/assets/kidney-og.jpg',
+
+      pinned: false
+
+    },{
+
+
+      slug: 'osteoarthritis-in-dogs-explained',
+
+
+      title: 'Osteoarthritis in Dogs: More Than Worn-Out Joints | PawWell',
+
+
+      category: 'arthritis',
+
+
+      excerpt: 'Osteoarthritis in dogs is more than simple wear and tear. Learn what changes inside a joint, how pain may appear and how vets build a management plan.',
+
+
+      date: 'August 6, 2026',
+
+
+      readTime: '8 min',
+
+
+      img: '/AU/assets/arthritis-og.jpg',
+
+
+      pinned: false
+
+
+    },{
+
+
+
+    slug: 'why-your-senior-dog-may-be-hiding-pain-and-how-to-spot-it',
+
+
+
+    title: 'Why Your Senior Dog May Be Hiding Pain (and How to Spot It)',
+
+
+
+    category: 'arthritis',
+
+
+
+    excerpt: 'Stiffness, slow rising and shorter walks are not just old age. Learn the subtle signs of joint pain in senior dogs and what to do.',
+
+
+
+    date: 'August 4, 2026',
+
+
+
+    readTime: '7 min read',
+
+
+
+    img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
+
+
+
+    pinned: false
+
+
+
+  },
+
+
+
+
+
+
+
+
+  {
+
+
+
+
+    slug: 'why-large-senior-dogs-face-more-heart-problems',
+
+
+
+
+    title: 'Why Large Senior Dogs Face More Heart Problems',
+
+
+
+
+    category: 'heart',
+
+
+
+
+    excerpt: 'Large senior dogs face significantly higher heart disease risk. Learn why age and size compound cardiac issues and what signs to watch for.',
+
+
+
+
+    date: 'August 3, 2026',
+
+
+
+
+    readTime: '9 min read',
+
+
+
+
+    img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&q=75',
+
+
+
+
+    pinned: false
+
+
+
+
+  },
+
+
+
+
+
+
+
+
+
+  {
+
+
+
+
+    slug: 'why-large-senior-dogs-develop-joint-problems',
+
+
+
+
+    title: 'Why Large Senior Dogs Develop Joint Problems',
+
+
+
+
+    category: 'arthritis',
+
+
+
+
+    excerpt: 'Joint problems in large senior dogs are common but manageable. Learn the early signs, risk factors and evidence-based ways to keep your dog comfortable.',
+
+
+
+
+    date: 'August 3, 2026',
+
+
+
+
+    readTime: '8 min read',
+
+
+
+
+    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
+
+
+
+
+    pinned: false
+
+
+
+
+  },
+
+
+
+
+
+
+
+
+
+  {
+
+
+
+
+    slug: 'large-senior-dogs-and-kidney-risk',
+
+
+
+
+    title: 'Large Senior Dogs and Kidney Risk: What Actually Matters?',
+
+
+
+
+    category: 'kidney',
+
+
+
+
+    excerpt: 'Kidney disease is a leading health concern for senior dogs. Understand the key risk factors, warning signs and what you can do to protect your dog.',
+
+
+
+
+    date: 'August 3, 2026',
+
+
+
+
+    readTime: '8 min read',
+
+
+
+
+    img: 'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&q=75',
+
+
+
+
+    pinned: false
+
+
+
+
+  },
+
+
+
+
+
+
+
+
+
+  {
+
+
+
+
+    slug: 'cough-and-dry-heave-in-large-senior-dogs-is-it-the-heart',
+
+
+
+
+    title: 'Senior Large-Breed Dog Coughing, Then Dry-Heaving: Could It Be Their Heart?',
+
+
+
+
+    category: 'heart',
+
+
+
+
+    excerpt: 'A cough followed by a gag can be a heart warning in older large breeds. Learn the danger signs and what to do tonight before you call the vet.',
+
+
+
+
+    date: 'August 2, 2026',
+
+
+
+
+    readTime: '9 min read',
+
+
+
+
+    img: '',
+
+
+
+
+    pinned: false
+
+
+
+
+  },
+
+
+
+
+
+
+
+
+
+{
+
+
+
+
+    slug: 'is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-aussie-fam',
+
+
+
+
+    title: 'Is Your Senior Dog Hiding Toothache? What Poppy&#x27;s Bad Breath Taught Her Aussie Family',
+
+
+
+
+    category: 'other',
+
+
+
+
+    excerpt: 'Bad breath and avoiding chew toys can be signs of hidden dental pain in senior dogs. Poppy’s story shows what owners should watch for.',
+
+
+
+
+    date: 'July 30, 2026',
+
+
+
+
+    readTime: '6 min',
+
+
+
+
+    img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
+
+
+
+
+    pinned: false
+
+
+
+
+},
+
+
+
+
+{
+
+
+
+
+                slug: 'is-your-senior-small-dog-coughing-at-night-its-not-just-old-age-could-be-heart',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "Is Your Senior Small Dog Coughing at Night? It's Not Just Old Age \u2013 It Could Be Their Heart",
+
+
+
+
+                excerpt: "That soft, hacking cough at night could be more than old age. Learn how coughing relates to heart disease in small breed dogs.",
+
+
+
+
+                date: 'July 26, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'your-dogs-heart-murmur-simple-bedside-checks-that-could-save-their-life',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "Your Dog&#x27;s Heart Murmur: Simple Bedside Checks That Could Save Their Life",
+
+
+
+
+                excerpt: "Heart murmurs are graded 1 to 6 in dogs. Learn what each grade means, which tests to ask your vet for, and the simple checks you can do at home to monitor a murmur between visits.",
+
+
+
+
+                date: 'July 29, 2026', readTime: '7 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'heart-murmurs-and-doggy-dentals-why-your-pup-can-still-have-a-clean-pain-free-sm',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "Heart Murmurs and Doggy Dentals: Why Your Pup Can Still Have a Clean, Pain-Free Smile",
+
+
+
+
+                excerpt: "Many dogs with heart murmurs still need dental work under anaesthetic. Here is how vets assess the risk, what pre-anaesthetic testing looks like, and how to keep your dog safe.",
+
+
+
+
+                date: 'July 29, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: '7-silent-signs-senior-dog-heart-needs-check-up-what-to-do-tonight',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "7 Silent Signs Your Senior Dog's Heart Needs a Check-Up (And What to Do Tonight)",
+
+
+
+
+                excerpt: "Watch for these quiet warning signs that your older dog's heart may need attention. Early detection can make all the difference.",
+
+
+
+
+                date: 'July 26, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'heart-failure-in-dogs-from-silent-belly-bloat-to-deadly-blood-clots',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: 'Heart Failure in Dogs: From Silent Belly Bloat to Deadly Blood Clots',
+
+
+
+
+                excerpt: "One Cavalier's story reveals the subtle signs of heart failure every senior dog owner should know about before it is too late.",
+
+
+
+
+                date: 'July 26, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'your-dogs-heart-murmur-what-every-aussie-owner-needs-to-know-about-canine-heart-disease',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "Your Dog's Heart Murmur: What Every Aussie Owner Needs to Know About Canine Heart Disease",
+
+
+
+
+                excerpt: "A heart murmur sounds scary, but understanding what it means can help you make the best decisions for your senior dog's care.",
+
+
+
+
+                date: 'July 26, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'why-swollen-belly-in-your-big-dog-could-signal-heart-trouble-lilys-story',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "Why a Swollen Belly in Your Big Dog Could Signal Heart Trouble: Lily's Story",
+
+
+
+
+                excerpt: "When Lily's belly swelled up, her owner had no idea it was linked to her heart. Learn what to watch for in large breed dogs.",
+
+
+
+
+                date: 'July 26, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'a-9-year-old-cocker-spaniels-sudden-pot-belly-what-every-aussie-dog-owner-should-know',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: "A 9-Year-Old Cocker Spaniel's Sudden Pot Belly: What Every Aussie Dog Owner Should Know",
+
+
+
+
+                excerpt: 'When a Cocker Spaniel developed a pot belly, the cause was not what anyone expected. Learn about this uncommon but important heart condition.',
+
+
+
+
+                date: 'July 26, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1544568100-847a948585b9?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'when-to-worry-about-senior-dog-stiffness',
+
+
+
+
+                category: 'arthritis',
+
+
+
+
+                title: "When to Worry About Your Senior Dog Stiffness",
+
+
+
+
+                excerpt: "Occasional stiffness after a long walk or a cold night is common in senior dogs and often eases with a little rest. But some signs should never be...",
+
+
+
+
+                date: 'July 27, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'early-signs-joint-pain-dogs-how-to-help-your-aussie-mate-stay-active',
+
+
+
+
+                category: 'arthritis',
+
+
+
+
+                title: "Early Signs of Joint Pain in Dogs and How to Help Your Aussie Mate Stay Active",
+
+
+
+
+                excerpt: "Occasional stiffness after a long walk or a cold night is common in senior dogs and often eases with a little rest. But some signs should never be ignored.",
+
+
+
+
+                date: 'July 27, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'when-your-senior-dog-needs-the-vet-for-arthritis',
+
+
+
+
+                category: 'arthritis',
+
+
+
+
+                title: "When Your Senior Dog Needs the Vet for Arthritis",
+
+
+
+
+                excerpt: "Occasional stiffness may improve with rest, but certain signs should never be ignored. Learn when arthritis warrants a vet visit.",
+
+
+
+
+                date: 'July 27, 2026', readTime: '4 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'increased-thirst-and-urination-early-signs-canine-kidney-disease',
+
+
+
+
+                category: 'kidney',
+
+
+
+
+                title: "Is Your Senior Dog Drinking More Water Than Usual? Early Kidney Disease Signs",
+
+
+
+
+                excerpt: "Excessive thirst and frequent urination are the most common early signs of chronic kidney disease in senior dogs — yet they're also the easiest to dismiss. Here's what every Australian dog owner needs to know.",
+
+
+
+
+                date: 'July 27, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'kidney-disease-senior-dogs-diet-treatment-complete-guide',
+
+
+
+
+                category: 'kidney',
+
+
+
+
+                title: "Kidney Disease in Senior Dogs: Your Complete Guide to Diet, Treatment & Survival",
+
+
+
+
+                excerpt: "A diagnosis of chronic kidney disease does not mean giving up. With the right prescription diet, medical management, and regular monitoring, many senior dogs live comfortably for years. Here's everything you need to know.",
+
+
+
+
+                date: 'July 27, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'kidney-biopsy-in-dogs-what-it-reveals-and-why-it-matters',
+
+
+
+
+                category: 'kidney',
+
+
+
+
+                title: "Kidney Biopsy in Dogs: What It Reveals and Why It Changes Treatment",
+
+
+
+
+                excerpt: "A kidney biopsy can identify the exact type of kidney disease your dog has — and that information directly determines whether to use immunosuppression, kidney protection, or both. New data from 1,439 canine biopsies explains why it matters.",
+
+
+
+
+                date: 'July 27, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            }
+
+
+
+
+,
+
+
+
+
+{
+
+
+
+
+                slug: 'why-your-senior-dog-coughs-at-night-heart-or-just-a-hack',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: 'Why Your Senior Dog Coughs at Night: Heart or Just a Hack?',
+
+
+
+
+                excerpt: "A night cough in your large senior dog can be a red flag for heart trouble. Learn when to worry, home comfort tips, and how to count sleeping breaths in plain Aussie English.",
+
+
+
+
+                date: 'July 31, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'what-chronic-kidney-disease-in-large-breeds-really-means-and-why-its-not-kidney-failure',
+
+
+
+
+                category: 'kidney',
+
+
+
+
+                title: 'What Chronic Kidney Disease in Large Breeds Really Means (And Why It\'s Not \'Kidney Failure\')',
+
+
+
+
+                excerpt: "A warm, chatty guide for Aussie owners: CKD is a staged condition, not immediate kidney failure. Learn what abnormal kidney values really mean and how to help your big dog.",
+
+
+
+
+                date: 'July 31, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'dog-cough-heart-or-airway-5-clues-to-record-for-your-vet',
+
+
+
+
+                category: 'heart',
+
+
+
+
+                title: 'Dog Cough: Heart or Airway? 5 Clues to Record for Your Vet',
+
+
+
+
+                excerpt: "Learn to tell if your senior large breed dog's cough is from the heart or lungs. Simple at-home clues on timing, sound, and triggers to note before the vet visit.",
+
+
+
+
+                date: 'July 31, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'your-senior-dogs-joint-map-hip-elbow-knee-spinewhats-really-going-on',
+
+
+
+
+                category: 'arthritis',
+
+
+
+
+                title: 'Your Senior Dogs Joint Map: Hip, Elbow, Knee & SpineWhats Really Going On',
+
+
+
+
+                excerpt: "Learn how different large-breed joint spots (hip, knee, elbow, spine) can show up, from a quiet hip sway to morning stiffness, and simple at-home checks you can do tonight.",
+
+
+
+
+                date: 'July 31, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'why-is-my-big-old-dog-suddenly-not-moving-personality-or-pain',
+
+
+
+
+                category: 'Kidney',
+
+
+
+
+                title: 'Why Is My Big Old Dog Suddenly Not Moving? Personality or Pain?',
+
+
+
+
+                excerpt: "A big old dog that's suddenly lying down all day might be more than lazy. Discover the top reasons and what to check at home tonight.",
+
+
+
+
+                date: 'August 01, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'senior-large-dog-suddenly-wont-move-read-this-nononsense-checklist-now',
+
+
+
+
+                category: 'Heart',
+
+
+
+
+                title: 'Senior Large Dog Suddenly Won\'t Move? Read This NoNonsense Checklist Now',
+
+
+
+
+                excerpt: "If your large senior dog has suddenly stopped wanting to walk, its likely a health issue, not laziness. Learn the warning signs and when to see a vet.",
+
+
+
+
+                date: 'August 01, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'why-your-large-dogs-bad-breath-and-mouth-sores-might-mean-kidney-worry',
+
+
+
+
+                category: 'Kidney',
+
+
+
+
+                title: 'Why Your Large Dogs Bad Breath and Mouth Sores Might Mean Kidney Worry',
+
+
+
+
+                excerpt: "Worsening breath and mouth ulcers in a senior large-breed dog could point to kidney trouble. Learn the signs, what to check at home, and when to call the vet.",
+
+
+
+
+                date: 'August 01, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'purple-gums-in-big-dogs-a-no-nonsense-guide-for-senior-large-breeds',
+
+
+
+
+                category: 'Heart',
+
+
+
+
+                title: 'Purple Gums in Big Dogs: A No-Nonsense Guide for Senior Large Breeds',
+
+
+
+
+                excerpt: "Purple or blue gums in a Labrador, Rottweiler, or other large breed can signal a heart emergency. Learn what causes it, how to check at home, and when to go to the vet right away.",
+
+
+
+
+                date: 'August 01, 2026', readTime: '5 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            },
+
+
+
+
+{
+
+
+
+
+                slug: 'your-senior-dogs-limp-more-than-arthritis-a-guide-for-large-breeds',
+
+
+
+
+                category: 'Arthritis',
+
+
+
+
+                title: 'Your Senior Dogs Limp: More Than Arthritis? A Guide for Large Breeds',
+
+
+
+
+                excerpt: "A limp isnt always arthritis in older large breeds. Learn what else could be causing it, when to worry, and simple at-home checks you can do tonight.",
+
+
+
+
+                date: 'August 01, 2026', readTime: '6 min',
+
+
+
+
+                img: 'https://images.unsplash.com/photo-1558788353-f76d92427f16?w=900&q=75',
+
+
+
+
+                pinned: false
+
+
+
+
+            }];
+
+
+
+
+;
+
+
+
+
+        
+
+
+
+
+        function filterBlog(cat, btn) {
+
+
+
+
+            document.querySelectorAll('.cat-btn').forEach(function(b) { b.classList.remove('active'); });
+
+
+
+
+            btn.classList.add('active');
+
+
+
+
+            renderGrid(cat);
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        function renderGrid(cat) {
+
+
+
+
+            var filtered = cat === 'all' ? ARTICLES : ARTICLES.filter(function(a) { return (a.category || '').toLowerCase() === cat.toLowerCase(); });
+
+
+
+
+            filtered.sort(function(a, b) {
+
+
+
+
+                return new Date(b.date) - new Date(a.date);
+
+
+
+
+            });
+
+
+
+
+            var html = filtered.map(function(a) { return renderCard(a); }).join('');
+
+
+
+
+            document.getElementById('blogGrid').innerHTML = html || '<p style="text-align:center;padding:3rem;color:#aaa;grid-column:1/-1;">No articles in this category yet. Stay tuned!</p>';
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        function renderCard(a) {
+
+
+
+
+            var catLabels = { "heart": "Heart", "kidney": "Kidney", "arthritis": "Arthritis", "other": "Others" };
+
+
+
+
+            var label = catLabels[
+
+
+
+
+    {
+
+
+
+
+      slug: 'why-large-senior-dogs-face-more-heart-problems',
+
+
+
+
+      title: 'Why Large Senior Dogs Face More Heart Problems',
+
+
+
+
+      category: 'heart',
+
+
+
+
+      excerpt: 'Learn how breed, age and body condition shape heart risk in large senior dogs, what changes to watch for and when to call a vet.',
+
+
+
+
+      date: 'August 3, 2026',
+
+
+
+
+      readTime: '55 min',
+
+
+
+
+      img: '/AU/assets/heart-og.jpg',
+
+
+
+
+      pinned: false
+
+
+
+
+    },a.category] || a.category;
+
+
+
+
+            var safeTitle = a.title.replace(/"/g, '&quot;');
+
+
+
+
+            return '<a href="/AU/blog/' + a.slug + '.html" class="blog-card">' +
+
+
+
+
+                '<div class="card-img-wrap"><img src="' + a.img + '" alt="' + safeTitle + '" loading="lazy"></div>' +
+
+
+
+
+                '<div class="card-body">' +
+
+
+
+
+                '<div class="card-meta"><span class="card-cat">' + label + '</span> &middot; ' + a.date + ' &middot; ' + a.readTime + '</div>' +
+
+
+
+
+                '<h2 class="card-title">' + a.title + '</h2>' +
+
+
+
+
+                '<p class="card-summary">' + a.excerpt + '</p>' +
+
+
+
+
+                '</div></a>';
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        // Init
+
+
+
+
+        renderGrid('all');
+
+
+
+
+        (function(){
+
+
+
+
+            try{
+
+
+
+
+                var c = new URLSearchParams(location.search).get('cat');
+
+
+
+
+                if(c){
+
+
+
+
+                    c = c.toLowerCase();
+
+
+
+
+                    var valid = {'all':1,'heart':1,'kidney':1,'arthritis':1,'other':1};
+
+
+
+
+                    if(valid[c]){
+
+
+
+
+                        var btns = document.querySelectorAll('.cat-btn');
+
+
+
+
+                        var target = null;
+
+
+
+
+                        btns.forEach(function(b){
+
+
+
+
+                            var om = (b.getAttribute('onclick')||'').match(/filterBlog\('([^']+)'/);
+
+
+
+
+                            if(om && om[1]===c) target = b;
+
+
+
+
+                        });
+
+
+
+
+                        if(target) filterBlog(c, target);
+
+
+
+
+                    }
+
+
+
+
+                }
+
+
+
+
+            }catch(e){}
+
+
+
+
+        })();
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+
+
+
+
+    <script src="js/supabase-init.js?v=20260728" defer></script>
+
+
+
+
+    <script src="js/api-client.js?v=20260728" defer></script>
+
+
+
+
+    <script defer src="./_shared/nav.js"></script>
+
+
+
+
+</body>
+
+
+
+
+</html>
+
+
+
+

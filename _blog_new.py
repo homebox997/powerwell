@@ -35,7 +35,7 @@ def create(slug, category, title, desc):
     # 替换
     eyebrow = CATEGORIES[category]
     hero = HERO_IMAGES[category]
-    today = datetime.now().strftime('%-d %B %Y')
+    today = datetime.now().strftime('%d %B %Y')
     year = datetime.now().year
 
     replacements = [

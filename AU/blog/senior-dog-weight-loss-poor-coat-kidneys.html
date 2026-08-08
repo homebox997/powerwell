@@ -35,7 +35,7 @@
     .nav { display: flex; gap: 24px; margin-left: auto; }
     .nav a { text-decoration: none; color: #333; font-weight: 500; font-size: 15px; }
     .hamburger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
-    .article-hero img { width: 100%; max-height: 420px; object-fit: cover; border-radius: 12px; }
+    
     .article-wrap { max-width: 780px; margin: 80px auto 40px; background: #fff; border-radius: 16px; padding: 40px 48px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
     .breadcrumb { font-size: 14px; color: #666; margin-bottom: 16px; }
     .breadcrumb a { color: #2d7a4f; text-decoration: none; }
@@ -50,12 +50,136 @@
     .cta-strip h3 { margin: 0 0 8px; font-size: 22px; }
     .cta-strip p { margin: 0 0 16px; opacity: 0.9; }
     .cta-btn { display: inline-block; background: #fff; color: #2d7a4f; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; }
-    .related-articles { margin-top: 40px; padding-top: 24px; border-top: 1px solid #eee; }
+    
     .site-footer { background: #1a1a2e; color: #ccc; padding: 32px 24px; margin-top: 0; }
     .site-footer a { color: #ccc; text-decoration: none; }
     .vet-disclaimer { font-size: 13px; color: #888; border-top: 1px solid #eee; padding-top: 16px; margin-top: 32px; }
     @media (max-width: 700px) { .hamburger { display: block; } .nav { display: none; } .nav.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #fff; padding: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); } .article-wrap { margin: 72px 12px 24px; padding: 24px 20px; } }
-  </style>
+  
+    /* Related Articles - Enhanced Styling */
+    .related-articles {
+      margin-top: 40px;
+      padding: 24px;
+      background: #f0f4f3;
+      border-radius: 12px;
+      border: 2px solid #2d7a4f;
+    }
+    .related-articles h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1a5c35;
+      border-bottom: 2px solid #2d7a4f;
+      padding-bottom: 12px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .related-grid a {
+      display: block;
+      background: #fff;
+      border: 1px solid #2d7a4f;
+      border-radius: 10px;
+      padding: 16px;
+      text-decoration: none;
+      color: #2d3436;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .related-grid a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(45,122,79,0.15);
+      border-color: #1a5c35;
+    }
+    .related-grid a strong {
+      color: #1565c0;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+      text-decoration: underline;
+      text-decoration-color: #1565c0;
+      text-underline-offset: 3px;
+    }
+    .related-grid a span {
+      font-size: 13px;
+      color: #666;
+    }
+    /* Landing page button (5th item) - enhanced */
+    .related-grid a.landing-btn,
+    .related-grid a[href*="/kidney.html"],
+    .related-grid a[href*="/heart.html"],
+    .related-grid a[href*="/arthritis.html"] {
+      background: linear-gradient(135deg, #2d7a4f, #1a5c35);
+      border: 2px solid #1a5c35;
+    }
+    .related-grid a.landing-btn strong,
+    .related-grid a[href*="/kidney.html"] strong,
+    .related-grid a[href*="/heart.html"] strong,
+    .related-grid a[href*="/arthritis.html"] strong {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .related-grid a.landing-btn span,
+    .related-grid a[href*="/kidney.html"] span,
+    .related-grid a[href*="/heart.html"] span,
+    .related-grid a[href*="/arthritis.html"] span {
+      color: #e0e0e0;
+    }
+
+    /* Sources - Enhanced Styling */
+    .article-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a5c35;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+    .article-content h2:first-of-type {
+      margin-top: 0;
+    }
+    .article-content ul {
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+    .article-content ul li {
+      margin-bottom: 8px;
+    }
+    .article-content ul a {
+      color: #1565c0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Image Mobile Adaptation */
+    .article-hero img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .article-content img {
+      max-width: 100% !important;
+      height: auto !important;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      .article-hero img {
+        max-height: 280px;
+        border-radius: 8px;
+      }
+      .article-content img {
+        max-width: 100% !important;
+        margin: 16px auto;
+      }
+    }
+</style>
   <script src="/AU/_shared/staff-entry.js" defer></script>
   <script type="application/ld+json">
   {

@@ -10,6 +10,16 @@ window.BLOG_ARTICLES =             {
       img: 'https://images.pexels.com/photos/1805160/pexels-photo-1805160.jpeg?auto=compress&cs=tinysrgb&w=800',
       pinned: false
     },
+    {
+      slug: 'senior-dog-heart-ageing-normal-vs-disease',
+      title: 'Senior Dog Heart Ageing: Normal Change or Heart Disease?',
+      category: 'heart',
+      excerpt: 'Learn which changes may accompany ageing in a large senior dog, which heart signs need attention, and how vets separate normal change from disease.',
+      date: '09 Aug 2026',
+      readTime: '13 min',
+      img: 'https://images.pexels.com/photos/3335878/pexels-photo-3335878.jpeg?auto=compress&cs=tinysrgb&w=800',
+      pinned: false
+    },
 {
                 slug: 'your-dogs-heart-murmur-what-every-aussie-owner-needs-to-know-about-canine-heart-disease',
                 category: 'heart',

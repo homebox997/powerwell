@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.agedpawwell.com/AU/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.agedpawwell.com/AU/heart.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -249,5 +244,55 @@
     <loc>https://www.agedpawwell.com/AU/blog/your-senior-dogs-limp-more-than-arthritis-a-guide-for-large-breeds.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/blood-in-your-senior-dogs-wee-what-it-means-for-large-breeds-like-labs-and-shepherds.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/heart-murmurs-in-senior-dogs.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/senior-dog-heart-ageing-normal-vs-disease.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/senior-dog-kidney-ageing-normal-vs-disease.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/senior-large-dog-coughing-and-gagging-heart-link-explained.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/silent-pain-in-senior-large-dogs-the-signs-they-hide-every-day.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/silent-pain-in-senior-large-dogs-why-your-labrador-doesnt-whimper.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/when-your-senior-dog-shows-no-pain-why-stoicism-doesnt-mean-comfort.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/blog/why-is-my-senior-large-dogs-urine-dark-or-bloody-a-practical-guide-for-aussie-owners.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.agedpawwell.com/AU/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
 </urlset>

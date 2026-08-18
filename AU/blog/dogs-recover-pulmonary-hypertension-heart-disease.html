@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Step 5: new formal Blog page; original /AU/ page retained -->
+    <!-- Current /AU/blog/ shell styles (Step 5) -->
+<style>
+
+
+
+
+
+
+
+
+
+        .article-content img { max-width: 100%; height: auto; display: block; }
+
+
+
+
+        .hero-img { max-width: 100%; height: auto; border-radius: 8px; }*{margin:0;padding:0;box-sizing:border-box}
+
+
+
+
+        body{font-family:'Inter','Segoe UI',sans-serif;color:#2d3436;background:#faf9f7;min-height:100vh}
+
+
+
+
+        .site-header{background:#fff;padding:.7rem 0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 1px 15px rgba(0,0,0,.06)}
+
+
+
+
+        .header-inner{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center}
+
+
+
+
+        .logo-img{height:36px!important;width:auto!important;max-width:180px;display:block}
+
+
+
+
+        .hamburger{display:none;background:0;border:none;font-size:1.6rem;cursor:pointer;color:#2d3436;padding:4px 8px}
+
+
+
+
+        .nav{display:flex;gap:.2rem;flex-wrap:wrap}
+
+
+
+
+        .nav a{text-decoration:none;color:#2d3436;font-weight:600;padding:7px 12px;border-radius:20px;transition:all .3s;font-size:.82rem}
+
+
+
+
+        .nav a:hover{background:#fff3ed}
+
+
+
+
+        .article-wrap{max-width:820px;margin:92px auto 1.5rem;padding:0 14px}
+
+
+
+
+        .breadcrumb{font-size:.82rem;color:#7a8a9a;margin-bottom:.4rem}
+
+
+
+
+        .breadcrumb a{color:#ff6b6b;text-decoration:none}
+
+
+
+
+        article{background:#fff;border-radius:16px;padding:24px 30px 20px;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+
+
+
+
+        .cat-badge{display:inline-block;background:#ff6b6b15;color:#ff6b6b;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:10px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px}
+
+
+
+
+        h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:700;color:#2d3436;line-height:1.25;margin-bottom:8px;font-family:'Fredoka','Inter',sans-serif}
+
+
+
+
+        .meta{color:#7a8a9a;font-size:.8rem;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0eded}
+
+
+
+
+        .content{font-size:.92rem;line-height:1.7;color:#2d3436}
+
+
+
+
+        .content h2{font-size:1.25rem;font-weight:700;margin:1.3rem 0 .5rem;color:#2d3436;font-family:'Fredoka','Inter',sans-serif}
+
+
+
+
+        .content h3{font-size:1rem;font-weight:700;margin:1rem 0 .3rem;color:#2d3436}
+
+
+
+
+        .content p{margin:0 0 .8rem}
+
+
+
+
+        .content ul,.content ol{margin:0 0 .8rem 1.2rem}
+
+
+
+
+        .content li{margin-bottom:.2rem}
+
+
+
+
+        .content strong{font-weight:700;color:#2d3436}
+
+
+
+
+        .content blockquote{border-left:3px solid #ff6b6b;padding-left:12px;margin:1rem 0;color:#636e72;font-style:italic;background:#fff8f5;border-radius:0 8px 8px 0;padding:10px 12px}
+
+
+
+
+        .cta-strip{background:linear-gradient(135deg,#ff6b6b,#ff8e53);color:#fff;text-align:center;padding:1.8rem 14px;margin:1.5rem 0;border-radius:14px}
+
+
+
+
+        .cta-strip h2{font-size:1.15rem;margin-bottom:.3rem;font-family:'Fredoka','Inter',sans-serif}
+
+
+
+
+        .cta-strip p{opacity:.9;margin-bottom:.7rem;font-size:.82rem}
+
+
+
+
+        .cta-strip .cta-btn{display:inline-block;padding:9px 22px;background:#fff;color:#ff6b6b;font-weight:700;border-radius:25px;text-decoration:none;font-size:.85rem;box-shadow:0 3px 10px rgba(0,0,0,.12)}
+
+
+
+
+        .site-footer{background:#2d3436;color:#dfe6e9;padding:1.3rem 14px;text-align:center;margin-top:1.3rem;font-size:.8rem}
+
+
+
+
+        .site-footer a{color:#ff8e53;text-decoration:none}
+
+
+
+
+        @media(max-width:700px){article{padding:16px 16px 14px}.article-wrap{margin-top:84px}.nav{display:none}.hamburger{display:block}}
+
+
+
+
+
+    /* Related Articles - Enhanced Styling */
+    .related-articles {
+      margin-top: 40px;
+      padding: 24px;
+      background: #f0f4f3;
+      border-radius: 12px;
+      border: 2px solid #2d7a4f;
+    }
+    .related-articles h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1a5c35;
+      border-bottom: 2px solid #2d7a4f;
+      padding-bottom: 12px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .related-grid a {
+      display: block;
+      background: #fff;
+      border: 1px solid #2d7a4f;
+      border-radius: 10px;
+      padding: 16px;
+      text-decoration: none;
+      color: #2d3436;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .related-grid a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(45,122,79,0.15);
+      border-color: #1a5c35;
+    }
+    .related-grid a strong {
+      color: #1565c0;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+      text-decoration: underline;
+      text-decoration-color: #1565c0;
+      text-underline-offset: 3px;
+    }
+    .related-grid a span {
+      font-size: 13px;
+      color: #666;
+    }
+    .related-grid a[href*="/kidney.html"],
+    .related-grid a[href*="/heart.html"],
+    .related-grid a[href*="/arthritis.html"] {
+      background: linear-gradient(135deg, #2d7a4f, #1a5c35);
+      border: 2px solid #1a5c35;
+    }
+    .related-grid a[href*="/kidney.html"] strong,
+    .related-grid a[href*="/heart.html"] strong,
+    .related-grid a[href*="/arthritis.html"] strong {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    .related-grid a[href*="/kidney.html"] span,
+    .related-grid a[href*="/heart.html"] span,
+    .related-grid a[href*="/arthritis.html"] span {
+      color: #e0e0e0;
+    }
+
+    /* Sources - Enhanced Styling */
+    .article-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a5c35;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+    .article-content ul {
+      line-height: 1.9;
+      margin-bottom: 24px;
+    }
+    .article-content ul li {
+      margin-bottom: 8px;
+    }
+    .article-content ul a {
+      color: #1565c0;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Image Mobile Adaptation */
+    .article-hero img {
+      width: 100%;
+      max-width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .article-content img {
+      max-width: 100% !important;
+      height: auto !important;
+      display: block;
+      margin: 20px auto;
+      border-radius: 8px;
+    }
+    @media (max-width: 600px) {
+      .article-hero img {
+        max-height: 280px;
+        border-radius: 8px;
+      }
+      .article-content img {
+        max-width: 100% !important;
+        margin: 16px auto;
+      }
+    }
+</style>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="PawWell Team">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-H7DBWWV06J"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+ gtag('config', 'G-H7DBWWV06J');
+</script>
+
+    <title>Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery | PawWell</title>
+    <meta name="description" content="Australian guide to pulmonary hypertension in dogs. Learn about causes, symptoms, diagnostic tests, treatment options, and what recovery looks like for affected dogs.">
+    <meta name="keywords" content="pulmonary hypertension dogs, PH dogs, heart disease dogs Australia, canine pulmonary hypertension, dog breathing difficulties">
+    <meta name="robots" content="index, follow">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
+    <meta name="theme-color" content="#ff8a4c">
+    <link rel="icon" type="image/png" sizes="32x32" href="../_shared/assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../_shared/assets/apple-touch-icon.png">
+    <link rel="canonical" href="https://www.agedpawwell.com/AU/blog/dogs-recover-pulmonary-hypertension-heart-disease.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery | PawWell">
+    <meta property="og:description" content="Understand pulmonary hypertension in dogs. Guide covering causes, diagnosis, treatment options, and recovery expectations for this serious condition.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.agedpawwell.com/AU/blog/dogs-recover-pulmonary-hypertension-heart-disease.html">
+    <meta property="og:image" content="https://www.agedpawwell.com/AU/_shared/assets/og-image.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="../_shared/styles.css">
+
+    <style>
+        /* ==============================================================
+           Pulmonary Hypertension — Disease-Specific Styles
+           ============================================================== */
+
+        /* -- Cover Banner -- */
+        .disease-cover {
+            margin-top: var(--pw-header-h);
+            height: 220px;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .disease-cover-img {
+            font-size: 6rem;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+        .disease-cover::after {
+            content: "Pulmonary Hypertension in Dogs";
+            position: absolute;
+            bottom: 16px;
+            left: 0; right: 0;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            opacity: 0.85;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* -- Article Wrapper -- */
+        .article-wrap {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--pw-page-pad);
+        }
+        .article-header { text-align: center; padding: 1.8rem 0 1rem; }
+        .article-meta-top {
+            display: flex; justify-content: center; gap: 1rem;
+            font-size: 0.82rem; color: var(--pw-muted); margin-bottom: 0.8rem; flex-wrap: wrap;
+        }
+        .article-title {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--pw-dark);
+            line-height: 1.3; margin-bottom: 0.6rem;
+        }
+        .article-subtitle { font-size: 0.95rem; color: var(--pw-muted); line-height: 1.6; }
+
+        /* -- Key Takeaway -- */
+        .key-takeaway {
+            background: #fff8e1; border-left: 4px solid #ffb300;
+            padding: 1.2rem 1.4rem; border-radius: 0 var(--pw-radius-card) var(--pw-radius-card) 0;
+            margin: 1.2rem 0;
+        }
+        .key-takeaway-title { font-weight: 700; font-size: 0.95rem; color: #e65100; margin-bottom: 0.3rem; }
+        .key-takeaway p { font-size: 0.9rem; color: var(--pw-dark); line-height: 1.7; }
+
+        /* -- TOC -- */
+        .toc {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.2rem 0;
+        }
+        .toc h3 { font-size: 1rem; margin-bottom: 0.6rem; }
+        .toc ol { padding-left: 1.4rem; }
+        .toc li { margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .toc a { color: var(--pw-red); font-weight: 600; }
+        .toc a:hover { text-decoration: underline; }
+
+        /* -- Content Body -- */
+        .content {
+            font-size: 0.95rem; line-height: 1.8; color: var(--pw-dark);
+        }
+        .content h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem; font-weight: 700; margin: 2rem 0 0.8rem;
+            color: var(--pw-dark); padding-bottom: 0.3rem; border-bottom: 2px solid #f0f0f0;
+        }
+        .content h3 {
+            font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.5rem;
+            color: var(--pw-dark);
+        }
+        .content p { margin-bottom: 0.8rem; }
+        .content ul { padding-left: 1.4rem; margin-bottom: 1rem; }
+        .content li { margin-bottom: 0.3rem; }
+
+        /* -- Photo Card -- */
+        .photo-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            overflow: hidden; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.5rem 0;
+        }
+        .photo-card-img {
+            height: 160px; display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
+        }
+        .photo-card-caption {
+            padding: 0.8rem 1rem; font-size: 0.82rem; color: var(--pw-muted);
+            font-style: italic; line-height: 1.5;
+        }
+
+        /* -- Inline CTA -- */
+        .article-cta {
+            background: linear-gradient(135deg, #fff0eb, #ffe8d6);
+            border-radius: var(--pw-radius-card); padding: 1.4rem;
+            text-align: center; margin: 1.5rem 0;
+        }
+        .article-cta h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+        .article-cta p { font-size: 0.88rem; color: var(--pw-muted); margin-bottom: 0.8rem; }
+        .article-cta a {
+            display: inline-block; padding: 14px 32px;
+            background: linear-gradient(135deg, var(--pw-red), var(--pw-orange));
+            color: white; font-weight: 700; border-radius: var(--pw-radius-btn);
+            font-size: 0.95rem; text-decoration: none;
+            box-shadow: 0 4px 14px rgba(255,107,107,0.3);
+            min-height: 44px; line-height: 1.2;
+            transition: all 0.3s;
+        }
+        .article-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,107,107,0.4); }
+
+        /* -- Warning Box -- */
+        .warning-box {
+            background: #ffe8e8; border-left: 4px solid #e74c3c;
+            padding: 1.2rem 1.4rem; border-radius: 0 var(--pw-radius-card) var(--pw-radius-card) 0;
+            margin: 1.2rem 0;
+        }
+        .warning-box-title { font-weight: 700; font-size: 0.95rem; color: #c0392b; margin-bottom: 0.3rem; }
+        .warning-box p { font-size: 0.9rem; color: var(--pw-dark); line-height: 1.7; }
+
+        /* -- Causes Grid -- */
+        .causes-grid {
+            display: grid; gap: 1rem; margin: 1rem 0;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .cause-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem; box-shadow: 0 2px 8px var(--pw-shadow);
+            border-top: 3px solid #8e44ad;
+        }
+        .cause-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; color: #8e44ad; }
+        .cause-desc { font-size: 0.84rem; color: var(--pw-muted); line-height: 1.5; }
+
+        /* -- Recovery Timeline -- */
+        .recovery-timeline {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow); margin: 1.2rem 0;
+        }
+        .timeline-header { font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem; }
+        .timeline-item {
+            display: flex; gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid #f0f0f0;
+        }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-dot {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 0.8rem; flex-shrink: 0;
+        }
+        .timeline-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; }
+        .timeline-content p { font-size: 0.84rem; color: var(--pw-muted); line-height: 1.5; margin-bottom: 0; }
+
+        /* -- Tip Cards -- */
+        .tip-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem 1.4rem; box-shadow: 0 2px 8px var(--pw-shadow);
+            margin: 1rem 0; border-left: 4px solid #8e44ad;
+        }
+        .tip-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+        .tip-card p { font-size: 0.88rem; color: var(--pw-muted); line-height: 1.7; margin-bottom: 0; }
+
+        /* -- Treatment Options -- */
+        .treatment-grid {
+            display: grid; gap: 1rem; margin: 1rem 0;
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .treatment-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            padding: 1.2rem; box-shadow: 0 2px 8px var(--pw-shadow);
+        }
+        .treatment-name { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; }
+        .treatment-desc { font-size: 0.84rem; color: var(--pw-muted); margin-bottom: 0.5rem; line-height: 1.5; }
+
+        /* -- Author Box -- */
+        .author-box {
+            display: flex; gap: 1rem; align-items: flex-start;
+            background: #f9f9f9; border-radius: var(--pw-radius-card); padding: 1.2rem; margin: 1.5rem 0;
+        }
+        .author-box-avatar {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--pw-red), var(--pw-orange));
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; flex-shrink: 0;
+        }
+        .author-box h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .author-box p { font-size: 0.84rem; color: var(--pw-muted); line-height: 1.6; margin-bottom: 0; }
+
+        /* -- Nav Links -- */
+        .nav-links {
+            display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.5rem 0; justify-content: center;
+        }
+        .nav-links a {
+            display: inline-flex; align-items: center; gap: 0.3rem;
+            padding: 12px 20px; border-radius: var(--pw-radius-btn);
+            font-weight: 700; font-size: 0.9rem; text-decoration: none;
+            min-height: 44px; transition: all 0.3s;
+        }
+        .nav-links a:hover { transform: translateY(-2px); }
+        .n-kid { background: #e8f4f8; color: #4a9eb8; }
+        .n-heart { background: #fce8e8; color: #c0392b; }
+        .n-arth { background: linear-gradient(135deg, var(--pw-red), var(--pw-orange)); color: white; }
+
+        /* -- Related Articles -- */
+        .related-articles { margin: 1.5rem 0; }
+        .related-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+        .related-card {
+            background: var(--pw-white); border-radius: var(--pw-radius-card);
+            overflow: hidden; box-shadow: 0 2px 8px var(--pw-shadow);
+            cursor: pointer; transition: all 0.3s;
+        }
+        .related-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px var(--pw-shadow-hover); }
+        .related-card-cover {
+            height: 100px; display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem;
+        }
+        .related-card-body { padding: 0.8rem; }
+        .related-card-body h3 { font-size: 0.84rem; margin-bottom: 0.3rem; line-height: 1.4; }
+        .related-card-body .meta { font-size: 0.72rem; color: var(--pw-muted); }
+
+        /* -- Bottom CTA -- */
+        .bottom-cta {
+            background: linear-gradient(135deg, var(--pw-red), var(--pw-orange));
+            color: white; border-radius: var(--pw-radius-card);
+            padding: 1.8rem; text-align: center; margin: 1.5rem 0;
+        }
+        .bottom-cta h2 { font-size: 1.3rem; margin-bottom: 0.3rem; border-bottom: none; }
+        .bottom-cta p { font-size: 0.9rem; opacity: 0.9; margin-bottom: 1rem; }
+        .bottom-cta a {
+            display: inline-block; padding: 14px 32px;
+            background: white; color: var(--pw-red); font-weight: 700;
+            border-radius: var(--pw-radius-btn); text-decoration: none;
+            font-size: 1rem; min-height: 44px; line-height: 1.2;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15); transition: all 0.3s;
+        }
+        .bottom-cta a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+        /* -- Responsive -- */
+        @media (max-width: 768px) {
+            .disease-cover { height: 150px; font-size: 3.5rem; }
+            .disease-cover::after { font-size: 0.7rem; }
+            .article-title { font-size: 1.3rem; }
+            .article-subtitle { font-size: 0.88rem; }
+            .causes-grid, .treatment-grid, .related-grid { grid-template-columns: 1fr; }
+            .nav-links { flex-direction: column; align-items: stretch; }
+            .nav-links a { justify-content: center; }
+            .photo-card-img { height: 120px; }
+            .content h2 { font-size: 1.2rem; }
+        }
+        @media (max-width: 480px) {
+            .article-title { font-size: 1.15rem; }
+            .article-cta a, .bottom-cta a { padding: 12px 24px; font-size: 0.9rem; width: 100%; }
+            .key-takeaway, .toc, .tip-card { padding: 1rem; }
+        }
+
+        /* -- Print -- */
+        @media print {
+            .disease-cover, .pw-header, .pw-footer, .bottom-cta, .article-cta, .nav-links { display: none !important; }
+            .article-wrap { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ================================================================
+         LAYER 1: Fixed Global Navigation
+         ================================================================ -->
+    <header class="site-header" role="banner">
+
+
+
+
+        <div class="header-inner">
+
+
+
+
+            <a href="/AU/index.html" aria-label="PawWell Home"><img src="/AU/_shared/assets/logo.png" alt="PawWell" class="logo-img"></a>
+
+
+
+
+            <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+
+
+
+
+            <nav class="nav" id="navMenu" role="navigation">
+
+
+
+
+                <a href="/AU/index.html">Home</a>
+
+
+
+
+                <a href="/AU/assessment.html">AI Health Check</a>
+
+
+
+
+                <a href="/AU/arthritis.html">Arthritis Guide</a>
+
+
+
+
+                <a href="/AU/kidney.html">Kidney Disease</a>
+
+
+
+
+                <a href="/AU/heart.html">Heart Disease</a>
+
+
+
+
+                <a href="/AU/blog.html">Blog</a>
+
+
+
+
+            </nav>
+
+
+
+
+        </div>
+
+
+
+
+    </header>
+
+    <!-- ================================================================
+         LAYER 2: Cover / Hero Section
+         ================================================================ -->
+    <div class="disease-cover" role="img" aria-label="Pulmonary hypertension in dogs guide cover">
+        <span class="disease-cover-img" aria-hidden="true">🫁</span>
+    </div>
+
+    <!-- ================================================================
+         LAYER 3 + 4 + 5: Article Content
+         ================================================================ -->
+    <main>
+        <div class="article-wrap">
+
+
+        <div class="breadcrumb">
+            <a href="/AU/index.html">Home</a> &nbsp;&raquo;&nbsp;
+            <a href="/AU/blog.html">Blog</a> &nbsp;&raquo;&nbsp;
+            <span>Dogs Recover Pulmonary Hypertension Heart Disease</span>
+        </div>
+<!-- HEADER -->
+            <header class="article-header">
+                <div class="article-meta-top">
+                    <span class="article-cat">🫁 Respiratory & Heart</span>
+                    <span class="article-date">🗓 July 2026</span>
+                    <span class="article-read">⏱ 9 min read</span>
+                </div>
+                <h1 class="article-title">Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery</h1>
+                <p class="article-subtitle">Pulmonary hypertension (PH) is a serious condition where high blood pressure in the lungs strains the right side of the heart. This Australian guide explains the causes, symptoms, treatment options, and what to expect during recovery.</p>
+            </header>
+
+            <!-- KEY TAKEAWAY -->
+            <aside class="key-takeaway" role="note" aria-label="Key takeaway">
+                <div class="key-takeaway-title">💡 Key Takeaway</div>
+                <p>Pulmonary hypertension is serious but increasingly manageable with modern medications. Early diagnosis and treating the underlying cause are key to the best outcomes. With appropriate therapy, many dogs experience significant improvement in breathing and quality of life, allowing them to enjoy months to years of comfortable living.</p>
+            </aside>
+
+            <!-- TABLE OF CONTENTS -->
+            <nav class="toc" aria-label="Article contents">
+                <h3>📑 Contents</h3>
+                <ol>
+                    <li><a href="#what-is">What is Pulmonary Hypertension?</a></li>
+                    <li><a href="#causes">Causes and Underlying Conditions</a></li>
+                    <li><a href="#symptoms">Recognising the Symptoms</a></li>
+                    <li><a href="#diagnosis">How PH is Diagnosed</a></li>
+                    <li><a href="#treatment">Treatment Options Available in Australia</a></li>
+                    <li><a href="#recovery">Recovery and Long-Term Management</a></li>
+                </ol>
+            </nav>
+
+            <!-- CONTENT -->
+            <div class="content">
+                <h2 id="what-is">What is Pulmonary Hypertension?</h2>
+                <p>To understand pulmonary hypertension, it helps to first understand how blood normally flows through your dog's body. After blood circulates through the body and returns to the heart, the right side of the heart pumps it through the lungs to pick up oxygen. This pulmonary circulation operates at much lower pressure than the rest of the body — the lungs present very little resistance to blood flow.</p>
+                <p>In pulmonary hypertension, something goes wrong with this system. The blood vessels in the lungs become narrowed, blocked, or damaged, causing the pressure to rise. This forces the right side of the heart to work much harder to push blood through. Over time, the right ventricle thickens and eventually weakens, leading to right-sided heart failure.</p>
+                <p>Think of it like trying to push water through a partially blocked hose — you need much more pressure to achieve the same flow. The heart compensates for a while, but eventually struggles to keep up.</p>
+
+                <!-- Warning Box -->
+                <div class="warning-box" role="alert">
+                    <div class="warning-box-title">⚠️ Why PH is Different from Other Heart Conditions</div>
+                    <p>Pulmonary hypertension is not the same as "regular" heart disease. It specifically affects the lung blood vessels and right heart. The medications used to treat left-sided heart disease (like pimobendan) are not always appropriate for PH and can sometimes be harmful. This is why accurate diagnosis by a veterinary cardiologist is essential.</p>
+                </div>
+
+                <h2 id="causes">Causes and Underlying Conditions</h2>
+                <p>Pulmonary hypertension rarely occurs on its own. It's usually a complication of another condition. Understanding the underlying cause is crucial because treatment must address both the PH and its source:</p>
+
+                <div class="causes-grid" role="list" aria-label="Causes of pulmonary hypertension">
+                    <div class="cause-card" role="listitem">
+                        <div class="cause-title">🫁 Left-Sided Heart Disease</div>
+                        <div class="cause-desc">The most common cause in dogs. When the left heart fails (from mitral valve disease or DCM), pressure backs up into the lungs, causing pulmonary venous hypertension. Treating the underlying heart disease is essential.</div>
+                    </div>
+                    <div class="cause-card" role="listitem">
+                        <div class="cause-title">🦠 Respiratory Disease</div>
+                        <div class="cause-desc">Chronic bronchitis, interstitial lung disease, and severe tracheal collapse can damage lung vessels. In Australia, smoke from bushfires has also been implicated in respiratory complications in dogs.</div>
+                    </div>
+                    <div class="cause-card" role="listitem">
+                        <div class="cause-title">🩸 Heartworm Disease</div>
+                        <div class="cause-desc">Heartworms physically block pulmonary vessels. Though preventable with monthly medication, heartworm still occurs in Australia, particularly in northern states. PH from heartworm can be severe and difficult to treat.</div>
+                    </div>
+                    <div class="cause-card" role="listitem">
+                        <div class="cause-title">🧬 Pulmonary Thromboembolism</div>
+                        <div class="cause-desc">Blood clots lodging in the lung vessels. Can occur with Cushing's disease, immune-mediated haemolytic anaemia, or protein-losing kidney disease. Requires anticoagulation therapy alongside PH treatment.</div>
+                    </div>
+                </div>
+
+                <p>Other, rarer causes include congenital heart defects (like PDA), pulmonary artery stenosis, and idiopathic PH where no underlying cause can be identified despite thorough investigation.</p>
+
+                <!-- Photo Card -->
+                <div class="photo-card" role="img" aria-label="Dog breathing difficulties — a key symptom of pulmonary hypertension">
+                    <div class="photo-card-img" style="background: linear-gradient(135deg, #8e44ad, #3498db);" aria-hidden="true">🐕🫁</div>
+                    <div class="photo-card-caption">Difficulty breathing, especially after mild exercise, is one of the hallmark signs of pulmonary hypertension. Dogs may seem winded after very short walks or reluctant to move at all.</div>
+                </div>
+
+                <!-- Inline CTA -->
+                <div class="article-cta">
+                    <h3>🩺 Take Our Free AI Health Check</h3>
+                    <p>2 minutes. Get a personalised assessment for your dog's heart and respiratory health.</p>
+                    <a href="../assessment.html" aria-label="Start free AI Health Check for your dog">Start AI Health Check →</a>
+                </div>
+
+                <h2 id="symptoms">Recognising the Symptoms</h2>
+                <p>Symptoms of pulmonary hypertension often develop gradually, making them easy to dismiss as "just getting older" or "out of shape." Here's what to watch for:</p>
+
+                <h3>Breathing Difficulties</h3>
+                <ul>
+                    <li><strong>Shortness of breath</strong> — laboured breathing, even at rest in severe cases</li>
+                    <li><strong>Exercise intolerance</strong> — tiring quickly, stopping to catch breath after minimal activity</li>
+                    <li><strong>Rapid breathing</strong> — elevated respiratory rate even when calm</li>
+                    <li><strong>Coughing</strong> — may or may not be present, depending on underlying cause</li>
+                </ul>
+
+                <h3>Other Signs</h3>
+                <ul>
+                    <li><strong>Fainting or collapsing</strong> — particularly after exercise or excitement (syncope)</li>
+                    <li><strong>Distended abdomen</strong> — fluid accumulation from right heart failure (ascites)</li>
+                    <li><strong>Blue-tinged gums</strong> — indicating low oxygen levels (cyanosis)</li>
+                    <li><strong>Weakness and lethargy</strong> — reluctance to move, sleeping more</li>
+                    <li><strong>Sudden death</strong> — in severe cases, PH can cause fatal arrhythmias</li>
+                </ul>
+
+                <p>If your dog shows any of these signs, particularly exercise intolerance and breathing difficulties, seek veterinary attention promptly. Early diagnosis offers the best chance of effective management.</p>
+
+                <h2 id="diagnosis">How PH is Diagnosed</h2>
+                <p>Diagnosing pulmonary hypertension requires specialised testing, often by a veterinary cardiologist. Here's what you can expect:</p>
+
+                <article class="tip-card">
+                    <h3>Physical Examination and Auscultation</h3>
+                    <p>Your vet will listen for heart murmurs, abnormal lung sounds, and split heart sounds. A split S2 heart sound is particularly suggestive of PH. However, examination alone cannot confirm PH — further testing is essential.</p>
+                </article>
+
+                <article class="tip-card">
+                    <h3>Echocardiogram (Heart Ultrasound)</h3>
+                    <p>The most important diagnostic tool. An echo can estimate pulmonary artery pressure by measuring blood flow velocity and assessing right heart size and function. Right ventricular enlargement and flattening of the interventricular septum are key signs. Available at specialist practices across Australia.</p>
+                </article>
+
+                <article class="tip-card">
+                    <h3>Chest X-rays</h3>
+                    <p>Shows heart size, lung patterns, and can identify underlying lung disease or heartworm. Enlarged pulmonary arteries may be visible. X-rays help determine if respiratory disease is contributing to PH.</p>
+                </article>
+
+                <article class="tip-card">
+                    <h3>Blood Tests and Heartworm Testing</h3>
+                    <p>Essential to identify underlying causes. Heartworm antigen testing, complete blood count, biochemistry, and tests for Cushing's disease or blood clotting disorders may be recommended.</p>
+                </article>
+
+                <article class="tip-card">
+                    <h3>Cardiac Catheterisation</h3>
+                    <p>The gold standard for measuring pulmonary pressure directly, but rarely performed in dogs as it requires general anaesthesia and is invasive. Echocardiography is usually sufficient for diagnosis and monitoring.</p>
+                </article>
+
+                <h2 id="treatment">Treatment Options Available in Australia</h2>
+                <p>Treatment for pulmonary hypertension has two components: addressing the underlying cause (when possible) and managing the elevated pulmonary pressure itself:</p>
+
+                <div class="treatment-grid" role="list" aria-label="Treatment options for PH">
+                    <div class="treatment-card" role="listitem">
+                        <div class="treatment-name">💊 Sildenafil (Viagra/Revatio)</div>
+                        <div class="treatment-desc">The most commonly prescribed medication for PH in dogs. It dilates pulmonary blood vessels, reducing pressure and improving blood flow. Available as compounded liquid or tablets. Significant improvement in breathing and exercise tolerance often seen within days.</div>
+                    </div>
+                    <div class="treatment-card" role="listitem">
+                        <div class="treatment-name">💊 Tadalafil (Cialis)</div>
+                        <div class="treatment-desc">Similar to sildenafil but longer-acting, allowing once or twice daily dosing. Sometimes used when sildenafil is ineffective or causes side effects. More expensive but more convenient.</div>
+                    </div>
+                    <div class="treatment-card" role="listitem">
+                        <div class="treatment-name">💊 Pimobendan</div>
+                        <div class="treatment-desc">Used when PH is secondary to left-sided heart disease. Strengthens heart contractions and dilates blood vessels. Not appropriate for all PH cases — must be prescribed by a cardiologist familiar with your dog's specific condition.</div>
+                    </div>
+                    <div class="treatment-card" role="listitem">
+                        <div class="treatment-name">💊 Diuretics (Furosemide, Spironolactone)</div>
+                        <div class="treatment-desc">Remove excess fluid when right heart failure is present. Reduce fluid in the abdomen (ascites) and help with breathing. Dosage adjusted based on response and kidney function.</div>
+                    </div>
+                </div>
+
+                <p><strong>Cost considerations in Australia:</strong> Sildenafil compounding typically costs $80–150 per month depending on dog size. Tadalafil is more expensive at $120–200 per month. These medications are not PBS-subsidised for veterinary use, but some pet insurance policies cover them.</p>
+
+                <!-- =====================================================
+                     LAYER 4: Disease Cross-Navigation
+                     ===================================================== -->
+                <nav class="nav-links" aria-label="Related disease guides">
+                    <a href="../kidney.html" class="n-kid">🫘 Kidney Disease Guide →</a>
+                    <a href="../heart.html" class="n-heart">❤️ Heart Disease Guide →</a>
+                    <a href="../assessment.html" class="n-arth">🩺 AI Health Check →</a>
+                </nav>
+
+                <!-- =====================================================
+                     LAYER 4b: Related Reading
+                     ===================================================== -->
+                <section class="related-articles" aria-labelledby="related-heading">
+                    <h2 id="related-heading">📚 Related Reading</h2>
+                    <div class="related-grid">
+                        <a href="../heart-disease-dogs-early-signs.html" class="related-card" aria-label="Related article: heart disease early signs">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #e74c3c, #c0392b);" aria-hidden="true">❤️</div>
+                            <div class="related-card-body">
+                                <h3>Heart Disease in Dogs: Early Warning Signs Every Aussie Owner Must Know</h3>
+                                <div class="meta">❤️ Heart Health · 12 min · Essential</div>
+                            </div>
+                        </a>
+                        <a href="/AU/blog/dog-heart-health-mitral-valve-disease-aussie-pet-owners.html" class="related-card" aria-label="Related article: mitral valve disease">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #c0392b, #8e44ad);" aria-hidden="true">❤️</div>
+                            <div class="related-card-body">
+                                <h3>Mitral Valve Disease in Dogs: A Guide for Australian Pet Owners</h3>
+                                <div class="meta">❤️ Heart Health · 10 min · Comprehensive</div>
+                            </div>
+                        </a>
+                        <a href="../kidney.html" class="related-card" aria-label="Related article: kidney disease">
+                            <div class="related-card-cover" style="background: linear-gradient(135deg, #4a9eb8, #00bcd4);" aria-hidden="true">🫘</div>
+                            <div class="related-card-body">
+                                <h3>Kidney Disease in Senior Dogs: Early Detection Guide</h3>
+                                <div class="meta">🫘 Kidney Health · 10 min · Comprehensive</div>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <h2 id="recovery">Recovery and Long-Term Management</h2>
+                <p>The outlook for dogs with pulmonary hypertension depends heavily on the underlying cause and how early treatment begins. Here's what you can generally expect:</p>
+
+                <div class="recovery-timeline">
+                    <div class="timeline-header">📅 Recovery and Management Timeline</div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-content">
+                            <h4>First Days of Treatment</h4>
+                            <p>If sildenafil or similar medications are effective, you may see improvement in breathing within 3–7 days. Your dog should seem more comfortable and willing to move around. Report any changes — positive or negative — to your vet.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-content">
+                            <h4>Weeks 2–4</h4>
+                            <p>Medication doses are adjusted based on response. Repeat echocardiograms may be scheduled to assess improvement. Underlying conditions (heartworm, lung disease) receive targeted treatment. Activity should gradually increase if responding well.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">3</div>
+                        <div class="timeline-content">
+                            <h4>Long-Term Management</h4>
+                            <p>PH is rarely "cured" — it's managed. Dogs typically remain on medication for life. Regular check-ups every 3–6 months monitor heart and lung function. Home monitoring of breathing rate and activity level is essential.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">4</div>
+                        <div class="timeline-content">
+                            <h4>Quality of Life Considerations</h4>
+                            <p>Many dogs with well-managed PH enjoy good quality of life for months to years. Focus on comfortable living — short, gentle walks, avoiding heat and humidity, maintaining healthy weight, and minimising stress. Your vet can help assess quality of life at any stage.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Prognosis</h3>
+                <p>Prognosis varies considerably:</p>
+                <ul>
+                    <li><strong>PH from treatable causes</strong> (heartworm, some heart diseases) — prognosis can be good if the underlying cause is successfully addressed</li>
+                    <li><strong>PH from progressive conditions</strong> (severe heart disease, advanced lung disease) — management focuses on comfort and slowing progression</li>
+                    <li><strong>Idiopathic PH</strong> — variable; some dogs respond excellently to sildenafil, others have more limited response</li>
+                </ul>
+
+                <p>The most important factors are early diagnosis, treating underlying causes, and regular monitoring. Dogs that respond well to initial therapy often enjoy meaningful extensions of good-quality life.</p>
+
+                <!-- AUTHOR BOX -->
+                <div class="author-box" role="contentinfo" aria-label="About the author">
+                    <div class="author-box-avatar" aria-hidden="true">PW</div>
+                    <div>
+                        <h3>About PawWell</h3>
+                        <p>PawWell is Australia's senior dog health community. Our guides are researched and reviewed by veterinary professionals. Always consult your vet for medical advice about your specific dog.</p>
+                    </div>
+                </div>
+
+                <!-- BOTTOM CTA -->
+                <div class="bottom-cta" role="complementary" aria-label="Call to action">
+                    <h2>Is Your Dog Showing Breathing Difficulties?</h2>
+                    <p>Take our free 2-minute AI health check to assess your dog's heart and respiratory health.</p>
+                    <a href="../assessment.html" aria-label="Start free AI Health Check for your dog">Start Free AI Health Check →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ================================================================
+         LAYER 6: Footer
+         ================================================================ -->
+    <footer class="site-footer" role="contentinfo">
+
+
+
+
+    <p>&copy; 2026 Aged Paw Well. All rights reserved.</p>
+
+
+
+
+    <p style="margin-top:.5rem;">
+
+
+
+
+        <a href="/AU/index.html">Home</a> &middot;
+
+
+
+
+        <a href="/AU/assessment.html">AI Health Check</a> &middot;
+
+
+
+
+        <a href="/AU/blog.html">Blog</a> &middot;
+
+
+
+
+        <a href="/AU/contact.html">Contact Us</a> &middot;
+
+
+
+
+        <a href="/AU/privacy.html">Privacy Policy</a> &middot;
+
+
+
+
+        <a href="/AU/disclaimer.html">Disclaimer</a> &middot;
+
+
+
+
+        <a href="/AU/terms.html">Terms &amp; Conditions</a>
+
+
+
+
+    </p>
+
+
+
+
+</footer>
+
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"https://www.agedpawwell.com"},
+        {"@type":"ListItem","position":2,"name":"Blog","item":"https://www.agedpawwell.com/AU/blog.html"},
+        {"@type":"ListItem","position":3,"name":"Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery","item":"https://www.agedpawwell.com/AU/blog/dogs-recover-pulmonary-hypertension-heart-disease.html"}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What is pulmonary hypertension in dogs?","acceptedAnswer":{"@type":"Answer","text":"Pulmonary hypertension (PH) is elevated blood pressure in the pulmonary arteries — the blood vessels carrying blood from the heart to the lungs. This increased pressure forces the right side of the heart to work harder, eventually leading to right heart enlargement and failure if untreated."}},
+        {"@type":"Question","name":"What causes pulmonary hypertension in dogs?","acceptedAnswer":{"@type":"Answer","text":"The most common cause is left-sided heart disease (mitral valve disease, dilated cardiomyopathy). Other causes include chronic respiratory disease, heartworm disease, blood clots in the lungs (thromboembolism), and congenital heart defects. Sometimes no underlying cause is found (idiopathic PH)."}},
+        {"@type":"Question","name":"How is pulmonary hypertension treated in dogs?","acceptedAnswer":{"@type":"Answer","text":"The main medications are sildenafil (Viagra) or tadalafil, which dilate pulmonary blood vessels to reduce pressure. Treatment also addresses the underlying cause — heart medications, heartworm treatment, or respiratory therapy. Diuretics are used if right heart failure is present. Treatment is usually lifelong."}},
+        {"@type":"Question","name":"What is the life expectancy for dogs with pulmonary hypertension?","acceptedAnswer":{"@type":"Answer","text":"Life expectancy varies greatly depending on the underlying cause and response to treatment. Dogs with treatable underlying conditions may live years. Dogs with severe or progressive underlying disease have shorter outlooks. Dogs that respond well to sildenafil often show significant improvement in quality of life for months to years."}},
+        {"@type":"Question","name":"Can dogs recover from pulmonary hypertension?","acceptedAnswer":{"@type":"Answer","text":"PH is rarely cured, but it can be managed effectively. If the underlying cause is treatable (like heartworm or certain heart conditions), PH may improve significantly. Otherwise, treatment focuses on controlling symptoms and maintaining quality of life. Many dogs on appropriate medication live comfortably for extended periods."}}
+      ]
+    }
+    </script>
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery",
+      "description": "Australian guide to pulmonary hypertension in dogs. Learn about causes, symptoms, diagnostic tests, treatment options, and what recovery looks like for affected dogs.",
+      "image": "https://www.agedpawwell.com/AU/og-image.png",
+      "author": { "@type": "Organization", "name": "PawWell", "url": "https://www.agedpawwell.com" },
+      "publisher": { "@type": "Organization", "name": "PawWell", "url": "https://www.agedpawwell.com" },
+      "datePublished": "2026-07-25",
+      "dateModified": "2026-07-25",
+      "keywords": ["pulmonary hypertension dogs", "PH dogs", "heart disease dogs Australia", "canine pulmonary hypertension", "dog breathing difficulties"],
+      "about": { "@type": "MedicalCondition", "name": "Pulmonary Hypertension", "description": "Elevated blood pressure in the pulmonary arteries leading to right heart strain, exercise intolerance, and potentially right-sided heart failure" }
+    }
+    </script>
+
+    <!-- Scripts -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script defer src="../js/supabase-init.js"></script>
+    <script defer src="../js/api-client.js"></script>
+    <script defer src="../_shared/nav.js"></script>
+</body>
+</html>

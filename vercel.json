@@ -74,6 +74,31 @@
       "permanent": true
     },
     {
+      "source": "/AU/arthritis-18-months.html",
+      "destination": "/AU/blog/arthritis-18-months.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/daily-feeding-schedule-13-year-old-staffy.html",
+      "destination": "/AU/blog/daily-feeding-schedule-13-year-old-staffy.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/dog-back-pain-arthritis-spondylosis-early-signs.html",
+      "destination": "/AU/blog/dog-back-pain-arthritis-spondylosis-early-signs.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/dog-heart-health-mitral-valve-disease-aussie-pet-owners.html",
+      "destination": "/AU/blog/dog-heart-health-mitral-valve-disease-aussie-pet-owners.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/dogs-recover-pulmonary-hypertension-heart-disease.html",
+      "destination": "/AU/blog/dogs-recover-pulmonary-hypertension-heart-disease.html",
+      "statusCode": 301
+    },
+    {
       "source": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-.html",
       "destination": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-aussie-family.html",
       "permanent": true

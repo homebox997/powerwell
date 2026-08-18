@@ -99,6 +99,156 @@
       "statusCode": 301
     },
     {
+      "source": "/AU/community/allergy-test-paw-licking-diagnosis.html",
+      "destination": "/AU/allergy-test-paw-licking-diagnosis.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/best-elevated-bowls-arthritic-dog.html",
+      "destination": "/AU/best-elevated-bowls-arthritic-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/bone-broth-senior-dog-joints.html",
+      "destination": "/AU/bone-broth-senior-dog-joints.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/border-collie-drinking-more-water.html",
+      "destination": "/AU/border-collie-drinking-more-water.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/bunnings-ramp-for-old-cavoodle.html",
+      "destination": "/AU/bunnings-ramp-for-old-cavoodle.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/car-ramp-for-small-senior-dog.html",
+      "destination": "/AU/car-ramp-for-small-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/cardiologist-visit-cost-breakdown.html",
+      "destination": "/AU/cardiologist-visit-cost-breakdown.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/cavalier-night-coughing-heart.html",
+      "destination": "/AU/cavalier-night-coughing-heart.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/daily-teeth-brushing-senior-dog.html",
+      "destination": "/AU/daily-teeth-brushing-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/elevated-kidney-values-beagle.html",
+      "destination": "/AU/elevated-kidney-values-beagle.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/fish-oil-dosage-senior-dog.html",
+      "destination": "/AU/fish-oil-dosage-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/fresh-food-diet-senior-labrador.html",
+      "destination": "/AU/fresh-food-diet-senior-labrador.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/german-shepherd-recurring-hot-spots.html",
+      "destination": "/AU/german-shepherd-recurring-hot-spots.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/golden-retriever-persistent-scratching.html",
+      "destination": "/AU/golden-retriever-persistent-scratching.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/grade-2-heart-murmur-labrador.html",
+      "destination": "/AU/grade-2-heart-murmur-labrador.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/greyhound-osteoarthritis-diagnosis.html",
+      "destination": "/AU/greyhound-osteoarthritis-diagnosis.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/hiding-dog-medication-tricks.html",
+      "destination": "/AU/hiding-dog-medication-tricks.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/kelpie-stiffness-at-7-years.html",
+      "destination": "/AU/kelpie-stiffness-at-7-years.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/librela-injection-arthritis-experience.html",
+      "destination": "/AU/librela-injection-arthritis-experience.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/mentally-stimulating-old-dog.html",
+      "destination": "/AU/mentally-stimulating-old-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/multiple-medications-senior-dog.html",
+      "destination": "/AU/multiple-medications-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/oatmeal-baths-itchy-dogs.html",
+      "destination": "/AU/oatmeal-baths-itchy-dogs.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/old-mate-struggling-on-stairs.html",
+      "destination": "/AU/old-mate-struggling-on-stairs.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/raw-diet-cleared-staffy-skin.html",
+      "destination": "/AU/raw-diet-cleared-staffy-skin.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/senior-dog-refusing-kibble.html",
+      "destination": "/AU/senior-dog-refusing-kibble.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/shih-tzu-coat-thinning-senior.html",
+      "destination": "/AU/shih-tzu-coat-thinning-senior.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/swimming-hydrotherapy-senior-dog.html",
+      "destination": "/AU/swimming-hydrotherapy-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/training-treats-for-senior-dog.html",
+      "destination": "/AU/training-treats-for-senior-dog.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/when-switch-senior-food-border-collie.html",
+      "destination": "/AU/when-switch-senior-food-border-collie.html",
+      "statusCode": 301
+    },
+    {
+      "source": "/AU/community/daily-feeding-schedule-13-year-old-staffy.html",
+      "destination": "/AU/blog/daily-feeding-schedule-13-year-old-staffy.html",
+      "statusCode": 301
+    },
+    {
       "source": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-.html",
       "destination": "/AU/blog/is-your-senior-dog-hiding-toothache-what-poppys-bad-breath-taught-her-aussie-family.html",
       "permanent": true

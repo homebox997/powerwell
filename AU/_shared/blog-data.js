@@ -327,7 +327,196 @@ window.BLOG_ARTICLES =             {
                 img: '',
                 pinned: false
             }
-        ];
+        ,    {
+      slug: 'arthritis-18-months',
+      title: '18-Month Arthritis Plan',
+      category: 'Arthritis',
+      excerpt: 'After being diagnosed with moderate osteoarthritis at age 10, Milo has been on glucosamine, MSM and fish oil for 18 months. Full breakdown of what worked, what did not, and cost an',
+      date: '05 Jul 2026', readTime: '10 min',
+      img: 'https://www.agedpawwell.com/AU/_shared/assets/og-image.png',
+      pinned: false
+    }
+    {
+      slug: 'blood-in-your-senior-dogs-wee-what-it-means-for-large-breeds-like-labs-and-shepherds',
+      title: 'Blood in Your Senior Dogs Wee? What It Means for Large Breeds Like Labs and Shepherds',
+      category: 'Other',
+      excerpt: 'Worried about dark wee or blood in your large senior dogs urine? Learn common causes, at-home checks, and when its an emergency. Plain Aussie advice for Lab, Shepherd, Rottie owner',
+      date: '11 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'daily-feeding-schedule-13-year-old-staffy',
+      title: 'Complete guide: what I feed my 13-year-old staffy every single day',
+      category: 'Other',
+      excerpt: 'Steve shares his complete daily feeding schedule for 13-year-old Staffy. Senior kibble, sardines, chicken, glucosamine. Dog is thriving with excellent blood res',
+      date: '11 Jul 2026', readTime: '10 min',
+      img: '',
+      pinned: false
+    }
+    {
+      slug: 'dark-urine-or-blood-in-your-big-dogs-pee-a-mates-guide',
+      title: 'Dark Urine or Blood in Your Big Dog',
+      category: 'Kidney',
+      excerpt: 'Noticed your senior large-breed dog',
+      date: '12 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'dark-wee-or-blood-in-your-big-old-dogs-pee-heres-what-aussie-owners-need-to-know',
+      title: 'Dark Wee or Blood in Your Big Old Dogs Pee? Heres What Aussie Owners Need to Know',
+      category: 'Other',
+      excerpt: 'Seeing dark urine or blood in your senior large dogs wee? Learn likely causes like UTI or bladder stones, when a vet visit is urgent, and how Aussie owners can run quick at-home ch',
+      date: '07 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/7474848/pexels-photo-7474848.jpeg?auto=compress&cs=tinysrgb&w=1200',
+      pinned: false
+    }
+    {
+      slug: 'dog-back-pain-arthritis-spondylosis-early-signs',
+      title: 'Back Pain & Spondylosis in Older Dogs: Early Signs Every Aussie Owner Should Know',
+      category: 'Arthritis',
+      excerpt: 'Understanding spinal arthritis (spondylosis) in senior dogs - symptoms, diagnosis, and management strategies for Australian pet owners.',
+      date: '25 Jul 2026', readTime: '10 min',
+      img: 'https://www.agedpawwell.com/AU/_shared/assets/og-image.png',
+      pinned: false
+    }
+    {
+      slug: 'dog-heart-health-mitral-valve-disease-aussie-pet-owners',
+      title: 'Mitral Valve Disease in Dogs: A Guide for Australian Pet Owners',
+      category: 'Heart',
+      excerpt: 'Comprehensive Australian guide to mitral valve disease in dogs. Covers causes, symptoms, staging, treatment options, medication costs, and life expectancy for affected dogs.',
+      date: '25 Jul 2026', readTime: '10 min',
+      img: 'https://www.agedpawwell.com/AU/_shared/assets/og-image.png',
+      pinned: false
+    }
+    {
+      slug: 'dogs-recover-pulmonary-hypertension-heart-disease',
+      title: 'Pulmonary Hypertension in Dogs: Understanding Diagnosis and Recovery',
+      category: 'Heart',
+      excerpt: 'Australian guide to pulmonary hypertension in dogs. Learn about causes, symptoms, diagnostic tests, treatment options, and what recovery looks like for affected dogs.',
+      date: '25 Jul 2026', readTime: '10 min',
+      img: 'https://www.agedpawwell.com/AU/_shared/assets/og-image.png',
+      pinned: false
+    }
+    {
+      slug: 'is-your-senior-large-breed-dog-hiding-pain-subtle-signs-to-check',
+      title: 'Is Your Senior Large-Breed Dog Hiding Pain? Subtle Signs to Check',
+      category: 'Other',
+      excerpt: 'Learn to spot hidden pain in older large dogs before it worsens, with a simple at-home checklist and vet red flags.',
+      date: '06 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?w=800',
+      pinned: false
+    }
+    {
+      slug: 'large-dog-coughing-and-gagging-is-it-a-heart-problem',
+      title: 'Large Dog Coughing and Gagging  Is It a Heart Problem?',
+      category: 'Heart',
+      excerpt: 'Could your large senior dog',
+      date: '05 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/1560807/pexels-photo-1560807.jpeg?auto=compress&cs=tinysrgb&w=800',
+      pinned: false
+    }
+    {
+      slug: 'large-dog-coughing-then-dry-heaving-could-it-be-the-heart',
+      title: 'Large Dog Coughing Then Dry Heaving: Could It Be the Heart?',
+      category: 'Heart',
+      excerpt: 'Senior large breed dog coughs then gags like something is stuck? That choking-heave pattern can be a classic heart-disease signal. Learn what to check at home tonight, when to call',
+      date: '01 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/4587995/pexels-photo-4587995.jpeg?w=800',
+      pinned: false
+    }
+    {
+      slug: 'senior-dog-breathing-fast-heavy',
+      title: 'Senior Dog Breathing Fast or Heavy: When to Worry',
+      category: 'Other',
+      excerpt: 'Learn how to check a senior dog',
+      date: '01 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/4587995/pexels-photo-4587995.jpeg?w=800',
+      pinned: false
+    }
+    {
+      slug: 'senior-dog-weight-loss-poor-coat-kidneys',
+      title: 'Senior Dog Losing Weight and Coat Condition: Could It Be Kidneys?',
+      category: 'Kidney',
+      excerpt: 'Unplanned weight loss and a dull coat in a senior dog need attention. Learn when kidneys may be involved, what else can cause it and what to record for your vet.',
+      date: '01 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/5826087/pexels-photo-5826087.jpeg?w=800',
+      pinned: false
+    }
+    {
+      slug: 'senior-large-dog-coughing-and-gagging-heart-link-explained',
+      title: 'Senior large dog coughing and gagging? Heart link explained',
+      category: 'Heart',
+      excerpt: 'If your senior Labrador or German Shepherd coughs and dry-heaves like something',
+      date: '09 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'silent-pain-in-senior-large-dogs-the-signs-they-hide-every-day',
+      title: 'Silent Pain in Senior Large Dogs: The Signs They Hide Every Day',
+      category: 'Other',
+      excerpt: 'Many old dogs suffer pain without a whimper. Learn the subtle signs in Labradors, German Shepherds & other big breeds and try a simple at-home check tonight.',
+      date: '11 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'silent-pain-in-senior-large-dogs-why-your-labrador-doesnt-whimper',
+      title: 'Silent Pain in Senior Large Dogs: Why Your Labrador Doesnt Whimper',
+      category: 'Other',
+      excerpt: 'Learn the subtle signs that your senior golden retriever or German shepherd may be hiding pain, and a simple at-home checklist to spot it early.',
+      date: '09 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'when-your-senior-dog-shows-no-pain-why-stoicism-doesnt-mean-comfort',
+      title: 'When Your Senior Dog Shows No Pain: Why Stoicism Doesn',
+      category: 'Other',
+      excerpt: 'Many big dogs hide pain, even with arthritis. Learn the subtle silent signs of pain in your senior large-breed dog and how to helpno whimper needed.',
+      date: '10 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'why-is-my-senior-large-dogs-urine-dark-or-bloody-a-practical-guide-for-aussie-owners',
+      title: 'Why is my senior large dogs urine dark or bloody? A practical guide for Aussie owners',
+      category: 'Kidney',
+      excerpt: 'Worried about dark urine or blood in your large senior dogs pee? Learn the common causes, what to check at home tonight, and when to see a vet.',
+      date: '10 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1586671267731-da2cf3ceeb80?w=900&q=75',
+      pinned: false
+    }
+    {
+      slug: 'why-your-big-old-dog-wont-tell-you-theyre-in-pain-and-how-to-help',
+      title: 'Why Your Big Old Dog Wont Tell You Theyre in Pain (and How to Help)',
+      category: 'Other',
+      excerpt: 'Many senior large-breed dogs hide discomfort. Learn to spot the subtle signs your Labrador or German Shepherd might be quietly hurtingand when to call the vet.',
+      date: '05 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/1918290/pexels-photo-1918290.jpeg?auto=compress&cs=tinysrgb&w=800',
+      pinned: false
+    }
+    {
+      slug: 'why-your-senior-large-breed-dog-hides-pain-and-how-to-spot-it',
+      title: 'Why Your Senior Large Breed Dog Hides Pain (And How to Spot It)',
+      category: 'Other',
+      excerpt: 'Many senior large-breed dogs hide pain. Learn the subtle signs owners miss, a simple home check, and when to see a vet. Trusted Australian advice.',
+      date: '01 Aug 2026', readTime: '10 min',
+      img: 'https://images.pexels.com/photos/1851164/pexels-photo-1851164.jpeg?w=800',
+      pinned: false
+    }
+    {
+      slug: 'why-your-senior-large-dog-may-be-hiding-pain-and-what-to-check-tonight',
+      title: 'Why Your Senior Large Dog May Be Hiding Pain  And What to Check Tonight',
+      category: 'Other',
+      excerpt: 'Discover the subtle signs a senior large breed dog shows when in pain, and a simple at-home checklist to spot discomfort earlyeven when they don',
+      date: '12 Aug 2026', readTime: '10 min',
+      img: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=900&q=75',
+      pinned: false
+    }
+  ];
 
 
 
